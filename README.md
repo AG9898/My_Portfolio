@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio Website
+
+A modern, responsive portfolio website built with Next.js and Tailwind CSS.
+
+## Features
+
+- 🎨 Modern, clean design
+- 📱 Fully responsive
+- 🌙 Dark mode support
+- ⚡ Fast and optimized
+- 🎯 Smooth scrolling navigation
 
 ## Getting Started
 
-First, run the development server:
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+2. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Customization
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Adding Your CV
 
-## Learn More
+1. Copy your CV PDF file to the `public` folder
+2. Rename it to `cv.pdf` (or update the href in `src/app/page.tsx`)
+3. Update the download filename in the "Download CV" button
 
-To learn more about Next.js, take a look at the following resources:
+### Personalizing Content
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Update personal information** in `src/app/page.tsx`:
+   - Replace "Your Name" with your actual name
+   - Update the profile picture initials (currently "YN")
+   - Change the email address and social media links
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. **Add your projects**:
+   - Replace the placeholder project cards with your real projects
+   - Add actual project screenshots to the `public` folder
+   - Update project descriptions and technology tags
 
-## Deploy on Vercel
+3. **Customize colors**:
+   - Modify the color scheme in `tailwind.config.js`
+   - Update gradient colors in the components
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This portfolio can be easily deployed to:
+- [Vercel](https://vercel.com) (recommended for Next.js)
+- [Netlify](https://netlify.com)
+- Any other hosting platform
+
+## Technologies Used
+
+- Next.js 15
+- React 19
+- TypeScript
+- Tailwind CSS 4
+- ESLint
+
+## License
+
+MIT
