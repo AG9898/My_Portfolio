@@ -1,10 +1,8 @@
 "use client";
 
-import Image from "next/image";
-
 export default function Home() {
   return (
-    <div className="static-gradient min-h-screen">
+    <div className="animated-gradient min-h-screen">
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-black/20 backdrop-blur-md z-50 border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -63,7 +61,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
             <h1 className="text-4xl sm:text-6xl font-bold text-white mb-6">
-              Hi, I'm <span className="text-purple-300">Aden Guo</span>
+              Hi, I&apos;m <span className="text-purple-300">Aden Guo</span>
             </h1>
             <p className="text-xl sm:text-2xl text-white/80 mb-8 max-w-3xl mx-auto">
               Full Stack Developer & GIS Specialist passionate about creating innovative solutions for spatial data analysis and web applications
@@ -94,7 +92,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <p className="text-lg text-white/80 mb-6">
-                I'm a passionate developer and GIS specialist with expertise in both modern web technologies and geospatial applications. 
+                I&apos;m a passionate developer and GIS specialist with expertise in both modern web technologies and geospatial applications. 
                 I love creating innovative solutions that combine spatial data analysis with user-friendly web interfaces.
               </p>
               <div className="space-y-4">
@@ -248,7 +246,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-white mb-12">Get In Touch</h2>
           <p className="text-lg text-white/80 mb-8">
-            I'm always interested in new opportunities and exciting projects.
+            I&apos;m always interested in new opportunities and exciting projects.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="mailto:aden.guowe@gmail.com" className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors flex items-center justify-center gap-2">
