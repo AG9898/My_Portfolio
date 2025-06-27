@@ -1,8 +1,10 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #7d7e82;
+  --foreground: #ffffff;
 }
 
 @theme inline {
@@ -10,13 +12,6 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 html {
@@ -29,52 +24,10 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Optimized Animated Gradient Background */
-.animated-gradient {
-  background: linear-gradient(-45deg, #1a0b2e, #2d1b69, #1e3a8a, #3730a3);
-  background-size: 400% 400%;
-  animation: gradientShift 20s ease infinite;
+/* Clean Medium Grey Background */
+.dark-theme {
+  background-color: #7d7e82;
   min-height: 100vh;
-  will-change: background-position;
-  transform: translateZ(0);
-}
-
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* Static Gradient Alternative */
-.static-gradient {
-  background: linear-gradient(135deg, #1a0b2e 0%, #2d1b69 25%, #1e3a8a 50%, #3730a3 75%, #1a0b2e 100%);
-  min-height: 100vh;
-}
-
-/* Animated Dots Background */
-.dots-background {
-  background-color: #1a0b2e;
-  background-image: radial-gradient(circle at 25% 25%, rgba(139, 92, 246, 0.1) 2px, transparent 2px),
-                    radial-gradient(circle at 75% 75%, rgba(59, 130, 246, 0.1) 2px, transparent 2px);
-  background-size: 50px 50px, 50px 50px;
-  background-position: 0 0, 25px 25px;
-  animation: dotsMove 30s linear infinite;
-  min-height: 100vh;
-}
-
-@keyframes dotsMove {
-  0% {
-    background-position: 0 0, 25px 25px;
-  }
-  100% {
-    background-position: 50px 50px, 75px 75px;
-  }
 }
 
 /* Custom scrollbar */
@@ -93,4 +46,203 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.5);
+}
+
+/* Performance optimizations */
+* {
+  box-sizing: border-box;
+}
+
+/* Optimize animations and transitions */
+.animate-pulse {
+  will-change: opacity;
+}
+
+/* Optimize transforms for better performance */
+.hover\:scale-105:hover {
+  will-change: transform;
+  transform: scale(1.05);
+}
+
+.hover\:scale-110:hover {
+  will-change: transform;
+  transform: scale(1.1);
+}
+
+.hover\:-translate-y-2:hover {
+  will-change: transform;
+  transform: translateY(-0.5rem);
+}
+
+/* Optimize backdrop blur for better performance */
+.backdrop-blur-md {
+  will-change: backdrop-filter;
+}
+
+.backdrop-blur-sm {
+  will-change: backdrop-filter;
+}
+
+/* Reduce paint operations for gradients */
+.bg-gradient-to-r {
+  will-change: background-image;
+}
+
+.bg-gradient-to-br {
+  will-change: background-image;
+}
+
+/* Optimize text rendering */
+body {
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Optimize scroll behavior */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4rem; /* Account for fixed navbar */
+}
+
+/* Reduce layout shifts */
+img, video, canvas, audio, iframe, embed, object {
+  display: block;
+  max-width: 100%;
+}
+
+/* Optimize focus styles for better accessibility and performance */
+*:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Custom dark theme with optimized colors */
+.dark-theme {
+  background-color: #7d7e82;
+  color: #ffffff;
+  min-height: 100vh;
+}
+
+/* Optimize transitions */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.transition-colors {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.transition-transform {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.transition-opacity {
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Optimize duration classes */
+.duration-300 {
+  transition-duration: 300ms;
+}
+
+.duration-500 {
+  transition-duration: 500ms;
+}
+
+/* Optimize hover states */
+@media (hover: hover) {
+  .hover\:bg-gray-700\/50:hover {
+    background-color: rgba(55, 65, 81, 0.5);
+  }
+  
+  .hover\:bg-gray-600\/70:hover {
+    background-color: rgba(75, 85, 99, 0.7);
+  }
+  
+  .hover\:text-white:hover {
+    color: #ffffff;
+  }
+  
+  .hover\:text-gray-300:hover {
+    color: #d1d5db;
+  }
+}
+
+/* 3D Flip Card Animation */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Optimize for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animate-pulse {
+    animation: none;
+  }
+  
+  /* Disable flip animation for reduced motion */
+  .rotate-y-180 {
+    transform: none !important;
+  }
+}
+
+/* Optimize for high contrast mode */
+@media (prefers-contrast: high) {
+  .dark-theme {
+    background-color: #000000;
+  }
+  
+  .text-gray-300 {
+    color: #ffffff;
+  }
+  
+  .text-gray-400 {
+    color: #e5e7eb;
+  }
+}
+
+/* Optimize for print */
+@media print {
+  .dark-theme {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+  
+  nav, footer {
+    display: none !important;
+  }
+  
+  /* Hide flip cards in print */
+  .perspective-1000 {
+    perspective: none;
+  }
+  
+  .rotate-y-180 {
+    transform: none !important;
+  }
 }
