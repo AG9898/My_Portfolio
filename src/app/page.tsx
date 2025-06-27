@@ -16,6 +16,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import PerformanceMonitor from './components/PerformanceMonitor';
+import CodeTypingAnimation from './components/CodeTypingAnimation';
 
 export default function Home() {
   const [subText, setSubText] = useState('');
@@ -217,15 +218,15 @@ export default function Home() {
             <h2 className="text-3xl font-bold text-center text-white mb-12 hover:text-gray-300 transition-colors duration-300">About Me</h2>
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
-                <p className="text-lg text-gray-300 mb-6">
+                <p className="text-lg text-white mb-6">
                   I&apos;m a passionate developer and GIS specialist with expertise in both modern web technologies and geospatial applications. 
                   I love creating innovative solutions that combine spatial data analysis with user-friendly web interfaces.
                 </p>
                 <div className="space-y-4">
                   {skillsData.map((skill, index) => (
                     <div key={index} className="flex items-center group hover:bg-gray-700/50 p-2 rounded-lg transition-all duration-300 hover:scale-105">
-                      <skill.icon className={`w-5 h-5 text-gray-400 mr-3 group-hover:text-${skill.color}-400 transition-colors duration-300`} />
-                      <span className="text-gray-300 group-hover:text-white transition-colors duration-300">{skill.text}</span>
+                      <skill.icon className={`w-5 h-5 text-white mr-3 group-hover:text-${skill.color}-400 transition-colors duration-300`} />
+                      <span className="text-white group-hover:text-white transition-colors duration-300">{skill.text}</span>
                     </div>
                   ))}
                 </div>
