@@ -12,7 +12,8 @@ import {
   PresentationChartLineIcon,
   BoltIcon,
   SwatchIcon,
-  DocumentTextIcon
+  DocumentTextIcon,
+  GlobeAltIcon
 } from '@heroicons/react/24/outline';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import PerformanceMonitor from './components/PerformanceMonitor';
@@ -72,17 +73,17 @@ export default function Home() {
       details: "Advanced machine learning implementation focusing on spatial clustering patterns. Features include noise reduction, cluster validation, and interactive result visualization with real-time parameter adjustment capabilities."
     },
     {
-      icon: CodeBracketIcon,
-      title: "Portfolio Website",
-      description: "A modern portfolio website built with Next.js and Tailwind CSS showcasing GIS and development projects.",
+      icon: GlobeAltIcon,
+      title: "Calgary Utilities & Services Web App",
+      description: "An interactive web mapping application for locating essential services in Calgary, including restaurants, gas stations, libraries, and hospitals.",
       technologies: [
-        { icon: BoltIcon, name: "Next.js" },
-        { icon: SwatchIcon, name: "Tailwind" },
-        { icon: DocumentTextIcon, name: "TypeScript" }
+        { icon: CommandLineIcon, name: "Flask" },
+        { icon: ChartBarIcon, name: "PostgreSQL" },
+        { icon: MapIcon, name: "Leaflet" }
       ],
       gradientFrom: "gray-700",
       gradientTo: "gray-500",
-      details: "Modern, responsive portfolio website featuring smooth animations, performance optimizations, and a clean design. Built with Next.js 14, TypeScript, and Tailwind CSS for optimal performance and maintainability."
+      details: "Built with Flask, PostgreSQL, and Leaflet, this project showcases skills in full-stack development, spatial data handling, and cloud deployment via Docker and Render. Features interactive mapping, service location search, and responsive design for optimal user experience."
     }
   ], []);
 
@@ -289,12 +290,35 @@ export default function Home() {
                       <h3 className="text-xl font-semibold text-white mb-4">{project.title}</h3>
                       <p className="text-gray-300 mb-6 flex-grow">{project.details}</p>
                       <div className="flex gap-2 mt-auto">
-                        <button className="flex-1 bg-gray-700/50 hover:bg-gray-600/70 text-white py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg border border-gray-600/30">
-                          Live Demo
-                        </button>
-                        <button className="flex-1 border border-gray-600/50 text-gray-300 hover:bg-gray-700/50 hover:text-white py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:scale-105 hover:border-gray-500/70">
-                          GitHub
-                        </button>
+                        {index === 2 ? (
+                          <>
+                            <a 
+                              href="https://calgary-utilities-webapp.onrender.com/" 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="flex-1 bg-gray-700/50 hover:bg-gray-600/70 text-white py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg border border-gray-600/30 text-center"
+                            >
+                              Live Demo
+                            </a>
+                            <a 
+                              href="https://github.com/AG9898/Calgary-utilities-webapp" 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="flex-1 border border-gray-600/50 text-gray-300 hover:bg-gray-700/50 hover:text-white py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:scale-105 hover:border-gray-500/70 text-center"
+                            >
+                              GitHub
+                            </a>
+                          </>
+                        ) : (
+                          <>
+                            <button className="flex-1 bg-gray-700/50 hover:bg-gray-600/70 text-white py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg border border-gray-600/30">
+                              Live Demo
+                            </button>
+                            <button className="flex-1 border border-gray-600/50 text-gray-300 hover:bg-gray-700/50 hover:text-white py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:scale-105 hover:border-gray-500/70">
+                              GitHub
+                            </button>
+                          </>
+                        )}
                       </div>
                       <div className="text-center text-gray-400 text-sm mt-2">
                         Click to flip back
