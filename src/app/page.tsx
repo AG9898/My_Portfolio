@@ -1,373 +1,392 @@
 "use client";
 
-import { 
-  EnvelopeIcon, 
-  CodeBracketIcon, 
-  BriefcaseIcon,
-  CommandLineIcon,
-  MapIcon,
-  ChartBarIcon,
-  CpuChipIcon,
-  MagnifyingGlassIcon,
-  PresentationChartLineIcon,
-  BoltIcon,
-  SwatchIcon,
-  DocumentTextIcon,
-  GlobeAltIcon
-} from '@heroicons/react/24/outline';
-import { useState, useEffect, useCallback, useMemo } from 'react';
-import PerformanceMonitor from './components/PerformanceMonitor';
-import CodeTypingAnimation from './components/CodeTypingAnimation';
+import { useEffect, useState } from "react";
+
+const projects = [
+  {
+    id: "01",
+    title: "Spatial Analysis Platform",
+    description:
+      "Comprehensive GIS application tailored for spatial data analysis using modern Python libraries.",
+    stack: "Python / GeoPandas",
+    image:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuCg8O7i0GhXC3ngY7JE4t1ZWu1NR4U7_KU_ApogKnroQHYxYNaCwzlepdCGkdXhNoOFGErH2yNiMjJO7z3x6XHHG3U2Pe2lbWgmKC4Ff9DKBa_bT0IhO-knIRDhT6s0srKuCyuogG1u1sFZQXB6Fg9FIxMtt2qAS0ouTgqCtnkNwo4nrv_80SYXaRSTs1MVbRfyn_5Y5YPCqg_hBhbc6nkI4eGlEgDrfCIDNu5TSzWQioekOKO7dp8mzpKQKA4hcl_SQmS_utIhTGA",
+  },
+  {
+    id: "02",
+    title: "Clustering With DBSCAN",
+    description:
+      "Machine learning implementation for pattern recognition and advanced data clustering.",
+    stack: "Scikit-learn / DBSCAN",
+    image:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuDELEfdkSehD8wy9_V2J2bwGJFoIjxI74ykZ8UHD3kaMj-yH4yed4xw1I5Aq_T3ksOxNjkHKZ1VBjYrblD12yOmmDcVCFWwINdJufXPAY49ZeeioRvRHi7ilKGHJmwKgYq0hqOs6kXm-XQ2DMwkdiS8shdr5ES8HzjTzYz5zXXaLgjL04vYOXsd4KFPIQ5vB0VI8ys_qujnFvmTJF3EKyOLTbWZvhVb5UUqqWjKzBQNwNJuqK7HwUh69PzZu6JEEP5kUJ7KVFRpGvs",
+  },
+  {
+    id: "03",
+    title: "City Utilities Web App",
+    description:
+      "Interactive mapping tool locating essential services, from libraries to hospitals.",
+    stack: "Flask / Leaflet",
+    image:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuBGXn-g0yLpPogdZxAe0IViyq2rvQc6wNrhyp5miU9hjbchZUf_JMG01IZDaTti1nEsFNjU65DDBLMrGNVW_qz-lIgNobj-d15glB_7byf9YYcqNsl8UeisA1HcT0GgcENCbzI-EL10oM6DZ5ay8qMrjfhbTK2_hvNp48bopsONrQwv7ojyvcjif0FLV3dc6TuEWvkYvGueukzJXkxTaUhTk1DxjLCVSLOy9jBKgZDp6vn6fN4qu3Qk7RFM8_Ag5yuwTZHTHTIfBP0",
+  },
+] as const;
+
+const skills = [
+  "React / Next.js",
+  "TypeScript",
+  "Tailwind CSS",
+  "Node.js / Express",
+  "PostgreSQL",
+] as const;
+
+const gisStack = [
+  "Python (Pandas/GeoPandas)",
+  "ArcGIS / QGIS",
+  "Leaflet / Mapbox",
+  "Spatial SQL",
+  "DBSCAN / Scikit-learn",
+] as const;
 
 export default function Home() {
-  const [subText, setSubText] = useState('');
-  const [subIndex, setSubIndex] = useState(0);
-  const [isSubDeleting, setIsSubDeleting] = useState(false);
-  const [showSubText, setShowSubText] = useState(false);
-  const [flippedCards, setFlippedCards] = useState<number[]>([]);
+  const [time, setTime] = useState("");
 
-  // Memoized constants to prevent recreation on every render
-  const fullSubText = useMemo(() => "Full Stack Developer & GIS Specialist passionate about creating innovative solutions for spatial data analysis and web applications", []);
-
-  // Optimized scroll handler with useCallback
-  const handleScroll = useCallback((sectionId: string) => (e: React.MouseEvent) => {
-    e.preventDefault();
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-  }, []);
-
-  // Flip card handler
-  const handleCardFlip = useCallback((index: number) => {
-    setFlippedCards(prev => 
-      prev.includes(index) 
-        ? prev.filter(i => i !== index)
-        : [...prev, index]
-    );
-  }, []);
-
-  // Memoized project data to prevent recreation
-  const projectsData = useMemo(() => [
-    {
-      icon: MapIcon,
-      title: "Spatial Data Analysis Platform",
-      description: "A comprehensive GIS application for spatial data analysis using Python, Folium, and machine learning algorithms.",
-      technologies: [
-        { icon: CommandLineIcon, name: "Python" },
-        { icon: MapIcon, name: "Folium" },
-        { icon: ChartBarIcon, name: "GeoPandas" }
-      ],
-      gradientFrom: "gray-700",
-      gradientTo: "gray-600",
-      details: "This project demonstrates advanced spatial data processing capabilities, including clustering analysis, geographic visualization, and interactive mapping features. Built with modern Python libraries for optimal performance and user experience."
-    },
-    {
-      icon: CpuChipIcon,
-      title: "Clustering Analysis with DBSCAN",
-      description: "Machine learning project implementing DBSCAN clustering algorithm for spatial pattern recognition and analysis.",
-      technologies: [
-        { icon: CpuChipIcon, name: "Scikit-learn" },
-        { icon: MagnifyingGlassIcon, name: "DBSCAN" },
-        { icon: PresentationChartLineIcon, name: "NumPy" }
-      ],
-      gradientFrom: "gray-600",
-      gradientTo: "gray-500",
-      details: "Advanced machine learning implementation focusing on spatial clustering patterns. Features include noise reduction, cluster validation, and interactive result visualization with real-time parameter adjustment capabilities."
-    },
-    {
-      icon: GlobeAltIcon,
-      title: "Calgary Utilities & Services Web App",
-      description: "An interactive web mapping application for locating essential services in Calgary, including restaurants, gas stations, libraries, and hospitals.",
-      technologies: [
-        { icon: CommandLineIcon, name: "Flask" },
-        { icon: ChartBarIcon, name: "PostgreSQL" },
-        { icon: MapIcon, name: "Leaflet" }
-      ],
-      gradientFrom: "gray-700",
-      gradientTo: "gray-500",
-      details: "Built with Flask, PostgreSQL, and Leaflet, this project showcases skills in full-stack development, spatial data handling, and cloud deployment via Docker and Render. Features interactive mapping, service location search, and responsive design for optimal user experience."
-    }
-  ], []);
-
-  // Memoized skills data
-  const skillsData = useMemo(() => [
-    { icon: CommandLineIcon, text: "Python & Geospatial Libraries (Folium, GeoPandas)", color: "blue" },
-    { icon: CpuChipIcon, text: "Machine Learning (Scikit-learn, DBSCAN)", color: "purple" },
-    { icon: CodeBracketIcon, text: "React & Next.js", color: "green" },
-    { icon: DocumentTextIcon, text: "TypeScript & Tailwind CSS", color: "yellow" },
-    { icon: MapIcon, text: "GIS Software (ArcGIS, QGIS)", color: "red" },
-    { icon: ChartBarIcon, text: "Spatial Data Analysis & Visualization", color: "indigo" }
-  ], []);
-
-  // Optimized subtitle animation with useCallback
-  const typeSubText = useCallback(() => {
-    if (!showSubText) {
-      const timeout = setTimeout(() => {
-        setShowSubText(true);
-      }, 1000);
-      return () => clearTimeout(timeout);
-    } else if (showSubText && !isSubDeleting && subIndex < fullSubText.length) {
-      const timeout = setTimeout(() => {
-        setSubText(fullSubText.slice(0, subIndex + 1));
-        setSubIndex(prev => prev + 1);
-      }, 30);
-      return () => clearTimeout(timeout);
-    } else if (showSubText && !isSubDeleting && subIndex === fullSubText.length) {
-      const timeout = setTimeout(() => {
-        setIsSubDeleting(true);
-      }, 2000);
-      return () => clearTimeout(timeout);
-    } else if (showSubText && isSubDeleting && subIndex > 0) {
-      const timeout = setTimeout(() => {
-        setSubText(fullSubText.slice(0, subIndex - 1));
-        setSubIndex(prev => prev - 1);
-      }, 20);
-      return () => clearTimeout(timeout);
-    } else if (showSubText && isSubDeleting && subIndex === 0) {
-      setIsSubDeleting(false);
-      setSubIndex(0);
-      setShowSubText(false);
-    }
-  }, [showSubText, subIndex, isSubDeleting, fullSubText]);
-
-  // Optimized useEffect for subtitle animation
   useEffect(() => {
-    const cleanup = typeSubText();
-    return cleanup;
-  }, [typeSubText]);
+    const updateClock = () => {
+      const now = new Date();
+      const label = now.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+      setTime(label);
+    };
+
+    updateClock();
+    const interval = setInterval(updateClock, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div className="dark-theme min-h-screen">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-gray-800/80 backdrop-blur-md z-50 border-b border-gray-600">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="text-xl font-bold text-white hover:text-gray-300 transition-all duration-300 hover:scale-105 cursor-pointer">
-              Portfolio
-            </div>
-            <div className="hidden md:flex space-x-8">
-              <a 
-                href="#home" 
-                onClick={handleScroll('home')}
-                className="text-gray-300 hover:text-white transition-all duration-300 hover:scale-110 relative group"
-              >
-                Home
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
-              </a>
-              <a 
-                href="#about" 
-                onClick={handleScroll('about')}
-                className="text-gray-300 hover:text-white transition-all duration-300 hover:scale-110 relative group"
-              >
-                About
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
-              </a>
-              <a 
-                href="#projects" 
-                onClick={handleScroll('projects')}
-                className="text-gray-300 hover:text-white transition-all duration-300 hover:scale-110 relative group"
-              >
-                Projects
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
-              </a>
-              <a 
-                href="#contact" 
-                onClick={handleScroll('contact')}
-                className="text-gray-300 hover:text-white transition-all duration-300 hover:scale-110 relative group"
-              >
-                Contact
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
-              </a>
-            </div>
+    <div className="min-h-screen bg-[var(--bg-light)] text-[var(--text-light)]">
+      <nav className="fixed w-full z-50 mix-blend-difference text-white border-b border-white/20">
+        <div className="max-w-[98%] mx-auto flex justify-between items-center py-6 px-4">
+          <div className="font-display font-black text-2xl tracking-tighter uppercase">
+            AG.PORTFOLIO
           </div>
+          <div className="hidden md:flex space-x-12 font-bold uppercase tracking-[0.25em] text-xs">
+            <a className="hover:line-through decoration-2" href="#work">
+              Work
+            </a>
+            <a className="hover:line-through decoration-2" href="#about">
+              About
+            </a>
+            <a className="hover:line-through decoration-2" href="#contact">
+              Contact
+            </a>
+          </div>
+          <button className="md:hidden font-bold uppercase tracking-widest text-xs">
+            Menu
+          </button>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section id="home" className="pt-20 pb-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center">
-            <h1 className="text-4xl sm:text-6xl font-bold text-white mb-6">
-              Hi, I&apos;m Aden Guo
-            </h1>
-            <p className="text-xl sm:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
-              {subText}<span className="animate-pulse">|</span>
+      <header
+        id="home"
+        className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-24"
+      >
+        <div className="absolute inset-0 select-none pointer-events-none flex flex-col justify-center items-center opacity-10 z-0 overflow-hidden">
+          <h1 className="font-display font-black text-[20vw] leading-none text-center whitespace-nowrap">
+            FULL STACK
+          </h1>
+          <h1 className="font-display font-black text-[20vw] leading-none text-center whitespace-nowrap ml-[20vw]">
+            DEVELOPER
+          </h1>
+        </div>
+        <div className="max-w-[1320px] mx-auto px-4 z-10 relative grid grid-cols-1 lg:grid-cols-12 gap-8 items-end h-full pb-20">
+          <div className="lg:col-span-7 flex flex-col justify-end space-y-8">
+            <div className="border-l-4 border-black pl-6 py-2">
+              <p className="font-bold tracking-[0.2em] uppercase text-[var(--accent-gray)] mb-2 text-xs">
+                Portfolio 2024
+              </p>
+              <h2 className="font-display font-black text-6xl md:text-8xl lg:text-9xl leading-[0.85] tracking-tight">
+                ADEN <br /> GUO
+              </h2>
+            </div>
+            <p className="text-xl md:text-2xl max-w-2xl font-light leading-relaxed text-neutral-700">
+              A{" "}
+              <span className="font-bold border-b-2 border-current">
+                GIS Specialist
+              </span>{" "}
+              &amp; Creative Technologist crafting digital experiences where
+              spatial data meets brutalist aesthetics.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button 
-                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-                className="group bg-gradient-to-r from-gray-700 to-gray-600 hover:from-gray-600 hover:to-gray-500 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-gray-500/25 relative overflow-hidden"
+            <div className="flex flex-wrap gap-4 pt-4">
+              <a
+                className="group relative px-8 py-4 bg-black text-white font-bold uppercase tracking-wider overflow-hidden"
+                href="#work"
               >
-                <span className="relative z-10">View My Work</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </button>
-              <a 
-                href="/cv.pdf" 
+                <span className="relative z-10 group-hover:text-black transition-colors">
+                  Explore Projects
+                </span>
+                <div className="absolute inset-0 h-full w-full bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+              </a>
+              <a
+                className="px-8 py-4 border-2 border-black font-bold uppercase tracking-wider hover:bg-black hover:text-white transition-colors"
+                href="/cv.pdf"
                 download="AdenGuo_CV.pdf"
-                className="group border border-gray-500 text-gray-300 hover:bg-gray-700 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-gray-500/25 text-center relative overflow-hidden"
               >
-                <span className="relative z-10">Download CV</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-gray-600/50 to-gray-500/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                Download CV
               </a>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section id="about" className="py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="bg-gray-800/60 backdrop-blur-md rounded-2xl p-8 border border-gray-700/50 shadow-xl">
-            <h2 className="text-3xl font-bold text-center text-white mb-12 hover:text-gray-300 transition-colors duration-300">About Me</h2>
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div>
-                <p className="text-lg text-white mb-6">
-                  I&apos;m a passionate developer and GIS specialist with expertise in both modern web technologies and geospatial applications. 
-                  I love creating innovative solutions that combine spatial data analysis with user-friendly web interfaces.
-                </p>
-                <div className="space-y-4">
-                  {skillsData.map((skill, index) => (
-                    <div key={index} className="flex items-center group hover:bg-gray-700/50 p-2 rounded-lg transition-all duration-300 hover:scale-105">
-                      <skill.icon className={`w-5 h-5 text-white mr-3 group-hover:text-${skill.color}-400 transition-colors duration-300`} />
-                      <span className="text-white group-hover:text-white transition-colors duration-300">{skill.text}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="bg-gradient-to-br from-gray-600 to-gray-700 p-1 rounded-lg">
-                <div className="bg-gray-800 rounded-lg p-8">
-                  <div className="text-center">
-                    <div className="w-32 h-32 bg-gradient-to-br from-gray-500 to-gray-600 rounded-full mx-auto mb-4 flex items-center justify-center">
-                      <span className="text-white text-4xl font-bold">AG</span>
-                    </div>
-                    <h3 className="text-xl font-semibold text-white">Aden Guo</h3>
-                    <p className="text-gray-300">Full Stack Developer & GIS Specialist</p>
-                  </div>
-                </div>
+          <div className="lg:col-span-5 relative h-[460px] lg:h-[680px] w-full">
+            <div className="absolute -top-10 -right-10 w-24 h-24 border-t-2 border-r-2 border-black"></div>
+            <div className="absolute -bottom-10 -left-10 w-24 h-24 border-b-2 border-l-2 border-black"></div>
+            <div className="h-full w-full bg-neutral-200 overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-700">
+              <img
+                alt="Aden Guo portrait"
+                className="object-cover w-full h-full object-center opacity-90 mix-blend-luminosity hover:mix-blend-normal transition-all duration-500"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNu4acd4dXXV7DoOQg7t56zdi39tK0cNzyHi585ppRsKbOAf86x5tYnIKEt4NaYqDzAHu6r4LGMwxZdP6mgRoaaiydcM8lAzQZ7jjZojJtdH83OZzzdxzGDup-zkNuvNKcDjvcz61sMl7bl4jGO5rr29BFFlOYTwodtH7_TT3vj2EVKgy5lIOOxq5GrrP2o7JBZxqfj3xDom44en8eiU_MDlU6B6glUlBXK6-1dX6hl_X5Ugjcfj3TD9e6Fsxu8sv0K9TdvYJWKkk"
+              />
+              <div className="absolute bottom-0 right-0 p-6 bg-black text-white">
+                <span className="inline-flex items-center justify-center w-10 h-10 border border-white/40 animate-spin-slow">
+                  AG
+                </span>
               </div>
             </div>
           </div>
         </div>
-      </section>
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center">
+          <span className="text-xs uppercase tracking-widest mb-2">Scroll</span>
+          <span className="text-lg">â†“</span>
+        </div>
+      </header>
 
-      {/* Projects Section */}
-      <section id="projects" className="py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-white mb-12 hover:text-gray-300 transition-colors duration-300">My Projects</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projectsData.map((project, index) => (
-              <div key={index} className="group relative h-96 perspective-1000">
-                <div 
-                  className={`relative w-full h-full transition-transform duration-700 transform-style-preserve-3d cursor-pointer ${
-                    flippedCards.includes(index) ? 'rotate-y-180' : ''
-                  }`}
-                  onClick={() => handleCardFlip(index)}
-                >
-                  {/* Front of card */}
-                  <div className="absolute w-full h-full backface-hidden bg-gray-800 rounded-lg shadow-lg overflow-hidden border border-gray-600/50">
-                    <div className={`h-48 bg-gradient-to-br from-${project.gradientFrom}/30 to-${project.gradientTo}/30 flex items-center justify-center group-hover:from-${project.gradientTo}/40 group-hover:to-${project.gradientFrom}/40 transition-all duration-500 relative overflow-hidden`}>
-                      <project.icon className="w-16 h-16 text-white group-hover:scale-110 transition-transform duration-300" />
-                      <div className="absolute inset-0 bg-gradient-to-r from-gray-500/10 to-gray-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    </div>
-                    <div className="p-6">
-                      <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-gray-300 transition-colors duration-300">{project.title}</h3>
-                      <p className="text-gray-300 mb-4 group-hover:text-gray-200 transition-colors duration-300">{project.description}</p>
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {project.technologies.map((tech, techIndex) => (
-                          <span key={techIndex} className="px-3 py-1 bg-gray-700/50 text-gray-200 text-sm rounded-full flex items-center gap-1 hover:bg-gray-600/70 hover:scale-105 transition-all duration-300 border border-gray-600/30">
-                            <tech.icon className="w-3 h-3" />
-                            {tech.name}
-                          </span>
-                        ))}
-                      </div>
-                      <div className="text-center text-gray-400 text-sm">
-                        Click to see more details
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Back of card */}
-                  <div className="absolute w-full h-full backface-hidden bg-gray-800 rounded-lg shadow-lg overflow-hidden border border-gray-600/50 rotate-y-180">
-                    <div className="p-6 h-full flex flex-col">
-                      <h3 className="text-xl font-semibold text-white mb-4">{project.title}</h3>
-                      <p className="text-gray-300 mb-6 flex-grow">{project.details}</p>
-                      <div className="flex gap-2 mt-auto">
-                        {index === 2 ? (
-                          <>
-                            <a 
-                              href="https://calgary-utilities-webapp.onrender.com/" 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              className="flex-1 bg-gray-700/50 hover:bg-gray-600/70 text-white py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg border border-gray-600/30 text-center"
-                            >
-                              Live Demo
-                            </a>
-                            <a 
-                              href="https://github.com/AG9898/Calgary-utilities-webapp" 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              className="flex-1 border border-gray-600/50 text-gray-300 hover:bg-gray-700/50 hover:text-white py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:scale-105 hover:border-gray-500/70 text-center"
-                            >
-                              GitHub
-                            </a>
-                          </>
-                        ) : (
-                          <>
-                            <button className="flex-1 bg-gray-700/50 hover:bg-gray-600/70 text-white py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg border border-gray-600/30">
-                              Live Demo
-                            </button>
-                            <button className="flex-1 border border-gray-600/50 text-gray-300 hover:bg-gray-700/50 hover:text-white py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:scale-105 hover:border-gray-500/70">
-                              GitHub
-                            </button>
-                          </>
-                        )}
-                      </div>
-                      <div className="text-center text-gray-400 text-sm mt-2">
-                        Click to flip back
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+      <section className="border-y border-black py-6 bg-black text-white overflow-hidden whitespace-nowrap">
+        <div className="inline-block animate-marquee">
+          <span className="text-4xl md:text-6xl font-display font-black uppercase mx-8">
+            Full Stack Developer
+          </span>
+          <span className="text-4xl md:text-6xl font-display font-black mx-4 text-transparent stroke-text opacity-50">
+            â€¢
+          </span>
+          <span className="text-4xl md:text-6xl font-display font-black uppercase mx-8">
+            GIS Specialist
+          </span>
+          <span className="text-4xl md:text-6xl font-display font-black mx-4 text-transparent stroke-text opacity-50">
+            â€¢
+          </span>
+          <span className="text-4xl md:text-6xl font-display font-black uppercase mx-8">
+            Data Analysis
+          </span>
+          <span className="text-4xl md:text-6xl font-display font-black mx-4 text-transparent stroke-text opacity-50">
+            â€¢
+          </span>
+          <span className="text-4xl md:text-6xl font-display font-black uppercase mx-8">
+            UI/UX Design
+          </span>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-gray-800/60 backdrop-blur-md rounded-2xl p-8 border border-gray-700/50 shadow-xl">
-            <h2 className="text-3xl font-bold text-center text-white mb-12 hover:text-gray-300 transition-colors duration-300">Get In Touch</h2>
-            <p className="text-lg text-gray-300 mb-8 text-center">
-              I&apos;m always interested in new opportunities and exciting projects.
+      <section id="work" className="py-24 px-4 md:px-8 border-b border-black/10">
+        <div className="max-w-[1320px] mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16">
+            <h2 className="font-display font-black text-6xl md:text-8xl uppercase tracking-tighter">
+              Selected
+              <br />
+              Works
+            </h2>
+            <p className="text-right mt-4 md:mt-0 max-w-xs text-xs uppercase tracking-widest text-[var(--accent-gray)]">
+              (2023 â€” 2025)
+              <br />
+              Showcasing technical precision
+              <br />
+              and creative direction.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="mailto:aden.guowe@gmail.com" className="group bg-gradient-to-r from-gray-700 to-gray-600 hover:from-gray-600 hover:to-gray-500 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-gray-500/25 flex items-center justify-center gap-2 relative overflow-hidden">
-                <EnvelopeIcon className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
-                <span className="relative z-10">Email Me</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-gray-500/20 to-gray-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </a>
-              <a href="https://github.com/AG9898" target="_blank" rel="noopener noreferrer" className="group border border-gray-500 text-gray-300 hover:bg-gray-700 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:border-gray-400 flex items-center justify-center gap-2">
-                <CodeBracketIcon className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
-                GitHub
-              </a>
-              <a href="https://www.linkedin.com/in/aden-guo-b39743362/" target="_blank" rel="noopener noreferrer" className="group border border-gray-500 text-gray-300 hover:bg-gray-700 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:border-gray-400 flex items-center justify-center gap-2">
-                <BriefcaseIcon className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
-                LinkedIn
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border-t border-black">
+            {projects.map((project) => (
+              <article
+                key={project.id}
+                className="group border-b md:border-r border-black relative min-h-[560px] flex flex-col justify-between p-6 md:p-12 hover:bg-[var(--surface-light)] transition-colors duration-300"
+              >
+                <div className="w-full h-[360px] bg-neutral-200 overflow-hidden mb-8 relative">
+                  <img
+                    alt={project.title}
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                    src={project.image}
+                  />
+                  <div className="absolute top-4 right-4 bg-black text-white px-3 py-1 text-xs font-bold uppercase">
+                    {project.stack}
+                  </div>
+                </div>
+                <div>
+                  <div className="flex justify-between items-baseline border-b border-black/20 pb-4 mb-4">
+                    <span className="font-mono text-sm text-[var(--accent-gray)]">
+                      {project.id}
+                    </span>
+                    <span className="transition-transform duration-300 group-hover:rotate-45">
+                      â†—
+                    </span>
+                  </div>
+                  <h3 className="font-display font-bold text-3xl md:text-4xl mb-2 uppercase group-hover:translate-x-2 transition-transform duration-300">
+                    {project.title}
+                  </h3>
+                  <p className="text-neutral-600 max-w-md">
+                    {project.description}
+                  </p>
+                </div>
+              </article>
+            ))}
+            <div className="group border-b border-black relative min-h-[560px] flex flex-col justify-center items-center p-12 bg-black text-white hover:bg-neutral-900 transition-colors">
+              <a
+                className="flex flex-col items-center group-hover:scale-110 transition-transform duration-300"
+                href="#"
+              >
+                <span className="font-display font-black text-6xl md:text-8xl mb-4">
+                  +
+                </span>
+                <span className="text-xl font-bold uppercase tracking-widest">
+                  View All Projects
+                </span>
               </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-8 px-4 sm:px-6 lg:px-8 bg-gray-900 border-t border-gray-700">
-        <div className="max-w-7xl mx-auto text-center">
-          <p className="text-gray-400 hover:text-gray-300 transition-colors duration-300">&copy; 2025 Aden Guo. All rights reserved.</p>
+      <section id="about" className="py-24 px-4 md:px-8 bg-neutral-100">
+        <div className="max-w-[1320px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32">
+          <div>
+            <h2 className="font-display font-black text-5xl md:text-7xl uppercase mb-12 relative inline-block">
+              About Me
+              <span className="absolute -bottom-2 left-0 w-1/3 h-2 bg-black"></span>
+            </h2>
+            <div className="font-light text-xl leading-relaxed mb-12 space-y-6">
+              <p>
+                I&apos;m Aden, a passionate developer bridging the gap between{" "}
+                <strong className="text-black font-bold">
+                  complex spatial data
+                </strong>{" "}
+                and{" "}
+                <strong className="text-black font-bold">
+                  intuitive web interfaces
+                </strong>
+                . My work is driven by a minimalist philosophy: stripping away
+                the unnecessary to reveal the core function and beauty of data.
+              </p>
+              <p>
+                With a background in both GIS and Full Stack Development, I
+                build tools that help users visualize and understand the world
+                around them.
+              </p>
+            </div>
+            <div className="grid grid-cols-2 gap-8">
+              <div>
+                <h4 className="font-bold uppercase tracking-widest border-b border-black pb-2 mb-4 text-xs">
+                  Tech Stack
+                </h4>
+                <ul className="space-y-2 font-mono text-sm text-neutral-600">
+                  {skills.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-bold uppercase tracking-widest border-b border-black pb-2 mb-4 text-xs">
+                  GIS &amp; Data
+                </h4>
+                <ul className="space-y-2 font-mono text-sm text-neutral-600">
+                  {gisStack.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="relative">
+            <div className="lg:sticky lg:top-24">
+              <div className="relative aspect-[3/4] border-2 border-black p-4">
+                <div className="absolute -top-4 -left-4 w-12 h-12 bg-black z-10 flex items-center justify-center text-white font-bold">
+                  AG
+                </div>
+                <img
+                  alt="Workspace"
+                  className="w-full h-full object-cover grayscale brightness-90 contrast-125"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkcYdcCbo6x2sWDYLMSwFmu9Dl2Z15CQlj9lWVNOw91ViNx2x-dljlLlcbgFD_adPzJA8CG_0TZkbBGx466N2LC4YC-P2wJD4yPwl6-48odJ3oKCjftm07LaBea_HogCe9_XrgTks4JNMirJxgSc3DroKEiRxCZfAb8nTpJ1Lxy_SJJC4Rhrsw_pe61d_QU8W-IXwFzYt4Rp9WLG9u2g6Bk9ilAiTYXOtdifQjytPrUkEJFwJRS6lgNZBSLpuVb-Z7WAWFxT-tJ0s"
+                />
+                <div className="absolute bottom-8 left-8 right-8 bg-white/90 backdrop-blur p-6 border border-black">
+                  <p className="font-display font-bold text-2xl mb-2">
+                    &quot;Design is intelligence made visible.&quot;
+                  </p>
+                  <p className="text-xs font-mono text-neutral-500">
+                    â€” Alina Wheeler
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer
+        id="contact"
+        className="bg-black text-white py-24 px-4 relative overflow-hidden"
+      >
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] border border-white/10 rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+        <div className="absolute top-0 right-0 w-[300px] h-[300px] border border-white/10 rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+        <div className="max-w-6xl mx-auto relative z-10 flex flex-col items-center text-center">
+          <h2 className="font-display font-black text-6xl md:text-9xl mb-8 uppercase leading-none">
+            Let&apos;s Talk
+          </h2>
+          <p className="text-xl md:text-2xl font-light max-w-2xl mb-12 text-neutral-400">
+            Interested in new opportunities or exciting collaborations? I&apos;m
+            always open to discussing product design, GIS solutions, or just
+            innovative ideas.
+          </p>
+          <a
+            className="inline-flex items-center gap-4 text-3xl md:text-5xl font-bold hover:underline decoration-2 underline-offset-8 transition-all hover:text-neutral-300 mb-16"
+            href="mailto:aden.guowe@gmail.com"
+          >
+            aden.guowe@gmail.com <span className="text-4xl md:text-6xl">â†’</span>
+          </a>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-16 w-full border-t border-white/20 pt-12">
+            <a className="flex flex-col items-center md:items-start group" href="#">
+              <span className="text-neutral-500 text-xs uppercase tracking-widest mb-2 group-hover:text-white transition-colors">
+                Social
+              </span>
+              <span className="text-xl font-bold">LinkedIn</span>
+            </a>
+            <a className="flex flex-col items-center md:items-start group" href="#">
+              <span className="text-neutral-500 text-xs uppercase tracking-widest mb-2 group-hover:text-white transition-colors">
+                Code
+              </span>
+              <span className="text-xl font-bold">GitHub</span>
+            </a>
+            <a className="flex flex-col items-center md:items-start group" href="#">
+              <span className="text-neutral-500 text-xs uppercase tracking-widest mb-2 group-hover:text-white transition-colors">
+                Design
+              </span>
+              <span className="text-xl font-bold">Dribbble</span>
+            </a>
+            <a className="flex flex-col items-center md:items-start group" href="#">
+              <span className="text-neutral-500 text-xs uppercase tracking-widest mb-2 group-hover:text-white transition-colors">
+                Network
+              </span>
+              <span className="text-xl font-bold">Twitter</span>
+            </a>
+          </div>
+          <div className="w-full flex flex-col md:flex-row justify-between items-center mt-24 text-xs text-neutral-500 font-mono">
+            <p>Â© 2025 Aden Guo. All Rights Reserved.</p>
+            <div className="flex gap-4 mt-4 md:mt-0">
+              <p>
+                Local Time: <span>{time || "00:00"}</span>
+              </p>
+              <p>Location: Earth</p>
+            </div>
+          </div>
         </div>
       </footer>
-
-      {/* Performance Monitor (Development Only) */}
-      <PerformanceMonitor />
     </div>
   );
 }
