@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aden Guo - Monochrome Brutalist Portfolio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;700;900&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#000000",
+                        "background-light": "#f3f3f3",
+                        "background-dark": "#0a0a0a",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1a1a1a",
+                        "text-light": "#111111",
+                        "text-dark": "#eeeeee",
+                        "accent-gray": "#888888"
+                    },
+                    fontFamily: {
+                        display: ['Archivo', 'sans-serif'],
+                        body: ['Space Grotesk', 'sans-serif'],
+                    },
+                    fontSize: {
+                        'huge': '14rem',
+                        'mega': '10rem',
+                    },
+                    borderWidth: {
+                        '1': '1px',
+                    },
+                    spacing: {
+                        '128': '32rem',
+                    }
+                },
+            },
+        };
+    </script>
+<style>
+        .stroke-text {
+            -webkit-text-stroke: 1px currentColor;
+            color: transparent;
+        }
+        .stroke-text:hover {
+            color: currentColor;
+        }::-webkit-scrollbar {
+            width: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f3f3f3;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #000;
+            border: 2px solid #f3f3f3;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #fff;
+            border: 2px solid #0a0a0a;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark font-body transition-colors duration-300 antialiased overflow-x-hidden">
+<nav class="fixed w-full z-50 mix-blend-difference text-white dark:text-white border-b border-white/20 backdrop-blur-sm">
+<div class="max-w-[98%] mx-auto flex justify-between items-center py-6 px-4">
+<div class="font-display font-black text-2xl tracking-tighter uppercase">AG.PORTFOLIO</div>
+<div class="hidden md:flex space-x-12 font-bold uppercase tracking-widest text-sm">
+<a class="hover:line-through decoration-2" href="#work">Work</a>
+<a class="hover:line-through decoration-2" href="#about">About</a>
+<a class="hover:line-through decoration-2" href="#contact">Contact</a>
+</div>
+<button class="md:hidden">
+<span class="material-icons text-3xl">menu</span>
+</button>
+</div>
+</nav>
+<header class="relative min-h-screen flex flex-col justify-center overflow-hidden pt-20">
+<div class="absolute inset-0 select-none pointer-events-none flex flex-col justify-center items-center opacity-10 dark:opacity-20 z-0 overflow-hidden">
+<h1 class="font-display font-black text-[20vw] leading-none text-center whitespace-nowrap">FULL STACK</h1>
+<h1 class="font-display font-black text-[20vw] leading-none text-center whitespace-nowrap ml-[20vw]">DEVELOPER</h1>
+</div>
+<div class="container mx-auto px-4 z-10 relative grid grid-cols-1 lg:grid-cols-12 gap-8 items-end h-full pb-20">
+<div class="lg:col-span-7 flex flex-col justify-end space-y-8">
+<div class="border-l-4 border-black dark:border-white pl-6 py-2">
+<p class="font-bold tracking-[0.2em] uppercase text-accent-gray mb-2">Portfolio 2024</p>
+<h2 class="font-display font-bold text-6xl md:text-8xl lg:text-9xl leading-[0.85] tracking-tight">
+                        ADEN <br/> GUO
+                    </h2>
+</div>
+<p class="text-xl md:text-2xl max-w-2xl font-light leading-relaxed text-gray-700 dark:text-gray-300">
+                    A <span class="font-bold border-b-2 border-current">GIS Specialist</span> &amp; Creative Technologist crafting digital experiences where spatial data meets brutalist aesthetics.
+                </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<a class="group relative px-8 py-4 bg-black dark:bg-white text-white dark:text-black font-bold uppercase tracking-wider overflow-hidden" href="#work">
+<span class="relative z-10 group-hover:text-black dark:group-hover:text-white transition-colors">Explore Projects</span>
+<div class="absolute inset-0 h-full w-full bg-white dark:bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+</a>
+<a class="px-8 py-4 border-2 border-black dark:border-white font-bold uppercase tracking-wider hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors" href="#">
+                        Download CV
+                    </a>
+</div>
+</div>
+<div class="lg:col-span-5 relative h-[500px] lg:h-[700px] w-full">
+<div class="absolute -top-10 -right-10 w-24 h-24 border-t-2 border-r-2 border-black dark:border-white"></div>
+<div class="absolute -bottom-10 -left-10 w-24 h-24 border-b-2 border-l-2 border-black dark:border-white"></div>
+<div class="h-full w-full bg-gray-200 dark:bg-gray-800 overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-700">
+<img alt="Aden Guo Portrait" class="object-cover w-full h-full object-center opacity-90 mix-blend-luminosity hover:mix-blend-normal transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNu4acd4dXXV7DoOQg7t56zdi39tK0cNzyHi585ppRsKbOAf86x5tYnIKEt4NaYqDzAHu6r4LGMwxZdP6mgRoaaiydcM8lAzQZ7jjZojJtdH83OZzzdxzGDup-zkNuvNKcDjvcz61sMl7bl4jGO5rr29BFFlOYTwodtH7_TT3vj2EVKgy5lIOOxq5GrrP2o7JBZxqfj3xDom44en8eiU_MDlU6B6glUlBXK6-1dX6hl_X5Ugjcfj3TD9e6Fsxu8sv0K9TdvYJWKkk"/>
+<div class="absolute bottom-0 right-0 p-6 bg-black text-white dark:bg-white dark:text-black">
+<span class="material-icons text-4xl animate-spin-slow">language</span>
+</div>
+</div>
+</div>
+</div>
+<div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce">
+<span class="text-xs uppercase tracking-widest mb-2">Scroll</span>
+<span class="material-icons">arrow_downward</span>
+</div>
+</header>
+<section class="border-y border-black dark:border-white py-8 bg-black dark:bg-white text-white dark:text-black overflow-hidden whitespace-nowrap">
+<div class="inline-block animate-[scroll_20s_linear_infinite]">
+<span class="text-4xl md:text-6xl font-display font-black uppercase mx-8">Full Stack Developer</span>
+<span class="text-4xl md:text-6xl font-display font-black mx-4 text-transparent stroke-text dark:stroke-text-dark opacity-50">•</span>
+<span class="text-4xl md:text-6xl font-display font-black uppercase mx-8">GIS Specialist</span>
+<span class="text-4xl md:text-6xl font-display font-black mx-4 text-transparent stroke-text dark:stroke-text-dark opacity-50">•</span>
+<span class="text-4xl md:text-6xl font-display font-black uppercase mx-8">Data Analysis</span>
+<span class="text-4xl md:text-6xl font-display font-black mx-4 text-transparent stroke-text dark:stroke-text-dark opacity-50">•</span>
+<span class="text-4xl md:text-6xl font-display font-black uppercase mx-8">UI/UX Design</span>
+<span class="text-4xl md:text-6xl font-display font-black mx-4 text-transparent stroke-text dark:stroke-text-dark opacity-50">•</span>
+</div>
+</section>
+<section class="py-24 px-4 md:px-8 border-b border-black/10 dark:border-white/10" id="work">
+<div class="max-w-[98%] mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16">
+<h2 class="font-display font-black text-6xl md:text-8xl uppercase tracking-tighter">Selected<br/>Works</h2>
+<p class="text-right mt-4 md:mt-0 max-w-xs text-sm uppercase tracking-widest">
+                    (2023 — 2025)<br/>
+                    Showcasing technical precision<br/>and creative direction.
+                </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-0 border-t border-black dark:border-white">
+<div class="group border-b md:border-r border-black dark:border-white relative min-h-[600px] flex flex-col justify-between p-6 md:p-12 hover:bg-surface-light dark:hover:bg-surface-dark transition-colors duration-300">
+<div class="w-full h-[400px] bg-gray-200 dark:bg-gray-800 overflow-hidden mb-8 relative">
+<img alt="Spatial Data Analysis" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCg8O7i0GhXC3ngY7JE4t1ZWu1NR4U7_KU_ApogKnroQHYxYNaCwzlepdCGkdXhNoOFGErH2yNiMjJO7z3x6XHHG3U2Pe2lbWgmKC4Ff9DKBa_bT0IhO-knIRDhT6s0srKuCyuogG1u1sFZQXB6Fg9FIxMtt2qAS0ouTgqCtnkNwo4nrv_80SYXaRSTs1MVbRfyn_5Y5YPCqg_hBhbc6nkI4eGlEgDrfCIDNu5TSzWQioekOKO7dp8mzpKQKA4hcl_SQmS_utIhTGA"/>
+<div class="absolute top-4 right-4 bg-black text-white dark:bg-white dark:text-black px-3 py-1 text-xs font-bold uppercase">Python / GeoPandas</div>
+</div>
+<div>
+<div class="flex justify-between items-baseline border-b border-black/20 dark:border-white/20 pb-4 mb-4">
+<span class="font-mono text-sm text-accent-gray">01</span>
+<span class="material-icons transform group-hover:rotate-45 transition-transform duration-300">arrow_outward</span>
+</div>
+<h3 class="font-display font-bold text-3xl md:text-4xl mb-2 uppercase group-hover:translate-x-2 transition-transform duration-300">Spatial Analysis Platform</h3>
+<p class="text-gray-600 dark:text-gray-400 max-w-md">Comprehensive GIS application tailored for spatial data analysis using modern Python libraries.</p>
+</div>
+</div>
+<div class="group border-b border-black dark:border-white relative min-h-[600px] flex flex-col justify-between p-6 md:p-12 hover:bg-surface-light dark:hover:bg-surface-dark transition-colors duration-300">
+<div class="w-full h-[400px] bg-gray-200 dark:bg-gray-800 overflow-hidden mb-8 relative">
+<img alt="Clustering Analysis" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDELEfdkSehD8wy9_V2J2bwGJFoIjxI74ykZ8UHD3kaMj-yH4yed4xw1I5Aq_T3ksOxNjkHKZ1VBjYrblD12yOmmDcVCFWwINdJufXPAY49ZeeioRvRHi7ilKGHJmwKgYq0hqOs6kXm-XQ2DMwkdiS8shdr5ES8HzjTzYz5zXXaLgjL04vYOXsd4KFPIQ5vB0VI8ys_qujnFvmTJF3EKyOLTbWZvhVb5UUqqWjKzBQNwNJuqK7HwUh69PzZu6JEEP5kUJ7KVFRpGvs"/>
+<div class="absolute top-4 right-4 bg-black text-white dark:bg-white dark:text-black px-3 py-1 text-xs font-bold uppercase">Scikit-learn / DBSCAN</div>
+</div>
+<div>
+<div class="flex justify-between items-baseline border-b border-black/20 dark:border-white/20 pb-4 mb-4">
+<span class="font-mono text-sm text-accent-gray">02</span>
+<span class="material-icons transform group-hover:rotate-45 transition-transform duration-300">arrow_outward</span>
+</div>
+<h3 class="font-display font-bold text-3xl md:text-4xl mb-2 uppercase group-hover:translate-x-2 transition-transform duration-300">Clustering With DBSCAN</h3>
+<p class="text-gray-600 dark:text-gray-400 max-w-md">Machine learning implementation for pattern recognition and advanced data clustering.</p>
+</div>
+</div>
+<div class="group border-b md:border-r border-black dark:border-white relative min-h-[600px] flex flex-col justify-between p-6 md:p-12 hover:bg-surface-light dark:hover:bg-surface-dark transition-colors duration-300">
+<div class="w-full h-[400px] bg-gray-200 dark:bg-gray-800 overflow-hidden mb-8 relative">
+<img alt="Calgary Utilities App" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGXn-g0yLpPogdZxAe0IViyq2rvQc6wNrhyp5miU9hjbchZUf_JMG01IZDaTti1nEsFNjU65DDBLMrGNVW_qz-lIgNobj-d15glB_7byf9YYcqNsl8UeisA1HcT0GgcENCbzI-EL10oM6DZ5ay8qMrjfhbTK2_hvNp48bopsONrQwv7ojyvcjif0FLV3dc6TuEWvkYvGueukzJXkxTaUhTk1DxjLCVSLOy9jBKgZDp6vn6fN4qu3Qk7RFM8_Ag5yuwTZHTHTIfBP0"/>
+<div class="absolute top-4 right-4 bg-black text-white dark:bg-white dark:text-black px-3 py-1 text-xs font-bold uppercase">Flask / Leaflet</div>
+</div>
+<div>
+<div class="flex justify-between items-baseline border-b border-black/20 dark:border-white/20 pb-4 mb-4">
+<span class="font-mono text-sm text-accent-gray">03</span>
+<span class="material-icons transform group-hover:rotate-45 transition-transform duration-300">arrow_outward</span>
+</div>
+<h3 class="font-display font-bold text-3xl md:text-4xl mb-2 uppercase group-hover:translate-x-2 transition-transform duration-300">City Utilities Web App</h3>
+<p class="text-gray-600 dark:text-gray-400 max-w-md">Interactive mapping tool locating essential services, from libraries to hospitals.</p>
+</div>
+</div>
+<div class="group border-b border-black dark:border-white relative min-h-[600px] flex flex-col justify-center items-center p-12 bg-black dark:bg-white text-white dark:text-black hover:bg-neutral-900 dark:hover:bg-neutral-100 transition-colors">
+<a class="flex flex-col items-center group-hover:scale-110 transition-transform duration-300" href="#">
+<span class="font-display font-black text-6xl md:text-8xl mb-4">+</span>
+<span class="text-xl font-bold uppercase tracking-widest">View All Projects</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 px-4 md:px-8 bg-gray-100 dark:bg-neutral-900" id="about">
+<div class="max-w-[98%] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32">
+<div>
+<h2 class="font-display font-black text-5xl md:text-7xl uppercase mb-12 relative inline-block">
+                    About Me
+                    <span class="absolute -bottom-2 left-0 w-1/3 h-2 bg-black dark:bg-white"></span>
+</h2>
+<div class="prose prose-lg dark:prose-invert font-light text-xl leading-relaxed mb-12">
+<p>
+                        I'm Aden, a passionate developer bridging the gap between <strong class="text-black dark:text-white font-bold">complex spatial data</strong> and <strong class="text-black dark:text-white font-bold">intuitive web interfaces</strong>. My work is driven by a minimalist philosophy: stripping away the unnecessary to reveal the core function and beauty of data.
+                    </p>
+<p>
+                        With a background in both GIS and Full Stack Development, I build tools that help users visualize and understand the world around them.
+                    </p>
+</div>
+<div class="grid grid-cols-2 gap-8">
+<div>
+<h4 class="font-bold uppercase tracking-widest border-b border-black dark:border-white pb-2 mb-4 text-sm">Tech Stack</h4>
+<ul class="space-y-2 font-mono text-sm text-gray-600 dark:text-gray-400">
+<li>React / Next.js</li>
+<li>TypeScript</li>
+<li>Tailwind CSS</li>
+<li>Node.js / Express</li>
+<li>PostgreSQL</li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold uppercase tracking-widest border-b border-black dark:border-white pb-2 mb-4 text-sm">GIS &amp; Data</h4>
+<ul class="space-y-2 font-mono text-sm text-gray-600 dark:text-gray-400">
+<li>Python (Pandas/GeoPandas)</li>
+<li>ArcGIS / QGIS</li>
+<li>Leaflet / Mapbox</li>
+<li>Spatial SQL</li>
+<li>DBSCAN / Scikit-learn</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="relative">
+<div class="sticky top-24">
+<div class="relative aspect-[3/4] border-2 border-black dark:border-white p-4">
+<div class="absolute -top-4 -left-4 w-12 h-12 bg-black dark:bg-white z-10 flex items-center justify-center text-white dark:text-black font-bold">AG</div>
+<img alt="Workspace" class="w-full h-full object-cover grayscale brightness-90 contrast-125" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkcYdcCbo6x2sWDYLMSwFmu9Dl2Z15CQlj9lWVNOw91ViNx2x-dljlLlcbgFD_adPzJA8CG_0TZkbBGx466N2LC4YC-P2wJD4yPwl6-48odJ3oKCjftm07LaBea_HogCe9_XrgTks4JNMirJxgSc3DroKEiRxCZfAb8nTpJ1Lxy_SJJC4Rhrsw_pe61d_QU8W-IXwFzYt4Rp9WLG9u2g6Bk9ilAiTYXOtdifQjytPrUkEJFwJRS6lgNZBSLpuVb-Z7WAWFxT-tJ0s"/>
+<div class="absolute bottom-8 left-8 right-8 bg-white/90 dark:bg-black/90 backdrop-blur p-6 border border-black dark:border-white">
+<p class="font-display font-bold text-2xl mb-2">"Design is intelligence made visible."</p>
+<p class="text-sm font-mono text-gray-500">— Alina Wheeler</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<footer class="bg-black text-white dark:bg-white dark:text-black py-24 px-4 relative overflow-hidden" id="contact">
+<div class="absolute top-0 right-0 w-[500px] h-[500px] border border-white/10 dark:border-black/10 rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+<div class="absolute top-0 right-0 w-[300px] h-[300px] border border-white/10 dark:border-black/10 rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+<div class="max-w-6xl mx-auto relative z-10 flex flex-col items-center text-center">
+<h2 class="font-display font-black text-6xl md:text-9xl mb-8 uppercase leading-none">Let's Talk</h2>
+<p class="text-xl md:text-2xl font-light max-w-2xl mb-12 text-gray-400 dark:text-gray-600">
+                Interested in new opportunities or exciting collaborations? I'm always open to discussing product design, GIS solutions, or just innovative ideas.
+            </p>
+<a class="inline-flex items-center gap-4 text-3xl md:text-5xl font-bold hover:underline decoration-2 underline-offset-8 transition-all hover:text-gray-300 dark:hover:text-gray-700 mb-16" href="mailto:aden@example.com">
+                aden@example.com
+                <span class="material-icons text-4xl md:text-6xl">arrow_forward</span>
+</a>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-16 w-full border-t border-white/20 dark:border-black/20 pt-12">
+<a class="flex flex-col items-center md:items-start group" href="#">
+<span class="text-gray-500 dark:text-gray-400 text-sm uppercase tracking-widest mb-2 group-hover:text-white dark:group-hover:text-black transition-colors">Social</span>
+<span class="text-xl font-bold">LinkedIn</span>
+</a>
+<a class="flex flex-col items-center md:items-start group" href="#">
+<span class="text-gray-500 dark:text-gray-400 text-sm uppercase tracking-widest mb-2 group-hover:text-white dark:group-hover:text-black transition-colors">Code</span>
+<span class="text-xl font-bold">GitHub</span>
+</a>
+<a class="flex flex-col items-center md:items-start group" href="#">
+<span class="text-gray-500 dark:text-gray-400 text-sm uppercase tracking-widest mb-2 group-hover:text-white dark:group-hover:text-black transition-colors">Design</span>
+<span class="text-xl font-bold">Dribbble</span>
+</a>
+<a class="flex flex-col items-center md:items-start group" href="#">
+<span class="text-gray-500 dark:text-gray-400 text-sm uppercase tracking-widest mb-2 group-hover:text-white dark:group-hover:text-black transition-colors">Network</span>
+<span class="text-xl font-bold">Twitter</span>
+</a>
+</div>
+<div class="w-full flex flex-col md:flex-row justify-between items-center mt-24 text-sm text-gray-500 dark:text-gray-400 font-mono">
+<p>© 2025 Aden Guo. All Rights Reserved.</p>
+<div class="flex gap-4 mt-4 md:mt-0">
+<p>Local Time: <span id="clock">12:00 PM</span></p>
+<p>Location: Earth</p>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Simple clock script
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('clock').textContent = timeString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+<style>@keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+    </style>
+
+</body></html>

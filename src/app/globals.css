@@ -3,15 +3,23 @@
 @tailwind utilities;
 
 :root {
-  --background: #7d7e82;
-  --foreground: #ffffff;
+  --color-black: #000000;
+  --color-white: #ffffff;
+
+  --bg-light: #f3f3f3;
+  --bg-dark: #0a0a0a;
+
+  --surface-light: #ffffff;
+  --surface-dark: #1a1a1a;
+
+  --text-light: #111111;
+  --text-dark: #eeeeee;
+
+  --accent-gray: #888888;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
 html {
@@ -19,230 +27,90 @@ html {
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-/* Clean Medium Grey Background */
-.dark-theme {
-  background-color: #7d7e82;
-  min-height: 100vh;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.5);
-}
-
-/* Performance optimizations */
-* {
-  box-sizing: border-box;
-}
-
-/* Optimize animations and transitions */
-.animate-pulse {
-  will-change: opacity;
-}
-
-/* Optimize transforms for better performance */
-.hover\:scale-105:hover {
-  will-change: transform;
-  transform: scale(1.05);
-}
-
-.hover\:scale-110:hover {
-  will-change: transform;
-  transform: scale(1.1);
-}
-
-.hover\:-translate-y-2:hover {
-  will-change: transform;
-  transform: translateY(-0.5rem);
-}
-
-/* Optimize backdrop blur for better performance */
-.backdrop-blur-md {
-  will-change: backdrop-filter;
-}
-
-.backdrop-blur-sm {
-  will-change: backdrop-filter;
-}
-
-/* Reduce paint operations for gradients */
-.bg-gradient-to-r {
-  will-change: background-image;
-}
-
-.bg-gradient-to-br {
-  will-change: background-image;
-}
-
-/* Optimize text rendering */
-body {
+  background: var(--bg-light);
+  color: var(--text-light);
+  font-family: var(--font-body), "Space Grotesk", system-ui, sans-serif;
   text-rendering: optimizeSpeed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Optimize scroll behavior */
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 4rem; /* Account for fixed navbar */
+.dark body {
+  background: var(--bg-dark);
+  color: var(--text-dark);
 }
 
-/* Reduce layout shifts */
-img, video, canvas, audio, iframe, embed, object {
-  display: block;
-  max-width: 100%;
+.font-display {
+  font-family: var(--font-display), "Archivo", system-ui, sans-serif;
 }
 
-/* Optimize focus styles for better accessibility and performance */
-*:focus {
-  outline: 2px solid #3b82f6;
-  outline-offset: 2px;
+.font-body {
+  font-family: var(--font-body), "Space Grotesk", system-ui, sans-serif;
 }
 
-/* Custom dark theme with optimized colors */
-.dark-theme {
-  background-color: #7d7e82;
-  color: #ffffff;
-  min-height: 100vh;
+.stroke-text {
+  -webkit-text-stroke: 1px currentColor;
+  color: transparent;
 }
 
-/* Optimize transitions */
-.transition-all {
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
 }
 
-.transition-colors {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+::-webkit-scrollbar-track {
+  background: var(--bg-light);
 }
 
-.transition-transform {
-  transition-property: transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+.dark ::-webkit-scrollbar-track {
+  background: var(--bg-dark);
 }
 
-.transition-opacity {
-  transition-property: opacity;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+::-webkit-scrollbar-thumb {
+  background: var(--color-black);
+  border: 2px solid var(--bg-light);
 }
 
-/* Optimize duration classes */
-.duration-300 {
-  transition-duration: 300ms;
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--color-white);
+  border: 2px solid var(--bg-dark);
 }
 
-.duration-500 {
-  transition-duration: 500ms;
+/* Animations */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
-/* Optimize hover states */
-@media (hover: hover) {
-  .hover\:bg-gray-700\/50:hover {
-    background-color: rgba(55, 65, 81, 0.5);
-  }
-  
-  .hover\:bg-gray-600\/70:hover {
-    background-color: rgba(75, 85, 99, 0.7);
-  }
-  
-  .hover\:text-white:hover {
-    color: #ffffff;
-  }
-  
-  .hover\:text-gray-300:hover {
-    color: #d1d5db;
-  }
+@keyframes slow-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
-/* 3D Flip Card Animation */
-.perspective-1000 {
-  perspective: 1000px;
+.animate-marquee {
+  animation: marquee 20s linear infinite;
 }
 
-.transform-style-preserve-3d {
-  transform-style: preserve-3d;
+.animate-spin-slow {
+  animation: slow-spin 12s linear infinite;
 }
 
-.backface-hidden {
-  backface-visibility: hidden;
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid var(--color-black);
+  outline-offset: 3px;
 }
 
-.rotate-y-180 {
-  transform: rotateY(180deg);
+.dark :focus-visible {
+  outline-color: var(--color-white);
 }
 
-/* Optimize for reduced motion */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  * {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-  
-  .animate-pulse {
-    animation: none;
-  }
-  
-  /* Disable flip animation for reduced motion */
-  .rotate-y-180 {
-    transform: none !important;
-  }
-}
-
-/* Optimize for high contrast mode */
-@media (prefers-contrast: high) {
-  .dark-theme {
-    background-color: #000000;
-  }
-  
-  .text-gray-300 {
-    color: #ffffff;
-  }
-  
-  .text-gray-400 {
-    color: #e5e7eb;
-  }
-}
-
-/* Optimize for print */
-@media print {
-  .dark-theme {
-    background-color: #ffffff !important;
-    color: #000000 !important;
-  }
-  
-  nav, footer {
-    display: none !important;
-  }
-  
-  /* Hide flip cards in print */
-  .perspective-1000 {
-    perspective: none;
-  }
-  
-  .rotate-y-180 {
-    transform: none !important;
   }
 }
