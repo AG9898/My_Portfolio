@@ -3,114 +3,33 @@
 @tailwind utilities;
 
 :root {
-  --color-black: #000000;
-  --color-white: #ffffff;
-
-  --bg-light: #f3f3f3;
-  --bg-dark: #0a0a0a;
-
-  --surface-light: #ffffff;
-  --surface-dark: #1a1a1a;
-
-  --text-light: #111111;
-  --text-dark: #eeeeee;
-
-  --accent-gray: #888888;
+  color-scheme: dark;
+  --desktop-bg: #0a0a0f;
+  --text-primary: #f5f5f7;
+  --text-secondary: rgba(255, 255, 255, 0.5);
 }
 
 * {
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
+html,
+body {
+  min-height: 100%;
 }
 
 body {
-  background: var(--bg-light);
-  color: var(--text-light);
-  font-family: var(--font-body), "Space Grotesk", system-ui, sans-serif;
-  text-rendering: optimizeSpeed;
+  margin: 0;
+  background: var(--desktop-bg);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-.dark body {
-  background: var(--bg-dark);
-  color: var(--text-dark);
-}
-
-.font-display {
-  font-family: var(--font-display), "Archivo", system-ui, sans-serif;
-}
-
-.font-body {
-  font-family: var(--font-body), "Space Grotesk", system-ui, sans-serif;
-}
-
-.stroke-text {
-  -webkit-text-stroke: 1px currentColor;
-  color: transparent;
-}
-
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 12px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--bg-light);
-}
-
-.dark ::-webkit-scrollbar-track {
-  background: var(--bg-dark);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-black);
-  border: 2px solid var(--bg-light);
-}
-
-.dark ::-webkit-scrollbar-thumb {
-  background: var(--color-white);
-  border: 2px solid var(--bg-dark);
-}
-
-/* Animations */
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-@keyframes slow-spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.animate-marquee {
-  animation: marquee 20s linear infinite;
-}
-
-.animate-spin-slow {
-  animation: slow-spin 12s linear infinite;
-}
-
-/* Focus styles */
-:focus-visible {
-  outline: 2px solid var(--color-black);
-  outline-offset: 3px;
-}
-
-.dark :focus-visible {
-  outline-color: var(--color-white);
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+button,
+input,
+textarea,
+select {
+  font: inherit;
 }
