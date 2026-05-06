@@ -87,6 +87,7 @@ Full topology and component responsibilities: [`docs/ARCHITECTURE.md`](docs/ARCH
 ### Always
 
 - Always follow `docs/macos-redesign.md` for portfolio UX and visual direction.
+- Always follow `docs/styling.md` for color tokens, glass materials, typography, and motion specs.
 - Always use Tailwind for component styling and keep `globals.css` limited to resets, tokens, and global motion rules.
 - Always use the macOS system font stack; do not add Google Fonts.
 - Always keep window behavior deterministic in reducer-style code.

@@ -1,6 +1,416 @@
 {
   "$schema": "./workboard.schema.json",
   "schema_version": "1.0.0",
-  "last_updated": "2026-04-23",
-  "tasks": []
+  "last_updated": "2026-05-06",
+  "tasks": [
+    {
+      "id": "V1_001",
+      "title": "Clarify Complete V1 scope in PRD",
+      "description": "Add a compact PRD clarification that defines Complete V1 as the boot sequence, persistent desktop shell, working shortcut routes, full window interactions, complete motion and styling pass, mobile fallback, and first-pass real app content. Keep this scoped to product documentation only.",
+      "status": "done",
+      "priority": "high",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "PRD includes an explicit Complete V1 boundary.",
+        "The clarification matches docs/macos-redesign.md and does not introduce backend, auth, deployment, or duplicate-window scope.",
+        "Documentation wording is concise and does not duplicate the full redesign doc."
+      ],
+      "docs": [
+        "docs/PRD.md",
+        "docs/macos-redesign.md"
+      ],
+      "files": [
+        "docs/PRD.md",
+        ".eslintrc.json"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V1_002",
+      "title": "Reset global shell foundation",
+      "description": "Replace the old single-page portfolio foundation with desktop-safe App Router structure: system font stack, no-scroll viewport behavior, dark/light theme tokens, minimal global CSS, and route placeholders ready to render inside app windows. Preserve public/cv.pdf and avoid carrying forward the deprecated brutalist/Stitch UI.",
+      "status": "todo",
+      "priority": "critical",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_001"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "src/app/globals.css contains only resets, tokens, global motion rules, and shell-safe viewport behavior.",
+        "src/app/layout.tsx is prepared to own the persistent desktop shell without unmounting across route changes.",
+        "Home route no longer depends on the deprecated single-page portfolio layout.",
+        "No Google Fonts or new Heroicons usage is introduced."
+      ],
+      "docs": [
+        "docs/ARCHITECTURE.md",
+        "docs/CONVENTIONS.md",
+        "docs/PRD.md",
+        "docs/macos-redesign.md",
+        "docs/styling.md"
+      ],
+      "files": [
+        "src/app/layout.tsx",
+        "src/app/page.tsx",
+        "src/app/globals.css"
+      ],
+      "commands": [
+        "npm run lint",
+        "npm run build"
+      ]
+    },
+    {
+      "id": "V1_003",
+      "title": "Build static desktop shell",
+      "description": "Implement the persistent macOS-style shell with a wallpaper layer placeholder, top menu bar, bottom dock, and left desktop shortcut column mounted from the root layout. This task establishes shell composition and component boundaries without requiring full window state behavior yet.",
+      "status": "todo",
+      "priority": "critical",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_002"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Desktop shell fills the viewport and prevents page-level scrolling on desktop.",
+        "Menu bar, dock, and shortcut column remain mounted while navigating between app routes.",
+        "Shortcut and dock item metadata come from shared app metadata instead of duplicated labels and routes.",
+        "Shell styling uses Tailwind plus global tokens only where appropriate."
+      ],
+      "docs": [
+        "docs/ARCHITECTURE.md",
+        "docs/CONVENTIONS.md",
+        "docs/macos-redesign.md",
+        "docs/styling.md"
+      ],
+      "files": [
+        "src/app/layout.tsx",
+        "src/app/components/Desktop/",
+        "src/app/components/MenuBar/",
+        "src/app/components/Dock/"
+      ],
+      "commands": [
+        "npm run lint",
+        "npm run build"
+      ]
+    },
+    {
+      "id": "V1_004",
+      "title": "Add wallpaper, boot screen, theme, and mobile fallback",
+      "description": "Complete the non-window shell experience by adding the animated simplex-noise canvas wallpaper, click-to-enter boot sequence, next-themes dark canonical/light inversion, and an intentional small-screen fallback instead of a broken desktop simulation. Boot audio must be custom, royalty-free, or omitted.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_003"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Animated wallpaper renders behind all shell chrome without layout shift or blank canvas on desktop.",
+        "Boot screen uses a user gesture for any audio path and does not use Apple-owned chime assets.",
+        "Dark mode is the default visual target and light mode works through token inversion.",
+        "Small screens show a deliberate fallback rather than cramped draggable windows."
+      ],
+      "docs": [
+        "docs/ARCHITECTURE.md",
+        "docs/CONVENTIONS.md",
+        "docs/PRD.md",
+        "docs/macos-redesign.md",
+        "docs/styling.md"
+      ],
+      "files": [
+        "src/app/layout.tsx",
+        "src/app/globals.css",
+        "src/app/components/Desktop/"
+      ],
+      "commands": [
+        "npm run lint",
+        "npm run build"
+      ]
+    },
+    {
+      "id": "V1_005",
+      "title": "Implement window registry and reducer",
+      "description": "Create the typed app registry and deterministic window reducer that owns open windows, focused app, z-index ordering, geometry, minimized, maximized, snapped, and restore geometry. Enforce one window per app route and focus/restore an existing window instead of duplicating it.",
+      "status": "todo",
+      "priority": "critical",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_003"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Shared registry defines app IDs, routes, labels, titles, icons, default sizes, and default positions for Home, Projects, About, Contact, and CV.",
+        "Reducer actions cover open, focus, close, minimize, restore, maximize, snap left, snap right, drag, resize, and route synchronization inputs.",
+        "Opening an already-open app focuses and restores that window without creating a duplicate.",
+        "Closing a focused window selects the next highest z-index window or falls back to the desktop route."
+      ],
+      "docs": [
+        "docs/ARCHITECTURE.md",
+        "docs/CONVENTIONS.md",
+        "docs/macos-redesign.md"
+      ],
+      "files": [
+        "src/app/components/WindowManager/"
+      ],
+      "commands": [
+        "npm run lint",
+        "npm run build"
+      ]
+    },
+    {
+      "id": "V1_006",
+      "title": "Render draggable and resizable windows",
+      "description": "Render app windows from the window manager provider with macOS chrome, traffic light controls, focus-on-interaction behavior, react-rnd dragging and resizing, maximize/restore, and snap left/right support. Keep state transitions routed through the reducer.",
+      "status": "todo",
+      "priority": "critical",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_005"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Each open app renders inside a draggable and resizable window with stable chrome and traffic light controls.",
+        "Window interactions update reducer state for focus, z-index, position, size, minimized, maximized, and snapped states.",
+        "Maximize and snap preserve previous geometry for restore.",
+        "Window content areas remain contained and do not create page-level scroll."
+      ],
+      "docs": [
+        "docs/ARCHITECTURE.md",
+        "docs/CONVENTIONS.md",
+        "docs/macos-redesign.md",
+        "docs/styling.md"
+      ],
+      "files": [
+        "src/app/components/WindowManager/",
+        "src/app/components/Window/"
+      ],
+      "commands": [
+        "npm run lint",
+        "npm run build"
+      ]
+    },
+    {
+      "id": "V1_007",
+      "title": "Integrate routes with shortcut and dock navigation",
+      "description": "Wire Home, Projects, About, Contact, and CV routes into the shell so desktop shortcuts and dock items open, focus, or restore windows while the focused app updates the URL. Direct route entry should open the matching app window without unmounting the desktop shell.",
+      "status": "todo",
+      "priority": "critical",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_006"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Routes exist for /, /projects, /about, /contact, and /cv.",
+        "Desktop shortcuts and dock items open or restore the matching app window.",
+        "Clicking or focusing a window updates the URL to that app route.",
+        "Direct browser entry to an app route opens and focuses the corresponding window while keeping desktop chrome mounted."
+      ],
+      "docs": [
+        "docs/ARCHITECTURE.md",
+        "docs/PRD.md",
+        "docs/macos-redesign.md",
+        "docs/styling.md"
+      ],
+      "files": [
+        "src/app/page.tsx",
+        "src/app/projects/page.tsx",
+        "src/app/about/page.tsx",
+        "src/app/contact/page.tsx",
+        "src/app/cv/page.tsx",
+        "src/app/components/Desktop/",
+        "src/app/components/Dock/",
+        "src/app/components/WindowManager/"
+      ],
+      "commands": [
+        "npm run lint",
+        "npm run build"
+      ]
+    },
+    {
+      "id": "V1_008",
+      "title": "Add menu bar interactions",
+      "description": "Implement accessible macOS-style menu bar interactions with Radix dropdowns, focused app name, live clock, decorative status icons, theme toggle, and applicable window actions such as close, minimize, and restore. Keep menu actions disabled or hidden when no focused window can receive them.",
+      "status": "todo",
+      "priority": "medium",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_007"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Menu bar shows the focused app name and updates as focus changes.",
+        "Radix dropdown menus are keyboard accessible and visually match the frosted macOS shell.",
+        "Clock updates without hydration errors or excessive re-rendering.",
+        "Menu actions dispatch reducer actions only when a valid focused window exists."
+      ],
+      "docs": [
+        "docs/ARCHITECTURE.md",
+        "docs/CONVENTIONS.md",
+        "docs/macos-redesign.md",
+        "docs/styling.md"
+      ],
+      "files": [
+        "src/app/components/MenuBar/",
+        "src/app/components/WindowManager/"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V1_009",
+      "title": "Implement complete motion system",
+      "description": "Add the V1 framer-motion system for window open, close, minimize, restore, dock hover magnification, dock tooltips, boot reveal, and page transitions inside windows. Respect reduced-motion preferences and keep animation timing tolerant for manual/browser verification.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_007"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Windows animate open, close, minimize, and restore with macOS-style scale/fade motion.",
+        "Dock icons magnify on hover, show labels, and indicate open non-minimized apps.",
+        "Inner app content uses a short page transition inside the window frame.",
+        "Reduced-motion users receive functional transitions without disruptive motion."
+      ],
+      "docs": [
+        "docs/CONVENTIONS.md",
+        "docs/TESTING.md",
+        "docs/macos-redesign.md",
+        "docs/styling.md"
+      ],
+      "files": [
+        "src/app/components/Dock/",
+        "src/app/components/Window/",
+        "src/app/components/WindowManager/",
+        "src/app/globals.css"
+      ],
+      "commands": [
+        "npm run lint",
+        "npm run build"
+      ]
+    },
+    {
+      "id": "V1_010",
+      "title": "Build app-specific toolbars and first-pass content",
+      "description": "Fill Home, Projects, About, Contact, and CV windows with redesign-native first-pass content and per-app metaphors: Notes or TextEdit for Home/About, Finder for Projects, Mail for Contact, and Preview for CV. Preserve public/cv.pdf and keep content maintainable without backend infrastructure.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_007"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Each route renders useful first-pass portfolio content inside its app window rather than placeholder-only UI.",
+        "Projects content is scannable in a Finder-style view with project names, descriptions, links or metadata as available.",
+        "Contact content presents a Mail-style compose metaphor with practical contact paths and no backend dependency.",
+        "CV window exposes public/cv.pdf through a Preview-style experience."
+      ],
+      "docs": [
+        "docs/PRD.md",
+        "docs/macos-redesign.md",
+        "docs/styling.md"
+      ],
+      "files": [
+        "src/app/page.tsx",
+        "src/app/projects/page.tsx",
+        "src/app/about/page.tsx",
+        "src/app/contact/page.tsx",
+        "src/app/cv/page.tsx",
+        "src/app/components/Window/",
+        "public/cv.pdf"
+      ],
+      "commands": [
+        "npm run lint",
+        "npm run build"
+      ]
+    },
+    {
+      "id": "V1_011",
+      "title": "Polish responsive, accessibility, and interaction details",
+      "description": "Perform the V1 polish pass across the shell, windows, shortcuts, dock, menu bar, app content, mobile fallback, keyboard/focus behavior, contrast, text overflow, and edge-case window state transitions. Keep fixes focused on shipping the desktop imitation cleanly.",
+      "status": "todo",
+      "priority": "medium",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_008",
+        "V1_009",
+        "V1_010"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Keyboard and pointer focus states are visible and coherent for shell controls, menus, dock items, shortcuts, and window controls.",
+        "Text does not overflow or overlap in menu bar, dock labels, shortcut labels, title bars, toolbars, or app content at supported desktop sizes.",
+        "Window close, minimize, restore, maximize, snap, and direct route entry behave consistently after repeated interactions.",
+        "Mobile fallback is intentional and not mixed with broken desktop controls."
+      ],
+      "docs": [
+        "docs/ARCHITECTURE.md",
+        "docs/CONVENTIONS.md",
+        "docs/PRD.md",
+        "docs/TESTING.md",
+        "docs/macos-redesign.md",
+        "docs/styling.md"
+      ],
+      "files": [
+        "src/app/components/",
+        "src/app/globals.css",
+        "src/app/page.tsx",
+        "src/app/projects/page.tsx",
+        "src/app/about/page.tsx",
+        "src/app/contact/page.tsx",
+        "src/app/cv/page.tsx"
+      ],
+      "commands": [
+        "npm run lint",
+        "npm run build"
+      ]
+    },
+    {
+      "id": "V1_012",
+      "title": "Run final V1 verification and docs sync",
+      "description": "Complete the V1 closeout by running lint and production build, manually verifying the core desktop workflows in a browser, and updating architecture, conventions, testing, or agent guidance only if implementation revealed durable patterns or constraints. Do not deploy or publish production changes as part of this task.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_011"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "npm run lint and npm run build pass after the complete V1 implementation.",
+        "Manual browser verification covers direct route entry, shortcut open, dock restore, focus URL sync, close fallback, minimize/restore, maximize/restore, snap left/right, mobile fallback, reduced motion, and CV availability.",
+        "Relevant docs are updated only for actual behavior, architecture, convention, testing, or durable agent-guidance changes introduced during implementation.",
+        "docs/workboard.json remains schema-valid after task status updates performed by execution workflows."
+      ],
+      "docs": [
+        "AGENTS.md",
+        "docs/ARCHITECTURE.md",
+        "docs/CONVENTIONS.md",
+        "docs/TESTING.md",
+        "docs/styling.md",
+        "docs/workboard.md"
+      ],
+      "files": [
+        "docs/ARCHITECTURE.md",
+        "docs/CONVENTIONS.md",
+        "docs/TESTING.md",
+        "AGENTS.md",
+        "src/app/",
+        "docs/workboard.json"
+      ],
+      "commands": [
+        "npm run lint",
+        "npm run build",
+        "npx --yes ajv-cli validate -s docs/workboard.schema.json -d docs/workboard.json"
+      ]
+    }
+  ]
 }

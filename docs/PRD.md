@@ -44,6 +44,10 @@ Build a memorable frontend portfolio where the browser behaves like a macOS desk
 - Per-app metaphors and toolbars: Notes/TextEdit, Finder, Mail, and Preview.
 - Fresh content written for the redesign. Preserve `/public/cv.pdf`.
 
+### Complete V1 Boundary
+
+- V1 is considered complete when the boot sequence, persistent desktop shell, working shortcut routes, full window interactions, complete motion/styling pass, mobile fallback, and first-pass real app content are implemented.
+
 ### Out of Scope
 
 - Backend services, databases, authentication, or user accounts.
