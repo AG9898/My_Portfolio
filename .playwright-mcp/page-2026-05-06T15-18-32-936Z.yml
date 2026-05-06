@@ -1,0 +1,2095 @@
+- generic:
+  - generic:
+    - generic [ref=e1]:
+      - generic [ref=e3]:
+        - menubar [ref=e4]:
+          - menuitem [ref=e5] [cursor=pointer]:
+            - img [ref=e7]
+          - menuitem "Product OS" [ref=e19] [cursor=pointer]
+          - menuitem "Pricing" [ref=e20] [cursor=pointer]
+          - menuitem "Docs" [ref=e21] [cursor=pointer]
+          - menuitem "Community" [ref=e22] [cursor=pointer]
+          - menuitem "Company" [ref=e23] [cursor=pointer]
+          - menuitem "More" [ref=e24] [cursor=pointer]:
+            - generic [ref=e25]: More
+        - complementary [ref=e26]:
+          - link "Get started – free" [ref=e29] [cursor=pointer]:
+            - /url: https://app.posthog.com/signup
+            - generic [ref=e30]: Get started – free
+          - button [ref=e35] [cursor=pointer]:
+            - img [ref=e36]
+          - button [ref=e40] [cursor=pointer]:
+            - img [ref=e41]
+          - button "2" [ref=e1063] [cursor=pointer]:
+            - generic [ref=e47]: "2"
+          - menubar [ref=e48]:
+            - menuitem [ref=e49] [cursor=pointer]:
+              - img [ref=e50]
+      - generic [ref=e52]:
+        - generic [ref=e53]:
+          - img [ref=e59]
+          - navigation:
+            - list:
+              - listitem [ref=e60]:
+                - figure [ref=e63]:
+                  - link "home.mdx" [ref=e65] [cursor=pointer]:
+                    - /url: /
+                    - img [ref=e67]
+                    - generic [ref=e70]: home.mdx
+              - listitem [ref=e71]:
+                - figure [ref=e74]:
+                  - link "Product OS" [ref=e76] [cursor=pointer]:
+                    - /url: /products
+                    - img [ref=e78]
+                    - generic [ref=e81]: Product OS
+              - listitem [ref=e82]:
+                - figure [ref=e85]:
+                  - link "Pricing" [ref=e87] [cursor=pointer]:
+                    - /url: /pricing
+                    - img [ref=e89]
+                    - generic [ref=e92]: Pricing
+              - listitem [ref=e93]:
+                - figure [ref=e96]:
+                  - link "customers.mdx" [ref=e98] [cursor=pointer]:
+                    - /url: /customers
+                    - img [ref=e100]
+                    - generic [ref=e103]: customers.mdx
+              - listitem [ref=e104]:
+                - figure [ref=e107]:
+                  - link "demo.mov" [ref=e109] [cursor=pointer]:
+                    - /url: /demo
+                    - img [ref=e111]
+                    - generic [ref=e115]: demo.mov
+              - listitem [ref=e116]:
+                - figure [ref=e119]:
+                  - link "Docs" [ref=e121] [cursor=pointer]:
+                    - /url: /docs
+                    - img [ref=e123]
+                    - generic [ref=e126]: Docs
+              - listitem [ref=e127]:
+                - figure [ref=e130]:
+                  - link "Talk to a human" [ref=e132] [cursor=pointer]:
+                    - /url: /talk-to-a-human
+                    - img [ref=e134]
+                    - generic [ref=e137]: Talk to a human
+              - listitem [ref=e138]:
+                - figure [ref=e141]:
+                  - button "Ask a question" [ref=e142] [cursor=pointer]:
+                    - img [ref=e144]
+                    - generic [ref=e147]: Ask a question
+              - listitem [ref=e148]:
+                - figure [ref=e151]:
+                  - link "Sign up ↗" [ref=e153] [cursor=pointer]:
+                    - /url: https://app.posthog.com/signup
+                    - img [ref=e155]
+                    - generic [ref=e158]: Sign up ↗
+              - listitem [ref=e159]:
+                - figure [ref=e162]:
+                  - button "Switch to website mode" [ref=e163] [cursor=pointer]:
+                    - img [ref=e165]
+                    - generic [ref=e168]: Switch to website mode
+              - listitem [ref=e169]:
+                - figure [ref=e172]:
+                  - link "Why PostHog?" [ref=e174] [cursor=pointer]:
+                    - /url: /about
+                    - img [ref=e176]
+                    - generic [ref=e179]: Why PostHog?
+              - listitem [ref=e180]:
+                - figure [ref=e183]:
+                  - link "Changelog" [ref=e185] [cursor=pointer]:
+                    - /url: /changelog
+                    - img [ref=e187]
+                    - generic [ref=e190]: Changelog
+              - listitem [ref=e191]:
+                - figure [ref=e194]:
+                  - link "Company handbook" [ref=e196] [cursor=pointer]:
+                    - /url: /handbook
+                    - img [ref=e198]
+                    - generic [ref=e201]: Company handbook
+              - listitem [ref=e202]:
+                - figure [ref=e205]:
+                  - link "Store" [ref=e207] [cursor=pointer]:
+                    - /url: /merch
+                    - img [ref=e209]
+                    - generic [ref=e212]: Store
+              - listitem [ref=e213]:
+                - figure [ref=e216]:
+                  - link "Work here" [ref=e218] [cursor=pointer]:
+                    - /url: /careers
+                    - img [ref=e220]
+                    - generic [ref=e223]: Work here
+              - listitem [ref=e224]:
+                - figure [ref=e227]:
+                  - link "Trash" [ref=e229] [cursor=pointer]:
+                    - /url: /trash
+                    - img [ref=e231]
+                    - generic [ref=e234]: Trash
+        - generic [ref=e235]:
+          - generic [ref=e236]:
+            - menubar [ref=e237]:
+              - menuitem [ref=e238] [cursor=pointer]:
+                - img [ref=e239]
+                - img [ref=e241]
+            - button "home.mdx" [ref=e244] [cursor=pointer]:
+              - text: home.mdx
+              - img [ref=e245]
+            - generic [ref=e247]:
+              - button [ref=e249] [cursor=pointer]:
+                - img [ref=e250]
+              - button [ref=e253] [cursor=pointer]:
+                - img [ref=e256]
+              - button [ref=e260] [cursor=pointer]:
+                - img [ref=e262]
+          - generic [ref=e265]:
+            - complementary [ref=e266]:
+              - toolbar [ref=e267]:
+                - button [disabled] [ref=e268]:
+                  - img [ref=e270]
+                - button [disabled] [ref=e272]:
+                  - img [ref=e274]
+                - separator [ref=e276]
+                - combobox [disabled] [ref=e278]:
+                  - generic: Zoom
+                  - img [ref=e280]
+                - separator [ref=e282]
+                - button [ref=e284] [cursor=pointer]:
+                  - img [ref=e286]
+                - button [ref=e289] [cursor=pointer]:
+                  - img [ref=e291]
+                - button [ref=e294] [cursor=pointer]:
+                  - img [ref=e296]
+                - separator [ref=e298]
+                - combobox [disabled] [ref=e300]:
+                  - generic: Font
+                  - img [ref=e302]
+                - separator [ref=e304]
+                - button [ref=e306] [cursor=pointer]:
+                  - img [ref=e308]
+                - button [ref=e311] [cursor=pointer]:
+                  - img [ref=e313]
+                - button [ref=e316] [cursor=pointer]:
+                  - img [ref=e318]
+                - separator [ref=e320]
+                - button [disabled] [ref=e321]:
+                  - img [ref=e323]
+                - button [disabled] [ref=e326]:
+                  - img [ref=e328]
+                - generic [ref=e332]:
+                  - button [ref=e334] [cursor=pointer]:
+                    - img [ref=e336]
+                  - button [ref=e340] [cursor=pointer]:
+                    - img [ref=e342]
+                  - link "Get started - free" [ref=e346] [cursor=pointer]:
+                    - /url: https://app.posthog.com/signup
+                    - generic [ref=e347]: Get started - free
+            - main [ref=e349]:
+              - article [ref=e353]:
+                - generic [ref=e357]:
+                  - toolbar
+                  - textbox "editable markdown" [ref=e360]:
+                    - generic [ref=e361]:
+                      - img [ref=e363]
+                      - heading [level=1] [ref=e364]:
+                        - img [ref=e366]
+                      - generic [ref=e378]:
+                        - heading "The new way to build products" [level=1] [ref=e379]
+                        - paragraph [ref=e380]: Product development used to mean manually writing code, running analysis, diagnosing bugs, and rolling out changes using dozens of tools.
+                        - paragraph [ref=e381]:
+                          - text: PostHog is the only platform that acts like a co-pilot for you (and your AI agents) to do it all –
+                          - emphasis [ref=e382]: autonomously
+                          - text: .
+                      - generic [ref=e384]:
+                        - generic [ref=e385]:
+                          - link "Get started - free" [ref=e387] [cursor=pointer]:
+                            - /url: https://app.posthog.com/signup
+                            - generic [ref=e388]: Get started - free
+                          - button "Install with AI" [ref=e389] [cursor=pointer]:
+                            - generic [ref=e390]: Install with AI
+                        - generic [ref=e391]:
+                          - heading "Install with AI in a single prompt" [level=3] [ref=e392]
+                          - paragraph [ref=e393]: Paste into your terminal or code editor and make AI do the work.
+                          - generic [ref=e394]:
+                            - button "npx @posthog/wizard" [ref=e396] [cursor=pointer]:
+                              - img [ref=e397]
+                              - code [ref=e400]: npx @posthog/wizard
+                              - img [ref=e401]
+                            - link "Learn more" [ref=e404] [cursor=pointer]:
+                              - /url: /wizard
+                        - paragraph [ref=e405]:
+                          - link "MCP" [ref=e407] [cursor=pointer]:
+                            - /url: /docs/model-context-protocol
+                            - img [ref=e408]
+                            - text: MCP
+                          - generic [ref=e410]: •
+                          - link "Watch a demo" [ref=e412] [cursor=pointer]:
+                            - /url: /demo
+                            - img [ref=e413]
+                            - text: Watch a demo
+                          - generic [ref=e415]: •
+                          - link "Talk to a human" [ref=e417] [cursor=pointer]:
+                            - /url: /talk-to-a-human
+                            - img [ref=e418]
+                            - text: Talk to a human
+                    - generic [ref=e422]:
+                      - tablist [ref=e423]:
+                        - generic [ref=e424]:
+                          - tab "Understand product usage" [ref=e425] [cursor=pointer]: Understand product usage
+                          - tab "One place for product data" [selected] [ref=e428] [cursor=pointer]: One place for product data
+                          - tab "Debug & fix issues" [ref=e430] [cursor=pointer]: Debug & fix issues
+                          - tab "Test & roll out changes" [ref=e432] [cursor=pointer]: Test & roll out changes
+                      - generic [ref=e435]:
+                        - button "Pause carousel" [ref=e438] [cursor=pointer]:
+                          - img [ref=e439]
+                        - tabpanel "One place for product data" [ref=e1065]:
+                          - generic [ref=e1066]:
+                            - generic [ref=e1067]:
+                              - img [ref=e1069]
+                              - heading "Build better products with better data" [level=2] [ref=e1070]
+                              - paragraph [ref=e1071]:
+                                - text: Not your mama's data integrations. Third party data is imported into PostHog's CDP and warehouse and lives as a first-class citizen. This means you can query third party data
+                                - emphasis [ref=e1072]: and
+                                - text: product usage data, leading to more informed decisions.
+                            - generic [ref=e1073]:
+                              - generic [ref=e1074]:
+                                - generic [ref=e1075]: Data sources & import
+                                - generic [ref=e1076]:
+                                  - link "Postgres Postgres" [ref=e1078] [cursor=pointer]:
+                                    - /url: /docs/data-warehouse/sources/postgres
+                                    - img "Postgres" [ref=e1079]
+                                    - generic [ref=e1080]: Postgres
+                                  - link "Snowflake Snowflake" [ref=e1082] [cursor=pointer]:
+                                    - /url: /docs/data-warehouse/sources/snowflake
+                                    - img "Snowflake" [ref=e1083]
+                                    - generic [ref=e1084]: Snowflake
+                                  - link "Salesforce Salesforce" [ref=e1086] [cursor=pointer]:
+                                    - /url: /docs/data-warehouse/sources/salesforce
+                                    - img "Salesforce" [ref=e1087]
+                                    - generic [ref=e1088]: Salesforce
+                                  - link "Stripe Stripe" [ref=e1090] [cursor=pointer]:
+                                    - /url: /docs/data-warehouse/sources/stripe
+                                    - img "Stripe" [ref=e1091]
+                                    - generic [ref=e1092]: Stripe
+                                  - link "Zendesk Zendesk" [ref=e1094] [cursor=pointer]:
+                                    - /url: /docs/data-warehouse/sources/zendesk
+                                    - img "Zendesk" [ref=e1095]
+                                    - generic [ref=e1096]: Zendesk
+                                  - link "Google Ads Google Ads" [ref=e1098] [cursor=pointer]:
+                                    - /url: /docs/data-warehouse/sources/google-ads
+                                    - img "Google Ads" [ref=e1099]
+                                    - generic [ref=e1100]: Google Ads
+                                  - link "Hubspot Hubspot" [ref=e1102] [cursor=pointer]:
+                                    - /url: /docs/data-warehouse/sources/hubspot
+                                    - img "Hubspot" [ref=e1103]
+                                    - generic [ref=e1104]: Hubspot
+                                  - link "BigQuery BigQuery" [ref=e1106] [cursor=pointer]:
+                                    - /url: /docs/data-warehouse/sources/bigquery
+                                    - img "BigQuery" [ref=e1107]
+                                    - generic [ref=e1108]: BigQuery
+                                  - link "Redshift Redshift" [ref=e1110] [cursor=pointer]:
+                                    - /url: /docs/data-warehouse/sources/redshift
+                                    - img "Redshift" [ref=e1111]
+                                    - generic [ref=e1112]: Redshift
+                                  - link "MySQL MySQL" [ref=e1114] [cursor=pointer]:
+                                    - /url: /docs/data-warehouse/sources/mysql
+                                    - img "MySQL" [ref=e1115]
+                                    - generic [ref=e1116]: MySQL
+                                  - link "GitHub GitHub" [ref=e1118] [cursor=pointer]:
+                                    - /url: /docs/data-warehouse/sources/github
+                                    - img "GitHub" [ref=e1119]
+                                    - generic [ref=e1120]: GitHub
+                                  - link "MongoDB MongoDB" [ref=e1122] [cursor=pointer]:
+                                    - /url: /docs/data-warehouse/sources/mongodb
+                                    - img "MongoDB" [ref=e1123]
+                                    - generic [ref=e1124]: MongoDB
+                                - generic [ref=e1125]:
+                                  - link "Explore data sources" [ref=e1127] [cursor=pointer]:
+                                    - /url: /docs/data-warehouse/sources
+                                  - generic [ref=e1128]: "45"
+                              - generic [ref=e1129]:
+                                - generic [ref=e1130]: Reverse ETL & export
+                                - generic [ref=e1131]:
+                                  - link "BigQuery BigQuery" [ref=e1133] [cursor=pointer]:
+                                    - /url: /docs/cdp/batch-exports/bigquery
+                                    - img "BigQuery" [ref=e1134]
+                                    - generic [ref=e1135]: BigQuery
+                                  - link "Snowflake Snowflake" [ref=e1137] [cursor=pointer]:
+                                    - /url: /docs/cdp/batch-exports/snowflake
+                                    - img "Snowflake" [ref=e1138]
+                                    - generic [ref=e1139]: Snowflake
+                                  - link "Amazon S3 Amazon S3" [ref=e1141] [cursor=pointer]:
+                                    - /url: /docs/cdp/batch-exports/s3
+                                    - img "Amazon S3" [ref=e1142]
+                                    - generic [ref=e1143]: Amazon S3
+                                  - link "PostgreSQL PostgreSQL" [ref=e1145] [cursor=pointer]:
+                                    - /url: /docs/cdp/batch-exports/postgres
+                                    - img "PostgreSQL" [ref=e1146]
+                                    - generic [ref=e1147]: PostgreSQL
+                                  - link "Redshift Redshift" [ref=e1149] [cursor=pointer]:
+                                    - /url: /docs/cdp/batch-exports/redshift
+                                    - img "Redshift" [ref=e1150]
+                                    - generic [ref=e1151]: Redshift
+                                  - link "Zapier Zapier" [ref=e1153] [cursor=pointer]:
+                                    - /url: /docs/cdp/destinations/zapier
+                                    - img "Zapier" [ref=e1154]
+                                    - generic [ref=e1155]: Zapier
+                                  - link "Hubspot Hubspot" [ref=e1157] [cursor=pointer]:
+                                    - /url: /docs/cdp/destinations/hubspot
+                                    - img "Hubspot" [ref=e1158]
+                                    - generic [ref=e1159]: Hubspot
+                                  - link "Intercom Intercom" [ref=e1161] [cursor=pointer]:
+                                    - /url: /docs/cdp/destinations/intercom
+                                    - img "Intercom" [ref=e1162]
+                                    - generic [ref=e1163]: Intercom
+                                  - link "Customer.io Customer.io" [ref=e1165] [cursor=pointer]:
+                                    - /url: /docs/cdp/destinations/customerio
+                                    - img "Customer.io" [ref=e1166]
+                                    - generic [ref=e1167]: Customer.io
+                                  - link "Zendesk Zendesk" [ref=e1169] [cursor=pointer]:
+                                    - /url: /docs/cdp/destinations/zendesk
+                                    - img "Zendesk" [ref=e1170]
+                                    - generic [ref=e1171]: Zendesk
+                                  - link "HTTP Webhook HTTP Webhook" [ref=e1173] [cursor=pointer]:
+                                    - /url: /docs/cdp/destinations/webhook
+                                    - img "HTTP Webhook" [ref=e1174]
+                                    - generic [ref=e1175]: HTTP Webhook
+                                - generic [ref=e1176]:
+                                  - link "Explore destinations" [ref=e1178] [cursor=pointer]:
+                                    - /url: /data-stack/integrations-library?type=destination
+                                  - generic [ref=e1179]: "110"
+                              - generic [ref=e1180]:
+                                - generic [ref=e1181]: Manage & query
+                                - generic [ref=e1182]:
+                                  - link "Data modeling" [ref=e1184] [cursor=pointer]:
+                                    - /url: /data-stack/data-modeling
+                                    - img [ref=e1185]
+                                    - generic [ref=e1187]: Data modeling
+                                  - link "SQL editor" [ref=e1189] [cursor=pointer]:
+                                    - /url: /data-stack/sql-editor
+                                    - img [ref=e1190]
+                                    - generic [ref=e1192]: SQL editor
+                                  - link "CDP" [ref=e1194] [cursor=pointer]:
+                                    - /url: /cdp
+                                    - img [ref=e1195]
+                                    - generic [ref=e1197]: CDP
+                                  - link "Managed warehouse" [ref=e1199] [cursor=pointer]:
+                                    - /url: /data-stack/managed-warehouse
+                                    - img [ref=e1200]
+                                    - generic [ref=e1202]: Managed warehouse
+                                  - link "BI" [ref=e1204] [cursor=pointer]:
+                                    - /url: /data-stack/business-intelligence
+                                    - img [ref=e1205]
+                                    - generic [ref=e1208]: BI
+                                - link "Data stack README" [ref=e1211] [cursor=pointer]:
+                                  - /url: /data-stack
+                    - generic [ref=e520]:
+                      - heading "Who's using PostHog?" [level=2] [ref=e521]
+                      - paragraph [ref=e522]: Here are some of our paying customers. (Yes they actually use us, no it's not just some random engineer who tried us out 2+ years ago.)
+                      - generic [ref=e523]:
+                        - button "Shuffle companies" [ref=e526] [cursor=pointer]:
+                          - generic [ref=e527]:
+                            - img [ref=e528]
+                            - text: Shuffle companies
+                        - generic [ref=e536]:
+                          - generic [ref=e537]: VCs love them
+                          - generic [ref=e538]: Product engineers love them
+                          - generic [ref=e540]:
+                            - link [ref=e544] [cursor=pointer]:
+                              - /url: /customers/ycombinator
+                              - img [ref=e545]
+                            - img [ref=e552]
+                            - img [ref=e557]
+                            - img [ref=e563]
+                            - img [ref=e569]
+                            - link [ref=e583] [cursor=pointer]:
+                              - /url: /customers/lovable
+                              - img [ref=e584]
+                            - img [ref=e598]
+                            - link [ref=e607] [cursor=pointer]:
+                              - /url: /customers/researchgate
+                              - img [ref=e608]
+                            - img [ref=e614]
+                          - generic [ref=e659]:
+                            - link [ref=e663] [cursor=pointer]:
+                              - /url: /customers/supabase
+                              - img [ref=e664]
+                            - img [ref=e673]
+                            - link [ref=e684] [cursor=pointer]:
+                              - /url: /customers/elevenlabs
+                              - img [ref=e685]
+                            - link [ref=e704] [cursor=pointer]:
+                              - /url: /customers/exa
+                              - img [ref=e705]
+                            - img [ref=e713]
+                            - link [ref=e722] [cursor=pointer]:
+                              - /url: /customers/hasura
+                              - img [ref=e723]
+                            - img [ref=e736]
+                            - img [ref=e747]
+                            - img [ref=e758]
+                            - img [ref=e762]
+                            - img [ref=e771]
+                            - img [ref=e783]
+                            - link [ref=e789] [cursor=pointer]:
+                              - /url: /blog/posthog-marketing
+                              - img [ref=e790]
+                        - link "Open customers.mdx" [ref=e812] [cursor=pointer]:
+                          - /url: /customers
+                          - generic [ref=e813]: Open customers.mdx
+                    - generic [ref=e814]:
+                      - generic [ref=e815]:
+                        - heading "PostHog data stack, built for data teams and loved by product teams" [level=2] [ref=e816]
+                        - generic [ref=e817]:
+                          - paragraph [ref=e818]:
+                            - paragraph [ref=e819]:
+                              - strong [ref=e820]: "Built-in, Product OS ships with:"
+                          - list [ref=e822]:
+                            - listitem [ref=e823]:
+                              - text: A data warehouse
+                              - img [ref=e827]
+                            - listitem [ref=e831]: 120+ sources/destinations
+                            - listitem [ref=e832]: SQL editor + BI + data viz
+                            - listitem [ref=e833]: User activity feed (CDP-lite)
+                            - listitem [ref=e834]: API, webhooks
+                        - paragraph [ref=e836]:
+                          - text: When you're analyzing how customers use your product, you should be operating from
+                          - emphasis [ref=e837]: the full set of data
+                          - text: .
+                        - paragraph [ref=e838]:
+                          - text: This includes customer information that happens
+                          - emphasis [ref=e839]: outside your product
+                          - text: ":"
+                        - list [ref=e840]:
+                          - listitem [ref=e841]: payments from Stripe
+                          - listitem [ref=e842]: exceptions in an error tracking tool
+                          - listitem [ref=e843]: tickets in your support platform
+                        - paragraph [ref=e844]: Having all the data in one place means you can make more informed decisions about what to build next.
+                        - paragraph [ref=e845]: PostHog's Product OS isn't just analytics – it's the entire suite of tools built to give you a single source of truth about your customers.
+                        - 'link "README: PostHog data stack.md" [ref=e848] [cursor=pointer]':
+                          - /url: /data-stack
+                      - generic [ref=e849]:
+                        - heading "Usage-based pricing" [level=2] [ref=e850]
+                        - paragraph [ref=e852]: Our whole philosophy is that you shouldn't have to worry about pricing.
+                        - paragraph [ref=e853]: All our paid products are pay-per-use with generous monthly free tiers. In fact, 98% of our customers use PostHog for free.
+                        - paragraph [ref=e854]: We aim to match the cheapest option at scale – PostHog should be a no-brainer. You never have to "jump on a quick call" with sales.
+                        - paragraph [ref=e855]: "Here are some examples of how we charge for most popular products:"
+                        - generic [ref=e865]:
+                          - generic [ref=e867]: Product
+                          - generic [ref=e868]: Free tier
+                          - generic [ref=e869]: Pricing (decreases with volume)
+                          - generic [ref=e870]: "1"
+                          - link "Product Analytics" [ref=e872] [cursor=pointer]:
+                            - /url: /product-analytics
+                            - img [ref=e873]
+                            - generic [ref=e875]: Product Analytics
+                          - generic [ref=e876]: 1 million events/mo
+                          - generic [ref=e878]: $0.00005/event
+                          - generic [ref=e879]: "2"
+                          - link "Session Replay" [ref=e881] [cursor=pointer]:
+                            - /url: /session-replay
+                            - img [ref=e882]
+                            - generic [ref=e885]: Session Replay
+                          - generic [ref=e886]: 5,000 recordings/mo
+                          - generic [ref=e888]: $0.005/recording
+                          - generic [ref=e889]: "3"
+                          - link "Feature Flags" [ref=e891] [cursor=pointer]:
+                            - /url: /feature-flags
+                            - img [ref=e892]
+                            - generic [ref=e895]: Feature Flags
+                          - generic [ref=e896]: 1 million requests/mo
+                          - generic [ref=e898]: $0.0001/request
+                          - generic [ref=e899]: "4"
+                          - link "Managed warehouse" [ref=e901] [cursor=pointer]:
+                            - /url: /data-stack/managed-warehouse
+                            - img [ref=e902]
+                            - generic [ref=e904]: Managed warehouse
+                          - generic [ref=e905]: 1 million rows/mo
+                          - generic [ref=e907]: $0.000015/row
+                        - link "Explore pricing" [ref=e910] [cursor=pointer]:
+                          - /url: /pricing
+                      - generic [ref=e911]:
+                        - heading "PostHog AI" [level=2] [ref=e912]
+                        - paragraph [ref=e913]:
+                          - text: PostHog AI works across PostHog – and it's
+                          - emphasis [ref=e914]: way
+                          - text: more than just generating insights.
+                        - paragraph [ref=e915]: PostHog AI helps you automate monotonous tasks of gathering context and summarizing information, and can even create multi-variate experiments and feature flags – all with natural language. And soon, it'll have the ability to make code changes to fix bugs and create pull requests.
+                        - link "Learn about PostHog AI" [ref=e918] [cursor=pointer]:
+                          - /url: /ai
+                      - generic [ref=e919]:
+                        - heading "Why PostHog?" [level=2] [ref=e920]
+                        - paragraph [ref=e921]: "We're different from most companies for a bunch of reasons:"
+                        - list [ref=e922]:
+                          - listitem [ref=e923]:
+                            - strong [ref=e924]: Transparency.
+                            - text: You can read our
+                            - link "company handbook" [ref=e925] [cursor=pointer]:
+                              - /url: /handbook
+                            - text: ", our"
+                            - link "sales manual" [ref=e926] [cursor=pointer]:
+                              - /url: /handbook/growth/sales/overview
+                            - text: ", and"
+                            - link "company strategy" [ref=e927] [cursor=pointer]:
+                              - /url: /handbook/why-does-posthog-exist
+                            - text: .
+                          - listitem [ref=e928]:
+                            - strong [ref=e929]: We ship fast.
+                            - text: See our
+                            - link "changelog" [ref=e930] [cursor=pointer]:
+                              - /url: /changelog
+                            - text: .
+                          - listitem [ref=e931]:
+                            - strong [ref=e932]: Actually
+                            - strong [ref=e933]: "-technical support."
+                            - text: Our
+                            - link "support folks" [ref=e938] [cursor=pointer]:
+                              - /url: /teams/support
+                              - generic [ref=e940]: support folks
+                            - text: all have engineering backgrounds.
+                        - link "Read more about us" [ref=e943] [cursor=pointer]:
+                          - /url: /about
+                      - generic [ref=e944]:
+                        - heading "Bedtime reading" [level=2] [ref=e945]
+                        - paragraph [ref=e947]: "Still here? We've got some links that may be mildly interesting to you:"
+                        - list [ref=e948]:
+                          - listitem [ref=e949]:
+                            - link "demo.mov" [ref=e950] [cursor=pointer]:
+                              - /url: /demo
+                          - listitem [ref=e951]:
+                            - link "Technical docs" [ref=e952] [cursor=pointer]:
+                              - /url: /docs
+                          - listitem [ref=e953]:
+                            - link "API" [ref=e954] [cursor=pointer]:
+                              - /url: /docs/api
+                          - listitem [ref=e955]:
+                            - link "Ask a question" [ref=e956] [cursor=pointer]:
+                              - /url: /questions
+                          - listitem [ref=e957]:
+                            - link "Small teams at PostHog" [ref=e958] [cursor=pointer]:
+                              - /url: /teams
+                      - generic [ref=e959]:
+                        - heading "Shameless CTA" [level=2] [ref=e960]
+                        - generic [ref=e961]:
+                          - paragraph [ref=e962]: If nothing else has sold you on PostHog, hopefully these classic marketing tactics will.
+                          - generic [ref=e964]:
+                            - generic [ref=e965]:
+                              - img "PostHog Cloud" [ref=e968]
+                              - img "People on G2 think we're great" [ref=e971]
+                              - generic [ref=e973]:
+                                - img [ref=e974]
+                                - paragraph [ref=e976]:
+                                  - generic [ref=e977]: Not
+                                  - text: endorsed
+                                  - text: by Kim K
+                              - paragraph [ref=e979]:
+                                - text: "*PostHog is a web product and cannot be installed by CD."
+                                - text: We
+                                - emphasis [ref=e980]: did
+                                - text: once send some customers a floppy disk but it was a Rickroll.
+                            - generic [ref=e981]:
+                              - generic [ref=e982]:
+                                - generic [ref=e983]:
+                                  - img [ref=e985]
+                                  - generic [ref=e989]: Eco-friendly
+                                - paragraph [ref=e990]: PostHog Cloud
+                                - paragraph [ref=e991]: Digital download*
+                              - list [ref=e992]:
+                                - listitem [ref=e993]:
+                                  - strong [ref=e994]: Select your cloud
+                                  - list [ref=e995]:
+                                    - listitem [ref=e996]:
+                                      - button "US (Virginia)" [ref=e997] [cursor=pointer]
+                                    - listitem [ref=e998]:
+                                      - button "EU (Frankfurt)" [ref=e999] [cursor=pointer]
+                                - listitem [ref=e1000]:
+                                  - strong [ref=e1001]: "Starts at:"
+                                  - generic [ref=e1002]:
+                                    - generic [ref=e1003]: $0
+                                    - generic [ref=e1004]: Free
+                                    - generic [ref=e1005]: ">1 left at this price!!"
+                              - link "Get started" [ref=e1008] [cursor=pointer]:
+                                - /url: https://app.posthog.com/signup
+                                - generic [ref=e1009]: Get started
+                              - generic [ref=e1010]:
+                                - img [ref=e1012]
+                                - paragraph [ref=e1014]:
+                                  - strong [ref=e1015]: "Hurry:"
+                                  - text: 1808 companies signed up
+                                  - button "today" [ref=e1016] [cursor=pointer]
+                                  - text: .
+                                  - text: Act now and get $0 off your first order.
+                    - generic [ref=e1046]:
+                      - img [ref=e1047]
+                      - img [ref=e1049]
+                      - img [ref=e1051]
+                      - img [ref=e1053]
+                      - img [ref=e1055]
+                      - img [ref=e1057]
+                      - img [ref=e1059]
+                      - img [ref=e1061]
+                    - paragraph [ref=e1017]
+        - generic [ref=e1212]:
+          - generic [ref=e1213]:
+            - menubar [ref=e1214]:
+              - menuitem [ref=e1215] [cursor=pointer]:
+                - img [ref=e1216]
+                - img [ref=e1218]
+            - button "PostHog pricing – Transparent, usage-based, generous free tier" [ref=e1221] [cursor=pointer]:
+              - text: PostHog pricing – Transparent, usage-based, generous free tier
+              - img [ref=e1222]
+            - generic [ref=e1224]:
+              - button [ref=e1226] [cursor=pointer]:
+                - img [ref=e1227]
+              - button [ref=e1230] [cursor=pointer]:
+                - img [ref=e1233]
+              - button [ref=e1237] [cursor=pointer]:
+                - img [ref=e1239]
+          - generic [ref=e1242]:
+            - generic [ref=e1244]:
+              - generic [ref=e1245]:
+                - button [disabled] [ref=e1246]:
+                  - img [ref=e1248]
+                - button [disabled] [ref=e1250]:
+                  - img [ref=e1252]
+              - button [ref=e1257] [cursor=pointer]:
+                - img [ref=e1259]
+            - article [ref=e1265]:
+              - generic [ref=e1267]:
+                - generic [ref=e1268]:
+                  - generic [ref=e1269]:
+                    - generic [ref=e1270]:
+                      - generic [ref=e1273]:
+                        - img "PostHog 3000" [ref=e1274]
+                        - button "Zoom image" [ref=e1275]
+                      - generic [ref=e1276]: "*Obviously this is cloud software, not an actual CD, silly goose."
+                      - generic [ref=e1279]:
+                        - img "Product analytics" [ref=e1280]
+                        - button "Zoom image" [ref=e1281]
+                      - generic [ref=e1284]:
+                        - img "Web analytics" [ref=e1285]
+                        - button "Zoom image" [ref=e1286]
+                      - generic [ref=e1289]:
+                        - img "Session replay" [ref=e1290]
+                        - button "Zoom image" [ref=e1291]
+                      - generic [ref=e1294]:
+                        - img "Feature flags" [ref=e1295]
+                        - button "Zoom image" [ref=e1296]
+                      - generic [ref=e1299]:
+                        - img "Experiments" [ref=e1300]
+                        - button "Zoom image" [ref=e1301]
+                      - generic [ref=e1304]:
+                        - img "Surveys" [ref=e1305]
+                        - button "Zoom image" [ref=e1306]
+                      - generic [ref=e1309]:
+                        - img "Data warehouse" [ref=e1310]
+                        - button "Zoom image" [ref=e1311]
+                    - generic [ref=e1316]:
+                      - button "PostHog 3000" [ref=e1317] [cursor=pointer]:
+                        - img "PostHog 3000" [ref=e1318]
+                      - button "Product analytics" [ref=e1319] [cursor=pointer]:
+                        - img "Product analytics" [ref=e1320]
+                      - button "Web analytics" [ref=e1321] [cursor=pointer]:
+                        - img "Web analytics" [ref=e1322]
+                      - button "Session replay" [ref=e1323] [cursor=pointer]:
+                        - img "Session replay" [ref=e1324]
+                      - button "Feature flags" [ref=e1325] [cursor=pointer]:
+                        - img "Feature flags" [ref=e1326]
+                      - button "Experiments" [ref=e1327] [cursor=pointer]:
+                        - img "Experiments" [ref=e1328]
+                      - button "Surveys" [ref=e1329] [cursor=pointer]:
+                        - img "Surveys" [ref=e1330]
+                      - button "Data warehouse" [ref=e1331] [cursor=pointer]:
+                        - img "Data warehouse" [ref=e1332]
+                  - generic [ref=e1333]:
+                    - heading "PostHog Cloud" [level=1] [ref=e1335]
+                    - paragraph [ref=e1336]:
+                      - text: PostHog is designed to grow with you. Our
+                      - strong [ref=e1337]: 10+ products
+                      - text: (and counting) will take you from idea to product-market fit to IPO and beyond. 🚀
+                    - paragraph [ref=e1338]:
+                      - text: Our generous free tier means
+                      - strong [ref=e1339]:
+                        - emphasis [ref=e1340]: more than 90% of companies use PostHog for free.
+                      - text: Only add a card if you need more than the free tier limits, advanced features, or want more projects. You still keep the same monthly free volume, even after upgrading.
+                    - generic [ref=e1341]:
+                      - generic [ref=e1342]:
+                        - generic [ref=e1343]:
+                          - heading "Free" [level=3] [ref=e1344]
+                          - paragraph [ref=e1345]: No credit card required
+                        - link "Compare plans" [ref=e1347] [cursor=pointer]:
+                          - /url: "#plans"
+                          - button "Compare plans" [ref=e1348]
+                      - list [ref=e1349]:
+                        - listitem [ref=e1350]:
+                          - button "Free Free - no credit card required" [ref=e1351] [cursor=pointer]:
+                            - strong [ref=e1352]: Free
+                            - generic [ref=e1353]: Free - no credit card required
+                        - listitem [ref=e1354]:
+                          - button "Pay-as-you-go Usage-based pricing" [ref=e1355] [cursor=pointer]:
+                            - strong [ref=e1356]: Pay-as-you-go
+                            - generic [ref=e1357]: Usage-based pricing
+                    - generic [ref=e1358]:
+                      - list [ref=e1360]:
+                        - listitem [ref=e1361]:
+                          - img [ref=e1362]
+                          - generic [ref=e1365]:
+                            - text: Generous
+                            - button "monthly free tier" [ref=e1366] [cursor=pointer]
+                        - listitem [ref=e1367]:
+                          - img [ref=e1368]
+                          - text: Community support
+                        - listitem [ref=e1371]:
+                          - img [ref=e1372]
+                          - text: 1 project, 1-year data retention
+                        - listitem [ref=e1375]:
+                          - img [ref=e1376]
+                          - text: Unlimited team members
+                      - generic [ref=e1379]:
+                        - generic [ref=e1380]:
+                          - generic [ref=e1381]: Cloud region
+                          - generic [ref=e1382]:
+                            - button "US (Virginia)" [ref=e1383] [cursor=pointer]
+                            - button "EU (Frankfurt)" [ref=e1384] [cursor=pointer]
+                        - link "Get started - free" [ref=e1386] [cursor=pointer]:
+                          - /url: https://app.posthog.com/signup
+                          - generic [ref=e1387]: Get started - free
+                        - paragraph [ref=e1388]:
+                          - strong [ref=e1389]: "1808"
+                          - text: companies signed up
+                          - button "today" [ref=e1390] [cursor=pointer]
+                    - generic [ref=e1391]:
+                      - generic [ref=e1392]:
+                        - heading "Free tier on all plans" [level=4] [ref=e1393]
+                        - generic [ref=e1394]: (resets monthly)
+                      - generic [ref=e1395]:
+                        - generic [ref=e1396]:
+                          - generic [ref=e1397]:
+                            - img [ref=e1398]
+                            - text: +
+                            - img [ref=e1400]
+                          - strong [ref=e1403]: Analytics
+                          - generic [ref=e1404]: 1M events
+                        - generic [ref=e1405]:
+                          - img [ref=e1407]
+                          - strong [ref=e1410]: Session replay
+                          - generic [ref=e1411]: 5K recordings
+                        - generic [ref=e1412]:
+                          - img [ref=e1414]
+                          - strong [ref=e1417]: Feature flags
+                          - generic [ref=e1418]: 1M requests
+                        - generic [ref=e1419]:
+                          - img [ref=e1421]
+                          - strong [ref=e1424]: Experiments
+                          - generic [ref=e1425]: Billed with feature flags
+                        - generic [ref=e1426]:
+                          - img [ref=e1428]
+                          - strong [ref=e1431]: Error tracking
+                          - generic [ref=e1432]: 100K exceptions
+                        - generic [ref=e1433]:
+                          - img [ref=e1435]
+                          - strong [ref=e1439]: Surveys
+                          - generic [ref=e1440]: 1500 responses
+                        - generic [ref=e1441]:
+                          - img [ref=e1443]
+                          - strong [ref=e1445]: Data warehouse
+                          - generic [ref=e1446]:
+                            - text: 1M rows + FREE historical
+                            - img [ref=e1448]
+                        - generic [ref=e1452]:
+                          - img [ref=e1454]
+                          - strong [ref=e1457]: Data pipelines
+                          - generic [ref=e1458]:
+                            - text: 10K events + 1M rows
+                            - img [ref=e1460]
+                        - generic [ref=e1464]:
+                          - img [ref=e1466]
+                          - strong [ref=e1469]: LLM analytics
+                          - generic [ref=e1470]: 100K events
+                        - generic [ref=e1471]:
+                          - img [ref=e1473]
+                          - strong [ref=e1475]: PostHog AI
+                          - generic [ref=e1476]: 2K credits (worth $20)
+                        - generic [ref=e1477]:
+                          - img [ref=e1479]
+                          - strong [ref=e1482]: Workflows
+                          - generic [ref=e1483]: 10K messages per channel
+                        - generic [ref=e1484]:
+                          - img [ref=e1486]
+                          - strong [ref=e1488]: Logs
+                          - generic [ref=e1489]: 50 GB ingested
+                - generic [ref=e1491]:
+                  - generic [ref=e1493]:
+                    - heading "Usage-based pricing" [level=2] [ref=e1496]
+                    - paragraph [ref=e1497]:
+                      - text: If your usage goes beyond the free tier limits, we offer
+                      - strong [ref=e1498]: usage-based pricing.
+                      - text: You can set a billing limit for each product so you never get an unexpected bill.
+                    - paragraph [ref=e1499]:
+                      - strong [ref=e1500]:
+                        - text: Add a
+                        - img [ref=e1501]
+                        - text: "credit card and also get:"
+                    - list [ref=e1503]:
+                      - listitem [ref=e1504]: 1 project 6 projects
+                      - listitem [ref=e1505]: 1-year data retention 7-year data retention
+                      - listitem [ref=e1506]: Community support Email support
+                    - button "Pricing calculator" [ref=e1508] [cursor=pointer]:
+                      - generic [ref=e1509]: Pricing calculator
+                  - generic [ref=e1510]:
+                    - generic [ref=e1511]:
+                      - generic [ref=e1512]:
+                        - heading "Rates (after the monthly free tier)" [level=4] [ref=e1513]
+                        - paragraph [ref=e1514]: Prices reduce with scale
+                      - button "Expand all" [ref=e1516] [cursor=pointer]
+                    - list [ref=e1517]:
+                      - listitem [ref=e1518]:
+                        - button "Product Analytics From $0.00005/event" [ref=e1519] [cursor=pointer]:
+                          - generic [ref=e1520]:
+                            - generic [ref=e1522]:
+                              - img [ref=e1524]
+                              - generic [ref=e1526]: Product Analytics
+                            - generic [ref=e1528]:
+                              - text: From
+                              - strong [ref=e1529]: $0.00005
+                              - generic [ref=e1530]: /event
+                            - img [ref=e1532]
+                        - generic [ref=e1534]:
+                          - generic [ref=e1535]:
+                            - heading "First 1 million events" [level=5] [ref=e1536]
+                            - heading "Free" [level=5] [ref=e1538]:
+                              - strong [ref=e1539]: Free
+                          - generic [ref=e1540]:
+                            - heading "1-2 million" [level=5] [ref=e1541]
+                            - heading "$0.0000500/event" [level=5] [ref=e1543]:
+                              - strong [ref=e1544]: $0.0000500
+                              - text: /event
+                          - generic [ref=e1545]:
+                            - heading "2-15 million" [level=5] [ref=e1546]
+                            - heading "$0.0000343/event" [level=5] [ref=e1548]:
+                              - strong [ref=e1549]: $0.0000343
+                              - text: /event
+                          - generic [ref=e1550]:
+                            - heading "15-50 million" [level=5] [ref=e1551]
+                            - heading "$0.0000295/event" [level=5] [ref=e1553]:
+                              - strong [ref=e1554]: $0.0000295
+                              - text: /event
+                          - generic [ref=e1555]:
+                            - heading "50-100 million" [level=5] [ref=e1556]
+                            - heading "$0.0000218/event" [level=5] [ref=e1558]:
+                              - strong [ref=e1559]: $0.0000218
+                              - text: /event
+                          - generic [ref=e1560]:
+                            - heading "100-250 million" [level=5] [ref=e1561]
+                            - heading "$0.0000150/event" [level=5] [ref=e1563]:
+                              - strong [ref=e1564]: $0.0000150
+                              - text: /event
+                          - generic [ref=e1565]:
+                            - heading "250 million+" [level=5] [ref=e1566]
+                            - heading "$0.0000090 /event" [level=5] [ref=e1568]:
+                              - generic [ref=e1569]:
+                                - strong [ref=e1570]: $0.0000090
+                                - text: /event
+                                - img [ref=e1573]
+                      - listitem [ref=e1577]:
+                        - button "Session Replay Multiple resources" [ref=e1578] [cursor=pointer]:
+                          - generic [ref=e1579]:
+                            - generic [ref=e1581]:
+                              - img [ref=e1583]
+                              - generic [ref=e1586]: Session Replay
+                            - emphasis [ref=e1588]: Multiple resources
+                            - img [ref=e1590]
+                        - generic [ref=e1593]:
+                          - generic [ref=e1594]:
+                            - heading "Session Replay" [level=5] [ref=e1595]
+                            - generic [ref=e1596]:
+                              - heading "First 5k recordings" [level=5] [ref=e1597]
+                              - heading "Free" [level=5] [ref=e1599]:
+                                - strong [ref=e1600]: Free
+                            - generic [ref=e1601]:
+                              - heading "5-15k" [level=5] [ref=e1602]
+                              - heading "$0.0050/recording" [level=5] [ref=e1604]:
+                                - strong [ref=e1605]: $0.0050
+                                - text: /recording
+                            - generic [ref=e1606]:
+                              - heading "15-50k" [level=5] [ref=e1607]
+                              - heading "$0.0035/recording" [level=5] [ref=e1609]:
+                                - strong [ref=e1610]: $0.0035
+                                - text: /recording
+                            - generic [ref=e1611]:
+                              - heading "50-150k" [level=5] [ref=e1612]
+                              - heading "$0.0020/recording" [level=5] [ref=e1614]:
+                                - strong [ref=e1615]: $0.0020
+                                - text: /recording
+                            - generic [ref=e1616]:
+                              - heading "150-500k" [level=5] [ref=e1617]
+                              - heading "$0.0017/recording" [level=5] [ref=e1619]:
+                                - strong [ref=e1620]: $0.0017
+                                - text: /recording
+                            - generic [ref=e1621]:
+                              - heading "500k+" [level=5] [ref=e1622]
+                              - heading "$0.0015/recording" [level=5] [ref=e1624]:
+                                - strong [ref=e1625]: $0.0015
+                                - text: /recording
+                          - generic [ref=e1626]:
+                            - heading "Mobile session replay" [level=5] [ref=e1627]
+                            - generic [ref=e1628]:
+                              - heading "First 2.5k mobile recordings" [level=5] [ref=e1629]
+                              - heading "Free" [level=5] [ref=e1631]:
+                                - strong [ref=e1632]: Free
+                            - generic [ref=e1633]:
+                              - heading "2.5-15k" [level=5] [ref=e1634]
+                              - heading "$0.0100/mobile recording" [level=5] [ref=e1636]:
+                                - strong [ref=e1637]: $0.0100
+                                - text: /mobile recording
+                            - generic [ref=e1638]:
+                              - heading "15-50k" [level=5] [ref=e1639]
+                              - heading "$0.0070/mobile recording" [level=5] [ref=e1641]:
+                                - strong [ref=e1642]: $0.0070
+                                - text: /mobile recording
+                            - generic [ref=e1643]:
+                              - heading "50-150k" [level=5] [ref=e1644]
+                              - heading "$0.0040/mobile recording" [level=5] [ref=e1646]:
+                                - strong [ref=e1647]: $0.0040
+                                - text: /mobile recording
+                            - generic [ref=e1648]:
+                              - heading "150-500k" [level=5] [ref=e1649]
+                              - heading "$0.0034/mobile recording" [level=5] [ref=e1651]:
+                                - strong [ref=e1652]: $0.0034
+                                - text: /mobile recording
+                            - generic [ref=e1653]:
+                              - heading "500k+" [level=5] [ref=e1654]
+                              - heading "$0.0030/mobile recording" [level=5] [ref=e1656]:
+                                - strong [ref=e1657]: $0.0030
+                                - text: /mobile recording
+                      - listitem [ref=e1658]:
+                        - button "Feature Flags From $0.0001/request" [ref=e1659] [cursor=pointer]:
+                          - generic [ref=e1660]:
+                            - generic [ref=e1662]:
+                              - img [ref=e1664]
+                              - generic [ref=e1667]: Feature Flags
+                            - generic [ref=e1669]:
+                              - text: From
+                              - strong [ref=e1670]: $0.0001
+                              - generic [ref=e1671]: /request
+                            - img [ref=e1673]
+                        - generic [ref=e1675]:
+                          - generic [ref=e1676]:
+                            - heading "First 1 million requests" [level=5] [ref=e1677]
+                            - heading "Free" [level=5] [ref=e1679]:
+                              - strong [ref=e1680]: Free
+                          - generic [ref=e1681]:
+                            - heading "1-2 million" [level=5] [ref=e1682]
+                            - heading "$0.000100/request" [level=5] [ref=e1684]:
+                              - strong [ref=e1685]: $0.000100
+                              - text: /request
+                          - generic [ref=e1686]:
+                            - heading "2-10 million" [level=5] [ref=e1687]
+                            - heading "$0.000045/request" [level=5] [ref=e1689]:
+                              - strong [ref=e1690]: $0.000045
+                              - text: /request
+                          - generic [ref=e1691]:
+                            - heading "10-50 million" [level=5] [ref=e1692]
+                            - heading "$0.000025/request" [level=5] [ref=e1694]:
+                              - strong [ref=e1695]: $0.000025
+                              - text: /request
+                          - generic [ref=e1696]:
+                            - heading "50 million+" [level=5] [ref=e1697]
+                            - heading "$0.000010/request" [level=5] [ref=e1699]:
+                              - strong [ref=e1700]: $0.000010
+                              - text: /request
+                      - listitem [ref=e1701]:
+                        - button "Surveys From $0.10/response" [ref=e1702] [cursor=pointer]:
+                          - generic [ref=e1703]:
+                            - generic [ref=e1705]:
+                              - img [ref=e1707]
+                              - generic [ref=e1711]: Surveys
+                            - generic [ref=e1713]:
+                              - text: From
+                              - strong [ref=e1714]: $0.10
+                              - generic [ref=e1715]: /response
+                            - img [ref=e1717]
+                        - generic [ref=e1719]:
+                          - generic [ref=e1720]:
+                            - heading "First 1.5k responses" [level=5] [ref=e1721]
+                            - heading "Free" [level=5] [ref=e1723]:
+                              - strong [ref=e1724]: Free
+                          - generic [ref=e1725]:
+                            - heading "1.5-2k" [level=5] [ref=e1726]
+                            - heading "$0.100/response" [level=5] [ref=e1728]:
+                              - strong [ref=e1729]: $0.100
+                              - text: /response
+                          - generic [ref=e1730]:
+                            - heading "2-10k" [level=5] [ref=e1731]
+                            - heading "$0.035/response" [level=5] [ref=e1733]:
+                              - strong [ref=e1734]: $0.035
+                              - text: /response
+                          - generic [ref=e1735]:
+                            - heading "10-20k" [level=5] [ref=e1736]
+                            - heading "$0.015/response" [level=5] [ref=e1738]:
+                              - strong [ref=e1739]: $0.015
+                              - text: /response
+                          - generic [ref=e1740]:
+                            - heading "20k+" [level=5] [ref=e1741]
+                            - heading "$0.010/response" [level=5] [ref=e1743]:
+                              - strong [ref=e1744]: $0.010
+                              - text: /response
+                      - listitem [ref=e1745]:
+                        - button "Managed warehouse Multiple resources" [ref=e1746] [cursor=pointer]:
+                          - generic [ref=e1747]:
+                            - generic [ref=e1749]:
+                              - img [ref=e1751]
+                              - generic [ref=e1753]: Managed warehouse
+                            - emphasis [ref=e1755]: Multiple resources
+                            - img [ref=e1757]
+                        - generic [ref=e1760]:
+                          - generic [ref=e1761]:
+                            - heading "Managed warehouse" [level=5] [ref=e1762]
+                            - generic [ref=e1763]:
+                              - heading "First 1 million rows" [level=5] [ref=e1764]
+                              - heading "Free" [level=5] [ref=e1766]:
+                                - strong [ref=e1767]: Free
+                            - generic [ref=e1768]:
+                              - heading "1-10 million" [level=5] [ref=e1769]
+                              - heading "$0.000015/row" [level=5] [ref=e1771]:
+                                - strong [ref=e1772]: $0.000015
+                                - text: /row
+                            - generic [ref=e1773]:
+                              - heading "10-25 million" [level=5] [ref=e1774]
+                              - heading "$0.000010/row" [level=5] [ref=e1776]:
+                                - strong [ref=e1777]: $0.000010
+                                - text: /row
+                            - generic [ref=e1778]:
+                              - heading "25-50 million" [level=5] [ref=e1779]
+                              - heading "$0.000008/row" [level=5] [ref=e1781]:
+                                - strong [ref=e1782]: $0.000008
+                                - text: /row
+                            - generic [ref=e1783]:
+                              - heading "50-100 million" [level=5] [ref=e1784]
+                              - heading "$0.000005/row" [level=5] [ref=e1786]:
+                                - strong [ref=e1787]: $0.000005
+                                - text: /row
+                            - generic [ref=e1788]:
+                              - heading "100-1 billion" [level=5] [ref=e1789]
+                              - heading "$0.000002/row" [level=5] [ref=e1791]:
+                                - strong [ref=e1792]: $0.000002
+                                - text: /row
+                            - generic [ref=e1793]:
+                              - heading "1 billion+" [level=5] [ref=e1794]
+                              - heading "$0.000001/row" [level=5] [ref=e1796]:
+                                - strong [ref=e1797]: $0.000001
+                                - text: /row
+                          - generic [ref=e1798]:
+                            - heading "Data warehouse historical syncs" [level=5] [ref=e1799]
+                            - generic [ref=e1800]:
+                              - heading "Unlimited rows" [level=5] [ref=e1801]
+                              - heading "$0/row" [level=5] [ref=e1803]:
+                                - strong [ref=e1804]: $0
+                                - text: /row
+                      - listitem [ref=e1805]:
+                        - button "Data pipelines Multiple resources" [ref=e1806] [cursor=pointer]:
+                          - generic [ref=e1807]:
+                            - generic [ref=e1809]:
+                              - img [ref=e1811]
+                              - generic [ref=e1814]: Data pipelines
+                            - emphasis [ref=e1816]: Multiple resources
+                            - img [ref=e1818]
+                        - generic [ref=e1821]:
+                          - generic [ref=e1822]:
+                            - heading "Realtime destinations" [level=5] [ref=e1823]
+                            - generic [ref=e1824]:
+                              - heading "First 10k trigger events" [level=5] [ref=e1825]
+                              - heading "Free" [level=5] [ref=e1827]:
+                                - strong [ref=e1828]: Free
+                            - generic [ref=e1829]:
+                              - heading "10-50k" [level=5] [ref=e1830]
+                              - heading "$0.000500/trigger event" [level=5] [ref=e1832]:
+                                - strong [ref=e1833]: $0.000500
+                                - text: /trigger event
+                            - generic [ref=e1834]:
+                              - heading "50-100k" [level=5] [ref=e1835]
+                              - heading "$0.000300/trigger event" [level=5] [ref=e1837]:
+                                - strong [ref=e1838]: $0.000300
+                                - text: /trigger event
+                            - generic [ref=e1839]:
+                              - heading "100-1 million" [level=5] [ref=e1840]
+                              - heading "$0.000150/trigger event" [level=5] [ref=e1842]:
+                                - strong [ref=e1843]: $0.000150
+                                - text: /trigger event
+                            - generic [ref=e1844]:
+                              - heading "1-10 million" [level=5] [ref=e1845]
+                              - heading "$0.000100/trigger event" [level=5] [ref=e1847]:
+                                - strong [ref=e1848]: $0.000100
+                                - text: /trigger event
+                            - generic [ref=e1849]:
+                              - heading "10-100 million" [level=5] [ref=e1850]
+                              - heading "$0.000050/trigger event" [level=5] [ref=e1852]:
+                                - strong [ref=e1853]: $0.000050
+                                - text: /trigger event
+                            - generic [ref=e1854]:
+                              - heading "100 million+" [level=5] [ref=e1855]
+                              - heading "$0.000025/trigger event" [level=5] [ref=e1857]:
+                                - strong [ref=e1858]: $0.000025
+                                - text: /trigger event
+                          - generic [ref=e1859]:
+                            - heading "Batch exports" [level=5] [ref=e1860]
+                            - generic [ref=e1861]:
+                              - heading "First 1 million rows" [level=5] [ref=e1862]
+                              - heading "Free" [level=5] [ref=e1864]:
+                                - strong [ref=e1865]: Free
+                            - generic [ref=e1866]:
+                              - heading "1-10 million" [level=5] [ref=e1867]
+                              - heading "$0.00001500/row" [level=5] [ref=e1869]:
+                                - strong [ref=e1870]: $0.00001500
+                                - text: /row
+                            - generic [ref=e1871]:
+                              - heading "10-50 million" [level=5] [ref=e1872]
+                              - heading "$0.00000500/row" [level=5] [ref=e1874]:
+                                - strong [ref=e1875]: $0.00000500
+                                - text: /row
+                            - generic [ref=e1876]:
+                              - heading "50-100 million" [level=5] [ref=e1877]
+                              - heading "$0.00000250/row" [level=5] [ref=e1879]:
+                                - strong [ref=e1880]: $0.00000250
+                                - text: /row
+                            - generic [ref=e1881]:
+                              - heading "100 million+" [level=5] [ref=e1882]
+                              - heading "$0.00000125/row" [level=5] [ref=e1884]:
+                                - strong [ref=e1885]: $0.00000125
+                                - text: /row
+                      - listitem [ref=e1886]:
+                        - button "Error Tracking From $0.00037/exception" [ref=e1887] [cursor=pointer]:
+                          - generic [ref=e1888]:
+                            - generic [ref=e1890]:
+                              - img [ref=e1892]
+                              - generic [ref=e1895]: Error Tracking
+                            - generic [ref=e1897]:
+                              - text: From
+                              - strong [ref=e1898]: $0.00037
+                              - generic [ref=e1899]: /exception
+                            - img [ref=e1901]
+                        - generic [ref=e1903]:
+                          - generic [ref=e1904]:
+                            - heading "First 100k exceptions" [level=5] [ref=e1905]
+                            - heading "Free" [level=5] [ref=e1907]:
+                              - strong [ref=e1908]: Free
+                          - generic [ref=e1909]:
+                            - heading "100-325k" [level=5] [ref=e1910]
+                            - heading "$0.000370/exception" [level=5] [ref=e1912]:
+                              - strong [ref=e1913]: $0.000370
+                              - text: /exception
+                          - generic [ref=e1914]:
+                            - heading "325-10 million" [level=5] [ref=e1915]
+                            - heading "$0.000140/exception" [level=5] [ref=e1917]:
+                              - strong [ref=e1918]: $0.000140
+                              - text: /exception
+                          - generic [ref=e1919]:
+                            - heading "10 million+" [level=5] [ref=e1920]
+                            - heading "$0.000115/exception" [level=5] [ref=e1922]:
+                              - strong [ref=e1923]: $0.000115
+                              - text: /exception
+                      - listitem [ref=e1924]:
+                        - generic [ref=e1926]:
+                          - generic [ref=e1928]:
+                            - img [ref=e1930]
+                            - generic [ref=e1933]: Web Analytics
+                          - emphasis [ref=e1935]: Billed with Product analytics
+                      - listitem [ref=e1936]:
+                        - generic [ref=e1938]:
+                          - generic [ref=e1940]:
+                            - img [ref=e1942]
+                            - generic [ref=e1945]: Experiments
+                          - emphasis [ref=e1947]: Billed with Feature flags
+                      - listitem [ref=e1948]:
+                        - button "PostHog AI From $0.01/credit" [ref=e1949] [cursor=pointer]:
+                          - generic [ref=e1950]:
+                            - generic [ref=e1952]:
+                              - img [ref=e1954]
+                              - generic [ref=e1956]: PostHog AI
+                            - generic [ref=e1958]:
+                              - text: From
+                              - strong [ref=e1959]: $0.01
+                              - generic [ref=e1960]: /credit
+                            - img [ref=e1962]
+                        - generic [ref=e1964]:
+                          - generic [ref=e1965]:
+                            - heading "First 2k credits" [level=5] [ref=e1966]
+                            - heading "Free" [level=5] [ref=e1968]:
+                              - strong [ref=e1969]: Free
+                          - generic [ref=e1970]:
+                            - heading "2k+" [level=5] [ref=e1971]
+                            - heading "$0.01/credit" [level=5] [ref=e1973]:
+                              - strong [ref=e1974]: $0.01
+                              - text: /credit
+                      - listitem [ref=e1975]:
+                        - button "LLM Analytics From $0.00006/event" [ref=e1976] [cursor=pointer]:
+                          - generic [ref=e1977]:
+                            - generic [ref=e1979]:
+                              - img [ref=e1981]
+                              - generic [ref=e1984]: LLM Analytics
+                            - generic [ref=e1986]:
+                              - text: From
+                              - strong [ref=e1987]: $0.00006
+                              - generic [ref=e1988]: /event
+                            - img [ref=e1990]
+                        - generic [ref=e1992]:
+                          - generic [ref=e1993]:
+                            - heading "First 100k events" [level=5] [ref=e1994]
+                            - heading "Free" [level=5] [ref=e1996]:
+                              - strong [ref=e1997]: Free
+                          - generic [ref=e1998]:
+                            - heading "100k+" [level=5] [ref=e1999]
+                            - heading "$0.00006/event" [level=5] [ref=e2001]:
+                              - strong [ref=e2002]: $0.00006
+                              - text: /event
+                      - listitem [ref=e2003]:
+                        - button "Logs From $0.25/GB" [ref=e2004] [cursor=pointer]:
+                          - generic [ref=e2005]:
+                            - generic [ref=e2007]:
+                              - img [ref=e2009]
+                              - generic [ref=e2011]: Logs
+                            - generic [ref=e2013]:
+                              - text: From
+                              - strong [ref=e2014]: $0.25
+                              - generic [ref=e2015]: /GB
+                            - img [ref=e2017]
+                        - generic [ref=e2019]:
+                          - generic [ref=e2020]:
+                            - heading "First 50 GB" [level=5] [ref=e2021]
+                            - heading "Free" [level=5] [ref=e2023]:
+                              - strong [ref=e2024]: Free
+                          - generic [ref=e2025]:
+                            - heading "50-300" [level=5] [ref=e2026]
+                            - heading "$0.25/GB" [level=5] [ref=e2028]:
+                              - strong [ref=e2029]: $0.25
+                              - text: /GB
+                          - generic [ref=e2030]:
+                            - heading "300+" [level=5] [ref=e2031]
+                            - heading "$0.15/GB" [level=5] [ref=e2033]:
+                              - strong [ref=e2034]: $0.15
+                              - text: /GB
+                      - listitem [ref=e2035]:
+                        - button "Workflows Multiple resources" [ref=e2036] [cursor=pointer]:
+                          - generic [ref=e2037]:
+                            - generic [ref=e2039]:
+                              - img [ref=e2041]
+                              - generic [ref=e2044]: Workflows
+                            - emphasis [ref=e2046]: Multiple resources
+                            - img [ref=e2048]
+                        - generic [ref=e2051]:
+                          - generic [ref=e2052]:
+                            - heading "Emails" [level=5] [ref=e2053]
+                            - generic [ref=e2054]:
+                              - heading "First 10k emails" [level=5] [ref=e2055]
+                              - heading "Free" [level=5] [ref=e2057]:
+                                - strong [ref=e2058]: Free
+                            - generic [ref=e2059]:
+                              - heading "10-50k" [level=5] [ref=e2060]
+                              - heading "$0.003000/email" [level=5] [ref=e2062]:
+                                - strong [ref=e2063]: $0.003000
+                                - text: /email
+                            - generic [ref=e2064]:
+                              - heading "50-100k" [level=5] [ref=e2065]
+                              - heading "$0.001800/email" [level=5] [ref=e2067]:
+                                - strong [ref=e2068]: $0.001800
+                                - text: /email
+                            - generic [ref=e2069]:
+                              - heading "100-1 million" [level=5] [ref=e2070]
+                              - heading "$0.001000/email" [level=5] [ref=e2072]:
+                                - strong [ref=e2073]: $0.001000
+                                - text: /email
+                            - generic [ref=e2074]:
+                              - heading "1-10 million" [level=5] [ref=e2075]
+                              - heading "$0.000500/email" [level=5] [ref=e2077]:
+                                - strong [ref=e2078]: $0.000500
+                                - text: /email
+                            - generic [ref=e2079]:
+                              - heading "10-100 million" [level=5] [ref=e2080]
+                              - heading "$0.000375/email" [level=5] [ref=e2082]:
+                                - strong [ref=e2083]: $0.000375
+                                - text: /email
+                            - generic [ref=e2084]:
+                              - heading "100 million+" [level=5] [ref=e2085]
+                              - heading "$0.000250/email" [level=5] [ref=e2087]:
+                                - strong [ref=e2088]: $0.000250
+                                - text: /email
+                          - generic [ref=e2089]:
+                            - heading "Destinations" [level=5] [ref=e2090]
+                            - generic [ref=e2091]:
+                              - heading "First 10k dispatches" [level=5] [ref=e2092]
+                              - heading "Free" [level=5] [ref=e2094]:
+                                - strong [ref=e2095]: Free
+                            - generic [ref=e2096]:
+                              - heading "10-50k" [level=5] [ref=e2097]
+                              - heading "$0.0007500/dispatch" [level=5] [ref=e2099]:
+                                - strong [ref=e2100]: $0.0007500
+                                - text: /dispatch
+                            - generic [ref=e2101]:
+                              - heading "50-100k" [level=5] [ref=e2102]
+                              - heading "$0.0004500/dispatch" [level=5] [ref=e2104]:
+                                - strong [ref=e2105]: $0.0004500
+                                - text: /dispatch
+                            - generic [ref=e2106]:
+                              - heading "100-1 million" [level=5] [ref=e2107]
+                              - heading "$0.0002250/dispatch" [level=5] [ref=e2109]:
+                                - strong [ref=e2110]: $0.0002250
+                                - text: /dispatch
+                            - generic [ref=e2111]:
+                              - heading "1-10 million" [level=5] [ref=e2112]
+                              - heading "$0.0001500/dispatch" [level=5] [ref=e2114]:
+                                - strong [ref=e2115]: $0.0001500
+                                - text: /dispatch
+                            - generic [ref=e2116]:
+                              - heading "10-100 million" [level=5] [ref=e2117]
+                              - heading "$0.0000750/dispatch" [level=5] [ref=e2119]:
+                                - strong [ref=e2120]: $0.0000750
+                                - text: /dispatch
+                            - generic [ref=e2121]:
+                              - heading "100 million+" [level=5] [ref=e2122]
+                              - heading "$0.0000375/dispatch" [level=5] [ref=e2124]:
+                                - strong [ref=e2125]: $0.0000375
+                                - text: /dispatch
+                - generic [ref=e2126]:
+                  - heading "Compare plans" [level=2] [ref=e2128]
+                  - generic [ref=e2134]:
+                    - generic [ref=e2135]:
+                      - generic [ref=e2136]:
+                        - strong [ref=e2137]: Just pick this one!
+                        - paragraph [ref=e2138]: You can upgrade later.
+                      - generic [ref=e2139]:
+                        - generic [ref=e2140]:
+                          - heading "Free" [level=3] [ref=e2141]:
+                            - emphasis [ref=e2142]: Free
+                          - paragraph [ref=e2143]: No credit card required
+                        - generic [ref=e2144]:
+                          - heading "Free" [level=4] [ref=e2145]
+                          - paragraph
+                        - list [ref=e2146]:
+                          - listitem [ref=e2147]:
+                            - img [ref=e2148]
+                            - strong [ref=e2151]: Generous free monthly tier
+                            - paragraph [ref=e2152]: Usage capped at free tier limits
+                          - listitem [ref=e2153]:
+                            - img [ref=e2154]
+                            - strong [ref=e2157]: Like, totally free
+                            - paragraph [ref=e2158]: Almost all product features, no credit card required
+                          - listitem [ref=e2159]:
+                            - img [ref=e2160]
+                            - strong [ref=e2163]: Community support
+                            - paragraph [ref=e2164]: Support via community forum
+                        - generic [ref=e2165]:
+                          - generic [ref=e2166]:
+                            - paragraph [ref=e2167]: 1 project
+                            - paragraph [ref=e2168]: 1-year data retention
+                          - link "Get started - free" [ref=e2170] [cursor=pointer]:
+                            - /url: https://app.posthog.com/signup
+                            - generic [ref=e2171]: Get started - free
+                    - generic [ref=e2173]:
+                      - generic [ref=e2174]:
+                        - heading "Pay-as-you-go" [level=3] [ref=e2175]:
+                          - emphasis [ref=e2176]: Pay-as-you-go
+                        - paragraph [ref=e2177]: Usage-based pricing after free tier
+                      - generic [ref=e2178]:
+                        - heading "Starts at $0/mo" [level=4] [ref=e2179]
+                        - paragraph
+                      - list [ref=e2180]:
+                        - listitem [ref=e2181]:
+                          - img [ref=e2182]
+                          - strong [ref=e2185]: Generous free monthly tier
+                          - paragraph [ref=e2186]: Pay nothing if below free tier limits
+                        - listitem [ref=e2187]:
+                          - img [ref=e2188]
+                          - strong [ref=e2191]: Usage-based pricing
+                          - paragraph [ref=e2192]: Set billing limits per product so you never pay more than expected.
+                        - listitem [ref=e2193]:
+                          - img [ref=e2194]
+                          - strong [ref=e2197]: Standard support
+                          - paragraph [ref=e2198]: Support via email, Slack-based over $2k/mo
+                      - generic [ref=e2199]:
+                        - generic [ref=e2200]:
+                          - paragraph [ref=e2201]: 6 projects
+                          - paragraph [ref=e2202]: 7-year data retention
+                        - link "Get started - free" [ref=e2204] [cursor=pointer]:
+                          - /url: https://app.posthog.com/signup
+                          - generic [ref=e2205]: Get started - free
+                    - generic [ref=e2206]:
+                      - generic [ref=e2207]:
+                        - paragraph [ref=e2208]: "All plans include:"
+                        - list [ref=e2209]:
+                          - listitem [ref=e2210]:
+                            - img [ref=e2211]
+                            - text: Unlimited team members
+                          - listitem [ref=e2214]:
+                            - img [ref=e2215]
+                            - text: No limits on tracked users
+                          - listitem [ref=e2218]:
+                            - img [ref=e2219]
+                            - text: API access
+                          - listitem [ref=e2222]:
+                            - img [ref=e2223]
+                            - text: Google, Github, and Gitlab SSO
+                      - generic [ref=e2226]:
+                        - paragraph [ref=e2227]:
+                          - emphasis [ref=e2228]: But wait, there's more...
+                        - list [ref=e2229]:
+                          - listitem [ref=e2230]:
+                            - link "Platform packages" [ref=e2232] [cursor=pointer]:
+                              - /url: /platform-packages
+                            - paragraph [ref=e2233]: Choose from extra features, like dedicated support, RBAC and SSO enforcement.
+                          - listitem [ref=e2234]:
+                            - link "Setup & training" [ref=e2236] [cursor=pointer]:
+                              - /url: /services
+                              - text: Setup & training
+                            - paragraph [ref=e2237]:
+                              - text: Our engineers can set everything up for you and train your team.
+                              - emphasis [ref=e2238]: Includes free merch!
+                  - paragraph [ref=e2239] [cursor=pointer]:
+                    - img [ref=e2240]
+                    - text: Show full plan comparison
+                - generic [ref=e2243]:
+                  - generic [ref=e2244]:
+                    - heading "Give PostHog a try" [level=3] [ref=e2245]
+                    - paragraph [ref=e2246]: No need to pick a plan - try our free version and decide if you want advanced features later!
+                  - link "Get started - free" [ref=e2249] [cursor=pointer]:
+                    - /url: https://app.posthog.com/signup
+                    - generic [ref=e2250]: Get started - free
+                - blockquote [ref=e2253]:
+                  - generic [ref=e2254]:
+                    - text: You always need to find ways to improve.
+                    - generic [ref=e2255]:
+                      - text: PostHog is central to how we do that at
+                      - generic [ref=e2256]: Y Combinator
+                      - text: .
+                    - text: It helps us try ideas, measure results, and build better products.
+                  - generic [ref=e2257]:
+                    - img "Cat Li, Y Combinator" [ref=e2259]
+                    - generic [ref=e2260]:
+                      - generic [ref=e2261]: Cat Li
+                      - generic [ref=e2262]: Product & Engineering Lead, Y Combinator
+                - generic [ref=e2263]:
+                  - generic [ref=e2264]:
+                    - paragraph [ref=e2265]: A note from our co-founder
+                    - heading "Our pricing is designed to make you happy" [level=3] [ref=e2266]
+                  - paragraph [ref=e2267]: "Here's what you should know about our pricing:"
+                  - list [ref=e2268]:
+                    - listitem [ref=e2269]:
+                      - strong [ref=e2270]: We make a profit with every product.
+                      - text: This means we don’t have loss-leader products that will go up in pricing later or get retired.
+                    - listitem [ref=e2271]:
+                      - strong [ref=e2272]: We aim to match the cheapest competitor for each product at every scale.
+                      - link "Tell us if we're not!" [ref=e2274] [cursor=pointer]:
+                        - /url: https://twitter.com/intent/tweet?text=@posthog%20Your%20pricing%20is...
+                        - generic [ref=e2275]:
+                          - emphasis [ref=e2277]: Tell us if we're not!
+                          - img [ref=e2278]
+                      - text: "(Note: This doesn't include your buddy's two-person startup.)"
+                    - listitem [ref=e2280]:
+                      - text: The company in general has significant revenue, over 60,000 customers, runs
+                      - link "default alive" [ref=e2282] [cursor=pointer]:
+                        - /url: /newsletter/the-companies-that-shaped-posthog#our-takeaways-2
+                      - text: ", and aims to IPO rather than sell. This means"
+                      - strong [ref=e2283]: we don’t rely on investors to grow, and we’re stable.
+                      - text: Of course we aren’t perfect, but this goes a long way to avoiding the average dumb vc-backed company stuff in general - like running out of money or selling to a lame bigger company who just kills off our products.
+                    - listitem [ref=e2284]:
+                      - text: We have an open source product too - so if you must, you can self host. It is MIT licensed if you want to use it in a big organization that isn’t ready to move to PostHog Cloud yet.
+                      - img [ref=e2286]
+                  - paragraph [ref=e2290]: "If this makes you happy – like most people - just start here:"
+                  - paragraph [ref=e2291]:
+                    - generic [ref=e2292]:
+                      - link "Get started - free" [ref=e2294] [cursor=pointer]:
+                        - /url: https://app.posthog.com/signup
+                        - generic [ref=e2295]: Get started - free
+                      - emphasis [ref=e2296]: No credit card required
+                  - paragraph [ref=e2297]:
+                    - text: Or if you need more info,
+                    - link "read our FAQ" [ref=e2298] [cursor=pointer]:
+                      - /url: "#faq"
+                    - text: ","
+                    - link "ask a question" [ref=e2300] [cursor=pointer]:
+                      - /url: /questions/topic/pricing
+                    - text: ", or"
+                    - link "talk to a human" [ref=e2302] [cursor=pointer]:
+                      - /url: /talk-to-a-human
+                    - text: .
+                  - generic [ref=e2303]:
+                    - link "James Hawkins, CEO, Co-founder" [ref=e2305] [cursor=pointer]:
+                      - /url: /community/profiles/27732
+                      - img "James Hawkins, CEO, Co-founder" [ref=e2307]
+                    - paragraph [ref=e2308]:
+                      - link "James Hawkins" [ref=e2310] [cursor=pointer]:
+                        - /url: /community/profiles/27732
+                        - strong [ref=e2311]: James Hawkins
+                      - text: Co-founder
+                  - paragraph [ref=e2312]: When James isn't thinking about how to cut prices (again), you'll likely find him changing a diaper.
+                - generic [ref=e2313]:
+                  - heading "Pricing calculator" [level=2] [ref=e2315]
+                  - generic [ref=e2316]:
+                    - generic [ref=e2317]:
+                      - generic [ref=e2318]:
+                        - generic [ref=e2319]:
+                          - heading "Products" [level=4] [ref=e2320]
+                          - list [ref=e2321]:
+                            - listitem [ref=e2322]:
+                              - button "Product Analytics $0" [ref=e2323] [cursor=pointer]:
+                                - generic [ref=e2324]:
+                                  - img [ref=e2326]
+                                  - generic [ref=e2328]: Product Analytics
+                                - generic [ref=e2329]: $0
+                            - listitem [ref=e2330]:
+                              - button "Session Replay $0" [ref=e2331] [cursor=pointer]:
+                                - generic [ref=e2332]:
+                                  - img [ref=e2334]
+                                  - generic [ref=e2337]: Session Replay
+                                - generic [ref=e2338]: $0
+                            - listitem [ref=e2339]:
+                              - button "Feature Flags $0" [ref=e2340] [cursor=pointer]:
+                                - generic [ref=e2341]:
+                                  - img [ref=e2343]
+                                  - generic [ref=e2346]: Feature Flags
+                                - generic [ref=e2347]: $0
+                            - listitem [ref=e2348]:
+                              - button "Surveys $0" [ref=e2349] [cursor=pointer]:
+                                - generic [ref=e2350]:
+                                  - img [ref=e2352]
+                                  - generic [ref=e2356]: Surveys
+                                - generic [ref=e2357]: $0
+                            - listitem [ref=e2358]:
+                              - button "Managed warehouse $0" [ref=e2359] [cursor=pointer]:
+                                - generic [ref=e2360]:
+                                  - img [ref=e2362]
+                                  - generic [ref=e2364]: Managed warehouse
+                                - generic [ref=e2365]: $0
+                            - listitem [ref=e2366]:
+                              - button "Data pipelines $0" [ref=e2367] [cursor=pointer]:
+                                - generic [ref=e2368]:
+                                  - img [ref=e2370]
+                                  - generic [ref=e2373]: Data pipelines
+                                - generic [ref=e2374]: $0
+                            - listitem [ref=e2375]:
+                              - button "Error Tracking $0" [ref=e2376] [cursor=pointer]:
+                                - generic [ref=e2377]:
+                                  - img [ref=e2379]
+                                  - generic [ref=e2382]: Error Tracking
+                                - generic [ref=e2383]: $0
+                            - listitem [ref=e2384]:
+                              - button "PostHog AI $0" [ref=e2385] [cursor=pointer]:
+                                - generic [ref=e2386]:
+                                  - img [ref=e2388]
+                                  - generic [ref=e2390]: PostHog AI
+                                - generic [ref=e2391]: $0
+                            - listitem [ref=e2392]:
+                              - button "LLM Analytics $0" [ref=e2393] [cursor=pointer]:
+                                - generic [ref=e2394]:
+                                  - img [ref=e2396]
+                                  - generic [ref=e2399]: LLM Analytics
+                                - generic [ref=e2400]: $0
+                            - listitem [ref=e2401]:
+                              - button "Logs $0" [ref=e2402] [cursor=pointer]:
+                                - generic [ref=e2403]:
+                                  - img [ref=e2405]
+                                  - generic [ref=e2407]: Logs
+                                - generic [ref=e2408]: $0
+                            - listitem [ref=e2409]:
+                              - button "Workflows $0" [ref=e2410] [cursor=pointer]:
+                                - generic [ref=e2411]:
+                                  - img [ref=e2413]
+                                  - generic [ref=e2416]: Workflows
+                                - generic [ref=e2417]: $0
+                        - generic [ref=e2418]:
+                          - heading "Estimate your price" [level=3] [ref=e2420]
+                          - generic [ref=e2421]:
+                            - generic [ref=e2422]:
+                              - generic [ref=e2423]:
+                                - generic [ref=e2424]: Event types, explained
+                                - button [ref=e2425] [cursor=pointer]:
+                                  - img [ref=e2426]
+                              - generic [ref=e2428]:
+                                - paragraph [ref=e2429]: Events are billed at different rates based on volume and if you choose to send custom user properties with the event.
+                                - generic [ref=e2430]:
+                                  - img "Anonymous event example" [ref=e2434]
+                                  - generic [ref=e2435]:
+                                    - heading "Anonymous events" [level=3] [ref=e2436]
+                                    - paragraph [ref=e2437]: No individually-identifiable info, analyzed in aggregate, don't use person profiles
+                                    - paragraph [ref=e2438]: By default, events are anonymous, meaning they don't have any personally-identifiable information attached to them.
+                                    - paragraph [ref=e2439]: They come with info about the browser and device, visitor's location, and any UTM parameters.
+                                    - heading "With anonymous events, you can:" [level=4] [ref=e2440]
+                                    - list [ref=e2441]:
+                                      - listitem [ref=e2442]:
+                                        - img [ref=e2443]
+                                        - text: See a Google Analytics-style dashboard
+                                      - listitem [ref=e2446]:
+                                        - img [ref=e2447]
+                                        - text: Access properties like UTMs, location, referrer, page views
+                                      - listitem [ref=e2450]:
+                                        - img [ref=e2451]
+                                        - paragraph [ref=e2454]:
+                                          - text: Create
+                                          - strong [ref=e2455]:
+                                            - emphasis [ref=e2456]: aggregate
+                                          - text: insights in
+                                          - strong [ref=e2457]: Product analytics
+                                        - list [ref=e2458]:
+                                          - listitem [ref=e2459]: How many times users click an element on a page
+                                          - listitem [ref=e2460]: Group visitors by device type or location
+                                          - listitem [ref=e2461]: Filter to interactions on a specific page
+                                          - listitem [ref=e2462]: Track anonymous users across sessions
+                                    - paragraph [ref=e2463]: Pricing starts at
+                                    - paragraph [ref=e2464]:
+                                      - strong [ref=e2465]: $0.00005
+                                      - text: /event
+                                    - paragraph [ref=e2466]: First 1 million events/mo free
+                                - generic [ref=e2467]:
+                                  - img "Identified event example" [ref=e2471]
+                                  - generic [ref=e2472]:
+                                    - heading "Identified events" [level=3] [ref=e2473]
+                                    - paragraph [ref=e2474]:
+                                      - text: Track usage of specific, logged in users by using
+                                      - link "person profiles" [ref=e2476] [cursor=pointer]:
+                                        - /url: /docs/data/persons
+                                      - text: .
+                                    - paragraph [ref=e2477]: Identify users by their email address or other unique identifier, and attach custom properties to their person profiles.
+                                    - heading "In addition to anonymous event capabilities, you can:" [level=4] [ref=e2478]
+                                    - list [ref=e2479]:
+                                      - listitem [ref=e2480]:
+                                        - img [ref=e2481]
+                                        - paragraph [ref=e2484]: Merge anonymous users with their eventual identified user
+                                        - list [ref=e2485]:
+                                          - listitem [ref=e2486]: Like when they sign up for your product or use different devices - enables analyzing the user's path
+                                      - listitem [ref=e2487]:
+                                        - img [ref=e2488]
+                                        - paragraph [ref=e2491]: Store custom properties on users
+                                        - list [ref=e2492]:
+                                          - listitem [ref=e2493]: Use these properties in cohorts, session replay, experiments, and feature flags
+                                      - listitem [ref=e2494]:
+                                        - img [ref=e2495]
+                                        - paragraph [ref=e2498]:
+                                          - text: Create
+                                          - strong [ref=e2499]:
+                                            - emphasis [ref=e2500]: user-specific
+                                          - text: insights in
+                                          - strong [ref=e2501]: Product analytics
+                                        - list [ref=e2502]:
+                                          - listitem [ref=e2503]:
+                                            - text: How many times
+                                            - emphasis [ref=e2504]: specific users
+                                            - text: click an element on a page
+                                          - listitem [ref=e2505]:
+                                            - text: Group
+                                            - emphasis [ref=e2506]: cohorts of users
+                                            - text: by device type, location, or property
+                                          - listitem [ref=e2507]:
+                                            - text: Filter to interactions on a specific page
+                                            - emphasis [ref=e2508]: by specific users
+                                    - generic [ref=e2510]:
+                                      - paragraph [ref=e2511]: Pricing starts at
+                                      - paragraph [ref=e2512]:
+                                        - strong [ref=e2513]: $0.000248
+                                        - text: /event
+                                      - paragraph [ref=e2514]: First 1 million events/mo free
+                            - generic [ref=e2515]:
+                              - generic [ref=e2516]: First 1,000,000 events free – every month!
+                              - generic [ref=e2517]:
+                                - heading "Event usage explain event types" [level=3] [ref=e2518]:
+                                  - text: Event usage
+                                  - button "explain event types" [ref=e2519] [cursor=pointer]
+                                - paragraph [ref=e2520]: Events/mo
+                              - generic [ref=e2522]:
+                                - generic [ref=e2523]:
+                                  - generic [ref=e2524]:
+                                    - checkbox "Product analytics" [checked] [ref=e2525] [cursor=pointer]
+                                    - img
+                                  - generic [ref=e2527] [cursor=pointer]: Product analytics
+                                - generic [ref=e2530]:
+                                  - generic [ref=e2531]:
+                                    - paragraph [ref=e2532]:
+                                      - text: Identified events
+                                      - img [ref=e2535]
+                                    - generic [ref=e2539]:
+                                      - slider [ref=e2542]
+                                      - generic:
+                                        - generic [ref=e2543] [cursor=pointer]: "0"
+                                        - generic [ref=e2544] [cursor=pointer]: 1M
+                                        - generic [ref=e2545] [cursor=pointer]: 10M
+                                        - generic [ref=e2546] [cursor=pointer]: 50M
+                                        - generic [ref=e2547] [cursor=pointer]: 250M
+                                  - textbox [ref=e2550]: "0"
+                              - generic [ref=e2552]:
+                                - generic [ref=e2553]:
+                                  - generic [ref=e2554]:
+                                    - checkbox "Website analytics" [checked] [ref=e2555] [cursor=pointer]
+                                    - img
+                                  - generic [ref=e2557] [cursor=pointer]: Website analytics
+                                - generic [ref=e2560]:
+                                  - generic [ref=e2561]:
+                                    - paragraph [ref=e2562]: Anonymous events
+                                    - generic [ref=e2563]:
+                                      - slider [ref=e2566]
+                                      - generic:
+                                        - generic [ref=e2567] [cursor=pointer]: "0"
+                                        - generic [ref=e2568] [cursor=pointer]: 1M
+                                        - generic [ref=e2569] [cursor=pointer]: 10M
+                                        - generic [ref=e2570] [cursor=pointer]: 50M
+                                        - generic [ref=e2571] [cursor=pointer]: 250M
+                                  - textbox [ref=e2574]: "0"
+                              - generic [ref=e2575]:
+                                - generic [ref=e2577]:
+                                  - checkbox "Mobile app" [ref=e2579] [cursor=pointer]
+                                  - generic [ref=e2581] [cursor=pointer]: Mobile app
+                                - generic [ref=e2582]: "--"
+                              - generic [ref=e2583]:
+                                - generic [ref=e2585]:
+                                  - checkbox "API events" [ref=e2587] [cursor=pointer]
+                                  - generic [ref=e2589] [cursor=pointer]: API events
+                                - generic [ref=e2590]: "--"
+                              - generic [ref=e2591]:
+                                - generic [ref=e2593]:
+                                  - checkbox "Other events" [ref=e2595] [cursor=pointer]
+                                  - generic [ref=e2597] [cursor=pointer]: Other events
+                                - generic [ref=e2598]: "--"
+                              - generic [ref=e2600]:
+                                - paragraph [ref=e2601]: Product add-ons
+                                - list [ref=e2602]:
+                                  - listitem [ref=e2603]:
+                                    - generic [ref=e2604]:
+                                      - generic [ref=e2605]:
+                                        - generic [ref=e2606]:
+                                          - paragraph [ref=e2607]: Group analytics
+                                          - img [ref=e2610]
+                                        - switch "Use setting" [ref=e2615] [cursor=pointer]:
+                                          - generic [ref=e2616]: Use setting
+                                      - generic [ref=e2617]:
+                                        - generic [ref=e2618]:
+                                          - paragraph [ref=e2619]: Starts at
+                                          - strong [ref=e2620]: $0.000071
+                                          - text: /event
+                                        - paragraph [ref=e2622]: $0
+                              - generic [ref=e2624]:
+                                - generic [ref=e2625]:
+                                  - heading "Event cost subtotal" [level=3] [ref=e2626]
+                                  - button "See how we calculate this" [ref=e2627] [cursor=pointer]
+                                - strong [ref=e2629]: $0
+                        - generic [ref=e2631]:
+                          - heading "Platform packages" [level=4] [ref=e2632]
+                          - generic [ref=e2633]:
+                            - generic [ref=e2634]:
+                              - generic [ref=e2635]:
+                                - paragraph [ref=e2636]: Boost add-on
+                                - img [ref=e2639]
+                              - switch "Use setting" [ref=e2644] [cursor=pointer]:
+                                - generic [ref=e2645]: Use setting
+                            - generic [ref=e2646]:
+                              - generic [ref=e2647]:
+                                - strong [ref=e2648]: $250
+                                - text: /mo
+                              - paragraph [ref=e2650]: $0
+                          - generic [ref=e2651]:
+                            - generic [ref=e2652]:
+                              - generic [ref=e2653]:
+                                - paragraph [ref=e2654]: Scale add-on
+                                - img [ref=e2657]
+                              - switch "Use setting" [ref=e2662] [cursor=pointer]:
+                                - generic [ref=e2663]: Use setting
+                            - generic [ref=e2664]:
+                              - generic [ref=e2665]:
+                                - strong [ref=e2666]: $750
+                                - text: /mo
+                              - paragraph [ref=e2668]: $0
+                          - generic [ref=e2669]:
+                            - generic [ref=e2670]:
+                              - generic [ref=e2671]:
+                                - paragraph [ref=e2672]: Enterprise add-on
+                                - img [ref=e2675]
+                              - switch "Use setting" [ref=e2680] [cursor=pointer]:
+                                - generic [ref=e2681]: Use setting
+                            - generic [ref=e2682]:
+                              - generic [ref=e2683]:
+                                - strong [ref=e2684]: $2,000
+                                - text: /mo
+                              - paragraph [ref=e2686]: $0
+                      - generic [ref=e2687]:
+                        - generic [ref=e2688]:
+                          - heading "Estimated total" [level=3] [ref=e2689]
+                          - paragraph [ref=e2690]: for all products & add-ons
+                        - paragraph [ref=e2692]: $0
+                      - generic [ref=e2693]:
+                        - img [ref=e2694]
+                        - button "Generate calculator URL" [ref=e2696] [cursor=pointer]
+                    - generic [ref=e2697]:
+                      - generic [ref=e2698]:
+                        - heading "How our pricing works" [level=4] [ref=e2699]
+                        - list [ref=e2700]:
+                          - listitem [ref=e2701]: Only pay for products you use
+                          - listitem [ref=e2702]:
+                            - strong [ref=e2703]: Generous free tier for each product (resets monthly)
+                          - listitem [ref=e2704]: You can set billing limits per product so you never get a surprise bill
+                          - listitem [ref=e2705]:
+                            - text: We also offer
+                            - strong [ref=e2707]: discounts
+                            - text: for startups and non-profits
+                      - generic [ref=e2708]:
+                        - heading "Estimating usage" [level=4] [ref=e2709]
+                        - list [ref=e2710]:
+                          - listitem [ref=e2711]: Not sure what your volume looks like? Add the tracking code to your site and check back in a few days – no credit card required.
+                          - listitem [ref=e2712]:
+                            - text: If something stupid happens and you get an unexpected bill (like if
+                            - link "your side project unexpectedly goes viral" [ref=e2714] [cursor=pointer]:
+                              - /url: /side-project-insurance
+                            - text: or you're unhappy), we'll pretty much always refund it!
+                          - listitem [ref=e2715]:
+                            - text: We've also written
+                            - link "this handy guide" [ref=e2717] [cursor=pointer]:
+                              - /url: /docs/billing/estimating-usage-costs
+                            - text: to help!
+                - generic [ref=e2718]:
+                  - heading "Add-ons" [level=2] [ref=e2720]
+                  - generic [ref=e2721]:
+                    - paragraph [ref=e2723]: Specialized functionality are offered as add-ons so you never pay for things you don't need. You can subscribe to them individually inside your PostHog account.
+                    - complementary [ref=e2724]:
+                      - img "Add-ons" [ref=e2726]
+                    - generic [ref=e2727]:
+                      - heading "Identified events" [level=3] [ref=e2729]:
+                        - button "Identified events" [ref=e2730] [cursor=pointer]:
+                          - generic [ref=e2731]: Identified events
+                          - img [ref=e2732]
+                      - heading "Group analytics" [level=3] [ref=e2735]:
+                        - button "Group analytics" [ref=e2736] [cursor=pointer]:
+                          - generic [ref=e2737]: Group analytics
+                          - img [ref=e2738]
+                - generic [ref=e2740]:
+                  - heading "Compare to similar products" [level=2] [ref=e2742]
+                  - generic [ref=e2746]:
+                    - generic [ref=e2747]:
+                      - generic [ref=e2749]:
+                        - img "Amplitude" [ref=e2752]
+                        - strong [ref=e2753]: Amplitude
+                      - generic [ref=e2754]:
+                        - img "Mixpanel" [ref=e2757]
+                        - strong [ref=e2758]: Mixpanel
+                      - generic [ref=e2759]:
+                        - img "Heap" [ref=e2762]
+                        - strong [ref=e2763]: Heap
+                      - generic [ref=e2764]:
+                        - img "Pendo" [ref=e2767]
+                        - strong [ref=e2768]: Pendo
+                      - generic [ref=e2769]:
+                        - img "FullStory" [ref=e2772]
+                        - strong [ref=e2773]: FullStory
+                      - generic [ref=e2774]:
+                        - img [ref=e2777]
+                        - strong [ref=e2789]: PostHog
+                    - generic [ref=e2790]:
+                      - strong [ref=e2792]: Product analytics
+                      - img [ref=e2794]
+                      - img [ref=e2798]
+                      - img [ref=e2802]
+                      - img [ref=e2806]
+                      - img [ref=e2810]
+                      - img [ref=e2814]
+                      - strong [ref=e2818]: Web analytics
+                      - img [ref=e2820]
+                      - img [ref=e2823]
+                      - img [ref=e2826]
+                      - img [ref=e2829]
+                      - img [ref=e2832]
+                      - img [ref=e2835]
+                      - strong [ref=e2839]: LLM analytics
+                      - img [ref=e2841]
+                      - img [ref=e2844]
+                      - img [ref=e2847]
+                      - img [ref=e2850]
+                      - img [ref=e2853]
+                      - img [ref=e2856]
+                      - strong [ref=e2860]: Session replay
+                      - img [ref=e2862]
+                      - img [ref=e2866]
+                      - img [ref=e2870]
+                      - img [ref=e2874]
+                      - img [ref=e2878]
+                      - img [ref=e2882]
+                      - strong [ref=e2886]: Feature flags
+                      - img [ref=e2888]
+                      - img [ref=e2891]
+                      - img [ref=e2894]
+                      - img [ref=e2897]
+                      - img [ref=e2900]
+                      - img [ref=e2903]
+                      - strong [ref=e2907]: Experiments
+                      - img [ref=e2909]
+                      - img [ref=e2913]
+                      - img [ref=e2916]
+                      - img [ref=e2919]
+                      - img [ref=e2922]
+                      - img [ref=e2925]
+                      - strong [ref=e2929]: Surveys
+                      - img [ref=e2931]
+                      - img [ref=e2934]
+                      - img [ref=e2937]
+                      - img [ref=e2940]
+                      - img [ref=e2944]
+                      - img [ref=e2947]
+                      - strong [ref=e2951]: Data warehouse
+                      - img [ref=e2953]
+                      - img [ref=e2956]
+                      - img [ref=e2960]
+                      - img [ref=e2963]
+                      - img [ref=e2966]
+                      - generic [ref=e2968]:
+                        - img [ref=e2969]
+                        - link "Get started - free" [ref=e2974] [cursor=pointer]:
+                          - /url: https://app.posthog.com/signup
+                          - generic [ref=e2975]: Get started - free
+                - generic [ref=e2976]:
+                  - heading "Frequently purchased with..." [level=2] [ref=e2978]
+                  - paragraph [ref=e2979]: These are some products that pair well with PostHog to help you find product-market fit and maybe even get to an IPO. (In fact, we use them ourselves!)
+                  - list [ref=e2983]:
+                    - listitem [ref=e2984]:
+                      - generic [ref=e2985]:
+                        - img [ref=e2987]
+                        - heading "Supabase" [level=5] [ref=e2988]
+                      - paragraph [ref=e2989]: Postgres database development platform
+                    - listitem [ref=e2990]:
+                      - generic [ref=e2991]:
+                        - img [ref=e2993]
+                        - heading "Digital Ocean" [level=5] [ref=e2994]
+                      - paragraph [ref=e2995]: Cloud infrastructure for developers
+                    - listitem [ref=e2996]:
+                      - generic [ref=e2997]:
+                        - img [ref=e2999]
+                        - heading "Vercel" [level=5] [ref=e3000]
+                      - paragraph [ref=e3001]: Build and deploy web experiences
+                    - listitem [ref=e3002]:
+                      - generic [ref=e3003]:
+                        - img [ref=e3005]
+                        - heading "Ashby" [level=5] [ref=e3006]
+                      - paragraph [ref=e3007]: All-in-one recruiting software for ambitious teams.
+                    - listitem [ref=e3008]:
+                      - generic [ref=e3009]:
+                        - img [ref=e3011]
+                        - heading "Algolia" [level=5] [ref=e3012]
+                      - paragraph [ref=e3013]: AI-powered search and discovery
+                - generic [ref=e3014]:
+                  - heading "Pricing FAQ" [level=2] [ref=e3015]
+                  - generic [ref=e3016]:
+                    - textbox "Search questions asked on this page..." [ref=e3017]
+                    - list [ref=e3018]:
+                      - listitem [ref=e3019]:
+                        - paragraph [ref=e3025]: How do I know what my volume is?
+                        - generic [ref=e3029]:
+                          - paragraph [ref=e3030]: Tim Glaser
+                          - paragraph [ref=e3031]: The easiest way is to sign up for the Free plan. You'll get an accurate volume projection after just a few days.
+                      - listitem [ref=e3032]:
+                        - paragraph [ref=e3038]: Do I pay anything for stored events?
+                        - generic [ref=e3042]:
+                          - paragraph [ref=e3043]: Simon Fisher
+                          - paragraph [ref=e3044]: No, you only pay the fee per captured event in a given month (i.e. you only pay when each event is first received). There are no additional costs or fees.
+                      - listitem [ref=e3045]:
+                        - paragraph [ref=e3051]: How long do you retain data?
+                        - generic [ref=e3055]:
+                          - paragraph [ref=e3056]: Tiina Turban
+                          - paragraph [ref=e3057]: Data (except recordings, see below) is guaranteed to be retained for 7 years on any paid plan and 1 year on a free plan. After 1 year, data may be moved into cold storage so queries may run more slowly.
+                      - listitem [ref=e3058]:
+                        - paragraph [ref=e3064]: How long do you retain recordings?
+                        - generic [ref=e3068]:
+                          - paragraph [ref=e3069]: Rick Marron
+                          - paragraph [ref=e3070]: Recordings are kept on Clickhouse-based installations for 1 month. For paid customers on PostHog cloud, recordings are kept for 3 months.
+                      - listitem [ref=e3071]:
+                        - paragraph [ref=e3077]: What happens after the data retention period elapses?
+                        - generic [ref=e3081]:
+                          - paragraph [ref=e3082]: Marius Andra
+                          - paragraph [ref=e3083]: Any event or user data stored for more than the retention period may be permanently deleted from our systems.
+                      - listitem [ref=e3084]:
+                        - paragraph [ref=e3090]: Is there a free trial on paid plans?
+                        - generic [ref=e3094]:
+                          - paragraph [ref=e3095]: Michael Matloka
+                          - paragraph [ref=e3096]: We have a generous free tier on every paid plan so you can try out the features before paying any money (though you will need to enter your credit card info). If you have additional needs, such as enterprise features, please get in touch.
+                      - listitem [ref=e3097]:
+                        - paragraph [ref=e3103]: What currency are your prices in?
+                        - generic [ref=e3107]:
+                          - paragraph [ref=e3108]: James Hawkins
+                          - paragraph [ref=e3109]: All prices are in US Dollars (USD), excluding taxes.
+                      - listitem [ref=e3110]:
+                        - paragraph [ref=e3116]: Do you offer a discount for non-profits?
+                        - generic [ref=e3120]:
+                          - paragraph [ref=e3121]: Eric Duong
+                          - paragraph [ref=e3122]: Yes in most cases! Create your account, then email sales@posthog.com from the same email address with some basic details on your organization. We will then apply a discount.
+                      - listitem [ref=e3123]:
+                        - paragraph [ref=e3129]: Are there any minimums or annual commitments?
+                        - generic [ref=e3133]:
+                          - paragraph [ref=e3134]: Cameron DeLeone
+                          - paragraph [ref=e3135]: Nope. We can, however, offer annual commitments (for example, to maintain pricing) if you need them as part of an enterprise agreement.
+                  - paragraph [ref=e3136]:
+                    - text: Have another pricing-related question?
+                    - link "Ask in our community forum." [ref=e3137] [cursor=pointer]:
+                      - /url: /questions/topic/pricing
+                - generic [ref=e3138]:
+                  - heading "This is the call to action." [level=2] [ref=e3139]:
+                    - text: This is the
+                    - generic [ref=e3140]: call to action.
+                  - heading "If nothing else has sold you on PostHog, hopefully these classic marketing tactics will." [level=3] [ref=e3141]
+                  - generic [ref=e3142]:
+                    - generic [ref=e3143]:
+                      - img "PostHog Cloud" [ref=e3146]
+                      - img "People on G2 think we're great" [ref=e3149]
+                      - generic [ref=e3151]:
+                        - img [ref=e3152]
+                        - paragraph [ref=e3154]:
+                          - generic [ref=e3155]: Not
+                          - text: endorsed
+                          - text: by Kim K
+                      - paragraph [ref=e3157]:
+                        - text: "*PostHog is a web product and cannot be installed by CD."
+                        - text: We
+                        - emphasis [ref=e3158]: did
+                        - text: once send some customers a floppy disk but it was a Rickroll.
+                    - generic [ref=e3159]:
+                      - generic [ref=e3160]:
+                        - generic [ref=e3161]:
+                          - img [ref=e3163]
+                          - generic [ref=e3167]: Eco-friendly
+                        - paragraph [ref=e3168]: PostHog Cloud
+                        - paragraph [ref=e3169]: Digital download*
+                      - list [ref=e3170]:
+                        - listitem [ref=e3171]:
+                          - strong [ref=e3172]: Select your cloud
+                          - list [ref=e3173]:
+                            - listitem [ref=e3174]:
+                              - button "US (Virginia)" [ref=e3175] [cursor=pointer]
+                            - listitem [ref=e3176]:
+                              - button "EU (Frankfurt)" [ref=e3177] [cursor=pointer]
+                        - listitem [ref=e3178]:
+                          - strong [ref=e3179]: "Starts at:"
+                          - generic [ref=e3180]:
+                            - generic [ref=e3181]: $0
+                            - generic [ref=e3182]: Free
+                            - generic [ref=e3183]: ">1 left at this price!!"
+                      - link "Get started" [ref=e3186] [cursor=pointer]:
+                        - /url: https://app.posthog.com/signup
+                        - generic [ref=e3187]: Get started
+                      - generic [ref=e3188]:
+                        - img [ref=e3190]
+                        - paragraph [ref=e3192]:
+                          - strong [ref=e3193]: "Hurry:"
+                          - text: 1808 companies signed up
+                          - button "today" [ref=e3194] [cursor=pointer]
+                          - text: .
+                          - text: Act now and get $0 off your first order.
+            - paragraph [ref=e3200]:
+              - text: Questions about this page?
+              - button "Ask PostHog AI" [ref=e3201] [cursor=pointer]
+              - text: or
+              - link "post a community question" [ref=e3203] [cursor=pointer]:
+                - /url: /questions
+              - text: .
+    - generic [ref=e1026]: Navigated to
+    - region "Notifications (F8)":
+      - list [ref=e1028]:
+        - listitem [ref=e1029]:
+          - generic [ref=e1030]:
+            - generic [ref=e1031]: Legally-required cookie banner
+            - generic [ref=e1032]:
+              - paragraph [ref=e1033]: PostHog.com doesn't use third-party cookies, only a single in-house cookie.
+              - paragraph [ref=e1034]:
+                - text: No data is sent to a third party. (
+                - generic [ref=e1035]: Ursula von der Leyen
+                - text: would be so proud.)
+            - img "Ursula von der Leyen, President of the European Commission" [ref=e1038]
+          - button [ref=e1040] [cursor=pointer]:
+            - img [ref=e1041]

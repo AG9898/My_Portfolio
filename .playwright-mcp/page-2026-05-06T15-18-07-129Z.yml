@@ -1,0 +1,559 @@
+- generic [active]:
+  - generic:
+    - generic [ref=e1]:
+      - generic [ref=e3]:
+        - menubar [ref=e4]:
+          - menuitem [ref=e5] [cursor=pointer]:
+            - img [ref=e7]
+          - menuitem "Product OS" [ref=e19] [cursor=pointer]
+          - menuitem "Pricing" [ref=e20] [cursor=pointer]
+          - menuitem "Docs" [ref=e21] [cursor=pointer]
+          - menuitem "Community" [ref=e22] [cursor=pointer]
+          - menuitem "Company" [ref=e23] [cursor=pointer]
+          - menuitem "More" [ref=e24] [cursor=pointer]:
+            - generic [ref=e25]: More
+        - complementary [ref=e26]:
+          - link "Get started – free" [ref=e29] [cursor=pointer]:
+            - /url: https://app.posthog.com/signup
+            - generic [ref=e30]: Get started – free
+          - button [ref=e35] [cursor=pointer]:
+            - img [ref=e36]
+          - button [ref=e40] [cursor=pointer]:
+            - img [ref=e41]
+          - button "1" [ref=e46] [cursor=pointer]:
+            - generic [ref=e47]: "1"
+          - menubar [ref=e48]:
+            - menuitem [ref=e49] [cursor=pointer]:
+              - img [ref=e50]
+      - generic [ref=e52]:
+        - generic [ref=e53]:
+          - img [ref=e59]
+          - navigation:
+            - list:
+              - listitem [ref=e60]:
+                - figure [ref=e63]:
+                  - link "home.mdx" [ref=e65] [cursor=pointer]:
+                    - /url: /
+                    - img [ref=e67]
+                    - generic [ref=e70]: home.mdx
+              - listitem [ref=e71]:
+                - figure [ref=e74]:
+                  - link "Product OS" [ref=e76] [cursor=pointer]:
+                    - /url: /products
+                    - img [ref=e78]
+                    - generic [ref=e81]: Product OS
+              - listitem [ref=e82]:
+                - figure [ref=e85]:
+                  - link "Pricing" [ref=e87] [cursor=pointer]:
+                    - /url: /pricing
+                    - img [ref=e89]
+                    - generic [ref=e92]: Pricing
+              - listitem [ref=e93]:
+                - figure [ref=e96]:
+                  - link "customers.mdx" [ref=e98] [cursor=pointer]:
+                    - /url: /customers
+                    - img [ref=e100]
+                    - generic [ref=e103]: customers.mdx
+              - listitem [ref=e104]:
+                - figure [ref=e107]:
+                  - link "demo.mov" [ref=e109] [cursor=pointer]:
+                    - /url: /demo
+                    - img [ref=e111]
+                    - generic [ref=e115]: demo.mov
+              - listitem [ref=e116]:
+                - figure [ref=e119]:
+                  - link "Docs" [ref=e121] [cursor=pointer]:
+                    - /url: /docs
+                    - img [ref=e123]
+                    - generic [ref=e126]: Docs
+              - listitem [ref=e127]:
+                - figure [ref=e130]:
+                  - link "Talk to a human" [ref=e132] [cursor=pointer]:
+                    - /url: /talk-to-a-human
+                    - img [ref=e134]
+                    - generic [ref=e137]: Talk to a human
+              - listitem [ref=e138]:
+                - figure [ref=e141]:
+                  - button "Ask a question" [ref=e142] [cursor=pointer]:
+                    - img [ref=e144]
+                    - generic [ref=e147]: Ask a question
+              - listitem [ref=e148]:
+                - figure [ref=e151]:
+                  - link "Sign up ↗" [ref=e153] [cursor=pointer]:
+                    - /url: https://app.posthog.com/signup
+                    - img [ref=e155]
+                    - generic [ref=e158]: Sign up ↗
+              - listitem [ref=e159]:
+                - figure [ref=e162]:
+                  - button "Switch to website mode" [ref=e163] [cursor=pointer]:
+                    - img [ref=e165]
+                    - generic [ref=e168]: Switch to website mode
+              - listitem [ref=e169]:
+                - figure [ref=e172]:
+                  - link "Why PostHog?" [ref=e174] [cursor=pointer]:
+                    - /url: /about
+                    - img [ref=e176]
+                    - generic [ref=e179]: Why PostHog?
+              - listitem [ref=e180]:
+                - figure [ref=e183]:
+                  - link "Changelog" [ref=e185] [cursor=pointer]:
+                    - /url: /changelog
+                    - img [ref=e187]
+                    - generic [ref=e190]: Changelog
+              - listitem [ref=e191]:
+                - figure [ref=e194]:
+                  - link "Company handbook" [ref=e196] [cursor=pointer]:
+                    - /url: /handbook
+                    - img [ref=e198]
+                    - generic [ref=e201]: Company handbook
+              - listitem [ref=e202]:
+                - figure [ref=e205]:
+                  - link "Store" [ref=e207] [cursor=pointer]:
+                    - /url: /merch
+                    - img [ref=e209]
+                    - generic [ref=e212]: Store
+              - listitem [ref=e213]:
+                - figure [ref=e216]:
+                  - link "Work here" [ref=e218] [cursor=pointer]:
+                    - /url: /careers
+                    - img [ref=e220]
+                    - generic [ref=e223]: Work here
+              - listitem [ref=e224]:
+                - figure [ref=e227]:
+                  - link "Trash" [ref=e229] [cursor=pointer]:
+                    - /url: /trash
+                    - img [ref=e231]
+                    - generic [ref=e234]: Trash
+        - generic [ref=e235]:
+          - generic [ref=e236]:
+            - menubar [ref=e237]:
+              - menuitem [ref=e238] [cursor=pointer]:
+                - img [ref=e239]
+                - img [ref=e241]
+            - button "home.mdx" [ref=e244] [cursor=pointer]:
+              - text: home.mdx
+              - img [ref=e245]
+            - generic [ref=e247]:
+              - button [ref=e249] [cursor=pointer]:
+                - img [ref=e250]
+              - button [ref=e253] [cursor=pointer]:
+                - img [ref=e256]
+              - button [ref=e260] [cursor=pointer]:
+                - img [ref=e262]
+          - generic [ref=e265]:
+            - complementary [ref=e266]:
+              - toolbar [ref=e267]:
+                - button [disabled] [ref=e268]:
+                  - img [ref=e270]
+                - button [disabled] [ref=e272]:
+                  - img [ref=e274]
+                - separator [ref=e276]
+                - combobox [disabled] [ref=e278]:
+                  - generic: Zoom
+                  - img [ref=e280]
+                - separator [ref=e282]
+                - button [ref=e284] [cursor=pointer]:
+                  - img [ref=e286]
+                - button [ref=e289] [cursor=pointer]:
+                  - img [ref=e291]
+                - button [ref=e294] [cursor=pointer]:
+                  - img [ref=e296]
+                - separator [ref=e298]
+                - combobox [disabled] [ref=e300]:
+                  - generic: Font
+                  - img [ref=e302]
+                - separator [ref=e304]
+                - button [ref=e306] [cursor=pointer]:
+                  - img [ref=e308]
+                - button [ref=e311] [cursor=pointer]:
+                  - img [ref=e313]
+                - button [ref=e316] [cursor=pointer]:
+                  - img [ref=e318]
+                - separator [ref=e320]
+                - button [disabled] [ref=e321]:
+                  - img [ref=e323]
+                - button [disabled] [ref=e326]:
+                  - img [ref=e328]
+                - generic [ref=e332]:
+                  - button [ref=e334] [cursor=pointer]:
+                    - img [ref=e336]
+                  - button [ref=e340] [cursor=pointer]:
+                    - img [ref=e342]
+                  - link "Get started - free" [ref=e346] [cursor=pointer]:
+                    - /url: https://app.posthog.com/signup
+                    - generic [ref=e347]: Get started - free
+            - main [ref=e349]:
+              - article [ref=e353]:
+                - generic [ref=e357]:
+                  - toolbar
+                  - textbox "editable markdown" [ref=e360]:
+                    - generic [ref=e361]:
+                      - img [ref=e363]
+                      - heading [level=1] [ref=e364]:
+                        - img [ref=e366]
+                      - generic [ref=e378]:
+                        - heading "The new way to build products" [level=1] [ref=e379]
+                        - paragraph [ref=e380]: Product development used to mean manually writing code, running analysis, diagnosing bugs, and rolling out changes using dozens of tools.
+                        - paragraph [ref=e381]:
+                          - text: PostHog is the only platform that acts like a co-pilot for you (and your AI agents) to do it all –
+                          - emphasis [ref=e382]: autonomously
+                          - text: .
+                      - generic [ref=e384]:
+                        - generic [ref=e385]:
+                          - link "Get started - free" [ref=e387] [cursor=pointer]:
+                            - /url: https://app.posthog.com/signup
+                            - generic [ref=e388]: Get started - free
+                          - button "Install with AI" [ref=e389] [cursor=pointer]:
+                            - generic [ref=e390]: Install with AI
+                        - generic [ref=e391]:
+                          - heading "Install with AI in a single prompt" [level=3] [ref=e392]
+                          - paragraph [ref=e393]: Paste into your terminal or code editor and make AI do the work.
+                          - generic [ref=e394]:
+                            - button "npx @posthog/wizard" [ref=e396] [cursor=pointer]:
+                              - img [ref=e397]
+                              - code [ref=e400]: npx @posthog/wizard
+                              - img [ref=e401]
+                            - link "Learn more" [ref=e404] [cursor=pointer]:
+                              - /url: /wizard
+                        - paragraph [ref=e405]:
+                          - link "MCP" [ref=e407] [cursor=pointer]:
+                            - /url: /docs/model-context-protocol
+                            - img [ref=e408]
+                            - text: MCP
+                          - generic [ref=e410]: •
+                          - link "Watch a demo" [ref=e412] [cursor=pointer]:
+                            - /url: /demo
+                            - img [ref=e413]
+                            - text: Watch a demo
+                          - generic [ref=e415]: •
+                          - link "Talk to a human" [ref=e417] [cursor=pointer]:
+                            - /url: /talk-to-a-human
+                            - img [ref=e418]
+                            - text: Talk to a human
+                    - generic [ref=e422]:
+                      - tablist [ref=e423]:
+                        - generic [ref=e424]:
+                          - tab "Understand product usage" [selected] [ref=e425] [cursor=pointer]: Understand product usage
+                          - tab "One place for product data" [ref=e428] [cursor=pointer]: One place for product data
+                          - tab "Debug & fix issues" [ref=e430] [cursor=pointer]: Debug & fix issues
+                          - tab "Test & roll out changes" [ref=e432] [cursor=pointer]: Test & roll out changes
+                      - generic [ref=e435]:
+                        - button "Pause carousel" [ref=e438] [cursor=pointer]:
+                          - img [ref=e439]
+                        - tabpanel "Understand product usage" [ref=e442]:
+                          - generic [ref=e443]:
+                            - heading "Understand what users are doing" [level=2] [ref=e444]
+                            - generic [ref=e445]:
+                              - paragraph [ref=e447]: Measure engagement, track conversion, and understand usage patterns — whether it's by person, company, or AI feature.
+                              - paragraph [ref=e449]:
+                                - text: How we analyze data and build products
+                                - link "has changed a lot" [ref=e451] [cursor=pointer]:
+                                  - /url: /tooling
+                                - text: . Work smarter with
+                                - img [ref=e452]
+                                - link "PostHog AI" [ref=e455] [cursor=pointer]:
+                                  - /url: /ai
+                                - text: to get direct answers to questions about your data.
+                            - generic [ref=e456]:
+                              - generic:
+                                - link "Web Analytics" [ref=e457] [cursor=pointer]:
+                                  - /url: /web-analytics
+                                  - img [ref=e458]
+                                  - generic [ref=e461]: Web Analytics
+                                - link "Product Analytics" [ref=e462] [cursor=pointer]:
+                                  - /url: /product-analytics
+                                  - img [ref=e463]
+                                  - generic [ref=e465]: Product Analytics
+                                - link "Revenue Analytics" [ref=e466] [cursor=pointer]:
+                                  - /url: /revenue-analytics
+                                  - img [ref=e467]
+                                  - generic [ref=e470]: Revenue Analytics
+                                - link "Session Replay" [ref=e473] [cursor=pointer]:
+                                  - /url: /session-replay
+                                  - img [ref=e474]
+                                  - generic [ref=e477]: Session Replay
+                                - link "Funnels" [ref=e478] [cursor=pointer]:
+                                  - /url: /funnels
+                                  - img [ref=e479]
+                                  - generic [ref=e481]: Funnels
+                                - link "Heatmaps" [ref=e482] [cursor=pointer]:
+                                  - /url: /heatmaps
+                                  - img [ref=e483]
+                                  - generic [ref=e485]: Heatmaps
+                                - link "Graphs & trends" [ref=e486] [cursor=pointer]:
+                                  - /url: /trends
+                                  - img [ref=e487]
+                                  - generic [ref=e489]: Graphs & trends
+                                - link "Lifecycle" [ref=e490] [cursor=pointer]:
+                                  - /url: /lifecycle
+                                  - img [ref=e491]
+                                  - generic [ref=e494]: Lifecycle
+                                - link "User Paths" [ref=e495] [cursor=pointer]:
+                                  - /url: /user-paths
+                                  - img [ref=e496]
+                                  - generic [ref=e498]: User Paths
+                                - link "Evals" [ref=e499] [cursor=pointer]:
+                                  - /url: /llm-analytics
+                                  - img [ref=e500]
+                                  - generic [ref=e504]: Evals
+                                - link "Traces" [ref=e507] [cursor=pointer]:
+                                  - /url: /llm-analytics
+                                  - img [ref=e508]
+                                  - generic [ref=e510]: Traces
+                                - link "Generations" [ref=e511] [cursor=pointer]:
+                                  - /url: /llm-analytics
+                                  - img [ref=e512]
+                                  - generic [ref=e514]: Generations
+                              - img [ref=e519]
+                    - generic [ref=e520]:
+                      - heading "Who's using PostHog?" [level=2] [ref=e521]
+                      - paragraph [ref=e522]: Here are some of our paying customers. (Yes they actually use us, no it's not just some random engineer who tried us out 2+ years ago.)
+                      - generic [ref=e523]:
+                        - button "Shuffle companies" [ref=e526] [cursor=pointer]:
+                          - generic [ref=e527]:
+                            - img [ref=e528]
+                            - text: Shuffle companies
+                        - generic [ref=e536]:
+                          - generic [ref=e537]: VCs love them
+                          - generic [ref=e538]: Product engineers love them
+                          - generic [ref=e540]:
+                            - link [ref=e544] [cursor=pointer]:
+                              - /url: /customers/ycombinator
+                              - img [ref=e545]
+                            - img [ref=e552]
+                            - img [ref=e557]
+                            - img [ref=e563]
+                            - img [ref=e569]
+                            - link [ref=e583] [cursor=pointer]:
+                              - /url: /customers/lovable
+                              - img [ref=e584]
+                            - img [ref=e598]
+                            - link [ref=e607] [cursor=pointer]:
+                              - /url: /customers/researchgate
+                              - img [ref=e608]
+                            - img [ref=e614]
+                          - generic [ref=e659]:
+                            - link [ref=e663] [cursor=pointer]:
+                              - /url: /customers/supabase
+                              - img [ref=e664]
+                            - img [ref=e673]
+                            - link [ref=e684] [cursor=pointer]:
+                              - /url: /customers/elevenlabs
+                              - img [ref=e685]
+                            - link [ref=e704] [cursor=pointer]:
+                              - /url: /customers/exa
+                              - img [ref=e705]
+                            - img [ref=e713]
+                            - link [ref=e722] [cursor=pointer]:
+                              - /url: /customers/hasura
+                              - img [ref=e723]
+                            - img [ref=e736]
+                            - img [ref=e747]
+                            - img [ref=e758]
+                            - img [ref=e762]
+                            - img [ref=e771]
+                            - img [ref=e783]
+                            - link [ref=e789] [cursor=pointer]:
+                              - /url: /blog/posthog-marketing
+                              - img [ref=e790]
+                        - link "Open customers.mdx" [ref=e812] [cursor=pointer]:
+                          - /url: /customers
+                          - generic [ref=e813]: Open customers.mdx
+                    - generic [ref=e814]:
+                      - generic [ref=e815]:
+                        - heading "PostHog data stack, built for data teams and loved by product teams" [level=2] [ref=e816]
+                        - generic [ref=e817]:
+                          - paragraph [ref=e818]:
+                            - paragraph [ref=e819]:
+                              - strong [ref=e820]: "Built-in, Product OS ships with:"
+                          - list [ref=e822]:
+                            - listitem [ref=e823]:
+                              - text: A data warehouse
+                              - img [ref=e827]
+                            - listitem [ref=e831]: 120+ sources/destinations
+                            - listitem [ref=e832]: SQL editor + BI + data viz
+                            - listitem [ref=e833]: User activity feed (CDP-lite)
+                            - listitem [ref=e834]: API, webhooks
+                        - paragraph [ref=e836]:
+                          - text: When you're analyzing how customers use your product, you should be operating from
+                          - emphasis [ref=e837]: the full set of data
+                          - text: .
+                        - paragraph [ref=e838]:
+                          - text: This includes customer information that happens
+                          - emphasis [ref=e839]: outside your product
+                          - text: ":"
+                        - list [ref=e840]:
+                          - listitem [ref=e841]: payments from Stripe
+                          - listitem [ref=e842]: exceptions in an error tracking tool
+                          - listitem [ref=e843]: tickets in your support platform
+                        - paragraph [ref=e844]: Having all the data in one place means you can make more informed decisions about what to build next.
+                        - paragraph [ref=e845]: PostHog's Product OS isn't just analytics – it's the entire suite of tools built to give you a single source of truth about your customers.
+                        - 'link "README: PostHog data stack.md" [ref=e848] [cursor=pointer]':
+                          - /url: /data-stack
+                      - generic [ref=e849]:
+                        - heading "Usage-based pricing" [level=2] [ref=e850]
+                        - paragraph [ref=e852]: Our whole philosophy is that you shouldn't have to worry about pricing.
+                        - paragraph [ref=e853]: All our paid products are pay-per-use with generous monthly free tiers. In fact, 98% of our customers use PostHog for free.
+                        - paragraph [ref=e854]: We aim to match the cheapest option at scale – PostHog should be a no-brainer. You never have to "jump on a quick call" with sales.
+                        - paragraph [ref=e855]: "Here are some examples of how we charge for most popular products:"
+                        - generic [ref=e865]:
+                          - generic [ref=e867]: Product
+                          - generic [ref=e868]: Free tier
+                          - generic [ref=e869]: Pricing (decreases with volume)
+                          - generic [ref=e870]: "1"
+                          - link "Product Analytics" [ref=e872] [cursor=pointer]:
+                            - /url: /product-analytics
+                            - img [ref=e873]
+                            - generic [ref=e875]: Product Analytics
+                          - generic [ref=e876]: 1 million events/mo
+                          - generic [ref=e878]: $0.00005/event
+                          - generic [ref=e879]: "2"
+                          - link "Session Replay" [ref=e881] [cursor=pointer]:
+                            - /url: /session-replay
+                            - img [ref=e882]
+                            - generic [ref=e885]: Session Replay
+                          - generic [ref=e886]: 5,000 recordings/mo
+                          - generic [ref=e888]: $0.005/recording
+                          - generic [ref=e889]: "3"
+                          - link "Feature Flags" [ref=e891] [cursor=pointer]:
+                            - /url: /feature-flags
+                            - img [ref=e892]
+                            - generic [ref=e895]: Feature Flags
+                          - generic [ref=e896]: 1 million requests/mo
+                          - generic [ref=e898]: $0.0001/request
+                          - generic [ref=e899]: "4"
+                          - link "Managed warehouse" [ref=e901] [cursor=pointer]:
+                            - /url: /data-stack/managed-warehouse
+                            - img [ref=e902]
+                            - generic [ref=e904]: Managed warehouse
+                          - generic [ref=e905]: 1 million rows/mo
+                          - generic [ref=e907]: $0.000015/row
+                        - link "Explore pricing" [ref=e910] [cursor=pointer]:
+                          - /url: /pricing
+                      - generic [ref=e911]:
+                        - heading "PostHog AI" [level=2] [ref=e912]
+                        - paragraph [ref=e913]:
+                          - text: PostHog AI works across PostHog – and it's
+                          - emphasis [ref=e914]: way
+                          - text: more than just generating insights.
+                        - paragraph [ref=e915]: PostHog AI helps you automate monotonous tasks of gathering context and summarizing information, and can even create multi-variate experiments and feature flags – all with natural language. And soon, it'll have the ability to make code changes to fix bugs and create pull requests.
+                        - link "Learn about PostHog AI" [ref=e918] [cursor=pointer]:
+                          - /url: /ai
+                      - generic [ref=e919]:
+                        - heading "Why PostHog?" [level=2] [ref=e920]
+                        - paragraph [ref=e921]: "We're different from most companies for a bunch of reasons:"
+                        - list [ref=e922]:
+                          - listitem [ref=e923]:
+                            - strong [ref=e924]: Transparency.
+                            - text: You can read our
+                            - link "company handbook" [ref=e925] [cursor=pointer]:
+                              - /url: /handbook
+                            - text: ", our"
+                            - link "sales manual" [ref=e926] [cursor=pointer]:
+                              - /url: /handbook/growth/sales/overview
+                            - text: ", and"
+                            - link "company strategy" [ref=e927] [cursor=pointer]:
+                              - /url: /handbook/why-does-posthog-exist
+                            - text: .
+                          - listitem [ref=e928]:
+                            - strong [ref=e929]: We ship fast.
+                            - text: See our
+                            - link "changelog" [ref=e930] [cursor=pointer]:
+                              - /url: /changelog
+                            - text: .
+                          - listitem [ref=e931]:
+                            - strong [ref=e932]: Actually
+                            - strong [ref=e933]: "-technical support."
+                            - text: Our
+                            - link "support folks" [ref=e938] [cursor=pointer]:
+                              - /url: /teams/support
+                              - generic [ref=e940]: support folks
+                            - text: all have engineering backgrounds.
+                        - link "Read more about us" [ref=e943] [cursor=pointer]:
+                          - /url: /about
+                      - generic [ref=e944]:
+                        - heading "Bedtime reading" [level=2] [ref=e945]
+                        - paragraph [ref=e947]: "Still here? We've got some links that may be mildly interesting to you:"
+                        - list [ref=e948]:
+                          - listitem [ref=e949]:
+                            - link "demo.mov" [ref=e950] [cursor=pointer]:
+                              - /url: /demo
+                          - listitem [ref=e951]:
+                            - link "Technical docs" [ref=e952] [cursor=pointer]:
+                              - /url: /docs
+                          - listitem [ref=e953]:
+                            - link "API" [ref=e954] [cursor=pointer]:
+                              - /url: /docs/api
+                          - listitem [ref=e955]:
+                            - link "Ask a question" [ref=e956] [cursor=pointer]:
+                              - /url: /questions
+                          - listitem [ref=e957]:
+                            - link "Small teams at PostHog" [ref=e958] [cursor=pointer]:
+                              - /url: /teams
+                      - generic [ref=e959]:
+                        - heading "Shameless CTA" [level=2] [ref=e960]
+                        - generic [ref=e961]:
+                          - paragraph [ref=e962]: If nothing else has sold you on PostHog, hopefully these classic marketing tactics will.
+                          - generic [ref=e964]:
+                            - generic [ref=e965]:
+                              - img "PostHog Cloud" [ref=e968]
+                              - img "People on G2 think we're great" [ref=e971]
+                              - generic [ref=e973]:
+                                - img [ref=e974]
+                                - paragraph [ref=e976]:
+                                  - generic [ref=e977]: Not
+                                  - text: endorsed
+                                  - text: by Kim K
+                              - paragraph [ref=e979]:
+                                - text: "*PostHog is a web product and cannot be installed by CD."
+                                - text: We
+                                - emphasis [ref=e980]: did
+                                - text: once send some customers a floppy disk but it was a Rickroll.
+                            - generic [ref=e981]:
+                              - generic [ref=e982]:
+                                - generic [ref=e983]:
+                                  - img [ref=e985]
+                                  - generic [ref=e989]: Eco-friendly
+                                - paragraph [ref=e990]: PostHog Cloud
+                                - paragraph [ref=e991]: Digital download*
+                              - list [ref=e992]:
+                                - listitem [ref=e993]:
+                                  - strong [ref=e994]: Select your cloud
+                                  - list [ref=e995]:
+                                    - listitem [ref=e996]:
+                                      - button "US (Virginia)" [ref=e997] [cursor=pointer]
+                                    - listitem [ref=e998]:
+                                      - button "EU (Frankfurt)" [ref=e999] [cursor=pointer]
+                                - listitem [ref=e1000]:
+                                  - strong [ref=e1001]: "Starts at:"
+                                  - generic [ref=e1002]:
+                                    - generic [ref=e1003]: $0
+                                    - generic [ref=e1004]: Free
+                                    - generic [ref=e1005]: ">1 left at this price!!"
+                              - link "Get started" [ref=e1008] [cursor=pointer]:
+                                - /url: https://app.posthog.com/signup
+                                - generic [ref=e1009]: Get started
+                              - generic [ref=e1010]:
+                                - img [ref=e1012]
+                                - paragraph [ref=e1014]:
+                                  - strong [ref=e1015]: "Hurry:"
+                                  - text: Tons of companies signed up
+                                  - button "today" [ref=e1016] [cursor=pointer]
+                                  - text: .
+                                  - text: Act now and get $0 off your first order.
+                    - paragraph [ref=e1017]
+    - region "Notifications (F8)":
+      - list [ref=e1028]:
+        - listitem [ref=e1029]:
+          - generic [ref=e1030]:
+            - generic [ref=e1031]: Legally-required cookie banner
+            - generic [ref=e1032]:
+              - paragraph [ref=e1033]: PostHog.com doesn't use third-party cookies, only a single in-house cookie.
+              - paragraph [ref=e1034]:
+                - text: No data is sent to a third party. (
+                - generic [ref=e1035]: Ursula von der Leyen
+                - text: would be so proud.)
+            - img "Ursula von der Leyen, President of the European Commission" [ref=e1038]
+          - button [ref=e1040] [cursor=pointer]:
+            - img [ref=e1041]
+  - status [ref=e1044]: Notification Legally-required cookie bannerPostHog.com doesn't use third-party cookies, only a single in-house cookie.No data is sent to a third party. (Ursula von der Leyen would be so proud.)Close
