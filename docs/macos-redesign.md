@@ -125,10 +125,10 @@ Initial implementation can enforce one window per route/app. Opening an already-
 - Closing a window plays the reverse animation before removing it from state
 
 ### Menu Bar
-- Top bar spanning full viewport width
-- Left side: Apple logo menu + focused app name + File/Edit/View style dropdowns
-- Right side: live clock (current time), Wi-Fi icon, battery icon (decorative)
-- Frosted glass treatment (`backdrop-filter: blur`)
+- Top bar spanning full viewport width, `28px` height
+- Left side: Apple logo SVG → focused app name (bold) → menu items (File, Edit, View, Window, Help) — each `13px`, hover `bg-white/10`
+- Right side (all `12.5px`, `white/85` opacity, left-to-right): Control center icon (4 rounded rects SVG) → Battery (24×12px rect, 78% fill visual, decorative) → Wi-Fi glyph → Date (`weekday short, month short, day numeric`) → Time (`hour numeric, minute 2-digit`, `tabular-nums`, updates every 1000ms)
+- Glass treatment: `.glass-menubar` utility; bottom edge `1px solid rgba(255,255,255,0.08)`
 
 ### Dock
 - Centered at bottom
@@ -139,10 +139,10 @@ Initial implementation can enforce one window per route/app. Opening an already-
 - Minimized windows remain represented in the dock and restore on click
 
 ### Window
-- Positioned center-right of desktop (leaving room for sidebar icons if present)
-- Title bar with: traffic light buttons + window title
-- Optional per-page toolbar below title bar (each app defines its own)
-- Drop shadow: `box-shadow: 0 22px 70px rgba(0,0,0,0.5)`
+- Default size: `760×520px`; centered on first open
+- Title bar with: traffic light buttons + centered window title (`13px font-medium`)
+- Optional per-page toolbar below title bar (`40px`, `glass-chrome`, border-bottom)
+- Drop shadow: `box-shadow: 0 22px 70px rgba(0,0,0,0.55)` + `inset 0 1px 0 rgba(255,255,255,0.06)`
 - Border radius: `12px`
 - Draggable and resizable through `react-rnd`
 - Window chrome color and frosted glass follow dark/light theme tokens
@@ -155,6 +155,8 @@ Initial implementation can enforce one window per route/app. Opening an already-
 - Green traffic light: maximize/restore
 - Green traffic light context menu or long-press/right-click: snap left, snap right, maximize, restore
 - Double-click title bar: maximize/restore
+
+**Traffic light group hover** (important UX detail): on hover over the traffic light *group container*, all three buttons simultaneously reveal glyphs — × (red), − (yellow), + (green) — in `rgba(0,0,0,0.55)` at 8px bold. Individual button hover is not used; the group state triggers all glyphs at once. This is the canonical macOS behavior.
 - Dragging a window near the left/right edge previews snap state; releasing snaps to half screen
 - Resize handles update `size`; restoring from maximized/snapped uses `previousPosition` and `previousSize`
 - Keyboard shortcuts can be added after base behavior: close focused window, minimize, cycle windows, snap left/right
@@ -223,7 +225,20 @@ Each icon represents a section. Icons use file-type metaphors:
 | `contact.msg` | Mail message | `/contact` |
 | `aden_guo_cv.pdf` | PDF document | `/cv` |
 
-Icon visual: small file-type SVG (16×20px document shape with folded corner), label beneath in `11px` system font, selected state with blue highlight box.
+Icon visual: `56×56px` SVG (file-type document shape with folded corner), label beneath in `11px` system font.
+
+**Interaction:**
+- Single click → **select** state: `rgba(10,132,255,0.28)` highlight box + `1px solid rgba(10,132,255,0.55)` border; label becomes a blue pill (`rgba(10,132,255,0.95)`)
+- Double click → open the app's window (same effect as clicking the dock item)
+- Click on empty desktop → deselects all
+
+**Icon SVG metaphors (finalized):**
+| Label | SVG style | Badge |
+|---|---|---|
+| `about_me.txt` | White document, folded corner, 4 grey content lines | Grey "TXT" (`#8E8E93`) |
+| `projects/` | Two-tone blue folder with tab flap (`#7CC2FF → #3A8DDB`) | — |
+| `contact.msg` | White document with blue envelope outline + flap | Blue "MSG" (`#0A84FF`) |
+| `aden_guo_cv.pdf` | White document, 4 content lines | Red "PDF" (`#FF453A`) |
 
 ---
 
@@ -285,6 +300,33 @@ On every page load, before the desktop is shown, a macOS-style boot screen plays
 - Commission/record a custom chime
 - Make the sound opt-in (click anywhere to start + play chime) — this also solves browser autoplay restrictions
 
+**Timing**: Progress bar fills linearly over `2400ms`. When progress > 85%, container opacity fades from 1 → 0 over `400ms`. Total visible ~`2800ms`. Progress bar dimensions: `176×4px`, track `rgba(255,255,255,0.15)`, fill `rgba(255,255,255,0.85)`.
+
 **Browser autoplay policy**: Most browsers block audio autoplay without a user gesture. Recommended approach: show a subtle "Click to enter" prompt over the boot screen, user click triggers both the audio and the boot animation.
 
 **Implementation**: `BootScreen.tsx` component, rendered in `layout.tsx` above everything else, uses `framer-motion` `AnimatePresence` to unmount after sequence completes. State lives in a `useBootSequence` hook. `sessionStorage` flag prevents replaying on tab refresh (optional — user decides).
+
+---
+
+## Design Handoff Reference
+
+`reference/design draft/design_handoff_macos_desktop_shell/` contains the finalized Phase 1 prototype (high-fidelity React mockup + README spec). Agents working on visual implementation tasks should treat it as the visual ground truth for:
+- All glass material values (exact RGBA opacities — these differ from earlier drafts)
+- Dock, menu bar, sidebar, window layout/sizing
+- Icon SVG designs (desktop shortcuts + dock icons)
+- Wallpaper gradient definitions and blob animations
+- Boot screen composition
+- Traffic light group hover behavior
+
+**What the mockup covers**: Phase 1 static shell + boot screen + home window open animation.
+
+**What is intentionally not in the mockup** (implement from docs, Phases 2–9):
+- Window dragging / resizing (`react-rnd`)
+- Snap preview grid + edge snapping
+- Minimize-to-dock animation
+- Green traffic light context menu
+- `simplex-noise` canvas wallpaper (CSS gradient is the fallback, not the final)
+- Projects / About / Contact / CV windows
+- Keyboard shortcuts
+- Dock right-click context menus
+- Multi-window z-order management

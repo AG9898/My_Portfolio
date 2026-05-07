@@ -1,7 +1,7 @@
 {
   "$schema": "./workboard.schema.json",
   "schema_version": "1.0.0",
-  "last_updated": "2026-05-06",
+  "last_updated": "2026-05-07",
   "tasks": [
     {
       "id": "V1_001",
@@ -32,7 +32,7 @@
     {
       "id": "V1_002",
       "title": "Reset global shell foundation",
-      "description": "Replace the old single-page portfolio foundation with desktop-safe App Router structure: system font stack, no-scroll viewport behavior, dark/light theme tokens, minimal global CSS, and route placeholders ready to render inside app windows. Preserve public/cv.pdf and avoid carrying forward the deprecated brutalist/Stitch UI.",
+      "description": "Replace the old single-page portfolio foundation with desktop-safe App Router structure: system font stack, no-scroll viewport behavior, dark/light theme tokens, minimal global CSS, and route placeholders ready to render inside app windows. Define all four glass utility classes (.glass, .glass-chrome, .glass-dock, .glass-menubar) in globals.css with the exact RGBA backgrounds and backdrop-filter stack from docs/styling.md. Configure Tailwind color tokens for desktop surfaces, text labels, accent, and traffic light classes. Preserve public/cv.pdf and avoid carrying forward the deprecated brutalist/Stitch UI.",
       "status": "todo",
       "priority": "critical",
       "group_id": "V1_DESKTOP",
@@ -41,7 +41,9 @@
       ],
       "blocked_by": [],
       "acceptance_criteria": [
-        "src/app/globals.css contains only resets, tokens, global motion rules, and shell-safe viewport behavior.",
+        "src/app/globals.css contains only resets, CSS variable tokens, glass utility classes, global motion rules, and shell-safe viewport behavior.",
+        "Glass utility classes .glass, .glass-chrome, .glass-dock, and .glass-menubar are defined in globals.css with backdrop-filter: blur(28px) saturate(180%) and the correct RGBA values from docs/styling.md — never reconstruct these inline.",
+        "tailwind.config.js maps bg-desktop, bg-window, bg-chrome, border-glass-edge, text-label-primary, text-label-secondary, text-accent, and traffic light color classes (bg-traffic-red, bg-traffic-yellow, bg-traffic-green) to CSS variables.",
         "src/app/layout.tsx is prepared to own the persistent desktop shell without unmounting across route changes.",
         "Home route no longer depends on the deprecated single-page portfolio layout.",
         "No Google Fonts or new Heroicons usage is introduced."
@@ -56,7 +58,8 @@
       "files": [
         "src/app/layout.tsx",
         "src/app/page.tsx",
-        "src/app/globals.css"
+        "src/app/globals.css",
+        "tailwind.config.js"
       ],
       "commands": [
         "npm run lint",
@@ -66,7 +69,7 @@
     {
       "id": "V1_003",
       "title": "Build static desktop shell",
-      "description": "Implement the persistent macOS-style shell with a wallpaper layer placeholder, top menu bar, bottom dock, and left desktop shortcut column mounted from the root layout. This task establishes shell composition and component boundaries without requiring full window state behavior yet.",
+      "description": "Implement the persistent macOS-style shell with a wallpaper layer placeholder, top menu bar, bottom dock, and left desktop shortcut column mounted from the root layout. This task establishes shell composition and component boundaries without requiring full window state behavior yet. Use the finalized visual specs in docs/styling.md and the design handoff reference (reference/design draft/design_handoff_macos_desktop_shell/) for all sizing, glass values, SVG icon designs, and interaction models. Desktop shortcuts are 56×56px SVGs with txt/folder/msg/pdf metaphors. Single click selects a shortcut; double click opens its window. Menu bar is 28px tall with live clock and right-side status icons. Dock icons have individual SVG designs per the design handoff README.",
       "status": "todo",
       "priority": "critical",
       "group_id": "V1_DESKTOP",
@@ -76,9 +79,12 @@
       "blocked_by": [],
       "acceptance_criteria": [
         "Desktop shell fills the viewport and prevents page-level scrolling on desktop.",
-        "Menu bar, dock, and shortcut column remain mounted while navigating between app routes.",
+        "Menu bar (28px), dock (bottom-3, glass-dock), and shortcut sidebar (88px column, 16px left, 48px top) remain mounted while navigating between app routes.",
+        "Desktop shortcut icons are 56×56px SVGs with txt/folder/msg/pdf metaphors matching docs/macos-redesign.md — not generic placeholder icons.",
+        "Single click on a shortcut applies the selected state (blue highlight box + label pill); double click opens the app window.",
+        "Menu bar right side shows control center icon, battery visual, Wi-Fi glyph, date, and live time (updates every 1000ms, tabular-nums).",
         "Shortcut and dock item metadata come from shared app metadata instead of duplicated labels and routes.",
-        "Shell styling uses Tailwind plus global tokens only where appropriate."
+        "Shell styling uses Tailwind plus glass utility classes only — no inline hex, no raw backdrop-filter."
       ],
       "docs": [
         "docs/ARCHITECTURE.md",
@@ -100,7 +106,7 @@
     {
       "id": "V1_004",
       "title": "Add wallpaper, boot screen, theme, and mobile fallback",
-      "description": "Complete the non-window shell experience by adding the animated simplex-noise canvas wallpaper, click-to-enter boot sequence, next-themes dark canonical/light inversion, and an intentional small-screen fallback instead of a broken desktop simulation. Boot audio must be custom, royalty-free, or omitted.",
+      "description": "Complete the non-window shell experience by adding the CSS gradient wallpaper with animated blobs, click-to-enter boot sequence, next-themes dark canonical/light inversion, and an intentional small-screen fallback instead of a broken desktop simulation. The wallpaper uses the four named CSS radial gradients from docs/styling.md (tahoe-dawn default) with two layered animated blob divs and a grain overlay — simplex-noise canvas is a separate post-V1 task (V1_013). Boot audio must be custom, royalty-free, or omitted.",
       "status": "todo",
       "priority": "high",
       "group_id": "V1_DESKTOP",
@@ -109,7 +115,9 @@
       ],
       "blocked_by": [],
       "acceptance_criteria": [
-        "Animated wallpaper renders behind all shell chrome without layout shift or blank canvas on desktop.",
+        "CSS gradient wallpaper (tahoe-dawn default) renders behind all shell chrome using the exact gradient values from docs/styling.md.",
+        "Two animated blob divs layer over the gradient using the keyframe specs from docs/styling.md (24s and 32s cycles); grain overlay is applied via SVG feTurbulence at opacity 0.06.",
+        "Boot screen: Apple logo SVG centered on black full-screen overlay; 176×4px progress bar fills over 2400ms; overlay fades out over 400ms when progress > 85%.",
         "Boot screen uses a user gesture for any audio path and does not use Apple-owned chime assets.",
         "Dark mode is the default visual target and light mode works through token inversion.",
         "Small screens show a deliberate fallback rather than cramped draggable windows."
@@ -174,6 +182,8 @@
       "blocked_by": [],
       "acceptance_criteria": [
         "Each open app renders inside a draggable and resizable window with stable chrome and traffic light controls.",
+        "Traffic light buttons reveal glyphs (×, −, +) simultaneously on group container hover — not per-button hover. This is the canonical macOS behavior per docs/macos-redesign.md.",
+        "Window default size is 760×520px; window shadow is 0 22px 70px rgba(0,0,0,0.55) per docs/styling.md.",
         "Window interactions update reducer state for focus, z-index, position, size, minimized, maximized, and snapped states.",
         "Maximize and snap preserve previous geometry for restore.",
         "Window content areas remain contained and do not create page-level scroll."
@@ -275,7 +285,8 @@
       "blocked_by": [],
       "acceptance_criteria": [
         "Windows animate open, close, minimize, and restore with macOS-style scale/fade motion.",
-        "Dock icons magnify on hover, show labels, and indicate open non-minimized apps.",
+        "Dock magnification uses the cosine falloff algorithm from docs/styling.md: dist radius 100px, base 56px, max 86px, lift -8px at peak. Exit transition is 220ms; framer-motion spring { stiffness: 600, damping: 35 }.",
+        "Dock icons show tooltip labels above icons on hover (within 30px) and indicate open non-minimized apps with a 4×4px dot.",
         "Inner app content uses a short page transition inside the window frame.",
         "Reduced-motion users receive functional transitions without disruptive motion."
       ],
@@ -410,6 +421,38 @@
         "npm run lint",
         "npm run build",
         "npx --yes ajv-cli validate -s docs/workboard.schema.json -d docs/workboard.json"
+      ]
+    }
+    ,{
+      "id": "V1_013",
+      "title": "Replace CSS gradient wallpaper with simplex-noise canvas",
+      "description": "Upgrade the wallpaper from the CSS gradient + blob animation (set in V1_004) to a Canvas element running a simplex-noise flow field animation, keeping the CSS gradient as the static fallback for SSR and no-JS environments. This is the final wallpaper spec from docs/macos-redesign.md. Add simplex-noise as a dependency.",
+      "status": "todo",
+      "priority": "medium",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_004"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Canvas element renders the simplex-noise flow field behind all shell chrome without layout shift or blank flash.",
+        "CSS gradient wallpaper class remains as the server-rendered fallback until the canvas is ready.",
+        "Flow field animation runs at acceptable performance on desktop (no jank, no excessive CPU).",
+        "Animation respects prefers-reduced-motion by stopping or slowing the particle movement.",
+        "simplex-noise is installed as a project dependency."
+      ],
+      "docs": [
+        "docs/macos-redesign.md",
+        "docs/styling.md"
+      ],
+      "files": [
+        "src/app/components/Desktop/",
+        "src/app/globals.css",
+        "package.json"
+      ],
+      "commands": [
+        "npm run lint",
+        "npm run build"
       ]
     }
   ]

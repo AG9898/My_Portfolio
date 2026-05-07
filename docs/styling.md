@@ -25,12 +25,14 @@ Reference this guide when working on any CSS or Tailwind styles. It defines the 
 
 macOS Tahoe replaces flat dark surfaces with translucent glass panels. Four named materials cover all chrome surfaces:
 
-| Class | Used for |
-|---|---|
-| `.glass` | Window panels, sheets, popovers |
-| `.glass-chrome` | Window title bars, toolbars |
-| `.glass-dock` | Dock background |
-| `.glass-menubar` | Menu bar (fully transparent in Tahoe) |
+| Class | Used for | Background (dark) | Blur |
+|---|---|---|---|
+| `.glass` | Window panels, sheets, popovers | `rgba(28,28,30,0.78)` | `blur(28px) saturate(180%)` |
+| `.glass-chrome` | Window title bars, toolbars | `rgba(44,44,46,0.72)` | `blur(28px) saturate(180%)` |
+| `.glass-dock` | Dock background | `rgba(255,255,255,0.14)` | `blur(28px) saturate(180%)` |
+| `.glass-menubar` | Menu bar | `rgba(20,20,22,0.45)` | `blur(28px) saturate(180%)` |
+
+All glass surfaces use the same blur stack: `backdrop-filter: blur(28px) saturate(180%)`. The inset top-edge highlight `inset 0 1px 0 rgba(255,255,255,N)` varies by surface weight (see shadow specs below).
 
 These are defined in `src/app/globals.css` as `@layer utilities`. Use the class — never reconstruct the `backdrop-filter` stack ad hoc.
 
@@ -101,6 +103,82 @@ SF Pro size reference (use Tailwind equivalents):
 | Body / content | 15px | 400 | `text-[15px]` |
 | Caption / label | 11px | 400 | `text-[11px]` |
 | Large title | 22px | 600 | `text-[22px] font-semibold` |
+
+---
+
+## Shadow specs
+
+| Surface | Shadow |
+|---|---|
+| Window | `0 22px 70px rgba(0,0,0,0.55)` + `inset 0 1px 0 rgba(255,255,255,0.06)` |
+| Dock | `inset 0 1px 0 rgba(255,255,255,0.35)`, `inset 0 -1px 0 rgba(0,0,0,0.2)`, `0 30px 80px rgba(0,0,0,0.5)` |
+
+Glass borders use `1px solid rgba(255,255,255,0.10)` for windows and `1px solid rgba(255,255,255,0.22)` for the dock.
+
+---
+
+## Wallpaper
+
+Four named CSS gradient variants provide the static (no-JS) wallpaper. The `tahoe-dawn` variant is the canonical default.
+
+| Name | Gradient stops | Character |
+|---|---|---|
+| `tahoe-dawn` | `#ff8a3c → #ff5b8a → #a15bff → #2b3bd6 → #0a0a18` at `120% 90% at 80% 10%` | Warm orange/pink/purple |
+| `tahoe-night` | `#1a3a8a → #5b2bd6 → #8a2bd6 → #1a1340 → #05050f` at `110% 80% at 30% 20%` | Deep blue/purple |
+| `sequoia` | `#0b3d2e → #0a2436 → #0a0e1a → #050608` at `130% 100% at 50% 0%` | Forest green/midnight |
+| `sonoma` | `#2e1a4a → #4a1e6a → #6a1e8a → #1a0a2a → #07050f` at `120% 90% at 50% 50%` | Magenta/violet |
+
+All variants use `radial-gradient(...)` with the fallback desktop bg `#0a0a0f`.
+
+**Animated blobs** layer on top of the gradient via CSS `@keyframes`:
+- Blob 1: `24s infinite ease-in-out`, translates `(0,0) → (40px,-30px)` + `scale(1.1)`, opacity `0.5`
+- Blob 2: `32s infinite ease-in-out`, translates `(0,0) → (-50px,40px)` + `scale(1.15)`, opacity `0.4`
+
+**Grain overlay**: SVG `feTurbulence` filter, opacity `0.06`, static — applied as a full-viewport pseudo-element.
+
+Future: Canvas + `simplex-noise` flow field replaces the CSS gradient as the animated layer; gradient stays as static fallback.
+
+---
+
+## Layout / sizing reference
+
+| Element | Spec |
+|---|---|
+| Menu bar height | `28px` |
+| Desktop sidebar column width | `88px` |
+| Desktop sidebar left offset | `16px` from viewport left |
+| Desktop sidebar top offset | `48px` (clears menu bar) |
+| Desktop icon gap | `12px` |
+| Desktop icon SVG size | `56×56px` |
+| Desktop icon label | `11px` system font, below icon |
+| Window default size | `760×520px` |
+| Window border radius | `12px` |
+| Window title bar height | `40px` |
+| Window toolbar height | `40px` |
+| Dock padding | `8px 12px` |
+| Dock border radius | `22px` |
+| Dock icon base size | `56px` |
+| Dock icon magnified max | `86px` |
+| Dock bottom offset | `12px` from viewport bottom |
+| Traffic light button diameter | `12px` |
+| Traffic light gap | `8px` |
+
+---
+
+## Dock magnification algorithm
+
+Applied via `useMotionValue` + `useTransform` in `Dock.tsx`. For each icon on `mousemove`:
+
+```ts
+const dist = Math.abs(mouseX - iconCenterX)
+if (dist < 100) {
+  const f = 1 - dist / 100
+  const eased = Math.cos((1 - f) * Math.PI / 2) // cosine falloff
+  size = 56 + (86 - 56) * eased
+  lift = -8 * eased // translateY upward at peak
+}
+// on mouseleave: 220ms transition back; spring { stiffness: 600, damping: 35 }
+```
 
 ---
 

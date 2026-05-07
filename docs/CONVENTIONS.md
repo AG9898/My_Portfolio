@@ -42,14 +42,20 @@ Normative guide for code in this portfolio. Read before writing new UI architect
 - Dark mode is canonical. Light mode should be implemented through token overrides.
 - Use frosted glass treatments for menu bar, dock, and window chrome.
 
+### App Router client boundary
+
+- Shell components that use state, effects, event handlers, or framer-motion must include `"use client"` at the top of the file. This applies to: `MenuBar`, `Dock`, `DockIcon`, `Window`, `TrafficLights`, `DesktopIcon`, `BootScreen`, and any component using `useWindowManager`.
+- Prefer pushing `"use client"` to leaf components so parent layouts remain server components where possible.
+- Never add `"use client"` to layout.tsx itself — mount client shell components as children instead.
+
 ### Interaction Patterns
 
 - Window state changes should go through deterministic reducer actions.
 - Opening an already-open app focuses and restores it.
 - Dragging and resizing use `react-rnd`.
-- Animations use `framer-motion`.
+- Animations use `framer-motion`. Use `AnimatePresence` for any component that needs an exit animation (window close, boot screen fade-out) — CSS transitions cannot animate unmounting.
 - Menu bar dropdowns use `@radix-ui/react-dropdown-menu`.
-- Icons use `lucide-react`.
+- **`lucide-react` is for UI chrome glyphs only** (status bar icons, toolbar buttons, decorative controls). Desktop shortcut icons and dock app icons use custom SVG artwork — see `reference/design draft/design_handoff_macos_desktop_shell/desktop.jsx` for the exact SVG designs. Never substitute a lucide icon for an app icon.
 
 ---
 
