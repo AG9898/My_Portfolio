@@ -939,7 +939,7 @@
       "id": "V1_011A",
       "title": "Accessibility and keyboard focus pass",
       "description": "Audit and fix keyboard and pointer focus states across all shell controls, menus, dock items, desktop shortcuts, and window traffic lights. All interactive elements must have visible focus rings and be keyboard operable.",
-      "status": "todo",
+      "status": "done",
       "priority": "medium",
       "group_id": "V1_DESKTOP",
       "depends_on": [

@@ -34,6 +34,21 @@ Not covered yet:
 - Unit tests for reducer behavior.
 - End-to-end interaction tests for window dragging, snapping, minimizing, and route focus.
 - Visual regression tests for desktop shell and mobile fallback.
+- Automated accessibility tests (axe-core or similar) for focus ring visibility, aria attributes, and keyboard operability.
+
+---
+
+## Accessibility Verification Checklist (V1_011A)
+
+Run manually when shell chrome changes:
+
+- [ ] Tab through Dock — each icon receives a visible focus ring before activation.
+- [ ] Tab through desktop shortcut column — each shortcut receives a visible focus ring.
+- [ ] Tab through menu bar — Apple menu, app name, File, Edit, View, Window, Help triggers all receive visible focus rings; Enter opens the menu; arrow keys navigate items; Escape closes.
+- [ ] Tab to theme toggle button — focus ring visible; Enter toggles theme.
+- [ ] Open a window; Tab to traffic lights — close, minimize, maximize each receive a visible outline ring.
+- [ ] Right-click (or keyboard activate) the green traffic light — snap context menu opens, first enabled item is focused; ArrowDown/Up navigates; Escape closes.
+- [ ] Confirm screen reader announces window title on focus (role="dialog" aria-modal="true" aria-label).
 
 ---
 

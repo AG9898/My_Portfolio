@@ -179,6 +179,7 @@ function AppWindow({
       }}
       onMouseDown={onFocus}
       role="dialog"
+      aria-modal="true"
       aria-label={title}
     >
       {/* Window chrome — traffic lights + title */}

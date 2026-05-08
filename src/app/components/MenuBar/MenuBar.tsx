@@ -33,7 +33,7 @@ function ControlCentreIcon() {
       fill="none"
       stroke="currentColor"
       strokeWidth="1.6"
-      aria-label="Control Centre"
+      aria-hidden="true"
     >
       <rect x="3" y="6" width="8" height="4" rx="2" />
       <circle cx="9" cy="8" r="1" fill="currentColor" />
@@ -50,7 +50,7 @@ function ControlCentreIcon() {
 // ─── Battery visual (24×12px rect, 78% fill, decorative) ────────────────────
 function BatteryIcon() {
   return (
-    <div className="flex items-center gap-0.5" aria-label="Battery">
+    <div className="flex items-center gap-0.5" aria-hidden="true">
       <div className="relative w-6 h-3 border rounded-[3px] opacity-80">
         <div
           className="absolute inset-0.5 rounded-[1px] bg-current"
@@ -70,7 +70,7 @@ function WifiIcon() {
       height="15"
       viewBox="0 0 24 24"
       fill="currentColor"
-      aria-label="Wi-Fi"
+      aria-hidden="true"
     >
       <path d="M12 18a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" />
       <path d="M12 13.5c-1.5 0-2.9.5-4 1.4l1.4 1.5c.7-.6 1.6-.9 2.6-.9s1.9.3 2.6.9l1.4-1.5c-1.1-.9-2.5-1.4-4-1.4z" />

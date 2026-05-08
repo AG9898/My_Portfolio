@@ -61,6 +61,17 @@ Normative guide for code in this portfolio. Read before writing new UI architect
 - Menu bar dropdowns use `@radix-ui/react-dropdown-menu`.
 - **`lucide-react` is for UI chrome glyphs only** (status bar icons, toolbar buttons, decorative controls). Desktop shortcut icons and dock app icons use custom SVG artwork — see `reference/design draft/design_handoff_macos_desktop_shell/desktop.jsx` for the exact SVG designs. Never substitute a lucide icon for an app icon.
 
+### Accessibility Patterns
+
+- All interactive icon-only controls (dock buttons, traffic lights, theme toggle) must have `aria-label` describing their action.
+- Purely decorative status icons in the menu bar (ControlCentre, Battery, Wi-Fi SVGs) must have `aria-hidden="true"`.
+- Focus rings use `focus-visible:` variants only — not plain `focus:` — to avoid showing rings on mouse click.
+  - Dock buttons and desktop shortcut buttons: `focus-visible:ring-2 focus-visible:ring-accent`.
+  - Traffic light buttons: `focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-white/70`.
+  - MenuBar dropdown triggers: `focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-1`.
+- App windows use `role="dialog" aria-modal="true" aria-label={title}`.
+- The green traffic light snap context menu uses `role="menu"` on the container and `role="menuitem"` on items. On open it auto-focuses the first enabled item and supports ArrowUp/ArrowDown navigation and Escape to close.
+
 ---
 
 ## Testing

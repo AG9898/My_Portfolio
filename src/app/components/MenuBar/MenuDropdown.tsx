@@ -47,7 +47,7 @@ export function MenuDropdown({ trigger, items, triggerClassName }: MenuDropdownP
             "cursor-default px-1.5 py-0.5 rounded text-[13px] text-label-primary " +
             "hover:bg-[var(--color-control-hover)] " +
             "data-[state=open]:bg-[var(--color-control-hover)] " +
-            "outline-none " +
+            "outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-1 " +
             (triggerClassName ?? "")
           }
         >

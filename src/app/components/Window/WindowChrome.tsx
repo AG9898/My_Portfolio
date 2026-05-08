@@ -70,19 +70,43 @@ export function WindowChrome({
   const [groupHovered, setGroupHovered] = useState(false);
   const [contextOpen, setContextOpen] = useState(false);
   const contextRef = useRef<HTMLDivElement>(null);
+  const firstMenuItemRef = useRef<HTMLButtonElement>(null);
 
   const isConstrained = isMaximized || snapped !== "none";
 
-  // Close context menu on outside click or Escape.
+  // Close context menu on outside click or Escape; arrow-key navigation within menu.
   useEffect(() => {
     if (!contextOpen) return;
+
+    // Focus first enabled menu item when menu opens.
+    firstMenuItemRef.current?.focus();
+
     function handleOutside(e: MouseEvent) {
       if (contextRef.current && !contextRef.current.contains(e.target as Node)) {
         setContextOpen(false);
       }
     }
     function handleKey(e: KeyboardEvent) {
-      if (e.key === "Escape") setContextOpen(false);
+      if (e.key === "Escape") {
+        setContextOpen(false);
+        return;
+      }
+      // Arrow navigation within the menu.
+      if ((e.key === "ArrowDown" || e.key === "ArrowUp") && contextRef.current) {
+        e.preventDefault();
+        const items = Array.from(
+          contextRef.current.querySelectorAll<HTMLButtonElement>("button:not([disabled])")
+        );
+        const current = document.activeElement as HTMLButtonElement;
+        const idx = items.indexOf(current);
+        if (e.key === "ArrowDown") {
+          const next = items[(idx + 1) % items.length];
+          next?.focus();
+        } else {
+          const prev = items[(idx - 1 + items.length) % items.length];
+          prev?.focus();
+        }
+      }
     }
     document.addEventListener("mousedown", handleOutside);
     document.addEventListener("keydown", handleKey);
@@ -138,6 +162,7 @@ export function WindowChrome({
             onClose();
           }}
           aria-label="Close window"
+          className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-white/70"
           style={{
             width: 12,
             height: 12,
@@ -169,6 +194,7 @@ export function WindowChrome({
             onMinimize();
           }}
           aria-label="Minimize window"
+          className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-white/70"
           style={{
             width: 12,
             height: 12,
@@ -199,7 +225,10 @@ export function WindowChrome({
             onClick={handleGreenClick}
             onContextMenu={handleGreenContextMenu}
             aria-label={isConstrained ? "Restore window" : "Maximize window"}
+            aria-haspopup="menu"
+            aria-expanded={contextOpen}
             title="Click to maximize/restore • Right-click for snap options"
+            className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-white/70"
             style={{
               width: 12,
               height: 12,
@@ -236,6 +265,8 @@ export function WindowChrome({
           {/* Snap / restore context menu */}
           {contextOpen && (
             <div
+              role="menu"
+              aria-label="Window snap options"
               style={{
                 position: "absolute",
                 top: 18,
@@ -279,9 +310,11 @@ export function WindowChrome({
                   action: () => { onRestore(); setContextOpen(false); },
                   disabled: !isConstrained,
                 },
-              ].map(({ label, icon, action, disabled }) => (
+              ].map(({ label, icon, action, disabled }, idx) => (
                 <button
                   key={label}
+                  role="menuitem"
+                  ref={idx === 0 ? firstMenuItemRef : undefined}
                   onClick={action}
                   disabled={disabled}
                   style={{

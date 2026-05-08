@@ -170,7 +170,7 @@ function DockItem({ app, mouseX, isOpen, onClick }: DockItemProps) {
         {app.label}
       </motion.span>
       <motion.button
-        className="relative flex items-center justify-center rounded-[18px] active:scale-95"
+        className="relative flex items-center justify-center rounded-[18px] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
         style={{
           width: size,
           height: size,
