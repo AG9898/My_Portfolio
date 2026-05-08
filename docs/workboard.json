@@ -30,361 +30,6 @@
       ]
     },
     {
-      "id": "V1_002",
-      "title": "Reset global shell foundation",
-      "description": "Replace the old single-page portfolio foundation with desktop-safe App Router structure: system font stack, no-scroll viewport behavior, dark/light theme tokens, minimal global CSS, and route placeholders ready to render inside app windows. Define all four glass utility classes (.glass, .glass-chrome, .glass-dock, .glass-menubar) in globals.css with the exact RGBA backgrounds and backdrop-filter stack from docs/styling.md. Configure Tailwind color tokens for desktop surfaces, text labels, accent, and traffic light classes. Preserve public/cv.pdf and avoid carrying forward the deprecated brutalist/Stitch UI.",
-      "status": "todo",
-      "priority": "critical",
-      "group_id": "V1_DESKTOP",
-      "depends_on": [
-        "V1_001"
-      ],
-      "blocked_by": [],
-      "acceptance_criteria": [
-        "src/app/globals.css contains only resets, CSS variable tokens, glass utility classes, global motion rules, and shell-safe viewport behavior.",
-        "Glass utility classes .glass, .glass-chrome, .glass-dock, and .glass-menubar are defined in globals.css with backdrop-filter: blur(28px) saturate(180%) and the correct RGBA values from docs/styling.md — never reconstruct these inline.",
-        "tailwind.config.js maps bg-desktop, bg-window, bg-chrome, border-glass-edge, text-label-primary, text-label-secondary, text-accent, and traffic light color classes (bg-traffic-red, bg-traffic-yellow, bg-traffic-green) to CSS variables.",
-        "src/app/layout.tsx is prepared to own the persistent desktop shell without unmounting across route changes.",
-        "Home route no longer depends on the deprecated single-page portfolio layout.",
-        "No Google Fonts or new Heroicons usage is introduced."
-      ],
-      "docs": [
-        "docs/ARCHITECTURE.md",
-        "docs/CONVENTIONS.md",
-        "docs/PRD.md",
-        "docs/macos-redesign.md",
-        "docs/styling.md"
-      ],
-      "files": [
-        "src/app/layout.tsx",
-        "src/app/page.tsx",
-        "src/app/globals.css",
-        "tailwind.config.js"
-      ],
-      "commands": [
-        "npm run lint",
-        "npm run build"
-      ]
-    },
-    {
-      "id": "V1_003",
-      "title": "Build static desktop shell",
-      "description": "Implement the persistent macOS-style shell with a wallpaper layer placeholder, top menu bar, bottom dock, and left desktop shortcut column mounted from the root layout. This task establishes shell composition and component boundaries without requiring full window state behavior yet. Use the finalized visual specs in docs/styling.md and the design handoff reference (reference/design draft/design_handoff_macos_desktop_shell/) for all sizing, glass values, SVG icon designs, and interaction models. Desktop shortcuts are 56×56px SVGs with txt/folder/msg/pdf metaphors. Single click selects a shortcut; double click opens its window. Menu bar is 28px tall with live clock and right-side status icons. Dock icons have individual SVG designs per the design handoff README.",
-      "status": "todo",
-      "priority": "critical",
-      "group_id": "V1_DESKTOP",
-      "depends_on": [
-        "V1_002"
-      ],
-      "blocked_by": [],
-      "acceptance_criteria": [
-        "Desktop shell fills the viewport and prevents page-level scrolling on desktop.",
-        "Menu bar (28px), dock (bottom-3, glass-dock), and shortcut sidebar (88px column, 16px left, 48px top) remain mounted while navigating between app routes.",
-        "Desktop shortcut icons are 56×56px SVGs with txt/folder/msg/pdf metaphors matching docs/macos-redesign.md — not generic placeholder icons.",
-        "Single click on a shortcut applies the selected state (blue highlight box + label pill); double click opens the app window.",
-        "Menu bar right side shows control center icon, battery visual, Wi-Fi glyph, date, and live time (updates every 1000ms, tabular-nums).",
-        "Shortcut and dock item metadata come from shared app metadata instead of duplicated labels and routes.",
-        "Shell styling uses Tailwind plus glass utility classes only — no inline hex, no raw backdrop-filter."
-      ],
-      "docs": [
-        "docs/ARCHITECTURE.md",
-        "docs/CONVENTIONS.md",
-        "docs/macos-redesign.md",
-        "docs/styling.md"
-      ],
-      "files": [
-        "src/app/layout.tsx",
-        "src/app/components/Desktop/",
-        "src/app/components/MenuBar/",
-        "src/app/components/Dock/"
-      ],
-      "commands": [
-        "npm run lint",
-        "npm run build"
-      ]
-    },
-    {
-      "id": "V1_004",
-      "title": "Add wallpaper, boot screen, theme, and mobile fallback",
-      "description": "Complete the non-window shell experience by adding the CSS gradient wallpaper with animated blobs, click-to-enter boot sequence, next-themes dark canonical/light inversion, and an intentional small-screen fallback instead of a broken desktop simulation. The wallpaper uses the four named CSS radial gradients from docs/styling.md (tahoe-dawn default) with two layered animated blob divs and a grain overlay — simplex-noise canvas is a separate post-V1 task (V1_013). Boot audio must be custom, royalty-free, or omitted.",
-      "status": "todo",
-      "priority": "high",
-      "group_id": "V1_DESKTOP",
-      "depends_on": [
-        "V1_003"
-      ],
-      "blocked_by": [],
-      "acceptance_criteria": [
-        "CSS gradient wallpaper (tahoe-dawn default) renders behind all shell chrome using the exact gradient values from docs/styling.md.",
-        "Two animated blob divs layer over the gradient using the keyframe specs from docs/styling.md (24s and 32s cycles); grain overlay is applied via SVG feTurbulence at opacity 0.06.",
-        "Boot screen: Apple logo SVG centered on black full-screen overlay; 176×4px progress bar fills over 2400ms; overlay fades out over 400ms when progress > 85%.",
-        "Boot screen uses a user gesture for any audio path and does not use Apple-owned chime assets.",
-        "Dark mode is the default visual target and light mode works through token inversion.",
-        "Small screens show a deliberate fallback rather than cramped draggable windows."
-      ],
-      "docs": [
-        "docs/ARCHITECTURE.md",
-        "docs/CONVENTIONS.md",
-        "docs/PRD.md",
-        "docs/macos-redesign.md",
-        "docs/styling.md"
-      ],
-      "files": [
-        "src/app/layout.tsx",
-        "src/app/globals.css",
-        "src/app/components/Desktop/"
-      ],
-      "commands": [
-        "npm run lint",
-        "npm run build"
-      ]
-    },
-    {
-      "id": "V1_005",
-      "title": "Implement window registry and reducer",
-      "description": "Create the typed app registry and deterministic window reducer that owns open windows, focused app, z-index ordering, geometry, minimized, maximized, snapped, and restore geometry. Enforce one window per app route and focus/restore an existing window instead of duplicating it.",
-      "status": "todo",
-      "priority": "critical",
-      "group_id": "V1_DESKTOP",
-      "depends_on": [
-        "V1_003"
-      ],
-      "blocked_by": [],
-      "acceptance_criteria": [
-        "Shared registry defines app IDs, routes, labels, titles, icons, default sizes, and default positions for Home, Projects, About, Contact, and CV.",
-        "Reducer actions cover open, focus, close, minimize, restore, maximize, snap left, snap right, drag, resize, and route synchronization inputs.",
-        "Opening an already-open app focuses and restores that window without creating a duplicate.",
-        "Closing a focused window selects the next highest z-index window or falls back to the desktop route."
-      ],
-      "docs": [
-        "docs/ARCHITECTURE.md",
-        "docs/CONVENTIONS.md",
-        "docs/macos-redesign.md"
-      ],
-      "files": [
-        "src/app/components/WindowManager/"
-      ],
-      "commands": [
-        "npm run lint",
-        "npm run build"
-      ]
-    },
-    {
-      "id": "V1_006",
-      "title": "Render draggable and resizable windows",
-      "description": "Render app windows from the window manager provider with macOS chrome, traffic light controls, focus-on-interaction behavior, react-rnd dragging and resizing, maximize/restore, and snap left/right support. Keep state transitions routed through the reducer.",
-      "status": "todo",
-      "priority": "critical",
-      "group_id": "V1_DESKTOP",
-      "depends_on": [
-        "V1_005"
-      ],
-      "blocked_by": [],
-      "acceptance_criteria": [
-        "Each open app renders inside a draggable and resizable window with stable chrome and traffic light controls.",
-        "Traffic light buttons reveal glyphs (×, −, +) simultaneously on group container hover — not per-button hover. This is the canonical macOS behavior per docs/macos-redesign.md.",
-        "Window default size is 760×520px; window shadow is 0 22px 70px rgba(0,0,0,0.55) per docs/styling.md.",
-        "Window interactions update reducer state for focus, z-index, position, size, minimized, maximized, and snapped states.",
-        "Maximize and snap preserve previous geometry for restore.",
-        "Window content areas remain contained and do not create page-level scroll."
-      ],
-      "docs": [
-        "docs/ARCHITECTURE.md",
-        "docs/CONVENTIONS.md",
-        "docs/macos-redesign.md",
-        "docs/styling.md"
-      ],
-      "files": [
-        "src/app/components/WindowManager/",
-        "src/app/components/Window/"
-      ],
-      "commands": [
-        "npm run lint",
-        "npm run build"
-      ]
-    },
-    {
-      "id": "V1_007",
-      "title": "Integrate routes with shortcut and dock navigation",
-      "description": "Wire Home, Projects, About, Contact, and CV routes into the shell so desktop shortcuts and dock items open, focus, or restore windows while the focused app updates the URL. Direct route entry should open the matching app window without unmounting the desktop shell.",
-      "status": "todo",
-      "priority": "critical",
-      "group_id": "V1_DESKTOP",
-      "depends_on": [
-        "V1_006"
-      ],
-      "blocked_by": [],
-      "acceptance_criteria": [
-        "Routes exist for /, /projects, /about, /contact, and /cv.",
-        "Desktop shortcuts and dock items open or restore the matching app window.",
-        "Clicking or focusing a window updates the URL to that app route.",
-        "Direct browser entry to an app route opens and focuses the corresponding window while keeping desktop chrome mounted."
-      ],
-      "docs": [
-        "docs/ARCHITECTURE.md",
-        "docs/PRD.md",
-        "docs/macos-redesign.md",
-        "docs/styling.md"
-      ],
-      "files": [
-        "src/app/page.tsx",
-        "src/app/projects/page.tsx",
-        "src/app/about/page.tsx",
-        "src/app/contact/page.tsx",
-        "src/app/cv/page.tsx",
-        "src/app/components/Desktop/",
-        "src/app/components/Dock/",
-        "src/app/components/WindowManager/"
-      ],
-      "commands": [
-        "npm run lint",
-        "npm run build"
-      ]
-    },
-    {
-      "id": "V1_008",
-      "title": "Add menu bar interactions",
-      "description": "Implement accessible macOS-style menu bar interactions with Radix dropdowns, focused app name, live clock, decorative status icons, theme toggle, and applicable window actions such as close, minimize, and restore. Keep menu actions disabled or hidden when no focused window can receive them.",
-      "status": "todo",
-      "priority": "medium",
-      "group_id": "V1_DESKTOP",
-      "depends_on": [
-        "V1_007"
-      ],
-      "blocked_by": [],
-      "acceptance_criteria": [
-        "Menu bar shows the focused app name and updates as focus changes.",
-        "Radix dropdown menus are keyboard accessible and visually match the frosted macOS shell.",
-        "Clock updates without hydration errors or excessive re-rendering.",
-        "Menu actions dispatch reducer actions only when a valid focused window exists."
-      ],
-      "docs": [
-        "docs/ARCHITECTURE.md",
-        "docs/CONVENTIONS.md",
-        "docs/macos-redesign.md",
-        "docs/styling.md"
-      ],
-      "files": [
-        "src/app/components/MenuBar/",
-        "src/app/components/WindowManager/"
-      ],
-      "commands": [
-        "npm run lint"
-      ]
-    },
-    {
-      "id": "V1_009",
-      "title": "Implement complete motion system",
-      "description": "Add the V1 framer-motion system for window open, close, minimize, restore, dock hover magnification, dock tooltips, boot reveal, and page transitions inside windows. Respect reduced-motion preferences and keep animation timing tolerant for manual/browser verification.",
-      "status": "todo",
-      "priority": "high",
-      "group_id": "V1_DESKTOP",
-      "depends_on": [
-        "V1_007"
-      ],
-      "blocked_by": [],
-      "acceptance_criteria": [
-        "Windows animate open, close, minimize, and restore with macOS-style scale/fade motion.",
-        "Dock magnification uses the cosine falloff algorithm from docs/styling.md: dist radius 100px, base 56px, max 86px, lift -8px at peak. Exit transition is 220ms; framer-motion spring { stiffness: 600, damping: 35 }.",
-        "Dock icons show tooltip labels above icons on hover (within 30px) and indicate open non-minimized apps with a 4×4px dot.",
-        "Inner app content uses a short page transition inside the window frame.",
-        "Reduced-motion users receive functional transitions without disruptive motion."
-      ],
-      "docs": [
-        "docs/CONVENTIONS.md",
-        "docs/TESTING.md",
-        "docs/macos-redesign.md",
-        "docs/styling.md"
-      ],
-      "files": [
-        "src/app/components/Dock/",
-        "src/app/components/Window/",
-        "src/app/components/WindowManager/",
-        "src/app/globals.css"
-      ],
-      "commands": [
-        "npm run lint",
-        "npm run build"
-      ]
-    },
-    {
-      "id": "V1_010",
-      "title": "Build app-specific toolbars and first-pass content",
-      "description": "Fill Home, Projects, About, Contact, and CV windows with redesign-native first-pass content and per-app metaphors: Notes or TextEdit for Home/About, Finder for Projects, Mail for Contact, and Preview for CV. Preserve public/cv.pdf and keep content maintainable without backend infrastructure.",
-      "status": "todo",
-      "priority": "high",
-      "group_id": "V1_DESKTOP",
-      "depends_on": [
-        "V1_007"
-      ],
-      "blocked_by": [],
-      "acceptance_criteria": [
-        "Each route renders useful first-pass portfolio content inside its app window rather than placeholder-only UI.",
-        "Projects content is scannable in a Finder-style view with project names, descriptions, links or metadata as available.",
-        "Contact content presents a Mail-style compose metaphor with practical contact paths and no backend dependency.",
-        "CV window exposes public/cv.pdf through a Preview-style experience."
-      ],
-      "docs": [
-        "docs/PRD.md",
-        "docs/macos-redesign.md",
-        "docs/styling.md"
-      ],
-      "files": [
-        "src/app/page.tsx",
-        "src/app/projects/page.tsx",
-        "src/app/about/page.tsx",
-        "src/app/contact/page.tsx",
-        "src/app/cv/page.tsx",
-        "src/app/components/Window/",
-        "public/cv.pdf"
-      ],
-      "commands": [
-        "npm run lint",
-        "npm run build"
-      ]
-    },
-    {
-      "id": "V1_011",
-      "title": "Polish responsive, accessibility, and interaction details",
-      "description": "Perform the V1 polish pass across the shell, windows, shortcuts, dock, menu bar, app content, mobile fallback, keyboard/focus behavior, contrast, text overflow, and edge-case window state transitions. Keep fixes focused on shipping the desktop imitation cleanly.",
-      "status": "todo",
-      "priority": "medium",
-      "group_id": "V1_DESKTOP",
-      "depends_on": [
-        "V1_008",
-        "V1_009",
-        "V1_010"
-      ],
-      "blocked_by": [],
-      "acceptance_criteria": [
-        "Keyboard and pointer focus states are visible and coherent for shell controls, menus, dock items, shortcuts, and window controls.",
-        "Text does not overflow or overlap in menu bar, dock labels, shortcut labels, title bars, toolbars, or app content at supported desktop sizes.",
-        "Window close, minimize, restore, maximize, snap, and direct route entry behave consistently after repeated interactions.",
-        "Mobile fallback is intentional and not mixed with broken desktop controls."
-      ],
-      "docs": [
-        "docs/ARCHITECTURE.md",
-        "docs/CONVENTIONS.md",
-        "docs/PRD.md",
-        "docs/TESTING.md",
-        "docs/macos-redesign.md",
-        "docs/styling.md"
-      ],
-      "files": [
-        "src/app/components/",
-        "src/app/globals.css",
-        "src/app/page.tsx",
-        "src/app/projects/page.tsx",
-        "src/app/about/page.tsx",
-        "src/app/contact/page.tsx",
-        "src/app/cv/page.tsx"
-      ],
-      "commands": [
-        "npm run lint",
-        "npm run build"
-      ]
-    },
-    {
       "id": "V1_012",
       "title": "Run final V1 verification and docs sync",
       "description": "Complete the V1 closeout by running lint and production build, manually verifying the core desktop workflows in a browser, and updating architecture, conventions, testing, or agent guidance only if implementation revealed durable patterns or constraints. Do not deploy or publish production changes as part of this task.",
@@ -392,7 +37,7 @@
       "priority": "high",
       "group_id": "V1_DESKTOP",
       "depends_on": [
-        "V1_011"
+        "V1_011C"
       ],
       "blocked_by": [],
       "acceptance_criteria": [
@@ -422,8 +67,8 @@
         "npm run build",
         "npx --yes ajv-cli validate -s docs/workboard.schema.json -d docs/workboard.json"
       ]
-    }
-    ,{
+    },
+    {
       "id": "V1_013",
       "title": "Replace CSS gradient wallpaper with simplex-noise canvas",
       "description": "Upgrade the wallpaper from the CSS gradient + blob animation (set in V1_004) to a Canvas element running a simplex-noise flow field animation, keeping the CSS gradient as the static fallback for SSR and no-JS environments. This is the final wallpaper spec from docs/macos-redesign.md. Add simplex-noise as a dependency.",
@@ -431,7 +76,7 @@
       "priority": "medium",
       "group_id": "V1_DESKTOP",
       "depends_on": [
-        "V1_004"
+        "V1_004A"
       ],
       "blocked_by": [],
       "acceptance_criteria": [
@@ -449,6 +94,931 @@
         "src/app/components/Desktop/",
         "src/app/globals.css",
         "package.json"
+      ],
+      "commands": [
+        "npm run lint",
+        "npm run build"
+      ]
+    },
+    {
+      "id": "V1_002A",
+      "title": "Set up globals.css resets, viewport, and CSS variable tokens",
+      "description": "Replace globals.css content with only: CSS resets, no-scroll viewport rules (html, body, #__next at 100vw/100vh, overflow hidden), and all desktop CSS variable tokens (--bg-desktop, --bg-window, --bg-chrome, --border-glass-edge, --text-label-primary, --text-label-secondary, --text-accent, --traffic-red, --traffic-yellow, --traffic-green). Token values from docs/styling.md. Dark mode canonical; light mode inverts via [data-theme=\"light\"].",
+      "status": "done",
+      "priority": "critical",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_001"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "globals.css contains only resets, viewport rules, and CSS variable token declarations — no component styles.",
+        "All desktop surface, text, border, and traffic-light variables are defined for the default (dark) theme.",
+        "[data-theme=\"light\"] block inverts the canonical dark values as specified in docs/styling.md.",
+        "No Google Fonts imports or Heroicons references are present."
+      ],
+      "docs": [
+        "docs/styling.md",
+        "docs/macos-redesign.md"
+      ],
+      "files": [
+        "src/app/globals.css"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V1_002B",
+      "title": "Add glass utility classes to globals.css",
+      "description": "Append the four glass utility classes (.glass, .glass-chrome, .glass-dock, .glass-menubar) to globals.css using the exact RGBA backgrounds and backdrop-filter stack from docs/styling.md. These classes must never be reconstructed inline in components.",
+      "status": "done",
+      "priority": "critical",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_002A"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        ".glass, .glass-chrome, .glass-dock, and .glass-menubar are defined in globals.css.",
+        "Each class uses backdrop-filter: blur(28px) saturate(180%) and the RGBA background value from docs/styling.md.",
+        "No other component styles are added to globals.css in this task."
+      ],
+      "docs": [
+        "docs/styling.md"
+      ],
+      "files": [
+        "src/app/globals.css"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V1_002C",
+      "title": "Configure Tailwind color tokens",
+      "description": "Update tailwind.config.js to map all desktop color tokens to CSS variables: bg-desktop, bg-window, bg-chrome, border-glass-edge, text-label-primary, text-label-secondary, text-accent, bg-traffic-red, bg-traffic-yellow, bg-traffic-green.",
+      "status": "done",
+      "priority": "critical",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_002A"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "tailwind.config.js maps bg-desktop, bg-window, bg-chrome, border-glass-edge, text-label-primary, text-label-secondary, text-accent, bg-traffic-red, bg-traffic-yellow, bg-traffic-green to their corresponding CSS variables.",
+        "Build succeeds with no Tailwind config errors."
+      ],
+      "docs": [
+        "docs/styling.md",
+        "docs/CONVENTIONS.md"
+      ],
+      "files": [
+        "tailwind.config.js"
+      ],
+      "commands": [
+        "npm run lint",
+        "npm run build"
+      ]
+    },
+    {
+      "id": "V1_002D",
+      "title": "Prepare layout.tsx for persistent desktop shell",
+      "description": "Replace the old single-page portfolio layout in src/app/layout.tsx with a shell-safe structure: system font stack (-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif), no-scroll viewport, next-themes ThemeProvider wrapping, and a root div ready to hold persistent shell components without unmounting across route changes. Remove any deprecated brutalist/Stitch layout references. Preserve public/cv.pdf.",
+      "status": "done",
+      "priority": "critical",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_002B",
+        "V1_002C"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "layout.tsx uses the macOS system font stack with no Google Fonts.",
+        "Root div prevents page-level scrolling.",
+        "ThemeProvider from next-themes wraps children.",
+        "No deprecated brutalist or Stitch layout code remains.",
+        "Build succeeds and home route renders without errors."
+      ],
+      "docs": [
+        "docs/ARCHITECTURE.md",
+        "docs/macos-redesign.md"
+      ],
+      "files": [
+        "src/app/layout.tsx",
+        "src/app/page.tsx"
+      ],
+      "commands": [
+        "npm run lint",
+        "npm run build"
+      ]
+    },
+    {
+      "id": "V1_003A",
+      "title": "Build static MenuBar component",
+      "description": "Create src/app/components/MenuBar/MenuBar.tsx as a static 28px-tall menu bar using .glass-menubar. Right side shows: control center icon, battery visual, Wi-Fi glyph, date, and a live clock (updates every 1000ms, tabular-nums font variant). Left side shows Apple logo and static app name placeholder. No dropdown interactivity yet — that is V1_008A.",
+      "status": "done",
+      "priority": "critical",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_002D"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "MenuBar renders at 28px height with .glass-menubar styling.",
+        "Live clock updates every 1000ms without hydration errors.",
+        "Right-side status icons (control center, battery, Wi-Fi, date, clock) are present using lucide-react icons or inline SVG.",
+        "No Heroicons usage introduced."
+      ],
+      "docs": [
+        "docs/macos-redesign.md",
+        "docs/styling.md"
+      ],
+      "files": [
+        "src/app/components/MenuBar/MenuBar.tsx"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V1_003B",
+      "title": "Build static Dock component with SVG icons",
+      "description": "Create src/app/components/Dock/Dock.tsx as a static bottom dock using .glass-dock. Dock icons are 56px base size with individual SVG designs per the design handoff reference (reference/design draft/design_handoff_macos_desktop_shell/). Apps: Home, Projects, About, Contact, CV. No magnification yet — that is V1_009B. Create src/app/components/appMetadata.ts with shared app ID, route, label, and icon for all five apps.",
+      "status": "done",
+      "priority": "critical",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_002D"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Dock renders at the bottom of the viewport using .glass-dock.",
+        "Each dock icon uses its SVG design from the design handoff — not generic placeholder icons.",
+        "Shared appMetadata.ts exports app ID, route, label, and icon for all five apps.",
+        "No magnification or animation present yet."
+      ],
+      "docs": [
+        "docs/macos-redesign.md",
+        "docs/styling.md"
+      ],
+      "files": [
+        "src/app/components/Dock/Dock.tsx",
+        "src/app/components/appMetadata.ts"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V1_003C",
+      "title": "Build desktop shortcuts sidebar",
+      "description": "Create src/app/components/Desktop/DesktopShortcuts.tsx as an 88px-wide left sidebar column (16px left, 48px top padding) with 56x56px SVG shortcut icons. Icon metaphors: txt for Home, folder for Projects, person for About, msg for Contact, pdf for CV — matching docs/macos-redesign.md. Single click applies selected state (blue highlight box + label pill). Double click will trigger open (wired in V1_007B). Use shared appMetadata for labels.",
+      "status": "done",
+      "priority": "critical",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_002D"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Shortcut column is 88px wide, positioned 16px from left, 48px from top.",
+        "Icons are 56x56px SVGs with txt/folder/person/msg/pdf metaphors.",
+        "Single click applies selected state with blue highlight box and label pill.",
+        "Shared appMetadata is used for labels and routes — no duplicated labels.",
+        "No Heroicons usage introduced."
+      ],
+      "docs": [
+        "docs/macos-redesign.md",
+        "docs/styling.md"
+      ],
+      "files": [
+        "src/app/components/Desktop/DesktopShortcuts.tsx"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V1_003D",
+      "title": "Wire static shell into layout.tsx",
+      "description": "Mount MenuBar, Dock, and DesktopShortcuts persistently in layout.tsx so they remain visible across all route changes. Add a wallpaper placeholder div (bg-desktop fill). Children (page routes) render in the remaining desktop area between menu bar and dock.",
+      "status": "todo",
+      "priority": "critical",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_003A",
+        "V1_003B",
+        "V1_003C"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "MenuBar, Dock, and DesktopShortcuts are mounted in layout.tsx and stay visible across navigation.",
+        "Wallpaper placeholder div fills the viewport behind shell chrome.",
+        "Route children render in the desktop area without overlapping menu bar or dock.",
+        "Build succeeds."
+      ],
+      "docs": [
+        "docs/ARCHITECTURE.md",
+        "docs/macos-redesign.md"
+      ],
+      "files": [
+        "src/app/layout.tsx"
+      ],
+      "commands": [
+        "npm run lint",
+        "npm run build"
+      ]
+    },
+    {
+      "id": "V1_004A",
+      "title": "CSS gradient wallpaper with animated blobs and grain",
+      "description": "Replace the wallpaper placeholder with the tahoe-dawn CSS radial gradient wallpaper from docs/styling.md. Add two animated blob divs layered over the gradient using the keyframe specs from docs/styling.md (24s and 32s animation cycles). Apply grain overlay via SVG feTurbulence at opacity 0.06.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_003D"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Tahoe-dawn CSS gradient renders behind all shell chrome using the exact gradient values from docs/styling.md.",
+        "Two animated blob divs animate on 24s and 32s cycles per the keyframe specs in docs/styling.md.",
+        "Grain overlay uses SVG feTurbulence at opacity 0.06."
+      ],
+      "docs": [
+        "docs/macos-redesign.md",
+        "docs/styling.md"
+      ],
+      "files": [
+        "src/app/globals.css",
+        "src/app/components/Desktop/Wallpaper.tsx"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V1_004B",
+      "title": "Boot sequence component",
+      "description": "Create a BootScreen component that renders: Apple logo SVG centered on a full-screen black overlay, a 176x4px progress bar that fills over 2400ms, and overlay fade-out over 400ms when progress > 85%. Must not use Apple-owned chime audio assets. Any audio must require a user gesture.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_004A"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Apple logo SVG centered on full-screen black overlay.",
+        "176x4px progress bar fills to 100% over 2400ms.",
+        "Overlay fades out over 400ms when progress exceeds 85%.",
+        "No Apple-owned audio assets used; any audio path requires a user gesture."
+      ],
+      "docs": [
+        "docs/macos-redesign.md",
+        "docs/styling.md"
+      ],
+      "files": [
+        "src/app/components/Desktop/BootScreen.tsx",
+        "src/app/layout.tsx"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V1_004C",
+      "title": "Dark/light theme toggle and mobile fallback",
+      "description": "Wire next-themes so dark mode is the default and light mode inverts tokens. Add a theme toggle control to the menu bar or shell chrome. Implement a deliberate mobile fallback screen (not broken desktop UI) that renders for small viewports instead of the desktop shell.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_003D"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Dark mode is the default canonical theme.",
+        "Light mode renders through token inversion with no hardcoded color overrides.",
+        "Small screens show a deliberate, intentional fallback component — not cramped draggable windows.",
+        "Build succeeds."
+      ],
+      "docs": [
+        "docs/macos-redesign.md",
+        "docs/PRD.md"
+      ],
+      "files": [
+        "src/app/layout.tsx",
+        "src/app/components/MenuBar/MenuBar.tsx",
+        "src/app/components/Desktop/MobileFallback.tsx"
+      ],
+      "commands": [
+        "npm run lint",
+        "npm run build"
+      ]
+    },
+    {
+      "id": "V1_005A",
+      "title": "Define shared app registry",
+      "description": "Extend src/app/components/appMetadata.ts (created in V1_003B) into a full typed app registry. Each entry defines: id, route, label, title, icon, defaultSize ({width, height}), and defaultPosition ({x, y}) for Home, Projects, About, Contact, and CV apps.",
+      "status": "todo",
+      "priority": "critical",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_003B"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "AppMetadata type and APPS registry export typed entries for all five apps.",
+        "Each entry includes id, route, label, title, icon reference, defaultSize, and defaultPosition.",
+        "No window state or reducer logic is included in this file."
+      ],
+      "docs": [
+        "docs/ARCHITECTURE.md",
+        "docs/CONVENTIONS.md"
+      ],
+      "files": [
+        "src/app/components/appMetadata.ts"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V1_005B",
+      "title": "Implement window state reducer",
+      "description": "Create src/app/components/WindowManager/windowReducer.ts with a typed window state shape and deterministic reducer. State shape includes: openWindows array (id, route, geometry, minimized, maximized, snapped, restoreGeometry), focusedId, zIndexMap. Reducer actions: open, focus, close, minimize, restore, maximize, snapLeft, snapRight, drag, resize, syncRoute. Opening an already-open app focuses and restores that window without duplicating. Closing the focused window selects the next highest z-index window or falls back to null.",
+      "status": "todo",
+      "priority": "critical",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_005A"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "WindowState and WindowAction types are exported.",
+        "Reducer handles all 11 action types deterministically.",
+        "Opening an already-open app ID focuses and restores the existing window.",
+        "Closing the focused window selects next-highest z-index or null.",
+        "No side effects or React hooks in this file."
+      ],
+      "docs": [
+        "docs/ARCHITECTURE.md",
+        "docs/CONVENTIONS.md"
+      ],
+      "files": [
+        "src/app/components/WindowManager/windowReducer.ts"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V1_006A",
+      "title": "WindowManager provider and basic window rendering",
+      "description": "Create WindowManagerProvider (context + useReducer with windowReducer) and a WindowRenderer that maps open windows to AppWindow shell divs with react-rnd for drag and resize. Windows render above the wallpaper and below menu bar/dock. Focus on click updates zIndex and focusedId via reducer.",
+      "status": "todo",
+      "priority": "critical",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_005B"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "WindowManagerContext provides dispatch and state to the component tree.",
+        "WindowRenderer renders one AppWindow shell per open window entry.",
+        "react-rnd powers drag and resize and dispatches drag/resize actions to the reducer.",
+        "Clicking a window dispatches a focus action and brings it to front via z-index.",
+        "Build succeeds."
+      ],
+      "docs": [
+        "docs/ARCHITECTURE.md",
+        "docs/CONVENTIONS.md"
+      ],
+      "files": [
+        "src/app/components/WindowManager/WindowManagerProvider.tsx",
+        "src/app/components/WindowManager/WindowRenderer.tsx"
+      ],
+      "commands": [
+        "npm run lint",
+        "npm run build"
+      ]
+    },
+    {
+      "id": "V1_006B",
+      "title": "Window chrome and traffic light controls",
+      "description": "Implement window chrome with title bar and traffic light controls. Traffic light buttons (close, minimize, maximize) reveal x, -, + glyphs simultaneously on group container hover — not per-button hover. This is the canonical macOS behavior. Window shadow is 0 22px 70px rgba(0,0,0,0.55). Default window size is 760x520px. Use .glass-chrome for the title bar.",
+      "status": "todo",
+      "priority": "critical",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_006A"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Traffic light glyphs (x, -, +) appear simultaneously on title bar group hover, not per-button.",
+        "Window shadow is 0 22px 70px rgba(0,0,0,0.55).",
+        "Title bar uses .glass-chrome and shows the app title.",
+        "Default window size is 760x520px via defaultSize in app registry."
+      ],
+      "docs": [
+        "docs/macos-redesign.md",
+        "docs/styling.md"
+      ],
+      "files": [
+        "src/app/components/Window/WindowChrome.tsx"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V1_006C",
+      "title": "Maximize, snap, and restore geometry",
+      "description": "Wire maximize, snap-left, snap-right, and restore actions through the reducer so traffic light and future menu bar controls update geometry correctly. Maximize and snap must save restoreGeometry before changing window bounds so restore can return to the previous position/size.",
+      "status": "todo",
+      "priority": "critical",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_006B"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Maximize fills the desktop area (below menu bar, above dock); restore returns to previous geometry.",
+        "Snap-left fills the left half of the desktop; snap-right fills the right half.",
+        "restoreGeometry is saved before any maximize or snap action.",
+        "All geometry changes go through reducer actions — no local state for window bounds."
+      ],
+      "docs": [
+        "docs/macos-redesign.md",
+        "docs/CONVENTIONS.md"
+      ],
+      "files": [
+        "src/app/components/Window/WindowChrome.tsx",
+        "src/app/components/WindowManager/WindowRenderer.tsx"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V1_007A",
+      "title": "Create route files for all five apps",
+      "description": "Create the five Next.js App Router page files: src/app/page.tsx (Home), src/app/projects/page.tsx, src/app/about/page.tsx, src/app/contact/page.tsx, src/app/cv/page.tsx. Each page exports a minimal component with the app name as a placeholder — real content comes in V1_010A–D. Pages must not render any desktop shell chrome (that lives in layout.tsx).",
+      "status": "todo",
+      "priority": "critical",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_002D"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "All five route files exist and export a default React component.",
+        "Each component is a minimal placeholder — no desktop chrome.",
+        "Build succeeds with no missing route errors."
+      ],
+      "docs": [
+        "docs/ARCHITECTURE.md"
+      ],
+      "files": [
+        "src/app/page.tsx",
+        "src/app/projects/page.tsx",
+        "src/app/about/page.tsx",
+        "src/app/contact/page.tsx",
+        "src/app/cv/page.tsx"
+      ],
+      "commands": [
+        "npm run lint",
+        "npm run build"
+      ]
+    },
+    {
+      "id": "V1_007B",
+      "title": "Wire dock and shortcuts to open/focus windows",
+      "description": "Connect DesktopShortcuts and Dock to the WindowManager so double-clicking a shortcut and clicking a dock icon dispatches the open action (or focus if already open). Mount WindowManagerProvider and WindowRenderer in layout.tsx.",
+      "status": "todo",
+      "priority": "critical",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_006A",
+        "V1_003C",
+        "V1_003B",
+        "V1_007A"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Double-clicking a desktop shortcut opens the matching app window.",
+        "Clicking a dock icon opens or focuses/restores the matching app window.",
+        "Opening an already-open app does not create a duplicate window.",
+        "WindowManagerProvider and WindowRenderer are mounted in layout.tsx."
+      ],
+      "docs": [
+        "docs/ARCHITECTURE.md",
+        "docs/macos-redesign.md"
+      ],
+      "files": [
+        "src/app/layout.tsx",
+        "src/app/components/Desktop/DesktopShortcuts.tsx",
+        "src/app/components/Dock/Dock.tsx"
+      ],
+      "commands": [
+        "npm run lint",
+        "npm run build"
+      ]
+    },
+    {
+      "id": "V1_007C",
+      "title": "URL sync: focused window updates the URL",
+      "description": "When a window is focused, push its route to the browser URL using Next.js router. When a window is closed and another becomes focused, the URL updates to that window's route. When no window is focused, the URL may remain on the last route.",
+      "status": "todo",
+      "priority": "critical",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_007B"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Focusing a window updates the browser URL to that window's route.",
+        "URL updates do not unmount or re-mount the desktop shell.",
+        "Closing the focused window and focusing another updates the URL correctly."
+      ],
+      "docs": [
+        "docs/ARCHITECTURE.md"
+      ],
+      "files": [
+        "src/app/components/WindowManager/WindowManagerProvider.tsx"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V1_007D",
+      "title": "Direct route entry opens the matching app window",
+      "description": "When the user navigates directly to /projects, /about, /contact, or /cv in the browser, the desktop shell mounts and the matching app window opens automatically. The URL on load triggers a syncRoute action in the reducer.",
+      "status": "todo",
+      "priority": "critical",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_007C"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Direct browser entry to any app route opens that app's window with the desktop shell fully mounted.",
+        "No duplicate windows are created on route hydration.",
+        "Build succeeds."
+      ],
+      "docs": [
+        "docs/ARCHITECTURE.md",
+        "docs/PRD.md"
+      ],
+      "files": [
+        "src/app/components/WindowManager/WindowManagerProvider.tsx",
+        "src/app/layout.tsx"
+      ],
+      "commands": [
+        "npm run lint",
+        "npm run build"
+      ]
+    },
+    {
+      "id": "V1_008A",
+      "title": "Radix dropdown menus and focused app name in menu bar",
+      "description": "Replace the static MenuBar app-name placeholder with Radix UI dropdown menus (Apple menu, focused-app menu). The focused app name updates in the menu bar as window focus changes. Menus are keyboard accessible and styled with .glass-chrome to match the frosted shell.",
+      "status": "todo",
+      "priority": "medium",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_007B"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Apple menu and focused-app dropdown menus open via Radix DropdownMenu.",
+        "Focused app name in menu bar updates when window focus changes.",
+        "Menus are keyboard accessible (arrow keys, Enter, Escape).",
+        "Menu popover uses .glass-chrome styling."
+      ],
+      "docs": [
+        "docs/macos-redesign.md",
+        "docs/CONVENTIONS.md"
+      ],
+      "files": [
+        "src/app/components/MenuBar/MenuBar.tsx"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V1_008B",
+      "title": "Theme toggle and window actions in menu bar",
+      "description": "Add menu bar items for: theme toggle (dark/light), and window actions (close, minimize, restore) that dispatch reducer actions. Window actions are disabled or hidden when no focused window can receive them.",
+      "status": "todo",
+      "priority": "medium",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_008A"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Theme toggle in menu bar switches between dark and light modes.",
+        "Window menu contains close, minimize, and restore items.",
+        "Window actions dispatch correct reducer actions.",
+        "Window actions are disabled when no focused window exists."
+      ],
+      "docs": [
+        "docs/macos-redesign.md"
+      ],
+      "files": [
+        "src/app/components/MenuBar/MenuBar.tsx"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V1_009A",
+      "title": "Window open/close/minimize/restore animations",
+      "description": "Wrap AppWindow renders in framer-motion AnimatePresence for open/close scale+fade. Add minimize animation (scale down toward dock, fade) and restore animation. All animations must respect prefers-reduced-motion.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_007B"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Windows animate open and close with macOS-style scale/opacity motion.",
+        "Minimize and restore use a scale+fade transition.",
+        "prefers-reduced-motion disables disruptive motion while keeping functional transitions."
+      ],
+      "docs": [
+        "docs/macos-redesign.md",
+        "docs/styling.md",
+        "docs/CONVENTIONS.md"
+      ],
+      "files": [
+        "src/app/components/Window/WindowChrome.tsx",
+        "src/app/components/WindowManager/WindowRenderer.tsx"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V1_009B",
+      "title": "Dock magnification, tooltips, and open indicators",
+      "description": "Add framer-motion dock magnification using the cosine falloff algorithm from docs/styling.md: dist radius 100px, base 56px, max 86px, lift -8px at peak. Exit transition is 220ms; spring { stiffness: 600, damping: 35 }. Show tooltip labels above dock icons on hover (within 30px). Show a 4x4px dot below open non-minimized app icons.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_007B"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Dock magnification uses cosine falloff: 100px radius, 56px base, 86px max, -8px lift at peak.",
+        "Exit transition is 220ms with spring { stiffness: 600, damping: 35 }.",
+        "Tooltip labels appear above icons when pointer is within 30px.",
+        "4x4px dot appears below dock icons for open non-minimized app windows."
+      ],
+      "docs": [
+        "docs/macos-redesign.md",
+        "docs/styling.md"
+      ],
+      "files": [
+        "src/app/components/Dock/Dock.tsx"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V1_009C",
+      "title": "Boot reveal animation and inner page transitions",
+      "description": "Add a framer-motion fade-out animation to the BootScreen overlay that reveals the desktop after the progress bar completes. Add a short framer-motion page transition inside app windows when the route content changes.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_004B",
+        "V1_007A"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "BootScreen overlay fades out via framer-motion after the progress bar completes.",
+        "Inner window content uses a short fade/slide transition on route change.",
+        "prefers-reduced-motion skips the page transition."
+      ],
+      "docs": [
+        "docs/macos-redesign.md",
+        "docs/CONVENTIONS.md"
+      ],
+      "files": [
+        "src/app/components/Desktop/BootScreen.tsx",
+        "src/app/components/Window/WindowChrome.tsx"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V1_010A",
+      "title": "Home and About window content",
+      "description": "Fill src/app/page.tsx (Home) and src/app/about/page.tsx with first-pass portfolio content using a Notes or TextEdit metaphor — sidebar list and a main content pane styled like a macOS document editor. Content should be real, not lorem ipsum.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_007A"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Home and About windows render Notes/TextEdit-style UI with real portfolio content.",
+        "No placeholder lorem ipsum text.",
+        "Styling uses Tailwind and glass utilities only — no inline hex."
+      ],
+      "docs": [
+        "docs/PRD.md",
+        "docs/macos-redesign.md",
+        "docs/styling.md"
+      ],
+      "files": [
+        "src/app/page.tsx",
+        "src/app/about/page.tsx"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V1_010B",
+      "title": "Projects window content",
+      "description": "Fill src/app/projects/page.tsx with first-pass projects content using a Finder-style view. Projects are scannable with name, description, and links/metadata. No backend required.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_007A"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Projects window renders a Finder-style layout with project cards or rows.",
+        "Each project entry includes name, description, and at least one link or metadata item.",
+        "Content is real project data, not placeholders."
+      ],
+      "docs": [
+        "docs/PRD.md",
+        "docs/macos-redesign.md",
+        "docs/styling.md"
+      ],
+      "files": [
+        "src/app/projects/page.tsx"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V1_010C",
+      "title": "Contact window content",
+      "description": "Fill src/app/contact/page.tsx with a Mail-style compose metaphor. Presents practical contact paths (email, LinkedIn, GitHub, etc.) with no backend dependency. A mailto: link or copy-to-clipboard button is acceptable for the email action.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_007A"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Contact window renders a Mail-style compose UI.",
+        "Provides at least two practical contact paths.",
+        "No backend form submission required."
+      ],
+      "docs": [
+        "docs/PRD.md",
+        "docs/macos-redesign.md",
+        "docs/styling.md"
+      ],
+      "files": [
+        "src/app/contact/page.tsx"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V1_010D",
+      "title": "CV window with PDF viewer",
+      "description": "Fill src/app/cv/page.tsx with a Preview-style experience for public/cv.pdf. Embed the PDF using an iframe or object tag. Preserve the existing public/cv.pdf file.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_007A"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "CV window renders public/cv.pdf in a Preview-style frame using iframe or object.",
+        "public/cv.pdf is not modified or deleted.",
+        "Download link or open-in-tab option is present."
+      ],
+      "docs": [
+        "docs/PRD.md",
+        "docs/macos-redesign.md"
+      ],
+      "files": [
+        "src/app/cv/page.tsx"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V1_011A",
+      "title": "Accessibility and keyboard focus pass",
+      "description": "Audit and fix keyboard and pointer focus states across all shell controls, menus, dock items, desktop shortcuts, and window traffic lights. All interactive elements must have visible focus rings and be keyboard operable.",
+      "status": "todo",
+      "priority": "medium",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_008B",
+        "V1_009A",
+        "V1_009B",
+        "V1_010A",
+        "V1_010B",
+        "V1_010C",
+        "V1_010D"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "All interactive shell elements (dock, shortcuts, menu bar, traffic lights) have visible focus rings.",
+        "Keyboard navigation reaches and activates all controls.",
+        "No missing aria-label attributes on icon-only controls."
+      ],
+      "docs": [
+        "docs/CONVENTIONS.md",
+        "docs/TESTING.md"
+      ],
+      "files": [
+        "src/app/components/"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V1_011B",
+      "title": "Visual consistency and text overflow pass",
+      "description": "Check and fix text overflow in menu bar, dock labels, shortcut labels, title bars, toolbars, and app content at supported desktop sizes. Ensure consistent glass material usage and no stray inline hex values.",
+      "status": "todo",
+      "priority": "medium",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_011A"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "No text overflows or overlaps in any shell or window element at 1280px and 1440px widths.",
+        "All glass surfaces use utility classes — no inline backdrop-filter or RGBA values.",
+        "No inline hex color values remain in component files."
+      ],
+      "docs": [
+        "docs/styling.md",
+        "docs/CONVENTIONS.md"
+      ],
+      "files": [
+        "src/app/components/",
+        "src/app/globals.css"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V1_011C",
+      "title": "Window state edge cases",
+      "description": "Verify and fix window close, minimize, restore, maximize, snap, and direct route entry after repeated interactions. Confirm no window state corruption after rapid open/close cycles or multi-window sequences.",
+      "status": "todo",
+      "priority": "medium",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_011B"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Close, minimize, restore, maximize, snap-left, and snap-right behave consistently after 5+ repeated cycles.",
+        "Opening and closing multiple windows in sequence does not corrupt zIndexMap or focusedId.",
+        "Direct route entry after navigating away re-opens the window correctly.",
+        "Build succeeds."
+      ],
+      "docs": [
+        "docs/ARCHITECTURE.md",
+        "docs/TESTING.md"
+      ],
+      "files": [
+        "src/app/components/WindowManager/"
       ],
       "commands": [
         "npm run lint",
