@@ -74,9 +74,8 @@ src/app/
       Dock.tsx        ← Bottom dock (magnification added in V1_009B)
     appMetadata.ts    ← Shared app registry (id, route, label, icon; extended in V1_005A)
     Window/
-      Window.tsx      ← Window chrome (title bar, traffic lights, toolbar slot)
-      WindowToolbar.tsx ← Per-page toolbar (passed in as children)
-      TrafficLights.tsx ← Red/yellow/green buttons
+      WindowChrome.tsx  ← Title bar: glass-chrome, traffic light group, centered title
+      WindowToolbar.tsx ← Per-page toolbar (passed in as children, future)
 ```
 
 The `WindowManagerProvider` lives inside `layout.tsx`. It renders one `Window` per open app window and uses the current route only to decide which window is focused. Page modules provide content for windows, but the window manager is the source of truth for open windows, z-index, geometry, minimized state, and snap/maximize state.

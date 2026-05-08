@@ -509,7 +509,7 @@
       "id": "V1_006B",
       "title": "Window chrome and traffic light controls",
       "description": "Implement window chrome with title bar and traffic light controls. Traffic light buttons (close, minimize, maximize) reveal x, -, + glyphs simultaneously on group container hover — not per-button hover. This is the canonical macOS behavior. Window shadow is 0 22px 70px rgba(0,0,0,0.55). Default window size is 760x520px. Use .glass-chrome for the title bar.",
-      "status": "todo",
+      "status": "done",
       "priority": "critical",
       "group_id": "V1_DESKTOP",
       "depends_on": [

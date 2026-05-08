@@ -9,6 +9,7 @@ import React, { useCallback } from "react";
 import { Rnd } from "react-rnd";
 import { useWindowManager } from "./WindowManagerProvider";
 import { AppId } from "../appMetadata";
+import { WindowChrome } from "../Window/WindowChrome";
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -34,6 +35,9 @@ interface AppWindowProps {
   isMinimized: boolean;
   isMaximized: boolean;
   onFocus: () => void;
+  onClose: () => void;
+  onMinimize: () => void;
+  onMaximize: () => void;
   onDragStop: (x: number, y: number) => void;
   onResizeStop: (x: number, y: number, width: number, height: number) => void;
   children?: React.ReactNode;
@@ -51,6 +55,9 @@ function AppWindow({
   isMinimized,
   isMaximized,
   onFocus,
+  onClose,
+  onMinimize,
+  onMaximize,
   onDragStop,
   onResizeStop,
 }: AppWindowProps) {
@@ -73,7 +80,7 @@ function AppWindow({
       style={{
         width: "100%",
         height: "100%",
-        borderRadius: 10,
+        borderRadius: 12,
         overflow: "hidden",
         boxShadow: "0 22px 70px rgba(0,0,0,0.55)",
         border: "1px solid rgba(255,255,255,0.14)",
@@ -87,72 +94,14 @@ function AppWindow({
       role="dialog"
       aria-label={title}
     >
-      {/* Title bar placeholder — chrome will be added in V1_006B */}
-      <div
-        className="glass-chrome"
-        style={{
-          height: 38,
-          display: "flex",
-          alignItems: "center",
-          paddingLeft: 12,
-          paddingRight: 12,
-          flexShrink: 0,
-          borderBottom: "1px solid rgba(255,255,255,0.08)",
-          cursor: "move",
-          userSelect: "none",
-        }}
-        aria-label={`${title} title bar`}
-      >
-        {/* Traffic light placeholder circles */}
-        <div style={{ display: "flex", gap: 8, marginRight: 12 }}>
-          <span
-            style={{
-              width: 12,
-              height: 12,
-              borderRadius: "50%",
-              background: "var(--traffic-red)",
-              display: "inline-block",
-            }}
-            aria-hidden="true"
-          />
-          <span
-            style={{
-              width: 12,
-              height: 12,
-              borderRadius: "50%",
-              background: "var(--traffic-yellow)",
-              display: "inline-block",
-            }}
-            aria-hidden="true"
-          />
-          <span
-            style={{
-              width: 12,
-              height: 12,
-              borderRadius: "50%",
-              background: "var(--traffic-green)",
-              display: "inline-block",
-            }}
-            aria-hidden="true"
-          />
-        </div>
-        <span
-          style={{
-            flex: 1,
-            textAlign: "center",
-            fontSize: 13,
-            fontWeight: 500,
-            color: isFocused
-              ? "var(--text-label-primary)"
-              : "var(--text-label-secondary)",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            whiteSpace: "nowrap",
-          }}
-        >
-          {title}
-        </span>
-      </div>
+      {/* Window chrome — traffic lights + title */}
+      <WindowChrome
+        title={title}
+        isFocused={isFocused}
+        onClose={onClose}
+        onMinimize={onMinimize}
+        onMaximize={onMaximize}
+      />
 
       {/* Window content area */}
       <div
@@ -238,6 +187,27 @@ export function WindowRenderer() {
     [dispatch]
   );
 
+  const handleClose = useCallback(
+    (id: AppId) => {
+      dispatch({ type: "close", payload: { id } });
+    },
+    [dispatch]
+  );
+
+  const handleMinimize = useCallback(
+    (id: AppId) => {
+      dispatch({ type: "minimize", payload: { id } });
+    },
+    [dispatch]
+  );
+
+  const handleMaximize = useCallback(
+    (id: AppId) => {
+      dispatch({ type: "maximize", payload: { id } });
+    },
+    [dispatch]
+  );
+
   const handleDragStop = useCallback(
     (id: AppId, x: number, y: number) => {
       dispatch({ type: "drag", payload: { id, x, y } });
@@ -273,6 +243,9 @@ export function WindowRenderer() {
             isMinimized={win.minimized}
             isMaximized={win.maximized}
             onFocus={() => handleFocus(win.id)}
+            onClose={() => handleClose(win.id)}
+            onMinimize={() => handleMinimize(win.id)}
+            onMaximize={() => handleMaximize(win.id)}
             onDragStop={(x, y) => handleDragStop(win.id, x, y)}
             onResizeStop={(x, y, w, h) =>
               handleResizeStop(win.id, x, y, w, h)
