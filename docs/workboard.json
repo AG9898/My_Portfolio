@@ -334,7 +334,7 @@
       "id": "V1_004A",
       "title": "CSS gradient wallpaper with animated blobs and grain",
       "description": "Replace the wallpaper placeholder with the tahoe-dawn CSS radial gradient wallpaper from docs/styling.md. Add two animated blob divs layered over the gradient using the keyframe specs from docs/styling.md (24s and 32s animation cycles). Apply grain overlay via SVG feTurbulence at opacity 0.06.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V1_DESKTOP",
       "depends_on": [

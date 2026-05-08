@@ -3,6 +3,7 @@ import { ThemeProvider } from "next-themes";
 import MenuBar from "./components/MenuBar/MenuBar";
 import Dock from "./components/Dock/Dock";
 import DesktopShortcuts from "./components/Desktop/DesktopShortcuts";
+import Wallpaper from "./components/Desktop/Wallpaper";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -33,11 +34,8 @@ export default function RootLayout({
             className="fixed inset-0 overflow-hidden bg-desktop"
             aria-label="Desktop"
           >
-            {/* Wallpaper placeholder — fills entire viewport behind all shell chrome */}
-            <div
-              className="absolute inset-0 bg-desktop"
-              aria-hidden="true"
-            />
+            {/* Wallpaper — tahoe-dawn gradient with animated blobs and grain overlay */}
+            <Wallpaper />
 
             {/* Menu bar — 28px pinned to top, z-50 */}
             <MenuBar />
