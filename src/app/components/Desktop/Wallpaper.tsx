@@ -1,71 +1,171 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
+import { createNoise3D } from "simplex-noise";
+
 /**
- * Wallpaper — tahoe-dawn CSS radial gradient with animated blobs and grain overlay.
- *
- * The CSS gradient is the server-rendered static layer (also acts as the fallback
- * for V1_013 when simplex-noise canvas is added). Two blob divs animate on 24s and
- * 32s cycles per docs/styling.md. A grain overlay uses an inline SVG feTurbulence
- * filter at opacity 0.06.
- *
- * prefers-reduced-motion: animation-play-state is paused so blobs freeze in place.
+ * Wallpaper — simplex-noise flow field canvas over a tahoe-dawn CSS fallback.
  */
 export default function Wallpaper() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [isCanvasReady, setIsCanvasReady] = useState(false);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+
+    if (!canvas) {
+      return;
+    }
+
+    const context = canvas.getContext("2d", { alpha: true });
+
+    if (!context) {
+      return;
+    }
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const random = seededRandom(20260507);
+    const noise3D = createNoise3D(random);
+    const particles = Array.from({ length: prefersReducedMotion.matches ? 120 : 420 }, () =>
+      createParticle(),
+    );
+
+    let width = 0;
+    let height = 0;
+    let dpr = 1;
+    let animationFrame = 0;
+    let lastReducedFrame = 0;
+    let hasPainted = false;
+
+    const resize = () => {
+      const rect = canvas.getBoundingClientRect();
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = Math.max(1, Math.floor(rect.width));
+      height = Math.max(1, Math.floor(rect.height));
+
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      context.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      for (const particle of particles) {
+        resetParticle(particle, width, height);
+      }
+    };
+
+    const draw = (time: number) => {
+      const reducedMotion = prefersReducedMotion.matches;
+
+      if (reducedMotion && time - lastReducedFrame < 260) {
+        animationFrame = window.requestAnimationFrame(draw);
+        return;
+      }
+
+      lastReducedFrame = time;
+
+      context.globalCompositeOperation = "source-over";
+      context.fillStyle = reducedMotion ? "rgba(10, 10, 15, 0.16)" : "rgba(10, 10, 15, 0.075)";
+      context.fillRect(0, 0, width, height);
+      context.globalCompositeOperation = "lighter";
+      context.lineCap = "round";
+
+      const timeOffset = reducedMotion ? 0.08 : time * 0.00008;
+      const speed = reducedMotion ? 0.35 : 0.95;
+
+      for (const particle of particles) {
+        const previousX = particle.x;
+        const previousY = particle.y;
+        const angle =
+          noise3D(particle.x * 0.0019, particle.y * 0.0019, timeOffset) * Math.PI * 2.2;
+
+        particle.x += Math.cos(angle) * particle.velocity * speed;
+        particle.y += Math.sin(angle) * particle.velocity * speed;
+        particle.life -= 1;
+
+        if (
+          particle.life <= 0 ||
+          particle.x < -24 ||
+          particle.x > width + 24 ||
+          particle.y < -24 ||
+          particle.y > height + 24
+        ) {
+          resetParticle(particle, width, height);
+          continue;
+        }
+
+        context.strokeStyle = `hsla(${particle.hue}, 88%, ${particle.lightness}%, ${particle.alpha})`;
+        context.lineWidth = particle.width;
+        context.beginPath();
+        context.moveTo(previousX, previousY);
+        context.lineTo(particle.x, particle.y);
+        context.stroke();
+      }
+
+      if (!hasPainted) {
+        hasPainted = true;
+        setIsCanvasReady(true);
+      }
+
+      animationFrame = window.requestAnimationFrame(draw);
+    };
+
+    resize();
+    animationFrame = window.requestAnimationFrame(draw);
+    window.addEventListener("resize", resize);
+
+    return () => {
+      window.cancelAnimationFrame(animationFrame);
+      window.removeEventListener("resize", resize);
+    };
+  }, []);
+
   return (
-    <div
-      className="absolute inset-0 overflow-hidden"
-      aria-hidden="true"
-      style={{
-        // tahoe-dawn gradient — static fallback for SSR and the future canvas layer
-        background:
-          "radial-gradient(120% 90% at 80% 10%, #ff8a3c 0%, #ff5b8a 22%, #a15bff 48%, #2b3bd6 72%, #0a0a18 100%)",
-        backgroundColor: "#0a0a0f",
-      }}
-    >
-      {/* Blob 1 — 24s drift, warm orange/amber tones */}
-      <div
-        className="wallpaper-blob wallpaper-blob-1"
-        style={{
-          position: "absolute",
-          width: "60%",
-          height: "70%",
-          top: "30%",
-          left: "-10%",
-          background:
-            "radial-gradient(50% 60% at 20% 80%, rgba(255,200,120,0.25), transparent 60%)",
-          animation: "wallpaper-drift1 24s ease-in-out infinite alternate",
-          willChange: "transform",
-        }}
+    <div className="wallpaper-fallback absolute inset-0 overflow-hidden" aria-hidden="true">
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 h-full w-full transition-opacity duration-500"
+        style={{ opacity: isCanvasReady ? 1 : 0 }}
       />
-
-      {/* Blob 2 — 32s drift, cool blue/violet tones */}
-      <div
-        className="wallpaper-blob wallpaper-blob-2"
-        style={{
-          position: "absolute",
-          width: "55%",
-          height: "65%",
-          top: "-10%",
-          right: "-5%",
-          background:
-            "radial-gradient(40% 50% at 80% 30%, rgba(120,140,255,0.30), transparent 60%)",
-          animation: "wallpaper-drift2 32s ease-in-out infinite alternate",
-          willChange: "transform",
-        }}
-      />
-
-      {/* Grain overlay — SVG feTurbulence, opacity 0.06 */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          opacity: 0.06,
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23grain)' opacity='1'/%3E%3C/svg%3E\")",
-          backgroundRepeat: "repeat",
-          pointerEvents: "none",
-        }}
-      />
+      <div className="wallpaper-grain absolute inset-0 pointer-events-none" />
     </div>
   );
+}
+
+type Particle = {
+  x: number;
+  y: number;
+  velocity: number;
+  life: number;
+  hue: number;
+  lightness: number;
+  alpha: number;
+  width: number;
+};
+
+function createParticle(): Particle {
+  return {
+    x: 0,
+    y: 0,
+    velocity: 0.6 + Math.random() * 1.8,
+    life: 0,
+    hue: 205 + Math.random() * 110,
+    lightness: 54 + Math.random() * 22,
+    alpha: 0.045 + Math.random() * 0.08,
+    width: 0.45 + Math.random() * 1.4,
+  };
+}
+
+function resetParticle(particle: Particle, width: number, height: number) {
+  particle.x = Math.random() * width;
+  particle.y = Math.random() * height;
+  particle.velocity = 0.6 + Math.random() * 1.8;
+  particle.life = 90 + Math.random() * 260;
+}
+
+function seededRandom(seed: number) {
+  let state = seed;
+
+  return () => {
+    state = (state * 1664525 + 1013904223) >>> 0;
+    return state / 4294967296;
+  };
 }

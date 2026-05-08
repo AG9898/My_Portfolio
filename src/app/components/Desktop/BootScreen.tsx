@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 const BOOT_DURATION_MS = 2400;
-const FADE_THRESHOLD = 85;
 const FADE_DURATION_SECONDS = 0.4;
 
 function AppleLogo() {
@@ -36,7 +35,7 @@ export default function BootScreen() {
 
       setProgress(nextProgress);
 
-      if (nextProgress > FADE_THRESHOLD && !hasStartedFade.current) {
+      if (nextProgress >= 100 && !hasStartedFade.current) {
         hasStartedFade.current = true;
         setIsFading(true);
       }

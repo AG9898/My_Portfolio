@@ -72,7 +72,7 @@
       "id": "V1_013",
       "title": "Replace CSS gradient wallpaper with simplex-noise canvas",
       "description": "Upgrade the wallpaper from the CSS gradient + blob animation (set in V1_004) to a Canvas element running a simplex-noise flow field animation, keeping the CSS gradient as the static fallback for SSR and no-JS environments. This is the final wallpaper spec from docs/macos-redesign.md. Add simplex-noise as a dependency.",
-      "status": "todo",
+      "status": "done",
       "priority": "medium",
       "group_id": "V1_DESKTOP",
       "depends_on": [
@@ -798,7 +798,7 @@
       "id": "V1_009C",
       "title": "Boot reveal animation and inner page transitions",
       "description": "Add a framer-motion fade-out animation to the BootScreen overlay that reveals the desktop after the progress bar completes. Add a short framer-motion page transition inside app windows when the route content changes.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V1_DESKTOP",
       "depends_on": [
@@ -827,7 +827,7 @@
       "id": "V1_010A",
       "title": "Home and About window content",
       "description": "Fill src/app/page.tsx (Home) and src/app/about/page.tsx with first-pass portfolio content using a Notes or TextEdit metaphor — sidebar list and a main content pane styled like a macOS document editor. Content should be real, not lorem ipsum.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V1_DESKTOP",
       "depends_on": [
@@ -856,7 +856,7 @@
       "id": "V1_010B",
       "title": "Projects window content",
       "description": "Fill src/app/projects/page.tsx with first-pass projects content using a Finder-style view. Projects are scannable with name, description, and links/metadata. No backend required.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V1_DESKTOP",
       "depends_on": [
@@ -884,7 +884,7 @@
       "id": "V1_010C",
       "title": "Contact window content",
       "description": "Fill src/app/contact/page.tsx with a Mail-style compose metaphor. Presents practical contact paths (email, LinkedIn, GitHub, etc.) with no backend dependency. A mailto: link or copy-to-clipboard button is acceptable for the email action.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V1_DESKTOP",
       "depends_on": [
@@ -912,7 +912,7 @@
       "id": "V1_010D",
       "title": "CV window with PDF viewer",
       "description": "Fill src/app/cv/page.tsx with a Preview-style experience for public/cv.pdf. Embed the PDF using an iframe or object tag. Preserve the existing public/cv.pdf file.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V1_DESKTOP",
       "depends_on": [

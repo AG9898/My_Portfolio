@@ -6,7 +6,7 @@
 > |---|---|
 > | Shipped | Previous single-page portfolio exists but is no longer canonical. |
 > | In Progress | macOS desktop OS redesign. See [`macos-redesign.md`](macos-redesign.md). |
-> | Planned | Windowed portfolio apps for Home, About, Projects, Contact, and CV. |
+> | Planned | Accessibility, menu bar, wallpaper, and polish follow-up tasks remain. |
 
 ---
 
@@ -43,6 +43,10 @@ Build a memorable frontend portfolio where the browser behaves like a macOS desk
 - Home, About, Projects, Contact, and CV app windows.
 - Per-app metaphors and toolbars: Notes/TextEdit, Finder, Mail, and Preview.
 - Fresh content written for the redesign. Preserve `/public/cv.pdf`.
+- Home and About use Notes/TextEdit-style document layouts with real first-pass portfolio copy.
+- Projects uses a Finder-style browser with real project entries, descriptions, stack tags, and repo/path metadata.
+- Contact uses a Mail-style compose sheet with practical outbound contact links and no backend form submission.
+- CV uses a Preview-style PDF viewer around `/public/cv.pdf`, with open-in-tab and download actions.
 
 ### Complete V1 Boundary
 

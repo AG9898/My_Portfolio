@@ -122,7 +122,9 @@ Glass borders use `1px solid rgba(255,255,255,0.10)` for windows and `1px solid 
 
 ## Wallpaper
 
-Four named CSS gradient variants provide the static (no-JS) wallpaper. The `tahoe-dawn` variant is the canonical default.
+The canonical wallpaper is a full-viewport Canvas simplex-noise flow field rendered by `src/app/components/Desktop/Wallpaper.tsx`. It uses `simplex-noise` to steer particles through a dark abstract field, caps device pixel ratio for predictable paint cost, and fades the canvas in only after the first frame has painted so there is no blank flash.
+
+The `tahoe-dawn` CSS gradient remains underneath the canvas as the server-rendered static fallback for SSR, no-JS, and initial canvas startup. Keep this fallback in the `.wallpaper-fallback` class in `globals.css`; do not move it back into inline component styles.
 
 | Name | Gradient stops | Character |
 |---|---|---|
@@ -133,13 +135,9 @@ Four named CSS gradient variants provide the static (no-JS) wallpaper. The `taho
 
 All variants use `radial-gradient(...)` with the fallback desktop bg `#0a0a0f`.
 
-**Animated blobs** layer on top of the gradient via CSS `@keyframes`:
-- Blob 1: `24s infinite ease-in-out`, translates `(0,0) → (40px,-30px)` + `scale(1.1)`, opacity `0.5`
-- Blob 2: `32s infinite ease-in-out`, translates `(0,0) → (-50px,40px)` + `scale(1.15)`, opacity `0.4`
-
 **Grain overlay**: SVG `feTurbulence` filter, opacity `0.06`, static — applied as a full-viewport pseudo-element.
 
-Future: Canvas + `simplex-noise` flow field replaces the CSS gradient as the animated layer; gradient stays as static fallback.
+**Reduced motion**: when `prefers-reduced-motion: reduce` is active, the canvas keeps the same visual language but sharply throttles particle movement instead of running full-speed animation.
 
 ---
 
@@ -167,6 +165,14 @@ Future: Canvas + `simplex-noise` flow field replaces the CSS gradient as the ani
 | Traffic light gap | `8px` |
 | Boot logo size | `64×64px`, centered in viewport |
 | Boot progress bar | `176×4px`, positioned `64px` below center |
+
+## App content surfaces
+
+- Home, About, Projects, and Contact content should use the same token-backed surfaces as shell chrome: `bg-window`, `bg-chrome`, `border-glass-edge`, `text-label-primary`, `text-label-secondary`, and `bg-accent`.
+- Notes/TextEdit-style sidebars should stay compact and use deterministic widths (`w-48` to `w-56`) so resizable windows do not reflow unpredictably.
+- Finder-style project browsers should keep sidebars deterministic (`w-52` is the current project-window width) and use token-backed cards or rows for repeated project entries.
+- Mail-style compose views should use deterministic mailbox sidebars (`w-52` is the current Contact width), token-backed compose headers, and normal outbound links instead of backend form controls.
+- Decorative editor controls must use token-backed hover and border styles; do not introduce inline hex or one-off backdrop classes inside page content.
 
 ---
 

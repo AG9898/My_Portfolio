@@ -110,6 +110,7 @@ interface AppWindowProps {
   isMaximized: boolean;
   exitModes: Partial<Record<AppId, WindowExitMode>>;
   reduceMotion: boolean;
+  contentKey: string;
   snapped: SnapState;
   onFocus: () => void;
   onClose: () => void;
@@ -135,6 +136,7 @@ function AppWindow({
   isMaximized,
   exitModes,
   reduceMotion,
+  contentKey,
   snapped,
   onFocus,
   onClose,
@@ -145,6 +147,7 @@ function AppWindow({
   onSnapRight,
   onDragStop,
   onResizeStop,
+  children,
 }: AppWindowProps) {
   const motionCustom: WindowPresenceCustom = {
     id,
@@ -202,9 +205,17 @@ function AppWindow({
           fontSize: 14,
         }}
       >
-        <div style={{ padding: 16, color: "var(--text-label-secondary)" }}>
-          {id} — content placeholder (wired in V1_007A+)
-        </div>
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={contentKey}
+            initial={reduceMotion ? false : { opacity: 0, y: 8 }}
+            animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+            exit={reduceMotion ? undefined : { opacity: 0, y: -4 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+          >
+            {children}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </motion.div>
   );
@@ -277,7 +288,11 @@ const WINDOW_TITLES: Record<AppId, string> = {
   cv: "CV — Aden Guo",
 };
 
-export function WindowRenderer() {
+interface WindowRendererProps {
+  children: React.ReactNode;
+}
+
+export function WindowRenderer({ children }: WindowRendererProps) {
   const { state, dispatch } = useWindowManager();
   const [exitModes, setExitModes] = useState<
     Partial<Record<AppId, WindowExitMode>>
@@ -404,6 +419,7 @@ export function WindowRenderer() {
             isMaximized={win.maximized}
             exitModes={exitModes}
             reduceMotion={reduceMotion}
+            contentKey={`${win.id}:${isFocused ? "active" : "inactive"}`}
             snapped={win.snapped}
             onFocus={() => handleFocus(win.id)}
             onClose={() => handleClose(win.id)}
@@ -416,7 +432,9 @@ export function WindowRenderer() {
             onResizeStop={(x, y, w, h) =>
               handleResizeStop(win.id, x, y, w, h)
             }
-          />
+          >
+            {isFocused ? children : null}
+          </AppWindow>
         );
       })}
     </AnimatePresence>

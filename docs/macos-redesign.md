@@ -170,6 +170,8 @@ Initial implementation can enforce one window per route/app. Opening an already-
 | `/contact` | Mail | Compose toolbar (To, Subject fields, Send button) |
 | `/cv` | Preview | Zoom controls, page navigation |
 
+The Contact window content is a static Mail-style compose sheet. Its Send action uses a `mailto:` link, profile cards link out to practical contact paths, and the page must not introduce backend form submission.
+
 ---
 
 ## Visual Design
@@ -209,7 +211,7 @@ No external font import required — uses the OS native font on macOS/iOS, falls
 - Window minimize: scale/fade toward dock icon, then mark as minimized
 - Window restore: scale/fade from dock icon toward saved position
 - Dock magnification: `scale` on hovered icon and adjacent icons using `useMotionValue` + `useTransform`
-- Page transition inside window: `opacity: 0 → 1`, `y: 8 → 0`, `duration: 0.2`
+- Page transition inside window: `opacity: 0 → 1`, `y: 8 → 0`, `duration: 0.2`; skip the transition when `prefers-reduced-motion` is active
 
 ---
 
@@ -282,7 +284,7 @@ Current implementation uses Option A at small viewports: the desktop shell is hi
 
 ## Content
 
-All existing page content is scrapped. Fresh content will be written for each app window during implementation. The only asset carried forward is `/public/cv.pdf`.
+All existing page content is scrapped. Fresh content is being written for each app window during implementation. Home now uses a TextEdit-style document with a decorative rich text toolbar, note sidebar, and first-pass portfolio introduction. About now uses a Notes-style sidebar and document pane with first-pass profile and working-principle copy. Projects now uses a Finder-style browser with a sidebar, grid/list toolbar controls, search field, and real project entries with stack and repo/path metadata. Contact now uses a static Mail-style compose sheet with outbound contact links. CV now uses a Preview-style PDF viewer that embeds `/public/cv.pdf` and exposes open-in-tab and download actions. The only asset carried forward is `/public/cv.pdf`.
 
 ## Boot / Launch Sequence
 
@@ -314,7 +316,7 @@ On every page load, before the desktop is shown, a macOS-style boot screen plays
 - All glass material values (exact RGBA opacities — these differ from earlier drafts)
 - Dock, menu bar, sidebar, window layout/sizing
 - Icon SVG designs (desktop shortcuts + dock icons)
-- Wallpaper gradient definitions and blob animations
+- Wallpaper fallback gradient and grain treatment
 - Boot screen composition
 - Traffic light group hover behavior
 
@@ -325,7 +327,6 @@ On every page load, before the desktop is shown, a macOS-style boot screen plays
 - Snap preview grid + edge snapping
 - Minimize-to-dock animation
 - Green traffic light context menu
-- `simplex-noise` canvas wallpaper (CSS gradient is the fallback, not the final)
 - Projects / About / Contact / CV windows
 - Keyboard shortcuts
 - Dock right-click context menus
