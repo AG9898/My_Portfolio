@@ -176,9 +176,9 @@ export function windowReducer(
 
       let newFocused = state.focusedId;
       if (state.focusedId === id) {
-        // Select next highest z-index window, or null.
-        const remainingIds = remaining.map((w) => w.id);
-        newFocused = highestZ(remainingIds, newZMap);
+        // Select next highest z-index visible (non-minimized) window, or null.
+        const visibleIds = remaining.filter((w) => !w.minimized).map((w) => w.id);
+        newFocused = highestZ(visibleIds, newZMap);
       }
 
       return {
@@ -365,6 +365,9 @@ export function windowReducer(
         (candidate) => candidate.route === action.payload.route
       );
       if (!app) return state;
+
+      // If already focused on this app, no state change needed.
+      if (state.focusedId === app.id) return state;
 
       const existing = state.openWindows.find((w) => w.id === app.id);
       const z = nextZ(state.zIndexMap);

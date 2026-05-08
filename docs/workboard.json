@@ -1000,7 +1000,7 @@
       "id": "V1_011C",
       "title": "Window state edge cases",
       "description": "Verify and fix window close, minimize, restore, maximize, snap, and direct route entry after repeated interactions. Confirm no window state corruption after rapid open/close cycles or multi-window sequences.",
-      "status": "todo",
+      "status": "done",
       "priority": "medium",
       "group_id": "V1_DESKTOP",
       "depends_on": [

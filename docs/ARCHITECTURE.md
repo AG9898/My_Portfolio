@@ -91,8 +91,8 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 - **`WindowEntry`**: `id`, `route`, `geometry` (`x, y, width, height`), `restoreGeometry`, `minimized`, `maximized`, `snapped: "none" | "left" | "right"`.
 - **`WindowAction`** union covers all 11 action types: `open`, `focus`, `close`, `minimize`, `restore`, `maximize`, `snapLeft`, `snapRight`, `drag`, `resize`, `syncRoute`.
 - `open` action: if the app is already in `openWindows`, it focuses and unminimizes that entry without duplicating. Otherwise appends a new `WindowEntry` using `defaultSize`/`defaultPosition` from the caller.
-- `syncRoute` action: maps the current pathname to the `APPS` registry, then opens/focuses/restores the matching app window using its default metadata. Existing windows are updated in place, so hydration and route changes do not create duplicates.
-- `close` action: removes the entry and selects the next highest z-index open window as `focusedId`, or null if none remain.
+- `syncRoute` action: maps the current pathname to the `APPS` registry, then opens/focuses/restores the matching app window using its default metadata. Existing windows are updated in place, so hydration and route changes do not create duplicates. Returns state unchanged if `focusedId` already equals the matched app id, preventing spurious z-index increments on URL-push feedback cycles.
+- `close` action: removes the entry and selects the next highest z-index **visible (non-minimized)** open window as `focusedId`, or null if none remain. Minimized windows are excluded from this selection to avoid `focusedId` pointing at a non-rendered window.
 - `maximize` action: saves current geometry to `restoreGeometry` and sets `geometry` to a zero-size sentinel — the WindowRenderer fills the desktop area using viewport dimensions. Toggling maximize again calls `restore`.
 - `snapLeft`/`snapRight` actions: accept `desktopWidth`/`desktopHeight` from the caller and compute exact half-screen geometry.
 - `drag`/`resize` actions: update geometry and `restoreGeometry` together; clear snapped and maximized flags.

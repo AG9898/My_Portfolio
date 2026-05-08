@@ -58,6 +58,20 @@ Run manually when shell chrome changes:
 
 ---
 
+## Window State Edge Case Checklist (V1_011C)
+
+Run manually after any window manager change:
+
+- [ ] Open a window, close it, open again — geometry and title are correct; no duplicate window.
+- [ ] Minimize a window, then close a second open window — `focusedId` does not point to the minimized window; next focused window is a visible (non-minimized) one.
+- [ ] Maximize a window 5+ times by toggling the green button — window consistently fills desktop area, then restores to previous geometry.
+- [ ] Snap left, then snap right, then restore — geometry returns to the pre-snap position each time.
+- [ ] Open two windows; close the focused one — the remaining window gains focus automatically.
+- [ ] Navigate directly to `/projects` in the browser — projects window opens with desktop shell fully mounted; no duplicate window.
+- [ ] Navigate from `/projects` to `/about` via the URL bar — about window opens; projects window remains open but unfocused.
+
+---
+
 ## Writing New Tests
 
 - If a test framework is added, document it here and add a `npm run test` script.

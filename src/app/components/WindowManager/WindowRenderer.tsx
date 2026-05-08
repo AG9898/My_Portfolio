@@ -13,7 +13,7 @@
 //   - All geometry changes (drag, resize, maximize, snap, restore) go through
 //     reducer actions — no local state for window bounds.
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import {
   AnimatePresence,
   motion,
@@ -296,6 +296,11 @@ export function WindowRenderer({ children }: WindowRendererProps) {
     Partial<Record<AppId, WindowExitMode>>
   >({});
   const reduceMotion = useReducedMotion() ?? false;
+  // Track visible window IDs via ref so onExitComplete always has the current set.
+  const visibleIdsRef = useRef<Set<AppId>>(new Set());
+  visibleIdsRef.current = new Set(
+    state.openWindows.filter((w) => !w.minimized).map((w) => w.id)
+  );
 
   const handleFocus = useCallback(
     (id: AppId) => {
@@ -386,16 +391,13 @@ export function WindowRenderer({ children }: WindowRendererProps) {
   return (
     <AnimatePresence
       onExitComplete={() => {
-        setExitModes((current) => {
-          const visibleIds = new Set(
-            state.openWindows
-              .filter((win) => !win.minimized)
-              .map((win) => win.id)
-          );
-          return Object.fromEntries(
-            Object.entries(current).filter(([id]) => visibleIds.has(id as AppId))
-          ) as Partial<Record<AppId, WindowExitMode>>;
-        });
+        // Use ref so we read the current visible IDs rather than stale closure.
+        const currentVisible = visibleIdsRef.current;
+        setExitModes((current) =>
+          Object.fromEntries(
+            Object.entries(current).filter(([id]) => currentVisible.has(id as AppId))
+          ) as Partial<Record<AppId, WindowExitMode>>
+        );
       }}
     >
       {state.openWindows.filter((win) => !win.minimized).map((win) => {
@@ -417,7 +419,7 @@ export function WindowRenderer({ children }: WindowRendererProps) {
             isMaximized={win.maximized}
             exitModes={exitModes}
             reduceMotion={reduceMotion}
-            contentKey={`${win.id}:${isFocused ? "active" : "inactive"}`}
+            contentKey={win.id}
             snapped={win.snapped}
             onFocus={() => handleFocus(win.id)}
             onClose={() => handleClose(win.id)}
