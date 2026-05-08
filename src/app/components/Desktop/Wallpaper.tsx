@@ -2,11 +2,28 @@
 
 import { useEffect, useRef, useState } from "react";
 import { createNoise3D } from "simplex-noise";
+import { useWallpaper } from "./WallpaperProvider";
 
-/**
- * Wallpaper — simplex-noise flow field canvas over a tahoe-dawn CSS fallback.
- */
 export default function Wallpaper() {
+  const { wallpaper } = useWallpaper();
+  return wallpaper === "tahoe-dawn" ? <TahoeDawn /> : <FlowField />;
+}
+
+// ─── Tahoe Dawn — radial gradient with two drifting blobs ────────────────────
+
+function TahoeDawn() {
+  return (
+    <div className="wallpaper-fallback absolute inset-0 overflow-hidden" aria-hidden="true">
+      <div className="wallpaper-blob-1 absolute" />
+      <div className="wallpaper-blob-2 absolute" />
+      <div className="wallpaper-grain absolute inset-0 pointer-events-none" />
+    </div>
+  );
+}
+
+// ─── Flow Field — simplex-noise particle canvas ───────────────────────────────
+
+function FlowField() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isCanvasReady, setIsCanvasReady] = useState(false);
 

@@ -15,6 +15,7 @@ export interface MenuItemDef {
   label: string;
   shortcut?: string;
   disabled?: boolean;
+  checked?: boolean;
   separator?: false;
   onSelect?: () => void;
 }
@@ -94,7 +95,10 @@ export function MenuDropdown({ trigger, items, triggerClassName }: MenuDropdownP
                   "data-[disabled]:opacity-40 data-[disabled]:cursor-not-allowed",
                 ].join(" ")}
               >
-                <span>{def.label}</span>
+                <span className="flex items-center gap-2">
+                  <span className="w-3 text-[11px] shrink-0">{def.checked ? "✓" : ""}</span>
+                  {def.label}
+                </span>
                 {def.shortcut && (
                   <span className="ml-8 text-[11px] opacity-60">{def.shortcut}</span>
                 )}

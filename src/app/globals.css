@@ -105,6 +105,43 @@ select {
   background-repeat: repeat;
 }
 
+@keyframes wallpaper-drift1 {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(5%, 8%) scale(1.08); }
+}
+
+@keyframes wallpaper-drift2 {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(-6%, -5%) scale(1.06); }
+}
+
+.wallpaper-blob-1 {
+  width: 60%;
+  height: 70%;
+  top: 30%;
+  left: -10%;
+  background: radial-gradient(50% 60% at 20% 80%, rgba(255, 200, 120, 0.25), transparent 60%);
+  animation: wallpaper-drift1 24s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.wallpaper-blob-2 {
+  width: 55%;
+  height: 65%;
+  top: -10%;
+  right: -5%;
+  background: radial-gradient(40% 50% at 80% 30%, rgba(120, 140, 255, 0.30), transparent 60%);
+  animation: wallpaper-drift2 32s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wallpaper-blob-1,
+  .wallpaper-blob-2 {
+    animation-play-state: paused;
+  }
+}
+
 /* ─── Glass utility classes ──────────────────────────────────────────────── */
 
 @layer utilities {

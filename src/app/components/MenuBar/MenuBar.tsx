@@ -1,25 +1,26 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Moon, Sun } from "lucide-react";
+import Image from "next/image";
+import { Moon, Mountain, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { APPS } from "../appMetadata";
 import { useWindowManager } from "../WindowManager/WindowManagerProvider";
+import { useWallpaper } from "../Desktop/WallpaperProvider";
 import { MenuDropdown, MenuEntry } from "./MenuDropdown";
 
-// ─── Apple logo SVG ──────────────────────────────────────────────────────────
+// ─── Strawberry logo ─────────────────────────────────────────────────────────
 function AppleLogo() {
   return (
-    <svg
-      width="14"
-      height="16"
-      viewBox="0 0 14 16"
-      fill="currentColor"
+    <Image
+      src="/strawberry-logo.png"
+      alt=""
       aria-hidden="true"
+      width={22}
+      height={22}
       className="mr-3 -mt-px opacity-90"
-    >
-      <path d="M11.182 8.46c-.02-2.05 1.674-3.04 1.751-3.087-.953-1.39-2.435-1.582-2.964-1.604-1.262-.127-2.464.745-3.106.745-.642 0-1.633-.726-2.687-.706-1.382.02-2.659.804-3.37 2.04-1.437 2.49-.366 6.176 1.034 8.197.685.99 1.5 2.103 2.566 2.062 1.03-.04 1.42-.667 2.664-.667s1.594.667 2.687.645c1.11-.02 1.812-1.008 2.49-2 .785-1.146 1.108-2.257 1.127-2.314-.025-.012-2.16-.83-2.182-3.31zM9.18 2.51c.568-.69.952-1.65.847-2.61-.82.034-1.812.547-2.4 1.236-.527.61-.99 1.586-.866 2.527.913.072 1.85-.464 2.42-1.153z" />
-    </svg>
+      style={{ mixBlendMode: "screen" }}
+    />
   );
 }
 
@@ -137,6 +138,7 @@ export default function MenuBar() {
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
   const { state, dispatch } = useWindowManager();
+  const { wallpaper, setWallpaper } = useWallpaper();
 
   useEffect(() => {
     setMounted(true);
@@ -282,6 +284,25 @@ export default function MenuBar() {
         >
           {isLight ? <Moon size={14} /> : <Sun size={14} />}
         </button>
+
+        {/* Wallpaper picker */}
+        <MenuDropdown
+          trigger={<Mountain size={14} aria-hidden="true" />}
+          triggerClassName="flex items-center justify-center !px-1 !py-0 h-5 w-5"
+          items={[
+            {
+              label: "Flow Field",
+              checked: wallpaper === "flow-field",
+              onSelect: () => setWallpaper("flow-field"),
+            },
+            {
+              label: "Tahoe Dawn",
+              checked: wallpaper === "tahoe-dawn",
+              onSelect: () => setWallpaper("tahoe-dawn"),
+            },
+          ] satisfies MenuEntry[]}
+        />
+
         <ControlCentreIcon />
         <BatteryIcon />
         <WifiIcon />

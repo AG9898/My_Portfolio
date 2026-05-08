@@ -8,11 +8,16 @@ import DesktopShortcuts from "./components/Desktop/DesktopShortcuts";
 import Wallpaper from "./components/Desktop/Wallpaper";
 import { WindowManagerProvider } from "./components/WindowManager/WindowManagerProvider";
 import { WindowRenderer } from "./components/WindowManager/WindowRenderer";
+import { WallpaperProvider } from "./components/Desktop/WallpaperProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Aden Guo Portfolio",
   description: "A macOS-inspired portfolio redesign for Aden Guo.",
+  icons: {
+    icon: "/strawberry-logo.png",
+    apple: "/strawberry-logo.png",
+  },
 };
 
 export default function RootLayout({
@@ -40,6 +45,7 @@ export default function RootLayout({
           <MobileFallback />
           <div className="hidden md:block">
             <WindowManagerProvider>
+              <WallpaperProvider>
               {/* Desktop shell root — persistent across all route changes */}
               <div
                 id="desktop-root"
@@ -65,6 +71,7 @@ export default function RootLayout({
 
                 <BootScreen />
               </div>
+              </WallpaperProvider>
             </WindowManagerProvider>
           </div>
         </ThemeProvider>
