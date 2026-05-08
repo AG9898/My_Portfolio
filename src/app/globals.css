@@ -2,16 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ─── macOS Tahoe design tokens ─────────────────────────────────────────── */
+/* ─── CSS variable tokens — dark (canonical) ────────────────────────────── */
 
 :root {
   color-scheme: dark;
 
   /* Surfaces */
-  --color-desktop:      #0a0a0f;
-  --color-window:       rgba(20, 20, 24, 0.72);
-  --color-chrome:       rgba(30, 30, 36, 0.85);
-  --color-glass-edge:   rgba(255, 255, 255, 0.10);
+  --color-desktop:    #0a0a0f;
+  --color-window:     rgba(28, 28, 30, 0.78);
+  --color-chrome:     rgba(44, 44, 46, 0.72);
+  --color-glass-edge: rgba(255, 255, 255, 0.10);
 
   /* Text */
   --color-label-primary:   #F5F5F7;
@@ -20,37 +20,46 @@
   /* Accent */
   --color-accent: #0A84FF;
 
-  /* Legacy aliases (keep for backward compat during migration) */
-  --desktop-bg:    var(--color-desktop);
-  --text-primary:  var(--color-label-primary);
-  --text-secondary: var(--color-label-secondary);
+  /* Traffic lights — fixed, no inversion in light mode */
+  --traffic-red:    #FF5F57;
+  --traffic-yellow: #FEBC2E;
+  --traffic-green:  #28C840;
 }
 
-.light {
+/* ─── Light mode token overrides ─────────────────────────────────────────── */
+
+[data-theme="light"] {
   color-scheme: light;
 
-  --color-desktop:      #e8e8ed;
-  --color-window:       rgba(242, 242, 247, 0.80);
-  --color-chrome:       rgba(255, 255, 255, 0.88);
-  --color-glass-edge:   rgba(0, 0, 0, 0.08);
+  --color-desktop:    #e8e8ed;
+  --color-window:     rgba(242, 242, 247, 0.92);
+  --color-chrome:     rgba(255, 255, 255, 0.90);
+  --color-glass-edge: rgba(0, 0, 0, 0.08);
+
   --color-label-primary:   #1C1C1E;
   --color-label-secondary: rgba(0, 0, 0, 0.50);
+
   --color-accent: #007AFF;
 }
 
 /* ─── Resets ─────────────────────────────────────────────────────────────── */
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 html,
 body {
-  min-height: 100%;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
   background: var(--color-desktop);
   color: var(--color-label-primary);
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", sans-serif;

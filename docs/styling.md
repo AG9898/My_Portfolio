@@ -206,8 +206,8 @@ const contentFade = { duration: 0.15, ease: 'easeOut' }
 
 ## Theming
 
-- `next-themes` manages dark/light via a `.light` class on `<html>`
-- CSS variables in `:root` are the dark (canonical) values; `.light` overrides them
+- `next-themes` manages dark/light via a `[data-theme="light"]` attribute on `<html>`
+- CSS variables in `:root` are the dark (canonical) values; `[data-theme="light"]` overrides them
 - Tailwind `dark:` prefix is almost never needed — token classes handle both modes automatically
 
 ```tsx
