@@ -21,7 +21,8 @@ Use this skill to complete exactly one task from `docs/workboard.json`.
 9. Add minimum extra validation needed for changed surface if commands are absent/incomplete.
 10. Update authoritative docs affected by behavior changes.
 11. Mark task `done` only after verification passes.
-12. Summarize: task, files changed, validations, docs updated, next startable tasks.
+12. Commit all changed files with a one-line message: `"<task title> (<task id>)"`. No Co-Authored-By line.
+13. Summarize: task, files changed, validations, docs updated, next startable tasks.
 
 ## Startability Query
 
