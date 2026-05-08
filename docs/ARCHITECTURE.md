@@ -68,8 +68,10 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 #### App Metadata (`src/app/components/appMetadata.ts`)
 
 - Shared registry of all five portfolio apps: Home, Projects, About, Contact, CV.
-- Exports `AppId` union type, `AppMetadata` interface (id, route, label, icon), and `APPS` array.
-- No state, no hooks, no window geometry — pure metadata. Extended in V1_005A to add `defaultSize` and `defaultPosition`.
+- Exports `AppId` union type, `AppSize` and `AppPosition` helper types, `AppMetadata` interface (id, route, label, title, icon, defaultSize, defaultPosition), and `APPS` array.
+- `defaultSize` provides the window's initial `{width, height}` in pixels; `defaultPosition` provides the initial top-left `{x, y}` offset from the desktop area.
+- `title` is the full window title bar string; `label` is the short dock/shortcut label.
+- No state, no hooks, no reducer logic — pure static metadata consumed by the window manager and shell components.
 
 ### Window Manager
 

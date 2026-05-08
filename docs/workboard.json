@@ -422,7 +422,7 @@
       "id": "V1_005A",
       "title": "Define shared app registry",
       "description": "Extend src/app/components/appMetadata.ts (created in V1_003B) into a full typed app registry. Each entry defines: id, route, label, title, icon, defaultSize ({width, height}), and defaultPosition ({x, y}) for Home, Projects, About, Contact, and CV apps.",
-      "status": "todo",
+      "status": "done",
       "priority": "critical",
       "group_id": "V1_DESKTOP",
       "depends_on": [

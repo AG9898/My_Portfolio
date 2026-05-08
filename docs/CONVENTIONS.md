@@ -32,7 +32,7 @@ Normative guide for code in this portfolio. Read before writing new UI architect
 - Window chrome belongs under `src/app/components/Window/`.
 - Menu bar components belong under `src/app/components/MenuBar/`.
 - Dock components belong under `src/app/components/Dock/`.
-- Keep shared app metadata in a registry module instead of duplicating route titles, icons, default sizes, or app IDs.
+- Keep shared app metadata in a registry module (`src/app/components/appMetadata.ts`) instead of duplicating route titles, icons, default sizes, positions, or app IDs. The `APPS` array is the canonical source for id, route, label, title, icon, defaultSize, and defaultPosition.
 
 ### Styling
 
