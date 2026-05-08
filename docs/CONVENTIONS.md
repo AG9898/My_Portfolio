@@ -41,6 +41,7 @@ Normative guide for code in this portfolio. Read before writing new UI architect
 - Use the macOS system font stack only; do not import Google Fonts.
 - Dark mode is canonical. Light mode should be implemented through token overrides.
 - Use frosted glass treatments for menu bar, dock, and window chrome.
+- Wallpaper components may use inline dynamic CSS variables for user-selected color settings. These values are interactive wallpaper inputs, not hardcoded UI chrome colors.
 
 ### App Router client boundary
 
@@ -60,6 +61,14 @@ Normative guide for code in this portfolio. Read before writing new UI architect
 - Inner window page transitions use a short opacity/y motion and must skip animation when `prefers-reduced-motion` is active.
 - Menu bar dropdowns use `@radix-ui/react-dropdown-menu`.
 - **`lucide-react` is for UI chrome glyphs only** (status bar icons, toolbar buttons, decorative controls). Desktop shortcut icons and dock app icons use custom SVG artwork — see `reference/design draft/design_handoff_macos_desktop_shell/desktop.jsx` for the exact SVG designs. Never substitute a lucide icon for an app icon.
+
+### Wallpaper Patterns
+
+- `WallpaperProvider` owns selected wallpaper and transient per-wallpaper settings. Do not persist wallpaper selection or custom colors unless a future task explicitly changes that product behavior.
+- Menu bar wallpaper controls stay inside the existing wallpaper dropdown. Prefer compact swatches and native color inputs for color values; use sliders only for numeric wallpaper settings.
+- Keep wallpaper renderers isolated by theme so canvas, WebGL, and CSS-gradient code do not accumulate in one large branch.
+- Canvas and WebGL wallpaper renderers must clean up requestAnimationFrame loops, resize listeners, shader/program resources, and any pointer listeners they create.
+- Wallpaper animation must respect `prefers-reduced-motion`: throttle, pause, or simplify motion while preserving a recognizable static visual.
 
 ### Accessibility Patterns
 

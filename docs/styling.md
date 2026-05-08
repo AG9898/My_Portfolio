@@ -122,22 +122,31 @@ Glass borders use `1px solid rgba(255,255,255,0.10)` for windows and `1px solid 
 
 ## Wallpaper
 
-The canonical wallpaper is a full-viewport Canvas simplex-noise flow field rendered by `src/app/components/Desktop/Wallpaper.tsx`. It uses `simplex-noise` to steer particles through a dark abstract field, caps device pixel ratio for predictable paint cost, and fades the canvas in only after the first frame has painted so there is no blank flash.
+The wallpaper system is rendered by `src/app/components/Desktop/Wallpaper.tsx` and selected through `WallpaperProvider`. It supports multiple full-viewport desktop themes while preserving the macOS shell layering: wallpaper at the back, menu bar and dock above it, and window chrome using independent glass tokens.
+
+The canonical animated wallpaper remains the Canvas simplex-noise flow field. It uses `simplex-noise` to steer particles through a dark abstract field, caps device pixel ratio for predictable paint cost, and fades the canvas in only after the first frame has painted so there is no blank flash.
 
 The `tahoe-dawn` CSS gradient remains underneath the canvas as the server-rendered static fallback for SSR, no-JS, and initial canvas startup. Keep this fallback in the `.wallpaper-fallback` class in `globals.css`; do not move it back into inline component styles.
 
-| Name | Gradient stops | Character |
-|---|---|---|
-| `tahoe-dawn` | `#ff8a3c → #ff5b8a → #a15bff → #2b3bd6 → #0a0a18` at `120% 90% at 80% 10%` | Warm orange/pink/purple |
-| `tahoe-night` | `#1a3a8a → #5b2bd6 → #8a2bd6 → #1a1340 → #05050f` at `110% 80% at 30% 20%` | Deep blue/purple |
-| `sequoia` | `#0b3d2e → #0a2436 → #0a0e1a → #050608` at `130% 100% at 50% 0%` | Forest green/midnight |
-| `sonoma` | `#2e1a4a → #4a1e6a → #6a1e8a → #1a0a2a → #07050f` at `120% 90% at 50% 50%` | Magenta/violet |
+| Theme | Basis | Character | Custom controls |
+|---|---|---|---|
+| `flow-field` | Canvas + `simplex-noise` particles | Dark abstract motion field | Particle palette controls may be added later |
+| `tahoe-dawn` | CSS radial gradient, drifting blobs, grain | Warm orange/pink/purple | Gradient stop controls may be added later |
+| `spooky-smoke` | WebGL2 fragment shader adapted from 21st.dev Spooky Smoke Animation | Dense cinematic smoke with tinted highlights | Smoke color |
+| `gradient-dots` | CSS layered radial gradients adapted from 21st.dev Gradient Dots | Static dot field with cursor-aware ripple/drag response | Background, dot, and ripple colors |
 
-All variants use `radial-gradient(...)` with the fallback desktop bg `#0a0a0f`.
+The `tahoe-dawn` fallback uses `radial-gradient(...)` with fallback desktop bg `#0a0a0f` and the following stops: `#ff8a3c -> #ff5b8a -> #a15bff -> #2b3bd6 -> #0a0a18` at `120% 90% at 80% 10%`.
+
+**21st.dev translation notes**:
+
+- `spooky-smoke` should adapt the referenced React/WebGL2 renderer and its `smokeColor` uniform rather than treat it as a third-party runtime dependency. Keep the shader isolated in the wallpaper component, cap DPR, fade in after first paint, clean up RAF loops/listeners/programs, and fall back to `.wallpaper-fallback` if WebGL2 is unavailable.
+- `gradient-dots` should reuse the referenced layered radial-gradient dot-field concept but remove the original infinite `backgroundPosition` and `hue-rotate` animation. In this portfolio, dots stay static until pointer input updates CSS variables or motion values for an epicenter ripple and subtle drag/parallax shift.
+
+**Color customization**: wallpaper color controls are exploratory only. They live in the existing menu bar wallpaper picker, update the active wallpaper live, and do not persist across visits. Each wallpaper owns its own settings shape; do not force all themes through a shared palette.
 
 **Grain overlay**: SVG `feTurbulence` filter, opacity `0.06`, static — applied as a full-viewport pseudo-element.
 
-**Reduced motion**: when `prefers-reduced-motion: reduce` is active, the canvas keeps the same visual language but sharply throttles particle movement instead of running full-speed animation.
+**Reduced motion**: when `prefers-reduced-motion: reduce` is active, animated wallpapers keep the same visual language but sharply throttle or pause movement. Cursor-aware dot interactions should reduce to a subtle opacity or color response without ripple travel or drag motion.
 
 ---
 
