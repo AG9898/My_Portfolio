@@ -21,6 +21,7 @@
 
 import { useState } from "react";
 import { APPS, type AppId } from "../appMetadata";
+import { useWindowManager } from "../WindowManager/WindowManagerProvider";
 
 // ─── Icon labels — file-system metaphors matching macos-redesign.md ───────────
 const ICON_LABELS: Record<AppId, string> = {
@@ -265,14 +266,24 @@ function DesktopShortcutItem({
 
 export default function DesktopShortcuts() {
   const [selectedId, setSelectedId] = useState<AppId | null>(null);
+  const { dispatch } = useWindowManager();
 
   function handleSelect(id: AppId) {
     setSelectedId((prev) => (prev === id ? null : id));
   }
 
-  // Double-click stub — window open wired in V1_007B
-  function handleOpen(_id: AppId) {
-    // no-op until V1_007B connects the window manager
+  function handleOpen(id: AppId) {
+    const app = APPS.find((a) => a.id === id);
+    if (!app) return;
+    dispatch({
+      type: "open",
+      payload: {
+        id: app.id,
+        route: app.route,
+        defaultSize: app.defaultSize,
+        defaultPosition: app.defaultPosition,
+      },
+    });
   }
 
   return (

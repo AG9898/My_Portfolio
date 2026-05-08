@@ -597,7 +597,7 @@
       "id": "V1_007B",
       "title": "Wire dock and shortcuts to open/focus windows",
       "description": "Connect DesktopShortcuts and Dock to the WindowManager so double-clicking a shortcut and clicking a dock icon dispatches the open action (or focus if already open). Mount WindowManagerProvider and WindowRenderer in layout.tsx.",
-      "status": "todo",
+      "status": "done",
       "priority": "critical",
       "group_id": "V1_DESKTOP",
       "depends_on": [

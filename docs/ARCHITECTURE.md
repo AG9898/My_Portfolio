@@ -52,6 +52,7 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 - Dock border: `1px solid rgba(255,255,255,0.22)`. Dock shadow: inset top/bottom highlights + `0 30px 80px rgba(0,0,0,0.5)`.
 - Dock padding: `8px 12px`, border radius: `22px`. Icon base size: `56px`.
 - Renders one button per app from the `APPS` registry. Each icon uses an individual SVG matching the design handoff.
+- Clicking a dock icon dispatches the `open` action; if the app is already open, focuses and restores it without duplicating.
 - No magnification, tooltip, or animation in this phase — deferred to V1_009B.
 - Running indicator dot slot is present but transparent until V1_009B wires window state.
 - Requires `"use client"` directive.
@@ -63,7 +64,7 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 - Each shortcut is a 56×56px SVG using file-type metaphors: txt (home), folder (projects), person (about), msg (contact), pdf (cv).
 - File labels are mapped via `ICON_LABELS` record (e.g., `"about_me.txt"`, `"projects/"`, `"aden_guo_cv.pdf"`); route/id come from `APPS`.
 - Single click: selected state — `rgba(10,132,255,0.28)` background + `1px solid rgba(10,132,255,0.55)` border; label becomes `rgba(10,132,255,0.95)` pill.
-- Double click: open stub (no-op) — wired to window manager in V1_007B.
+- Double click: dispatches `open` action to the window manager; focuses and restores the window if already open.
 - Requires `"use client"` directive; selection state is local (`useState<AppId | null>`).
 
 #### App Metadata (`src/app/components/appMetadata.ts`)

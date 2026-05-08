@@ -6,6 +6,7 @@
 //   reference/design draft/design_handoff_macos_desktop_shell/desktop.jsx
 
 import { APPS, type AppId } from "../appMetadata";
+import { useWindowManager } from "../WindowManager/WindowManagerProvider";
 
 // ─── Individual dock icon SVGs ─────────────────────────────────────────────────
 
@@ -95,6 +96,22 @@ function DockIconGlyph({ appId }: { appId: AppId }) {
 // ─── Dock ──────────────────────────────────────────────────────────────────────
 
 export default function Dock() {
+  const { dispatch } = useWindowManager();
+
+  function handleAppClick(appId: AppId) {
+    const app = APPS.find((a) => a.id === appId);
+    if (!app) return;
+    dispatch({
+      type: "open",
+      payload: {
+        id: app.id,
+        route: app.route,
+        defaultSize: app.defaultSize,
+        defaultPosition: app.defaultPosition,
+      },
+    });
+  }
+
   return (
     <div
       className="absolute bottom-3 left-0 right-0 flex justify-center z-40 pointer-events-none"
@@ -124,6 +141,7 @@ export default function Dock() {
               }}
               aria-label={app.label}
               title={app.label}
+              onClick={() => handleAppClick(app.id)}
             >
               <DockIconGlyph appId={app.id} />
             </button>
