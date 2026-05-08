@@ -160,19 +160,10 @@ export function WindowChrome({
             onClose();
           }}
           aria-label="Close window"
-          className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-white/70"
+          className="bg-traffic-red flex shrink-0 cursor-pointer items-center justify-center rounded-full border-none p-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-white/70"
           style={{
             width: 12,
             height: 12,
-            borderRadius: "50%",
-            background: "#FF5F57",
-            border: "none",
-            padding: 0,
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexShrink: 0,
           }}
         >
           {groupHovered && (
@@ -192,19 +183,10 @@ export function WindowChrome({
             onMinimize();
           }}
           aria-label="Minimize window"
-          className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-white/70"
+          className="bg-traffic-yellow flex shrink-0 cursor-pointer items-center justify-center rounded-full border-none p-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-white/70"
           style={{
             width: 12,
             height: 12,
-            borderRadius: "50%",
-            background: "#FEBC2E",
-            border: "none",
-            padding: 0,
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexShrink: 0,
           }}
         >
           {groupHovered && (
@@ -226,19 +208,10 @@ export function WindowChrome({
             aria-haspopup="menu"
             aria-expanded={contextOpen}
             title="Click to maximize/restore • Right-click for snap options"
-            className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-white/70"
+            className="bg-traffic-green flex shrink-0 cursor-pointer items-center justify-center rounded-full border-none p-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-white/70"
             style={{
               width: 12,
               height: 12,
-              borderRadius: "50%",
-              background: "#28C840",
-              border: "none",
-              padding: 0,
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexShrink: 0,
             }}
           >
             {groupHovered && (
@@ -265,14 +238,12 @@ export function WindowChrome({
             <div
               role="menu"
               aria-label="Window snap options"
+              className="glass-chrome"
               style={{
                 position: "absolute",
                 top: 18,
                 left: 0,
                 zIndex: 9999,
-                background: "rgba(44,44,46,0.96)",
-                backdropFilter: "blur(20px)",
-                WebkitBackdropFilter: "blur(20px)",
                 border: "1px solid rgba(255,255,255,0.12)",
                 borderRadius: 8,
                 padding: "4px 0",

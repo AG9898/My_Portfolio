@@ -228,7 +228,7 @@ export default function MenuBar() {
       aria-label="Menu Bar"
     >
       {/* ── Left side ── */}
-      <nav className="flex items-center" aria-label="App menus">
+      <nav className="flex min-w-0 flex-1 items-center overflow-hidden" aria-label="App menus">
         {/* Apple menu */}
         <MenuDropdown
           trigger={<AppleLogo />}
@@ -239,7 +239,7 @@ export default function MenuBar() {
         {/* Focused app name — updates as window focus changes */}
         <MenuDropdown
           trigger={
-            <span className="font-semibold text-label-primary">
+            <span className="max-w-[120px] truncate font-semibold text-label-primary">
               {focusedAppLabel}
             </span>
           }
@@ -267,7 +267,7 @@ export default function MenuBar() {
 
       {/* ── Right side ── */}
       <div
-        className="ml-auto flex items-center gap-3 text-[12.5px] text-label-primary"
+        className="ml-3 flex shrink-0 items-center gap-3 text-[12.5px] text-label-primary"
         style={{ color: "var(--color-label-tertiary)" }}
         aria-label="Status icons"
       >

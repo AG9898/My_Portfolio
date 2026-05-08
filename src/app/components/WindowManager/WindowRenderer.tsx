@@ -157,7 +157,7 @@ function AppWindow({
 
   const windowContent = (
     <motion.div
-      className="window-shell"
+      className="window-shell glass"
       custom={motionCustom}
       variants={windowVariants}
       initial="initial"
@@ -171,9 +171,6 @@ function AppWindow({
         overflow: "hidden",
         boxShadow: "0 22px 70px rgba(0,0,0,0.55)",
         border: "1px solid rgba(255,255,255,0.14)",
-        background: "rgba(30,30,32,0.82)",
-        backdropFilter: "blur(28px) saturate(180%)",
-        WebkitBackdropFilter: "blur(28px) saturate(180%)",
         display: "flex",
         flexDirection: "column",
       }}
@@ -198,11 +195,11 @@ function AppWindow({
 
       {/* Window content area */}
       <div
+        className="text-label-primary"
         style={{
           flex: 1,
           overflow: "auto",
           position: "relative",
-          color: "var(--text-label-primary)",
           fontSize: 14,
         }}
       >

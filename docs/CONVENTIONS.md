@@ -92,6 +92,8 @@ Full testing guide: [`TESTING.md`](TESTING.md)
 - Never introduce backend, database, or auth complexity for static portfolio content without explicit approval.
 - Never duplicate app metadata across desktop icons, dock items, menu labels, and routes.
 - Never bulk-rewrite `docs/workboard.json`.
+- Never reconstruct the `.glass-*` backdrop-filter stack inline in component files — always use the named utility class.
+- Never use inline hex values for UI surface backgrounds or text colors in component files. Traffic light colors must use `bg-traffic-red`, `bg-traffic-yellow`, `bg-traffic-green`. SVG design-handoff artwork (icons) is exempt.
 
 ## Always
 

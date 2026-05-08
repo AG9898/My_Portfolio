@@ -163,7 +163,7 @@ function DockItem({ app, mouseX, isOpen, onClick }: DockItemProps) {
       style={{ width: DOCK_BASE_SIZE }}
     >
       <motion.span
-        className="glass-chrome pointer-events-none absolute bottom-[74px] rounded-md border border-glass-edge px-2 py-1 text-[11px] text-label-primary shadow-lg"
+        className="glass-chrome pointer-events-none absolute bottom-[74px] max-w-[120px] truncate rounded-md border border-glass-edge px-2 py-1 text-[11px] text-label-primary shadow-lg"
         style={{ opacity: tooltipOpacity, y }}
         aria-hidden="true"
       >

@@ -972,7 +972,7 @@
       "id": "V1_011B",
       "title": "Visual consistency and text overflow pass",
       "description": "Check and fix text overflow in menu bar, dock labels, shortcut labels, title bars, toolbars, and app content at supported desktop sizes. Ensure consistent glass material usage and no stray inline hex values.",
-      "status": "todo",
+      "status": "done",
       "priority": "medium",
       "group_id": "V1_DESKTOP",
       "depends_on": [

@@ -18,18 +18,18 @@ export default function CV() {
           Preview
         </div>
         <div className="rounded-lg border border-glass-edge bg-window p-2 shadow-[0_8px_28px_rgba(0,0,0,0.2)]">
-          <div className="aspect-[8.5/11] rounded border border-glass-edge bg-[#f5f5f7] p-2">
-            <div className="h-2 w-16 rounded-sm bg-[#d1d1d6]" />
+          <div className="aspect-[8.5/11] rounded border border-glass-edge bg-white/90 p-2">
+            <div className="h-2 w-16 rounded-sm bg-black/20" />
             <div className="mt-3 space-y-1.5">
-              <div className="h-1.5 rounded-sm bg-[#aeaeb2]" />
-              <div className="h-1.5 rounded-sm bg-[#c7c7cc]" />
-              <div className="h-1.5 w-3/4 rounded-sm bg-[#c7c7cc]" />
+              <div className="h-1.5 rounded-sm bg-black/30" />
+              <div className="h-1.5 rounded-sm bg-black/20" />
+              <div className="h-1.5 w-3/4 rounded-sm bg-black/20" />
             </div>
-            <div className="mt-4 h-10 rounded-sm border border-[#d1d1d6]" />
+            <div className="mt-4 h-10 rounded-sm border border-black/20" />
             <div className="mt-4 space-y-1.5">
-              <div className="h-1.5 rounded-sm bg-[#c7c7cc]" />
-              <div className="h-1.5 rounded-sm bg-[#c7c7cc]" />
-              <div className="h-1.5 w-2/3 rounded-sm bg-[#c7c7cc]" />
+              <div className="h-1.5 rounded-sm bg-black/20" />
+              <div className="h-1.5 rounded-sm bg-black/20" />
+              <div className="h-1.5 w-2/3 rounded-sm bg-black/20" />
             </div>
           </div>
         </div>
@@ -100,8 +100,8 @@ export default function CV() {
           </a>
         </div>
 
-        <section className="min-h-0 flex-1 overflow-auto bg-[#2c2c2e] p-3 sm:p-5">
-          <div className="mx-auto h-full min-h-[520px] max-w-4xl overflow-hidden rounded-lg border border-glass-edge bg-[#1c1c1e] shadow-[0_18px_60px_rgba(0,0,0,0.38)]">
+        <section className="min-h-0 flex-1 overflow-auto bg-chrome p-3 sm:p-5">
+          <div className="mx-auto h-full min-h-[520px] max-w-4xl overflow-hidden rounded-lg border border-glass-edge bg-window shadow-[0_18px_60px_rgba(0,0,0,0.38)]">
             <iframe
               title="Aden Guo CV"
               src={`${PDF_URL}#toolbar=0&navpanes=0`}

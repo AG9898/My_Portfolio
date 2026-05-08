@@ -249,11 +249,10 @@ function DesktopShortcutItem({
     >
       <ShortcutFileIcon appId={appId} />
       <span
-        className="mt-1.5 text-[11px] leading-tight text-label-primary px-1 rounded max-w-full truncate"
+        className={`mt-1.5 text-[11px] leading-tight px-1 rounded max-w-full truncate ${selected ? "text-white" : "text-label-primary"}`}
         style={{
           background: selected ? "rgba(10,132,255,0.95)" : "transparent",
           textShadow: selected ? "none" : "0 1px 2px rgba(0,0,0,0.7)",
-          color: selected ? "#FFFFFF" : undefined,
         }}
       >
         {label}

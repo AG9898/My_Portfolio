@@ -243,3 +243,13 @@ const bootFade = { duration: 0.4, ease: 'easeOut' }
 - No Heroicons — use `lucide-react`
 - No stock Tailwind grays (`gray-*`, `zinc-*`, `neutral-*`) for UI chrome
 - No hardcoded opacity variants for window backgrounds — use the token
+
+## Overflow prevention
+
+All text-bearing shell elements must guard against overflow at 1280px and 1440px widths:
+
+- Menu bar left nav: `min-w-0 flex-1 overflow-hidden` on the nav container; `max-w-[120px] truncate` on the focused-app name span.
+- Menu bar right status area: `shrink-0` so icons are never pushed off-screen.
+- Dock tooltips: `max-w-[120px] truncate` on the tooltip `<span>`.
+- Desktop shortcut labels: `max-w-full truncate` on the label `<span>`.
+- Window title bar: `overflow: hidden; textOverflow: ellipsis; whiteSpace: nowrap` with `padding: 0 80px` to clear traffic lights on both sides.
