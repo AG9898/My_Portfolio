@@ -43,9 +43,10 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 #### MenuBar (`src/app/components/MenuBar/MenuBar.tsx`)
 
 - Static 28px bar using `.glass-menubar` with `borderBottom: 1px solid rgba(255,255,255,0.08)`.
-- Left: Apple logo SVG → app name placeholder (static "Finder" until V1_008A wires focused-app name) → File / Edit / View / Window / Help menu buttons.
-- Right: Control Centre SVG → Battery visual (24×12px rect, 78% fill, decorative) → Wi-Fi SVG → date → live clock.
+- Left: Apple logo Radix dropdown → focused-app name Radix dropdown (updates live as window focus changes, falls back to "Finder") → app-specific Radix dropdowns (File / Edit / View / Window / Help).
+- Right: theme toggle button → Control Centre SVG → Battery visual (24×12px rect, 78% fill, decorative) → Wi-Fi SVG → date → live clock.
 - Includes a right-side icon button that toggles the `next-themes` theme between dark and light.
+- Dropdown menus are implemented in `src/app/components/MenuBar/MenuDropdown.tsx` using `@radix-ui/react-dropdown-menu`. Popovers use `.glass-chrome` styling and Radix animation state attributes for open/close transitions. Menus are keyboard accessible (arrow keys, Enter, Escape).
 - Clock uses `useState<Date | null>(null)` initialised null on the server; `useEffect` populates it on the client and starts a 1000ms interval. Date and time strings are only rendered once non-null, eliminating SSR/client hydration mismatch. Requires `"use client"` directive.
 
 #### Dock (`src/app/components/Dock/Dock.tsx`)

@@ -3,6 +3,9 @@
 import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import { APPS } from "../appMetadata";
+import { useWindowManager } from "../WindowManager/WindowManagerProvider";
+import { MenuDropdown, MenuEntry } from "./MenuDropdown";
 
 // ─── Apple logo SVG ──────────────────────────────────────────────────────────
 function AppleLogo() {
@@ -77,8 +80,65 @@ function WifiIcon() {
   );
 }
 
-// ─── Menu Bar app menus (left side) ──────────────────────────────────────────
-const APP_MENUS = ["File", "Edit", "View", "Window", "Help"];
+// ─── Apple menu items ─────────────────────────────────────────────────────────
+const APPLE_MENU_ITEMS: MenuEntry[] = [
+  { label: "About This Portfolio" },
+  { separator: true },
+  { label: "System Preferences…", disabled: true },
+  { separator: true },
+  { label: "Sleep", disabled: true },
+  { label: "Restart…", disabled: true },
+  { label: "Shut Down…", disabled: true },
+];
+
+// ─── App-specific menu definitions ──────────────────────────────────────────
+const APP_MENUS_MAP: Record<string, { label: string; items: MenuEntry[] }[]> = {
+  default: [
+    {
+      label: "File",
+      items: [
+        { label: "New Window", shortcut: "⌘N", disabled: true },
+        { label: "Close Window", shortcut: "⌘W", disabled: true },
+      ],
+    },
+    {
+      label: "Edit",
+      items: [
+        { label: "Undo", shortcut: "⌘Z", disabled: true },
+        { label: "Redo", shortcut: "⇧⌘Z", disabled: true },
+        { separator: true },
+        { label: "Cut", shortcut: "⌘X", disabled: true },
+        { label: "Copy", shortcut: "⌘C", disabled: true },
+        { label: "Paste", shortcut: "⌘V", disabled: true },
+        { label: "Select All", shortcut: "⌘A", disabled: true },
+      ],
+    },
+    {
+      label: "View",
+      items: [
+        { label: "Zoom In", shortcut: "⌘+", disabled: true },
+        { label: "Zoom Out", shortcut: "⌘−", disabled: true },
+        { separator: true },
+        { label: "Enter Full Screen", shortcut: "⌃⌘F", disabled: true },
+      ],
+    },
+    {
+      label: "Window",
+      items: [
+        { label: "Minimize", shortcut: "⌘M", disabled: true },
+        { label: "Zoom", disabled: true },
+        { separator: true },
+        { label: "Bring All to Front", disabled: true },
+      ],
+    },
+    {
+      label: "Help",
+      items: [
+        { label: "Portfolio Help", disabled: true },
+      ],
+    },
+  ],
+};
 
 // ─── MenuBar ─────────────────────────────────────────────────────────────────
 export default function MenuBar() {
@@ -86,6 +146,7 @@ export default function MenuBar() {
   const [now, setNow] = useState<Date | null>(null);
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
+  const { state } = useWindowManager();
 
   useEffect(() => {
     setMounted(true);
@@ -108,6 +169,16 @@ export default function MenuBar() {
       })
     : "";
 
+  // Derive focused app label from window manager state
+  const focusedApp = state.focusedId
+    ? APPS.find((app) => app.id === state.focusedId)
+    : null;
+  const focusedAppLabel = focusedApp?.label ?? "Finder";
+
+  // Get app-specific menu definitions, falling back to default
+  const appMenus =
+    APP_MENUS_MAP[state.focusedId ?? ""] ?? APP_MENUS_MAP["default"];
+
   return (
     <header
       className="glass-menubar absolute top-0 left-0 right-0 h-7 flex items-center px-3 text-[13px] text-label-primary z-50 select-none"
@@ -116,20 +187,39 @@ export default function MenuBar() {
     >
       {/* ── Left side ── */}
       <nav className="flex items-center" aria-label="App menus">
-        <AppleLogo />
-        {/* App name placeholder — replaced with focused-app name in V1_008A */}
-        <span className="font-semibold mr-4 text-label-primary" aria-current="page">
-          Finder
-        </span>
-        {APP_MENUS.map((menu) => (
-          <button
-            key={menu}
-            className="mr-3.5 cursor-default px-1.5 py-0.5 rounded text-[13px] text-label-primary hover:bg-[var(--color-control-hover)]"
-            aria-haspopup="menu"
-            aria-label={menu}
-          >
-            {menu}
-          </button>
+        {/* Apple menu */}
+        <MenuDropdown
+          trigger={<AppleLogo />}
+          items={APPLE_MENU_ITEMS}
+          triggerClassName="mr-2"
+        />
+
+        {/* Focused app name — updates as window focus changes */}
+        <MenuDropdown
+          trigger={
+            <span className="font-semibold text-label-primary">
+              {focusedAppLabel}
+            </span>
+          }
+          items={[
+            { label: `About ${focusedAppLabel}` },
+            { separator: true },
+            { label: "Hide", shortcut: "⌘H", disabled: true },
+            { label: "Hide Others", shortcut: "⌥⌘H", disabled: true },
+            { separator: true },
+            { label: "Quit", shortcut: "⌘Q", disabled: true },
+          ]}
+          triggerClassName="mr-2"
+        />
+
+        {/* App-specific menus: File, Edit, View, Window, Help */}
+        {appMenus.map((menu) => (
+          <MenuDropdown
+            key={menu.label}
+            trigger={menu.label}
+            items={menu.items}
+            triggerClassName="mr-1"
+          />
         ))}
       </nav>
 

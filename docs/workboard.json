@@ -686,7 +686,7 @@
       "id": "V1_008A",
       "title": "Radix dropdown menus and focused app name in menu bar",
       "description": "Replace the static MenuBar app-name placeholder with Radix UI dropdown menus (Apple menu, focused-app menu). The focused app name updates in the menu bar as window focus changes. Menus are keyboard accessible and styled with .glass-chrome to match the frosted shell.",
-      "status": "todo",
+      "status": "done",
       "priority": "medium",
       "group_id": "V1_DESKTOP",
       "depends_on": [
