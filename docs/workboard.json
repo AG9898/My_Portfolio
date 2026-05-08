@@ -714,7 +714,7 @@
       "id": "V1_008B",
       "title": "Theme toggle and window actions in menu bar",
       "description": "Add menu bar items for: theme toggle (dark/light), and window actions (close, minimize, restore) that dispatch reducer actions. Window actions are disabled or hidden when no focused window can receive them.",
-      "status": "todo",
+      "status": "done",
       "priority": "medium",
       "group_id": "V1_DESKTOP",
       "depends_on": [

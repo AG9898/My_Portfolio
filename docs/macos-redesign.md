@@ -128,6 +128,7 @@ Initial implementation can enforce one window per route/app. Opening an already-
 - Right side (all `12.5px`, `white/85` opacity, left-to-right): Control center icon (4 rounded rects SVG) → Battery (24×12px rect, 78% fill visual, decorative) → Wi-Fi glyph → Date (`weekday short, month short, day numeric`) → Time (`hour numeric, minute 2-digit`, `tabular-nums`, updates every 1000ms)
 - Theme toggle: icon-only control in the right-side status cluster switches between dark and light modes through `next-themes`; dark remains the default canonical theme.
 - Glass treatment: `.glass-menubar` utility; bottom edge `1px solid rgba(255,255,255,0.08)`
+- Window menu (functional): Minimize dispatches `minimize` to the window reducer; Zoom dispatches `maximize` (toggle); Restore dispatches `restore` (clears minimized/maximized/snapped); Close dispatches `close`. All items are disabled when no window is focused. Restore is additionally disabled when the focused window is already in the default open state (not minimized, not maximized, not snapped).
 
 ### Dock
 - Centered at bottom

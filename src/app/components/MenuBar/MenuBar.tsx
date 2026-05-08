@@ -91,54 +91,44 @@ const APPLE_MENU_ITEMS: MenuEntry[] = [
   { label: "Shut Down…", disabled: true },
 ];
 
-// ─── App-specific menu definitions ──────────────────────────────────────────
-const APP_MENUS_MAP: Record<string, { label: string; items: MenuEntry[] }[]> = {
-  default: [
-    {
-      label: "File",
-      items: [
-        { label: "New Window", shortcut: "⌘N", disabled: true },
-        { label: "Close Window", shortcut: "⌘W", disabled: true },
-      ],
-    },
-    {
-      label: "Edit",
-      items: [
-        { label: "Undo", shortcut: "⌘Z", disabled: true },
-        { label: "Redo", shortcut: "⇧⌘Z", disabled: true },
-        { separator: true },
-        { label: "Cut", shortcut: "⌘X", disabled: true },
-        { label: "Copy", shortcut: "⌘C", disabled: true },
-        { label: "Paste", shortcut: "⌘V", disabled: true },
-        { label: "Select All", shortcut: "⌘A", disabled: true },
-      ],
-    },
-    {
-      label: "View",
-      items: [
-        { label: "Zoom In", shortcut: "⌘+", disabled: true },
-        { label: "Zoom Out", shortcut: "⌘−", disabled: true },
-        { separator: true },
-        { label: "Enter Full Screen", shortcut: "⌃⌘F", disabled: true },
-      ],
-    },
-    {
-      label: "Window",
-      items: [
-        { label: "Minimize", shortcut: "⌘M", disabled: true },
-        { label: "Zoom", disabled: true },
-        { separator: true },
-        { label: "Bring All to Front", disabled: true },
-      ],
-    },
-    {
-      label: "Help",
-      items: [
-        { label: "Portfolio Help", disabled: true },
-      ],
-    },
-  ],
-};
+// ─── Static (non-window-action) menu definitions ─────────────────────────────
+// These menus are app-agnostic and do not require dispatch or focused state.
+const STATIC_MENUS: { label: string; items: MenuEntry[] }[] = [
+  {
+    label: "File",
+    items: [
+      { label: "New Window", shortcut: "⌘N", disabled: true },
+      { label: "Close Window", shortcut: "⌘W", disabled: true },
+    ],
+  },
+  {
+    label: "Edit",
+    items: [
+      { label: "Undo", shortcut: "⌘Z", disabled: true },
+      { label: "Redo", shortcut: "⇧⌘Z", disabled: true },
+      { separator: true },
+      { label: "Cut", shortcut: "⌘X", disabled: true },
+      { label: "Copy", shortcut: "⌘C", disabled: true },
+      { label: "Paste", shortcut: "⌘V", disabled: true },
+      { label: "Select All", shortcut: "⌘A", disabled: true },
+    ],
+  },
+  {
+    label: "View",
+    items: [
+      { label: "Zoom In", shortcut: "⌘+", disabled: true },
+      { label: "Zoom Out", shortcut: "⌘−", disabled: true },
+      { separator: true },
+      { label: "Enter Full Screen", shortcut: "⌃⌘F", disabled: true },
+    ],
+  },
+  {
+    label: "Help",
+    items: [
+      { label: "Portfolio Help", disabled: true },
+    ],
+  },
+];
 
 // ─── MenuBar ─────────────────────────────────────────────────────────────────
 export default function MenuBar() {
@@ -146,7 +136,7 @@ export default function MenuBar() {
   const [now, setNow] = useState<Date | null>(null);
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
-  const { state } = useWindowManager();
+  const { state, dispatch } = useWindowManager();
 
   useEffect(() => {
     setMounted(true);
@@ -175,9 +165,61 @@ export default function MenuBar() {
     : null;
   const focusedAppLabel = focusedApp?.label ?? "Finder";
 
-  // Get app-specific menu definitions, falling back to default
-  const appMenus =
-    APP_MENUS_MAP[state.focusedId ?? ""] ?? APP_MENUS_MAP["default"];
+  // Focused window entry — used to determine if a focused window is minimized/maximized.
+  const focusedWindow = state.openWindows.find((w) => w.id === state.focusedId);
+
+  // Window menu — built dynamically so actions can dispatch to the window manager.
+  // Items are disabled when no focused window exists.
+  const noFocus = !state.focusedId;
+  const windowMenuItems: MenuEntry[] = [
+    {
+      label: "Minimize",
+      shortcut: "⌘M",
+      disabled: noFocus || focusedWindow?.minimized === true,
+      onSelect: () => {
+        if (state.focusedId) {
+          dispatch({ type: "minimize", payload: { id: state.focusedId } });
+        }
+      },
+    },
+    {
+      label: "Zoom",
+      disabled: noFocus,
+      onSelect: () => {
+        if (state.focusedId) {
+          dispatch({ type: "maximize", payload: { id: state.focusedId } });
+        }
+      },
+    },
+    { separator: true },
+    {
+      label: "Restore",
+      disabled: noFocus || (!focusedWindow?.minimized && !focusedWindow?.maximized && focusedWindow?.snapped === "none"),
+      onSelect: () => {
+        if (state.focusedId) {
+          dispatch({ type: "restore", payload: { id: state.focusedId } });
+        }
+      },
+    },
+    { separator: true },
+    {
+      label: "Close",
+      shortcut: "⌘W",
+      disabled: noFocus,
+      onSelect: () => {
+        if (state.focusedId) {
+          dispatch({ type: "close", payload: { id: state.focusedId } });
+        }
+      },
+    },
+  ];
+
+  // All menus: static menus plus the dynamic Window menu inserted before Help.
+  const allMenus = [
+    ...STATIC_MENUS.slice(0, 3), // File, Edit, View
+    { label: "Window", items: windowMenuItems },
+    ...STATIC_MENUS.slice(3),   // Help
+  ];
 
   return (
     <header
@@ -212,8 +254,8 @@ export default function MenuBar() {
           triggerClassName="mr-2"
         />
 
-        {/* App-specific menus: File, Edit, View, Window, Help */}
-        {appMenus.map((menu) => (
+        {/* App menus: File, Edit, View, Window (dynamic), Help */}
+        {allMenus.map((menu) => (
           <MenuDropdown
             key={menu.label}
             trigger={menu.label}
