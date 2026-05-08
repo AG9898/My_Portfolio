@@ -1,5 +1,3 @@
-"use client";
-
 // ─── WindowChrome ──────────────────────────────────────────────────────────────
 // Window title bar with traffic light controls.
 //
