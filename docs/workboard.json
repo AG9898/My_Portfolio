@@ -478,7 +478,7 @@
       "id": "V1_006A",
       "title": "WindowManager provider and basic window rendering",
       "description": "Create WindowManagerProvider (context + useReducer with windowReducer) and a WindowRenderer that maps open windows to AppWindow shell divs with react-rnd for drag and resize. Windows render above the wallpaper and below menu bar/dock. Focus on click updates zIndex and focusedId via reducer.",
-      "status": "todo",
+      "status": "done",
       "priority": "critical",
       "group_id": "V1_DESKTOP",
       "depends_on": [

@@ -26,9 +26,10 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 - `src/app/layout.tsx` mounts the persistent desktop shell and window manager provider.
   - `html` element carries `suppressHydrationWarning` (required by `next-themes`).
   - `ThemeProvider` uses `attribute="data-theme"` to match the CSS selector `[data-theme="light"]` in `globals.css`; `defaultTheme="dark"`, `enableSystem={false}`.
+  - `WindowManagerProvider` wraps the desktop root, making window state available to all client components.
   - `#desktop-root` div is `position: fixed; inset: 0; overflow: hidden; bg-desktop` — the stable shell container that never unmounts.
   - Font is set via inline `style` on `body` using the macOS system font stack (`-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif`); no Google Fonts import.
-  - Inside `#desktop-root`, from back to front: wallpaper placeholder div (`absolute inset-0 bg-desktop`), `<MenuBar />` (`z-50`, `h-7`), `<DesktopShortcuts />` (`z-10`, top: 48px), `<main>` page content area (`absolute`, `top: 28`, `bottom: 80`, `overflow-hidden`), `<Dock />` (`z-40`, `bottom-3`).
+  - Inside `#desktop-root`, from back to front: `<Wallpaper />`, `<MenuBar />` (`z-50`, `h-7`), `<DesktopShortcuts />` (`z-10`, top: 48px), `<WindowRenderer />` (window z-index 21+), `<main>` page content area (`absolute`, `top: 28`, `bottom: 80`, `overflow-hidden`), `<Dock />` (`z-40`, `bottom-3`).
   - The `<main>` content area sits between the menu bar (28px tall) and the dock (80px clearance at the bottom), so route children never overlap shell chrome.
 - Route pages provide content for their app windows.
 - Route changes focus/open app windows without unmounting wallpaper, menu bar, dock, desktop icons, or other open windows.
@@ -81,7 +82,7 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 
 #### Window State Reducer (`src/app/components/WindowManager/windowReducer.ts`)
 
-- Pure TypeScript module — no React hooks or side effects. Wired into `useReducer` by the WindowManagerProvider (V1_006A).
+- Pure TypeScript module — no React hooks or side effects. Wired into `useReducer` by the WindowManagerProvider.
 - **`WindowState`**: `openWindows: WindowEntry[]`, `focusedId: AppId | null`, `zIndexMap: Partial<Record<AppId, number>>`.
 - **`WindowEntry`**: `id`, `route`, `geometry` (`x, y, width, height`), `restoreGeometry`, `minimized`, `maximized`, `snapped: "none" | "left" | "right"`.
 - **`WindowAction`** union covers all 11 action types: `open`, `focus`, `close`, `minimize`, `restore`, `maximize`, `snapLeft`, `snapRight`, `drag`, `resize`, `syncRoute`.
@@ -91,6 +92,24 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 - `snapLeft`/`snapRight` actions: accept `desktopWidth`/`desktopHeight` from the caller and compute exact half-screen geometry.
 - `drag`/`resize` actions: update geometry and `restoreGeometry` together; clear snapped and maximized flags.
 - z-index is a monotonically incrementing counter (`nextZ = max(zIndexMap values) + 1`); every focus/open/snap/maximize/restore increments it.
+
+#### WindowManagerProvider (`src/app/components/WindowManager/WindowManagerProvider.tsx`)
+
+- `"use client"` component that wraps the app tree via `WindowManagerContext`.
+- Owns the single `useReducer(windowReducer, initialWindowState)` call; provides `{ state, dispatch }` via context.
+- `useWindowManager()` hook returns context value; throws if called outside the provider.
+- Mounted in `layout.tsx` wrapping the desktop root so all shell components (Dock, DesktopShortcuts, MenuBar) and window components share one state instance.
+
+#### WindowRenderer (`src/app/components/WindowManager/WindowRenderer.tsx`)
+
+- `"use client"` component that reads `state.openWindows` from `useWindowManager()` and renders one `AppWindow` shell per entry.
+- Skips rendering for minimized windows (returns null).
+- Uses `react-rnd` (`<Rnd>`) for drag and resize; `onDragStop` dispatches `drag` action, `onResizeStop` dispatches `resize` action.
+- Clicking any part of a window dispatches a `focus` action via `onMouseDown`.
+- z-index: each window's `zIndexMap[id]` value is added to `WINDOW_Z_BASE = 20`, placing windows above the wallpaper (0) and shortcuts (z-10) but below the dock (z-40) and menu bar (z-50).
+- Maximized windows bypass `react-rnd` and render as a `position: fixed` div filling the desktop area (top: 28px, bottom: 80px).
+- Title bar chrome and traffic lights are placeholder divs in this phase — full chrome is added in V1_006B.
+- Window drag handle is scoped to elements with the `.glass-chrome` class on the title bar.
 
 ### App Windows
 
