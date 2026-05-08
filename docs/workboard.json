@@ -566,7 +566,7 @@
       "id": "V1_007A",
       "title": "Create route files for all five apps",
       "description": "Create the five Next.js App Router page files: src/app/page.tsx (Home), src/app/projects/page.tsx, src/app/about/page.tsx, src/app/contact/page.tsx, src/app/cv/page.tsx. Each page exports a minimal component with the app name as a placeholder — real content comes in V1_010A–D. Pages must not render any desktop shell chrome (that lives in layout.tsx).",
-      "status": "todo",
+      "status": "done",
       "priority": "critical",
       "group_id": "V1_DESKTOP",
       "depends_on": [

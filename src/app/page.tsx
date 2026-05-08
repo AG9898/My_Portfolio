@@ -1,3 +1,3 @@
 export default function Home() {
-  return <main aria-label="Portfolio desktop root" />;
+  return <div className="p-4 text-label-primary">Home</div>;
 }
