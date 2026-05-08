@@ -74,43 +74,30 @@ select {
   font: inherit;
 }
 
-/* ─── Liquid Glass materials ─────────────────────────────────────────────── */
+/* ─── Glass utility classes ──────────────────────────────────────────────── */
 
 @layer utilities {
-  /* Standard window / panel */
   .glass {
-    background: var(--color-window);
-    backdrop-filter: blur(40px) saturate(180%);
-    -webkit-backdrop-filter: blur(40px) saturate(180%);
-    border: 1px solid var(--color-glass-edge);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.12),
-      0 0 0 0.5px rgba(255, 255, 255, 0.06);
+    background: rgba(28, 28, 30, 0.78);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
   }
 
-  /* Window title bar / toolbar chrome */
   .glass-chrome {
-    background: var(--color-chrome);
-    backdrop-filter: blur(20px) saturate(160%);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    border-bottom: 1px solid var(--color-glass-edge);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.10);
+    background: rgba(44, 44, 46, 0.72);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
   }
 
-  /* Dock — heavy blur, strong specular */
   .glass-dock {
-    background: rgba(255, 255, 255, 0.10);
-    backdrop-filter: blur(48px) saturate(200%);
-    -webkit-backdrop-filter: blur(48px) saturate(200%);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    box-shadow:
-      inset 0 1.5px 0 rgba(255, 255, 255, 0.20),
-      0 8px 32px rgba(0, 0, 0, 0.40);
+    background: rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
   }
 
-  /* Menu bar — fully transparent in Tahoe */
   .glass-menubar {
-    background: transparent;
-    border-bottom: none;
+    background: rgba(20, 20, 22, 0.45);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
   }
 }
