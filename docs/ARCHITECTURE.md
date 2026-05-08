@@ -79,6 +79,19 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 - Enforces one window per app/route by default.
 - Handles open, focus, close, minimize, restore, maximize, snap, drag, and resize actions deterministically.
 
+#### Window State Reducer (`src/app/components/WindowManager/windowReducer.ts`)
+
+- Pure TypeScript module — no React hooks or side effects. Wired into `useReducer` by the WindowManagerProvider (V1_006A).
+- **`WindowState`**: `openWindows: WindowEntry[]`, `focusedId: AppId | null`, `zIndexMap: Partial<Record<AppId, number>>`.
+- **`WindowEntry`**: `id`, `route`, `geometry` (`x, y, width, height`), `restoreGeometry`, `minimized`, `maximized`, `snapped: "none" | "left" | "right"`.
+- **`WindowAction`** union covers all 11 action types: `open`, `focus`, `close`, `minimize`, `restore`, `maximize`, `snapLeft`, `snapRight`, `drag`, `resize`, `syncRoute`.
+- `open` action: if the app is already in `openWindows`, it focuses and unminimizes that entry without duplicating. Otherwise appends a new `WindowEntry` using `defaultSize`/`defaultPosition` from the caller.
+- `close` action: removes the entry and selects the next highest z-index open window as `focusedId`, or null if none remain.
+- `maximize` action: saves current geometry to `restoreGeometry` and sets `geometry` to a zero-size sentinel — the WindowRenderer fills the desktop area using viewport dimensions. Toggling maximize again calls `restore`.
+- `snapLeft`/`snapRight` actions: accept `desktopWidth`/`desktopHeight` from the caller and compute exact half-screen geometry.
+- `drag`/`resize` actions: update geometry and `restoreGeometry` together; clear snapped and maximized flags.
+- z-index is a monotonically incrementing counter (`nextZ = max(zIndexMap values) + 1`); every focus/open/snap/maximize/restore increments it.
+
 ### App Windows
 
 - Render macOS-style chrome, traffic lights, optional toolbar, and the route app content.

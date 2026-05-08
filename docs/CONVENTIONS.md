@@ -50,7 +50,7 @@ Normative guide for code in this portfolio. Read before writing new UI architect
 
 ### Interaction Patterns
 
-- Window state changes should go through deterministic reducer actions.
+- Window state changes should go through deterministic reducer actions. The canonical state types (`WindowState`, `WindowEntry`, `WindowAction`, `WindowGeometry`, `SnapState`) and `windowReducer` are defined in `src/app/components/WindowManager/windowReducer.ts`.
 - Opening an already-open app focuses and restores it.
 - Dragging and resizing use `react-rnd`.
 - Animations use `framer-motion`. Use `AnimatePresence` for any component that needs an exit animation (window close, boot screen fade-out) — CSS transitions cannot animate unmounting.

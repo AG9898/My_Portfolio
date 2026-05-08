@@ -449,7 +449,7 @@
       "id": "V1_005B",
       "title": "Implement window state reducer",
       "description": "Create src/app/components/WindowManager/windowReducer.ts with a typed window state shape and deterministic reducer. State shape includes: openWindows array (id, route, geometry, minimized, maximized, snapped, restoreGeometry), focusedId, zIndexMap. Reducer actions: open, focus, close, minimize, restore, maximize, snapLeft, snapRight, drag, resize, syncRoute. Opening an already-open app focuses and restores that window without duplicating. Closing the focused window selects the next highest z-index window or falls back to null.",
-      "status": "todo",
+      "status": "done",
       "priority": "critical",
       "group_id": "V1_DESKTOP",
       "depends_on": [
