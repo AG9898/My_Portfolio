@@ -1,7 +1,7 @@
 {
   "$schema": "./workboard.schema.json",
   "schema_version": "1.0.0",
-  "last_updated": "2026-05-07",
+  "last_updated": "2026-05-08",
   "tasks": [
     {
       "id": "V1_001",
@@ -1019,6 +1019,128 @@
       ],
       "files": [
         "src/app/components/WindowManager/"
+      ],
+      "commands": [
+        "npm run lint",
+        "npm run build"
+      ]
+    },
+    {
+      "id": "V1_014A",
+      "title": "Extend wallpaper state for transient theme settings",
+      "description": "Expand the wallpaper provider and renderer routing so the desktop can select between all supported wallpaper themes and hold non-persisted, per-theme color settings for smoke and gradient dots without writing to browser storage.",
+      "status": "todo",
+      "priority": "medium",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Wallpaper type includes flow-field, tahoe-dawn, spooky-smoke, and gradient-dots.",
+        "WallpaperProvider exposes selected wallpaper plus independent transient settings for each customizable wallpaper.",
+        "Wallpaper selection and custom colors reset on full page reload.",
+        "Wallpaper.tsx routes each wallpaper type to an isolated renderer component."
+      ],
+      "docs": [
+        "docs/ARCHITECTURE.md",
+        "docs/styling.md",
+        "docs/CONVENTIONS.md"
+      ],
+      "files": [
+        "src/app/components/Desktop/WallpaperProvider.tsx",
+        "src/app/components/Desktop/Wallpaper.tsx"
+      ],
+      "commands": [
+        "npm run lint",
+        "npm run build"
+      ]
+    },
+    {
+      "id": "V1_014B",
+      "title": "Add spooky smoke wallpaper renderer",
+      "description": "Implement the spooky-smoke wallpaper as an isolated WebGL2 shader renderer adapted from the referenced 21st.dev Spooky Smoke Animation source, wired to the provider's smoke color setting with fallback and cleanup behavior matching the existing wallpaper system.",
+      "status": "todo",
+      "priority": "medium",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_014A"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Spooky smoke renders full viewport behind desktop chrome when selected.",
+        "Smoke color updates live from provider state.",
+        "Renderer caps DPR, fades in after first paint, cleans up RAF/listeners/WebGL resources, and falls back when WebGL2 is unavailable.",
+        "Reduced motion throttles or pauses smoke motion while preserving a static visual."
+      ],
+      "docs": [
+        "docs/styling.md",
+        "docs/ARCHITECTURE.md"
+      ],
+      "files": [
+        "src/app/components/Desktop/Wallpaper.tsx"
+      ],
+      "commands": [
+        "npm run lint",
+        "npm run build"
+      ]
+    },
+    {
+      "id": "V1_014C",
+      "title": "Add cursor-aware gradient dots wallpaper",
+      "description": "Implement the gradient-dots wallpaper as a static layered dot field adapted from the referenced 21st.dev Gradient Dots source, replacing autonomous hue/background animation with pointer-aware ripple and subtle drag/parallax movement.",
+      "status": "todo",
+      "priority": "medium",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_014A"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Gradient dots renders full viewport behind desktop chrome when selected.",
+        "Dots remain static without pointer input.",
+        "Pointer movement creates an epicenter ripple and subtle drag/parallax response.",
+        "Background, dot, and ripple colors update live from provider state.",
+        "Reduced motion disables ripple travel and drag motion."
+      ],
+      "docs": [
+        "docs/styling.md",
+        "docs/ARCHITECTURE.md"
+      ],
+      "files": [
+        "src/app/components/Desktop/Wallpaper.tsx"
+      ],
+      "commands": [
+        "npm run lint",
+        "npm run build"
+      ]
+    },
+    {
+      "id": "V1_014D",
+      "title": "Add menu bar wallpaper color controls",
+      "description": "Expand the existing menu bar wallpaper picker so users can select the new wallpaper themes and adjust each active theme's own color controls inline without opening a separate settings window or persisting values.",
+      "status": "todo",
+      "priority": "medium",
+      "group_id": "V1_DESKTOP",
+      "depends_on": [
+        "V1_014B",
+        "V1_014C"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Wallpaper picker lists flow field, Tahoe dawn, spooky smoke, and gradient dots.",
+        "Spooky smoke exposes a compact smoke color control.",
+        "Gradient dots exposes compact background, dot, and ripple color controls.",
+        "Controls update the active wallpaper live and reset on reload.",
+        "Menu bar layout remains stable at 1280px and 1440px widths."
+      ],
+      "docs": [
+        "docs/ARCHITECTURE.md",
+        "docs/styling.md",
+        "docs/CONVENTIONS.md"
+      ],
+      "files": [
+        "src/app/components/MenuBar/MenuBar.tsx",
+        "src/app/components/MenuBar/MenuDropdown.tsx",
+        "src/app/components/Desktop/WallpaperProvider.tsx"
       ],
       "commands": [
         "npm run lint",

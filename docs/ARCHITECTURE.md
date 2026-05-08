@@ -13,7 +13,7 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 ## System Topology
 
 - **Frontend:** Next.js 14, React 18, TypeScript, Tailwind CSS.
-- **Client interaction layer:** `framer-motion`, `react-rnd`, `next-themes`, Radix dropdown menus, `lucide-react`, and canvas wallpaper using `simplex-noise`.
+- **Client interaction layer:** `framer-motion`, `react-rnd`, `next-themes`, Radix dropdown menus, `lucide-react`, canvas wallpaper using `simplex-noise`, and optional WebGL2 wallpaper rendering.
 - **Static assets:** served from `public/`, including the carried-forward `cv.pdf`.
 - **Backend/database/auth:** none.
 
@@ -46,8 +46,25 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 - Left: Apple logo Radix dropdown → focused-app name Radix dropdown (updates live as window focus changes, falls back to "Finder") → app-specific Radix dropdowns (File / Edit / View / Window / Help).
 - Right: theme toggle button → Control Centre SVG → Battery visual (24×12px rect, 78% fill, decorative) → Wi-Fi SVG → date → live clock.
 - Includes a right-side icon button that toggles the `next-themes` theme between dark and light.
+- Includes a wallpaper picker in the right-side status cluster. The picker selects the active wallpaper theme and exposes compact theme-specific color controls inline inside the existing dropdown; it does not open a separate settings window.
 - Dropdown menus are implemented in `src/app/components/MenuBar/MenuDropdown.tsx` using `@radix-ui/react-dropdown-menu`. Popovers use `.glass-chrome` styling and Radix animation state attributes for open/close transitions. Menus are keyboard accessible (arrow keys, Enter, Escape).
 - Clock uses `useState<Date | null>(null)` initialised null on the server; `useEffect` populates it on the client and starts a 1000ms interval. Date and time strings are only rendered once non-null, eliminating SSR/client hydration mismatch. Requires `"use client"` directive.
+
+#### Wallpaper (`src/app/components/Desktop/Wallpaper.tsx`)
+
+- Renders the active full-viewport desktop wallpaper behind the shell chrome.
+- Routes the selected wallpaper type to focused renderer components such as `FlowField`, `TahoeDawn`, `SpookySmoke`, and `GradientDots`.
+- Keeps `.wallpaper-fallback` underneath animated/canvas renderers so SSR, no-JS, startup, and unsupported-renderer states never show a blank desktop.
+- Canvas and WebGL renderers own their own RAF loops, resize listeners, DPR caps, first-frame readiness state, and cleanup.
+- `spooky-smoke` is a WebGL2 shader wallpaper adapted from the 21st.dev Spooky Smoke Animation source. It uses a smoke color uniform controlled by `WallpaperProvider` and falls back gracefully if WebGL2 is unavailable.
+- `gradient-dots` is a static CSS dot-field wallpaper adapted from the 21st.dev Gradient Dots source. It replaces the original autonomous Framer Motion background-position and hue cycling with pointer-aware ripple and drag/parallax interaction.
+
+#### WallpaperProvider (`src/app/components/Desktop/WallpaperProvider.tsx`)
+
+- Owns the selected wallpaper type and transient per-wallpaper settings.
+- Exposes setters for the active wallpaper and the active theme's color settings to `Wallpaper`, `MenuBar`, and mobile fallback surfaces.
+- Does not persist wallpaper selection or custom colors to `localStorage`, `sessionStorage`, URL state, or cookies; selections reset on a full reload.
+- Keeps each wallpaper's settings independent. For example, smoke color does not share state with gradient dot background, dot, or ripple colors.
 
 #### Dock (`src/app/components/Dock/Dock.tsx`)
 
@@ -157,6 +174,7 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 | `react-rnd` | Window drag and resize | Yes |
 | `next-themes` | Theme switching | Yes |
 | `simplex-noise` | Generative wallpaper | Yes |
+| WebGL2 browser API | Smoke shader wallpaper | Optional with fallback |
 
 ---
 
