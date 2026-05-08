@@ -65,7 +65,8 @@ Normative guide for code in this portfolio. Read before writing new UI architect
 ### Wallpaper Patterns
 
 - `WallpaperProvider` owns selected wallpaper and transient per-wallpaper settings. Do not persist wallpaper selection or custom colors unless a future task explicitly changes that product behavior.
-- Menu bar wallpaper controls stay inside the existing wallpaper dropdown. Prefer compact swatches and native color inputs for color values; use sliders only for numeric wallpaper settings.
+- Keep customizable wallpaper settings typed per theme instead of sharing one palette object across unrelated renderers.
+- Menu bar wallpaper controls stay inside the existing wallpaper dropdown and should render only for the active customizable theme. Prefer compact swatches and native color inputs for color values; use sliders only for numeric wallpaper settings.
 - Keep wallpaper renderers isolated by theme so canvas, WebGL, and CSS-gradient code do not accumulate in one large branch.
 - Canvas and WebGL wallpaper renderers must clean up requestAnimationFrame loops, resize listeners, shader/program resources, and any pointer listeners they create.
 - Wallpaper animation must respect `prefers-reduced-motion`: throttle, pause, or simplify motion while preserving a recognizable static visual.

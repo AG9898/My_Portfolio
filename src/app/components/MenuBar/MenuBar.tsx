@@ -48,6 +48,31 @@ function ControlCentreIcon() {
   );
 }
 
+function ColorMenuControl({
+  label,
+  value,
+  onChange,
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+}) {
+  return (
+    <label className="mx-1 flex min-w-[190px] items-center justify-between rounded-[4px] px-3 py-[5px] text-[13px] text-label-primary">
+      <span className="pr-4">{label}</span>
+      <input
+        type="color"
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        onPointerDown={(event) => event.stopPropagation()}
+        onKeyDown={(event) => event.stopPropagation()}
+        className="h-5 w-8 cursor-default rounded border border-glass-edge bg-transparent p-0"
+        aria-label={label}
+      />
+    </label>
+  );
+}
+
 // ─── Battery visual (24×12px rect, 78% fill, decorative) ────────────────────
 function BatteryIcon() {
   return (
@@ -138,7 +163,18 @@ export default function MenuBar() {
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
   const { state, dispatch } = useWindowManager();
-  const { wallpaper, setWallpaper } = useWallpaper();
+  const {
+    wallpaper,
+    setWallpaper,
+    tahoeDawnSettings,
+    setTahoeDawnSettings,
+    flowFieldSettings,
+    setFlowFieldSettings,
+    spookySmokeSettings,
+    setSpookySmokeSettings,
+    gradientDotsSettings,
+    setGradientDotsSettings,
+  } = useWallpaper();
 
   useEffect(() => {
     setMounted(true);
@@ -223,6 +259,150 @@ export default function MenuBar() {
     ...STATIC_MENUS.slice(3),   // Help
   ];
 
+  const wallpaperMenuItems: MenuEntry[] = [
+    {
+      label: "Flow Field",
+      checked: wallpaper === "flow-field",
+      onSelect: () => setWallpaper("flow-field"),
+    },
+    {
+      label: "Tahoe Dawn",
+      checked: wallpaper === "tahoe-dawn",
+      onSelect: () => setWallpaper("tahoe-dawn"),
+    },
+    {
+      label: "Spooky Smoke",
+      checked: wallpaper === "spooky-smoke",
+      onSelect: () => setWallpaper("spooky-smoke"),
+    },
+    {
+      label: "Cyber Grid",
+      checked: wallpaper === "gradient-dots",
+      onSelect: () => setWallpaper("gradient-dots"),
+    },
+  ];
+
+  if (wallpaper === "flow-field") {
+    wallpaperMenuItems.push(
+      { separator: true },
+      {
+        custom: (
+          <ColorMenuControl
+            label="Background"
+            value={flowFieldSettings.backgroundColor}
+            onChange={(backgroundColor) =>
+              setFlowFieldSettings({ ...flowFieldSettings, backgroundColor })
+            }
+          />
+        ),
+      },
+      {
+        custom: (
+          <ColorMenuControl
+            label="Lines"
+            value={flowFieldSettings.lineColor}
+            onChange={(lineColor) =>
+              setFlowFieldSettings({ ...flowFieldSettings, lineColor })
+            }
+          />
+        ),
+      },
+    );
+  }
+
+  if (wallpaper === "tahoe-dawn") {
+    wallpaperMenuItems.push(
+      { separator: true },
+      {
+        custom: (
+          <ColorMenuControl
+            label="Background"
+            value={tahoeDawnSettings.backgroundColor}
+            onChange={(backgroundColor) =>
+              setTahoeDawnSettings({ ...tahoeDawnSettings, backgroundColor })
+            }
+          />
+        ),
+      },
+      {
+        custom: (
+          <ColorMenuControl
+            label="Dawn"
+            value={tahoeDawnSettings.dawnColor}
+            onChange={(dawnColor) =>
+              setTahoeDawnSettings({ ...tahoeDawnSettings, dawnColor })
+            }
+          />
+        ),
+      },
+      {
+        custom: (
+          <ColorMenuControl
+            label="Glow"
+            value={tahoeDawnSettings.glowColor}
+            onChange={(glowColor) =>
+              setTahoeDawnSettings({ ...tahoeDawnSettings, glowColor })
+            }
+          />
+        ),
+      },
+    );
+  }
+
+  if (wallpaper === "spooky-smoke") {
+    wallpaperMenuItems.push(
+      { separator: true },
+      {
+        custom: (
+          <ColorMenuControl
+            label="Smoke"
+            value={spookySmokeSettings.smokeColor}
+            onChange={(smokeColor) => setSpookySmokeSettings({ smokeColor })}
+          />
+        ),
+      },
+    );
+  }
+
+  if (wallpaper === "gradient-dots") {
+    wallpaperMenuItems.push(
+      { separator: true },
+      {
+        custom: (
+          <ColorMenuControl
+            label="Background"
+            value={gradientDotsSettings.backgroundColor}
+            onChange={(backgroundColor) =>
+              setGradientDotsSettings({ ...gradientDotsSettings, backgroundColor })
+            }
+          />
+        ),
+      },
+      {
+        custom: (
+          <ColorMenuControl
+            label="Grid"
+            value={gradientDotsSettings.dotColor}
+            onChange={(dotColor) =>
+              setGradientDotsSettings({ ...gradientDotsSettings, dotColor })
+            }
+          />
+        ),
+      },
+      {
+        custom: (
+          <ColorMenuControl
+            label="Ripple"
+            value={gradientDotsSettings.rippleColor}
+            onChange={(rippleColor) =>
+              setGradientDotsSettings({ ...gradientDotsSettings, rippleColor })
+            }
+          />
+        ),
+      },
+    );
+  }
+
   return (
     <header
       className="glass-menubar absolute top-0 left-0 right-0 h-7 flex items-center px-3 text-[13px] text-label-primary z-50 select-none"
@@ -289,18 +469,7 @@ export default function MenuBar() {
         <MenuDropdown
           trigger={<Mountain size={14} aria-hidden="true" />}
           triggerClassName="flex items-center justify-center !px-1 !py-0 h-5 w-5"
-          items={[
-            {
-              label: "Flow Field",
-              checked: wallpaper === "flow-field",
-              onSelect: () => setWallpaper("flow-field"),
-            },
-            {
-              label: "Tahoe Dawn",
-              checked: wallpaper === "tahoe-dawn",
-              onSelect: () => setWallpaper("tahoe-dawn"),
-            },
-          ] satisfies MenuEntry[]}
+          items={wallpaperMenuItems}
         />
 
         <ControlCentreIcon />

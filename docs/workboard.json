@@ -1029,7 +1029,7 @@
       "id": "V1_014A",
       "title": "Extend wallpaper state for transient theme settings",
       "description": "Expand the wallpaper provider and renderer routing so the desktop can select between all supported wallpaper themes and hold non-persisted, per-theme color settings for smoke and gradient dots without writing to browser storage.",
-      "status": "todo",
+      "status": "done",
       "priority": "medium",
       "group_id": "V1_DESKTOP",
       "depends_on": [],
@@ -1058,7 +1058,7 @@
       "id": "V1_014B",
       "title": "Add spooky smoke wallpaper renderer",
       "description": "Implement the spooky-smoke wallpaper as an isolated WebGL2 shader renderer adapted from the referenced 21st.dev Spooky Smoke Animation source, wired to the provider's smoke color setting with fallback and cleanup behavior matching the existing wallpaper system.",
-      "status": "todo",
+      "status": "done",
       "priority": "medium",
       "group_id": "V1_DESKTOP",
       "depends_on": [
@@ -1087,7 +1087,7 @@
       "id": "V1_014C",
       "title": "Add cursor-aware gradient dots wallpaper",
       "description": "Implement the gradient-dots wallpaper as a static layered dot field adapted from the referenced 21st.dev Gradient Dots source, replacing autonomous hue/background animation with pointer-aware ripple and subtle drag/parallax movement.",
-      "status": "todo",
+      "status": "done",
       "priority": "medium",
       "group_id": "V1_DESKTOP",
       "depends_on": [
@@ -1117,7 +1117,7 @@
       "id": "V1_014D",
       "title": "Add menu bar wallpaper color controls",
       "description": "Expand the existing menu bar wallpaper picker so users can select the new wallpaper themes and adjust each active theme's own color controls inline without opening a separate settings window or persisting values.",
-      "status": "todo",
+      "status": "done",
       "priority": "medium",
       "group_id": "V1_DESKTOP",
       "depends_on": [

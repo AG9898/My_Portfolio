@@ -24,7 +24,11 @@ export interface SeparatorDef {
   separator: true;
 }
 
-export type MenuEntry = MenuItemDef | SeparatorDef;
+export interface CustomDef {
+  custom: ReactNode;
+}
+
+export type MenuEntry = MenuItemDef | SeparatorDef | CustomDef;
 
 export interface MenuDropdownProps {
   /** Trigger label shown in the menu bar */
@@ -73,6 +77,10 @@ export function MenuDropdown({ trigger, items, triggerClassName }: MenuDropdownP
           ].join(" ")}
         >
           {items.map((item, idx) => {
+            if ("custom" in item) {
+              return <div key={idx}>{item.custom}</div>;
+            }
+
             if ("separator" in item && item.separator) {
               return (
                 <DropdownMenu.Separator

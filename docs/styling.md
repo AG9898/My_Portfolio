@@ -130,19 +130,21 @@ The `tahoe-dawn` CSS gradient remains underneath the canvas as the server-render
 
 | Theme | Basis | Character | Custom controls |
 |---|---|---|---|
-| `flow-field` | Canvas + `simplex-noise` particles | Dark abstract motion field | Particle palette controls may be added later |
-| `tahoe-dawn` | CSS radial gradient, drifting blobs, grain | Warm orange/pink/purple | Gradient stop controls may be added later |
+| `flow-field` | Canvas + `simplex-noise` particles | Dark abstract motion field | Background and line colors |
+| `tahoe-dawn` | CSS radial gradient, drifting blobs, grain | Warm orange/pink/purple | Background, dawn, and glow colors |
 | `spooky-smoke` | WebGL2 fragment shader adapted from 21st.dev Spooky Smoke Animation | Dense cinematic smoke with tinted highlights | Smoke color |
-| `gradient-dots` | CSS layered radial gradients adapted from 21st.dev Gradient Dots | Static dot field with cursor-aware ripple/drag response | Background, dot, and ripple colors |
+| `gradient-dots` | Three.js fragment shader adapted from the Cybernetic Grid reference | Animated grid field with subtle cursor warp | Background, grid, and pulse colors |
 
 The `tahoe-dawn` fallback uses `radial-gradient(...)` with fallback desktop bg `#0a0a0f` and the following stops: `#ff8a3c -> #ff5b8a -> #a15bff -> #2b3bd6 -> #0a0a18` at `120% 90% at 80% 10%`.
 
 **21st.dev translation notes**:
 
 - `spooky-smoke` should adapt the referenced React/WebGL2 renderer and its `smokeColor` uniform rather than treat it as a third-party runtime dependency. Keep the shader isolated in the wallpaper component, cap DPR, fade in after first paint, clean up RAF loops/listeners/programs, and fall back to `.wallpaper-fallback` if WebGL2 is unavailable.
-- `gradient-dots` should reuse the referenced layered radial-gradient dot-field concept but remove the original infinite `backgroundPosition` and `hue-rotate` animation. In this portfolio, dots stay static until pointer input updates CSS variables or motion values for an epicenter ripple and subtle drag/parallax shift.
+- `gradient-dots` now renders a Three.js-backed cyber grid shader adapted from the provided grid reference. Keep the wallpaper id for compatibility, but expose it as Cyber Grid in UI. The grid color control drives line color, ripple drives pulse/glow color, and cursor warp should stay restrained rather than rubbery.
 
-**Color customization**: wallpaper color controls are exploratory only. They live in the existing menu bar wallpaper picker, update the active wallpaper live, and do not persist across visits. Each wallpaper owns its own settings shape; do not force all themes through a shared palette.
+**Color customization**: wallpaper color controls are exploratory only. They live in the existing menu bar wallpaper picker, render only for the active customizable theme, update the active wallpaper live, and do not persist across visits. Each wallpaper owns its own settings shape; do not force all themes through a shared palette.
+
+Default transient colors live in `WallpaperProvider`: flow field starts with background `#0a0a0f` and lines `#7dd3fc`; Tahoe Dawn starts with background `#0a0a18`, dawn `#ff5b8a`, and glow `#788cff`; spooky smoke starts with `#a78bfa`; cyber grid starts with background `#080b14`, grid lines `#f8fafc`, and pulse/glow `#38bdf8`. These defaults are in-memory React state and reset on full page reload.
 
 **Grain overlay**: SVG `feTurbulence` filter, opacity `0.06`, static — applied as a full-viewport pseudo-element.
 
