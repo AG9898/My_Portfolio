@@ -537,7 +537,7 @@
       "id": "V1_006C",
       "title": "Maximize, snap, and restore geometry",
       "description": "Wire maximize, snap-left, snap-right, and restore actions through the reducer so traffic light and future menu bar controls update geometry correctly. Maximize and snap must save restoreGeometry before changing window bounds so restore can return to the previous position/size.",
-      "status": "todo",
+      "status": "done",
       "priority": "critical",
       "group_id": "V1_DESKTOP",
       "depends_on": [

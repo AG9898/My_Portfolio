@@ -58,8 +58,8 @@ export type WindowAction =
   | { type: "minimize"; payload: { id: AppId } }
   | { type: "restore"; payload: { id: AppId } }
   | { type: "maximize"; payload: { id: AppId } }
-  | { type: "snapLeft"; payload: { id: AppId; desktopWidth: number; desktopHeight: number } }
-  | { type: "snapRight"; payload: { id: AppId; desktopWidth: number; desktopHeight: number } }
+  | { type: "snapLeft"; payload: { id: AppId; desktopWidth: number; desktopHeight: number; desktopTop: number } }
+  | { type: "snapRight"; payload: { id: AppId; desktopWidth: number; desktopHeight: number; desktopTop: number } }
   | { type: "drag"; payload: { id: AppId; x: number; y: number } }
   | { type: "resize"; payload: { id: AppId; x: number; y: number; width: number; height: number } }
   | { type: "syncRoute"; payload: { id: AppId; route: string } };
@@ -266,13 +266,13 @@ export function windowReducer(
 
     // ── snapLeft ─────────────────────────────────────────────────────────────
     case "snapLeft": {
-      const { id, desktopWidth, desktopHeight } = action.payload;
+      const { id, desktopWidth, desktopHeight, desktopTop } = action.payload;
       const win = state.openWindows.find((w) => w.id === id);
       if (!win) return state;
       const z = nextZ(state.zIndexMap);
       const snappedGeometry: WindowGeometry = {
         x: 0,
-        y: 0,
+        y: desktopTop,
         width: Math.floor(desktopWidth / 2),
         height: desktopHeight,
       };
@@ -296,14 +296,14 @@ export function windowReducer(
 
     // ── snapRight ────────────────────────────────────────────────────────────
     case "snapRight": {
-      const { id, desktopWidth, desktopHeight } = action.payload;
+      const { id, desktopWidth, desktopHeight, desktopTop } = action.payload;
       const win = state.openWindows.find((w) => w.id === id);
       if (!win) return state;
       const z = nextZ(state.zIndexMap);
       const half = Math.floor(desktopWidth / 2);
       const snappedGeometry: WindowGeometry = {
         x: half,
-        y: 0,
+        y: desktopTop,
         width: desktopWidth - half,
         height: desktopHeight,
       };

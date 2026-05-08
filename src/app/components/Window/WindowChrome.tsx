@@ -9,7 +9,10 @@
 //   - Glyph color: rgba(0,0,0,0.55) at 8px bold weight.
 //   - Red   (#FF5F57) → close
 //   - Yellow(#FEBC2E) → minimize
-//   - Green (#28C840) → maximize / restore
+//   - Green (#28C840) → maximize when open; restore when maximized or snapped
+//
+// Snap via right-click on green button:
+//   - Context menu offers: Snap Left, Snap Right, Maximize, Restore
 //
 // Styling:
 //   - Title bar height: 40px (styling.md)
@@ -17,8 +20,9 @@
 //   - Uses .glass-chrome material class (globals.css) — never reconstruct inline.
 //   - Window title: text-[13px] font-medium, centered, truncated.
 
-import React, { useState } from "react";
-import { X, Minus, Plus } from "lucide-react";
+import React, { useState, useRef, useEffect } from "react";
+import { X, Minus, Plus, Minimize2, Maximize2, PanelLeft, PanelRight } from "lucide-react";
+import { SnapState } from "../WindowManager/windowReducer";
 
 // ---------------------------------------------------------------------------
 // Props
@@ -29,12 +33,22 @@ export interface WindowChromeProps {
   title: string;
   /** Whether the owning window is currently focused. Dims the title when false. */
   isFocused: boolean;
+  /** Whether the window is currently maximized. */
+  isMaximized: boolean;
+  /** Current snap state of the window. */
+  snapped: SnapState;
   /** Called when the close button is clicked. */
   onClose: () => void;
   /** Called when the minimize button is clicked. */
   onMinimize: () => void;
-  /** Called when the maximize/restore button is clicked. */
+  /** Called when the green button is clicked and window is not maximized/snapped. */
   onMaximize: () => void;
+  /** Called when the green button is clicked and window is maximized or snapped. */
+  onRestore: () => void;
+  /** Called when snap-left is selected from the context menu. */
+  onSnapLeft: () => void;
+  /** Called when snap-right is selected from the context menu. */
+  onSnapRight: () => void;
 }
 
 // ---------------------------------------------------------------------------
@@ -44,11 +58,54 @@ export interface WindowChromeProps {
 export function WindowChrome({
   title,
   isFocused,
+  isMaximized,
+  snapped,
   onClose,
   onMinimize,
   onMaximize,
+  onRestore,
+  onSnapLeft,
+  onSnapRight,
 }: WindowChromeProps) {
   const [groupHovered, setGroupHovered] = useState(false);
+  const [contextOpen, setContextOpen] = useState(false);
+  const contextRef = useRef<HTMLDivElement>(null);
+
+  const isConstrained = isMaximized || snapped !== "none";
+
+  // Close context menu on outside click or Escape.
+  useEffect(() => {
+    if (!contextOpen) return;
+    function handleOutside(e: MouseEvent) {
+      if (contextRef.current && !contextRef.current.contains(e.target as Node)) {
+        setContextOpen(false);
+      }
+    }
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setContextOpen(false);
+    }
+    document.addEventListener("mousedown", handleOutside);
+    document.addEventListener("keydown", handleKey);
+    return () => {
+      document.removeEventListener("mousedown", handleOutside);
+      document.removeEventListener("keydown", handleKey);
+    };
+  }, [contextOpen]);
+
+  function handleGreenClick(e: React.MouseEvent) {
+    e.stopPropagation();
+    if (isConstrained) {
+      onRestore();
+    } else {
+      onMaximize();
+    }
+  }
+
+  function handleGreenContextMenu(e: React.MouseEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+    setContextOpen((prev) => !prev);
+  }
 
   return (
     <div
@@ -136,36 +193,124 @@ export function WindowChrome({
           )}
         </button>
 
-        {/* Maximize / restore (green) */}
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onMaximize();
-          }}
-          aria-label="Maximize window"
-          style={{
-            width: 12,
-            height: 12,
-            borderRadius: "50%",
-            background: "#28C840",
-            border: "none",
-            padding: 0,
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexShrink: 0,
-          }}
-        >
-          {groupHovered && (
-            <Plus
-              size={8}
-              strokeWidth={2.5}
-              color="rgba(0,0,0,0.55)"
-              aria-hidden="true"
-            />
+        {/* Maximize / restore (green) with context menu for snap */}
+        <div style={{ position: "relative" }} ref={contextRef}>
+          <button
+            onClick={handleGreenClick}
+            onContextMenu={handleGreenContextMenu}
+            aria-label={isConstrained ? "Restore window" : "Maximize window"}
+            title="Click to maximize/restore • Right-click for snap options"
+            style={{
+              width: 12,
+              height: 12,
+              borderRadius: "50%",
+              background: "#28C840",
+              border: "none",
+              padding: 0,
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexShrink: 0,
+            }}
+          >
+            {groupHovered && (
+              isConstrained ? (
+                <Minimize2
+                  size={7}
+                  strokeWidth={2.5}
+                  color="rgba(0,0,0,0.55)"
+                  aria-hidden="true"
+                />
+              ) : (
+                <Plus
+                  size={8}
+                  strokeWidth={2.5}
+                  color="rgba(0,0,0,0.55)"
+                  aria-hidden="true"
+                />
+              )
+            )}
+          </button>
+
+          {/* Snap / restore context menu */}
+          {contextOpen && (
+            <div
+              style={{
+                position: "absolute",
+                top: 18,
+                left: 0,
+                zIndex: 9999,
+                background: "rgba(44,44,46,0.96)",
+                backdropFilter: "blur(20px)",
+                WebkitBackdropFilter: "blur(20px)",
+                border: "1px solid rgba(255,255,255,0.12)",
+                borderRadius: 8,
+                padding: "4px 0",
+                minWidth: 160,
+                boxShadow: "0 8px 32px rgba(0,0,0,0.6)",
+                cursor: "default",
+                userSelect: "none",
+              }}
+              onMouseDown={(e) => e.stopPropagation()}
+            >
+              {[
+                {
+                  label: "Snap Left",
+                  icon: <PanelLeft size={12} aria-hidden="true" />,
+                  action: () => { onSnapLeft(); setContextOpen(false); },
+                  disabled: snapped === "left",
+                },
+                {
+                  label: "Snap Right",
+                  icon: <PanelRight size={12} aria-hidden="true" />,
+                  action: () => { onSnapRight(); setContextOpen(false); },
+                  disabled: snapped === "right",
+                },
+                {
+                  label: "Maximize",
+                  icon: <Maximize2 size={12} aria-hidden="true" />,
+                  action: () => { onMaximize(); setContextOpen(false); },
+                  disabled: isMaximized,
+                },
+                {
+                  label: "Restore",
+                  icon: <Minimize2 size={12} aria-hidden="true" />,
+                  action: () => { onRestore(); setContextOpen(false); },
+                  disabled: !isConstrained,
+                },
+              ].map(({ label, icon, action, disabled }) => (
+                <button
+                  key={label}
+                  onClick={action}
+                  disabled={disabled}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8,
+                    width: "100%",
+                    padding: "6px 14px",
+                    background: "none",
+                    border: "none",
+                    color: disabled ? "rgba(255,255,255,0.30)" : "rgba(255,255,255,0.85)",
+                    fontSize: 13,
+                    cursor: disabled ? "default" : "pointer",
+                    textAlign: "left",
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!disabled) (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.10)";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLButtonElement).style.background = "none";
+                  }}
+                >
+                  {icon}
+                  {label}
+                </button>
+              ))}
+            </div>
           )}
-        </button>
+        </div>
       </div>
 
       {/* Centered window title ───────────────────────────────────────────── */}

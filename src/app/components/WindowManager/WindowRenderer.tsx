@@ -4,12 +4,21 @@
 // Renders one AppWindow shell per open window entry in the window manager state.
 // Sits above the wallpaper and below menu bar/dock in z-order.
 // Uses react-rnd for drag and resize, dispatching state changes to the reducer.
+//
+// Geometry contract:
+//   - Maximized windows bypass react-rnd and render as a fixed full-desktop div.
+//   - Snapped windows use their geometry (set by snapLeft/snapRight actions)
+//     inside react-rnd; dragging a snapped window clears the snap state via the
+//     reducer's drag action.
+//   - All geometry changes (drag, resize, maximize, snap, restore) go through
+//     reducer actions — no local state for window bounds.
 
 import React, { useCallback } from "react";
 import { Rnd } from "react-rnd";
 import { useWindowManager } from "./WindowManagerProvider";
 import { AppId } from "../appMetadata";
 import { WindowChrome } from "../Window/WindowChrome";
+import { SnapState } from "./windowReducer";
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -18,6 +27,14 @@ import { WindowChrome } from "../Window/WindowChrome";
 /** z-index floor for app windows — above wallpaper (0) and shortcuts (10),
  *  below dock (z-40) and menu bar (z-50). */
 const WINDOW_Z_BASE = 20;
+
+/**
+ * Desktop safe area heights (px).
+ * Menu bar: 28px top; Dock: 80px bottom.
+ * Maximized windows fill the area between them.
+ */
+const MENU_BAR_HEIGHT = 28;
+const DOCK_HEIGHT = 80;
 
 // ---------------------------------------------------------------------------
 // AppWindow shell component
@@ -34,10 +51,14 @@ interface AppWindowProps {
   isFocused: boolean;
   isMinimized: boolean;
   isMaximized: boolean;
+  snapped: SnapState;
   onFocus: () => void;
   onClose: () => void;
   onMinimize: () => void;
   onMaximize: () => void;
+  onRestore: () => void;
+  onSnapLeft: () => void;
+  onSnapRight: () => void;
   onDragStop: (x: number, y: number) => void;
   onResizeStop: (x: number, y: number, width: number, height: number) => void;
   children?: React.ReactNode;
@@ -54,25 +75,18 @@ function AppWindow({
   isFocused,
   isMinimized,
   isMaximized,
+  snapped,
   onFocus,
   onClose,
   onMinimize,
   onMaximize,
+  onRestore,
+  onSnapLeft,
+  onSnapRight,
   onDragStop,
   onResizeStop,
 }: AppWindowProps) {
   if (isMinimized) return null;
-
-  const rndStyle: React.CSSProperties = isMaximized
-    ? {
-        position: "fixed",
-        inset: "28px 0 80px 0",
-        width: "100%",
-        height: "calc(100vh - 28px - 80px)",
-        zIndex: WINDOW_Z_BASE + zIndex,
-        pointerEvents: "all",
-      }
-    : { zIndex: WINDOW_Z_BASE + zIndex, pointerEvents: "all" };
 
   const windowContent = (
     <div
@@ -80,7 +94,7 @@ function AppWindow({
       style={{
         width: "100%",
         height: "100%",
-        borderRadius: 12,
+        borderRadius: isMaximized ? 0 : 12,
         overflow: "hidden",
         boxShadow: "0 22px 70px rgba(0,0,0,0.55)",
         border: "1px solid rgba(255,255,255,0.14)",
@@ -98,9 +112,14 @@ function AppWindow({
       <WindowChrome
         title={title}
         isFocused={isFocused}
+        isMaximized={isMaximized}
+        snapped={snapped}
         onClose={onClose}
         onMinimize={onMinimize}
         onMaximize={onMaximize}
+        onRestore={onRestore}
+        onSnapLeft={onSnapLeft}
+        onSnapRight={onSnapRight}
       />
 
       {/* Window content area */}
@@ -121,9 +140,20 @@ function AppWindow({
   );
 
   if (isMaximized) {
-    // When maximized, bypass react-rnd and render a fixed full-desktop div.
+    // Maximized: bypass react-rnd; fill desktop area between menu bar and dock.
     return (
-      <div style={rndStyle} onMouseDown={onFocus}>
+      <div
+        style={{
+          position: "fixed",
+          top: MENU_BAR_HEIGHT,
+          left: 0,
+          right: 0,
+          bottom: DOCK_HEIGHT,
+          zIndex: WINDOW_Z_BASE + zIndex,
+          pointerEvents: "all",
+        }}
+        onMouseDown={onFocus}
+      >
         {windowContent}
       </div>
     );
@@ -133,7 +163,7 @@ function AppWindow({
     <Rnd
       position={{ x, y }}
       size={{ width, height }}
-      style={rndStyle}
+      style={{ zIndex: WINDOW_Z_BASE + zIndex, pointerEvents: "all" }}
       minWidth={320}
       minHeight={200}
       bounds="parent"
@@ -208,6 +238,39 @@ export function WindowRenderer() {
     [dispatch]
   );
 
+  const handleRestore = useCallback(
+    (id: AppId) => {
+      dispatch({ type: "restore", payload: { id } });
+    },
+    [dispatch]
+  );
+
+  /** Snap-left: fills the left half of the desktop area (below menu bar, above dock). */
+  const handleSnapLeft = useCallback(
+    (id: AppId) => {
+      const desktopWidth = window.innerWidth;
+      const desktopHeight = window.innerHeight - MENU_BAR_HEIGHT - DOCK_HEIGHT;
+      dispatch({
+        type: "snapLeft",
+        payload: { id, desktopWidth, desktopHeight, desktopTop: MENU_BAR_HEIGHT },
+      });
+    },
+    [dispatch]
+  );
+
+  /** Snap-right: fills the right half of the desktop area (below menu bar, above dock). */
+  const handleSnapRight = useCallback(
+    (id: AppId) => {
+      const desktopWidth = window.innerWidth;
+      const desktopHeight = window.innerHeight - MENU_BAR_HEIGHT - DOCK_HEIGHT;
+      dispatch({
+        type: "snapRight",
+        payload: { id, desktopWidth, desktopHeight, desktopTop: MENU_BAR_HEIGHT },
+      });
+    },
+    [dispatch]
+  );
+
   const handleDragStop = useCallback(
     (id: AppId, x: number, y: number) => {
       dispatch({ type: "drag", payload: { id, x, y } });
@@ -242,10 +305,14 @@ export function WindowRenderer() {
             isFocused={isFocused}
             isMinimized={win.minimized}
             isMaximized={win.maximized}
+            snapped={win.snapped}
             onFocus={() => handleFocus(win.id)}
             onClose={() => handleClose(win.id)}
             onMinimize={() => handleMinimize(win.id)}
             onMaximize={() => handleMaximize(win.id)}
+            onRestore={() => handleRestore(win.id)}
+            onSnapLeft={() => handleSnapLeft(win.id)}
+            onSnapRight={() => handleSnapRight(win.id)}
             onDragStop={(x, y) => handleDragStop(win.id, x, y)}
             onResizeStop={(x, y, w, h) =>
               handleResizeStop(win.id, x, y, w, h)
