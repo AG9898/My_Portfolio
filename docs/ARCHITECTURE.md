@@ -56,8 +56,10 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 - Dock padding: `8px 12px`, border radius: `22px`. Icon base size: `56px`.
 - Renders one button per app from the `APPS` registry. Each icon uses an individual SVG matching the design handoff.
 - Clicking a dock icon dispatches the `open` action; if the app is already open, focuses and restores it without duplicating.
-- No magnification, tooltip, or animation in this phase — deferred to V1_009B.
-- Running indicator dot slot is present but transparent until V1_009B wires window state.
+- Magnification uses a cosine-falloff algorithm: 100px radius, 56px base, 86px max, -8px lift at peak. Implemented with `framer-motion` `useTransform`/`useSpring` reading a `useMotionValue` tracking `clientX`.
+- Spring config: `{ stiffness: 600, damping: 35, duration: 0.22 }`.
+- Tooltip labels appear above icons when pointer is within 30px; uses `useSpring` on `tooltipOpacity`.
+- A 4×4px dot appears below each icon when the app window is open and non-minimized.
 - Requires `"use client"` directive.
 
 #### Desktop Shortcuts (`src/app/components/Desktop/DesktopShortcuts.tsx`)
@@ -115,8 +117,10 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 - Clicking any part of a window dispatches a `focus` action via `onMouseDown`.
 - z-index: each window's `zIndexMap[id]` value is added to `WINDOW_Z_BASE = 20`, placing windows above the wallpaper (0) and shortcuts (z-10) but below the dock (z-40) and menu bar (z-50).
 - Maximized windows bypass `react-rnd` and render as a `position: fixed` div filling the desktop area (top: 28px, bottom: 80px).
-- Title bar chrome and traffic lights are placeholder divs in this phase — full chrome is added in V1_006B.
+- Each window is wrapped in a `framer-motion` `motion.div` inside `AnimatePresence`; open uses scale/opacity spring, close uses a quick 150ms ease-out exit. Minimize exit scales down toward the dock (scale 0.82, y+72). `prefers-reduced-motion` collapses all exit/enter to a plain opacity transition.
 - Window drag handle is scoped to elements with the `.glass-chrome` class on the title bar.
+- `exitModes` state tracks whether the last action for each window was `"close"` or `"minimize"` so `AnimatePresence` can choose the correct exit variant. `flushSync` is used when setting exitModes before dispatching the reducer action to avoid exit-before-set races.
+- `visibleIdsRef` is kept current each render cycle; `onExitComplete` cleans up `exitModes` entries only for windows no longer visible, avoiding stale closure values.
 
 ### App Windows
 

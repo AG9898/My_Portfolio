@@ -33,7 +33,7 @@
       "id": "V1_012",
       "title": "Run final V1 verification and docs sync",
       "description": "Complete the V1 closeout by running lint and production build, manually verifying the core desktop workflows in a browser, and updating architecture, conventions, testing, or agent guidance only if implementation revealed durable patterns or constraints. Do not deploy or publish production changes as part of this task.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V1_DESKTOP",
       "depends_on": [

@@ -196,3 +196,13 @@ Deployment details are not documented in this repo yet. Do not manually deploy o
 ### 2026-05-06 — Redesign Supersedes Existing UI
 
 `docs/macos-redesign.md` is the source of truth for new portfolio work. Existing brutalist/Stitch UI and styling in `src/` should be treated as scrap material, not as a design system to preserve.
+
+### 2026-05-08 — V1 Complete: Key Implementation Patterns
+
+The following patterns emerged during the complete V1 implementation and are now canonical:
+
+- **`flushSync` before AnimatePresence dispatch**: When removing a component from the DOM via reducer dispatch (close/minimize), set the `exitModes` state with `flushSync` before dispatching the reducer action. Without `flushSync`, React batches both updates and the exit variant may not be set when `AnimatePresence` reads it.
+- **`useReducedMotion` for framer-motion components**: Use `useReducedMotion()` from `framer-motion` (not CSS media query in JS) to check `prefers-reduced-motion` inside components that use motion variants. Pass it as a custom prop to variants.
+- **`visibleIdsRef` pattern for AnimatePresence cleanup**: Use a `useRef` tracking current visible IDs, updated each render, so `onExitComplete` callbacks always read the current set instead of a stale closure.
+- **syncRoute guard against feedback loops**: The `syncRoute` reducer action returns unchanged state if `focusedId` already matches the target app. This prevents the `useEffect`s in `WindowManagerProvider` from creating a push→sync→push cycle when the URL and window focus agree.
+- **Dock indicator dot via `opacity` not `display`**: The 4×4px dot under dock icons uses `opacity: isOpen ? 0.9 : 0` rather than conditional rendering, so the layout slot is always reserved and no layout shift occurs on open/close.
