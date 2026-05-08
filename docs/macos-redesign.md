@@ -67,13 +67,12 @@ src/app/
     WindowManager/
       WindowManagerProvider.tsx ← Open/focus/close/minimize/snap/maximize state
       windowReducer.ts          ← Reducer/actions for deterministic window behavior
-      windowRegistry.ts         ← Route/app metadata, default size, title, icon, toolbar
     MenuBar/
       MenuBar.tsx     ← Top bar (clock, Apple menu, app name)
       MenuDropdown.tsx← @radix-ui dropdown menus
     Dock/
-      Dock.tsx        ← Bottom dock with magnification
-      DockIcon.tsx    ← Individual dock item
+      Dock.tsx        ← Bottom dock (magnification added in V1_009B)
+    appMetadata.ts    ← Shared app registry (id, route, label, icon; extended in V1_005A)
     Window/
       Window.tsx      ← Window chrome (title bar, traffic lights, toolbar slot)
       WindowToolbar.tsx ← Per-page toolbar (passed in as children)
