@@ -1,10 +1,18 @@
 "use client";
 
-// ─── Dock — static, no magnification (V1_009B adds magnification) ─────────────
+// ─── Dock ─────────────────────────────────────────────────────────────────────
 // Uses .glass-dock from globals.css.
 // Icon designs match the design handoff reference:
 //   reference/design draft/design_handoff_macos_desktop_shell/desktop.jsx
 
+import {
+  motion,
+  MotionValue,
+  useMotionValue,
+  useSpring,
+  useTransform,
+} from "framer-motion";
+import { useRef } from "react";
 import { APPS, type AppId } from "../appMetadata";
 import { useWindowManager } from "../WindowManager/WindowManagerProvider";
 
@@ -93,10 +101,105 @@ function DockIconGlyph({ appId }: { appId: AppId }) {
   }
 }
 
+const DOCK_BASE_SIZE = 56;
+const DOCK_MAX_SIZE = 86;
+const DOCK_RADIUS = 100;
+const DOCK_MAX_LIFT = -8;
+const DOCK_SPRING = { stiffness: 600, damping: 35, duration: 0.22 };
+const TOOLTIP_RADIUS = 30;
+
+function getFalloff(mouseX: number, centerX: number) {
+  const dist = Math.abs(mouseX - centerX);
+  if (!Number.isFinite(mouseX) || dist >= DOCK_RADIUS) {
+    return 0;
+  }
+
+  const f = 1 - dist / DOCK_RADIUS;
+  return Math.cos((1 - f) * Math.PI / 2);
+}
+
+interface DockItemProps {
+  app: (typeof APPS)[number];
+  mouseX: MotionValue<number>;
+  isOpen: boolean;
+  onClick: (appId: AppId) => void;
+}
+
+function DockItem({ app, mouseX, isOpen, onClick }: DockItemProps) {
+  const itemRef = useRef<HTMLDivElement>(null);
+
+  const sizeTransform = useTransform(mouseX, (latest) => {
+    const bounds = itemRef.current?.getBoundingClientRect();
+    if (!bounds) return DOCK_BASE_SIZE;
+
+    const eased = getFalloff(latest, bounds.left + bounds.width / 2);
+    return DOCK_BASE_SIZE + (DOCK_MAX_SIZE - DOCK_BASE_SIZE) * eased;
+  });
+  const liftTransform = useTransform(mouseX, (latest) => {
+    const bounds = itemRef.current?.getBoundingClientRect();
+    if (!bounds) return 0;
+
+    return DOCK_MAX_LIFT * getFalloff(latest, bounds.left + bounds.width / 2);
+  });
+  const tooltipOpacityTransform = useTransform<number, number>(
+    mouseX,
+    (latest) => {
+      const bounds = itemRef.current?.getBoundingClientRect();
+      if (!bounds) return 0;
+
+      const dist = Math.abs(latest - (bounds.left + bounds.width / 2));
+      return Number.isFinite(latest) && dist <= TOOLTIP_RADIUS ? 1 : 0;
+    }
+  );
+
+  const size = useSpring(sizeTransform, DOCK_SPRING);
+  const y = useSpring(liftTransform, DOCK_SPRING);
+  const tooltipOpacity = useSpring(tooltipOpacityTransform, DOCK_SPRING);
+
+  return (
+    <div
+      ref={itemRef}
+      className="relative flex flex-col items-center"
+      style={{ width: DOCK_BASE_SIZE }}
+    >
+      <motion.span
+        className="glass-chrome pointer-events-none absolute bottom-[74px] rounded-md border border-glass-edge px-2 py-1 text-[11px] text-label-primary shadow-lg"
+        style={{ opacity: tooltipOpacity, y }}
+        aria-hidden="true"
+      >
+        {app.label}
+      </motion.span>
+      <motion.button
+        className="relative flex items-center justify-center rounded-[18px] active:scale-95"
+        style={{
+          width: size,
+          height: size,
+          y,
+          filter: "drop-shadow(0 6px 10px rgba(0,0,0,0.35))",
+        }}
+        transition={DOCK_SPRING}
+        aria-label={app.label}
+        onClick={() => onClick(app.id)}
+      >
+        <DockIconGlyph appId={app.id} />
+      </motion.button>
+      <div
+        className="mt-0.5 rounded-full bg-label-primary"
+        style={{
+          width: 4,
+          height: 4,
+          opacity: isOpen ? 0.9 : 0,
+        }}
+      />
+    </div>
+  );
+}
+
 // ─── Dock ──────────────────────────────────────────────────────────────────────
 
 export default function Dock() {
-  const { dispatch } = useWindowManager();
+  const { state, dispatch } = useWindowManager();
+  const mouseX = useMotionValue(Number.POSITIVE_INFINITY);
 
   function handleAppClick(appId: AppId) {
     const app = APPS.find((a) => a.id === appId);
@@ -125,33 +228,24 @@ export default function Dock() {
             "inset 0 1px 0 rgba(255,255,255,0.35), inset 0 -1px 0 rgba(0,0,0,0.2), 0 30px 80px rgba(0,0,0,0.5)",
         }}
         aria-label="App shortcuts"
+        onMouseMove={(event) => mouseX.set(event.clientX)}
+        onMouseLeave={() => mouseX.set(Number.POSITIVE_INFINITY)}
       >
-        {APPS.map((app) => (
-          <div
-            key={app.id}
-            className="relative flex flex-col items-center"
-            style={{ width: 56 }}
-          >
-            <button
-              className="relative rounded-[18px] active:scale-95 transition-transform flex items-center justify-center"
-              style={{
-                width: 56,
-                height: 56,
-                filter: "drop-shadow(0 6px 10px rgba(0,0,0,0.35))",
-              }}
-              aria-label={app.label}
-              title={app.label}
-              onClick={() => handleAppClick(app.id)}
-            >
-              <DockIconGlyph appId={app.id} />
-            </button>
-            {/* Running indicator placeholder — filled in V1_009B */}
-            <div
-              className="rounded-full mt-0.5"
-              style={{ width: 4, height: 4, background: "transparent" }}
+        {APPS.map((app) => {
+          const isOpen = state.openWindows.some(
+            (window) => window.id === app.id && !window.minimized
+          );
+
+          return (
+            <DockItem
+              key={app.id}
+              app={app}
+              mouseX={mouseX}
+              isOpen={isOpen}
+              onClick={handleAppClick}
             />
-          </div>
-        ))}
+          );
+        })}
       </nav>
     </div>
   );

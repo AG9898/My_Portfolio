@@ -3,7 +3,7 @@
 // All state transitions are deterministic; the WindowManagerProvider
 // (V1_006A) will wire this into a useReducer call.
 
-import { AppId, AppPosition, AppSize } from "../appMetadata";
+import { AppId, AppPosition, AppSize, APPS } from "../appMetadata";
 
 // ---------------------------------------------------------------------------
 // State shape
@@ -62,7 +62,7 @@ export type WindowAction =
   | { type: "snapRight"; payload: { id: AppId; desktopWidth: number; desktopHeight: number; desktopTop: number } }
   | { type: "drag"; payload: { id: AppId; x: number; y: number } }
   | { type: "resize"; payload: { id: AppId; x: number; y: number; width: number; height: number } }
-  | { type: "syncRoute"; payload: { id: AppId; route: string } };
+  | { type: "syncRoute"; payload: { route: string } };
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -361,11 +361,47 @@ export function windowReducer(
 
     // ── syncRoute ────────────────────────────────────────────────────────────
     case "syncRoute": {
-      const { id, route } = action.payload;
-      const updated = state.openWindows.map((w) =>
-        w.id === id ? { ...w, route } : w
+      const app = APPS.find(
+        (candidate) => candidate.route === action.payload.route
       );
-      return { ...state, openWindows: updated };
+      if (!app) return state;
+
+      const existing = state.openWindows.find((w) => w.id === app.id);
+      const z = nextZ(state.zIndexMap);
+
+      if (existing) {
+        return {
+          ...state,
+          openWindows: state.openWindows.map((w) =>
+            w.id === app.id ? { ...w, minimized: false, route: app.route } : w
+          ),
+          focusedId: app.id,
+          zIndexMap: { ...state.zIndexMap, [app.id]: z },
+        };
+      }
+
+      const geometry: WindowGeometry = {
+        x: app.defaultPosition.x,
+        y: app.defaultPosition.y,
+        width: app.defaultSize.width,
+        height: app.defaultSize.height,
+      };
+      const entry: WindowEntry = {
+        id: app.id,
+        route: app.route,
+        geometry,
+        restoreGeometry: geometry,
+        minimized: false,
+        maximized: false,
+        snapped: "none",
+      };
+
+      return {
+        ...state,
+        openWindows: [...state.openWindows, entry],
+        focusedId: app.id,
+        zIndexMap: { ...state.zIndexMap, [app.id]: z },
+      };
     }
 
     default:

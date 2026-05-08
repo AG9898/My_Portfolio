@@ -71,7 +71,7 @@ src/app/
       MenuBar.tsx     ← Top bar (clock, Apple menu, app name)
       MenuDropdown.tsx← @radix-ui dropdown menus
     Dock/
-      Dock.tsx        ← Bottom dock (magnification added in V1_009B)
+      Dock.tsx        ← Bottom dock with magnification, tooltips, and open indicators
     appMetadata.ts    ← Shared app registry (id, route, label, icon; extended in V1_005A)
     Window/
       WindowChrome.tsx  ← Title bar: glass-chrome, traffic light group, centered title
@@ -126,6 +126,7 @@ Initial implementation can enforce one window per route/app. Opening an already-
 - Top bar spanning full viewport width, `28px` height
 - Left side: Apple logo SVG → focused app name (bold) → menu items (File, Edit, View, Window, Help) — each `13px`, hover `bg-white/10`
 - Right side (all `12.5px`, `white/85` opacity, left-to-right): Control center icon (4 rounded rects SVG) → Battery (24×12px rect, 78% fill visual, decorative) → Wi-Fi glyph → Date (`weekday short, month short, day numeric`) → Time (`hour numeric, minute 2-digit`, `tabular-nums`, updates every 1000ms)
+- Theme toggle: icon-only control in the right-side status cluster switches between dark and light modes through `next-themes`; dark remains the default canonical theme.
 - Glass treatment: `.glass-menubar` utility; bottom edge `1px solid rgba(255,255,255,0.08)`
 
 ### Dock
@@ -265,7 +266,7 @@ Once open decisions are resolved:
 6. **Phase 6 — Menu bar**: `@radix-ui` dropdowns, live clock, focused app name, app-specific menu actions.
 7. **Phase 7 — Per-app toolbars**: Each page's window toolbar (Finder toolbar, Mail toolbar, etc.)
 8. **Phase 8 — Content**: Port project content, about text, contact form, and CV into their respective app windows.
-9. **Phase 9 — Polish**: Reduced motion support, mobile fallback (show a "switch to website mode" notice like PostHog), performance audit.
+9. **Phase 9 — Polish**: Reduced motion support, performance audit, and final responsive checks.
 
 ---
 
@@ -275,7 +276,7 @@ macOS desktop UX does not translate to mobile. Two options:
 - **Option A**: Show a styled "This experience is designed for desktop" message on small screens with a link to a simplified mobile view
 - **Option B**: Detect viewport and render a conventional responsive layout instead
 
-PostHog uses Option A (the "Switch to website mode" button in the sidebar). This is the recommended approach.
+Current implementation uses Option A at small viewports: the desktop shell is hidden below the `md` breakpoint and `MobileFallback` renders a deliberate full-screen fallback with the wallpaper, CV access, and the same dark/light theme toggle. Tablet and larger viewports keep the full desktop shell.
 
 ---
 
@@ -288,21 +289,22 @@ All existing page content is scrapped. Fresh content will be written for each ap
 On every page load, before the desktop is shown, a macOS-style boot screen plays:
 
 1. **Black full-screen overlay** mounts immediately (z-index above everything)
-2. **White Apple logo SVG** centered — fades in over ~0.4s
-3. **Startup chime** plays via `<audio>` (autoplay on user gesture or directly — see note below)
-4. After ~2.5s total, overlay **fades out** (opacity 1 → 0, ~0.6s) to reveal the desktop
-5. Desktop appears with dock/menu bar sliding in
+2. **White Apple logo SVG** centered
+3. **Progress bar** below center fills linearly over `2400ms`
+4. When progress exceeds `85%`, overlay **fades out** (opacity 1 → 0, `400ms`) to reveal the desktop
+5. Desktop appears with wallpaper, dock, menu bar, shortcuts, and any route-synced windows already mounted underneath
 
 **Sound note**: The original Apple startup chime is Apple IP. Options:
 - Use a royalty-free recreation (available on freesound.org)
 - Commission/record a custom chime
 - Make the sound opt-in (click anywhere to start + play chime) — this also solves browser autoplay restrictions
+- Current implementation uses no audio. Any future audio path must require a user gesture.
 
 **Timing**: Progress bar fills linearly over `2400ms`. When progress > 85%, container opacity fades from 1 → 0 over `400ms`. Total visible ~`2800ms`. Progress bar dimensions: `176×4px`, track `rgba(255,255,255,0.15)`, fill `rgba(255,255,255,0.85)`.
 
 **Browser autoplay policy**: Most browsers block audio autoplay without a user gesture. Recommended approach: show a subtle "Click to enter" prompt over the boot screen, user click triggers both the audio and the boot animation.
 
-**Implementation**: `BootScreen.tsx` component, rendered in `layout.tsx` above everything else, uses `framer-motion` `AnimatePresence` to unmount after sequence completes. State lives in a `useBootSequence` hook. `sessionStorage` flag prevents replaying on tab refresh (optional — user decides).
+**Implementation**: `BootScreen.tsx` component, rendered in `layout.tsx` above everything else, uses `framer-motion` to fade and unmount after the sequence completes. The current implementation replays on each full page load; a `sessionStorage` flag to skip replay is optional later.
 
 ---
 

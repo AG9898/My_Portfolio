@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
 
 // ─── Apple logo SVG ──────────────────────────────────────────────────────────
 function AppleLogo() {
@@ -46,13 +48,13 @@ function ControlCentreIcon() {
 function BatteryIcon() {
   return (
     <div className="flex items-center gap-0.5" aria-label="Battery">
-      <div className="relative w-6 h-3 border border-white/70 rounded-[3px]">
+      <div className="relative w-6 h-3 border rounded-[3px] opacity-80">
         <div
-          className="absolute inset-0.5 bg-white/85 rounded-[1px]"
+          className="absolute inset-0.5 rounded-[1px] bg-current"
           style={{ width: "78%" }}
         />
       </div>
-      <div className="w-0.5 h-1.5 bg-white/70 rounded-r" />
+      <div className="w-0.5 h-1.5 rounded-r bg-current opacity-80" />
     </div>
   );
 }
@@ -82,12 +84,17 @@ const APP_MENUS = ["File", "Edit", "View", "Window", "Help"];
 export default function MenuBar() {
   // Hydration-safe clock: start null on server, fill on client
   const [now, setNow] = useState<Date | null>(null);
+  const [mounted, setMounted] = useState(false);
+  const { resolvedTheme, setTheme } = useTheme();
 
   useEffect(() => {
+    setMounted(true);
     setNow(new Date());
     const interval = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(interval);
   }, []);
+
+  const isLight = resolvedTheme === "light";
 
   const timeStr = now
     ? now.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })
@@ -104,7 +111,7 @@ export default function MenuBar() {
   return (
     <header
       className="glass-menubar absolute top-0 left-0 right-0 h-7 flex items-center px-3 text-[13px] text-label-primary z-50 select-none"
-      style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}
+      style={{ borderBottom: "1px solid var(--color-glass-edge)" }}
       aria-label="Menu Bar"
     >
       {/* ── Left side ── */}
@@ -117,7 +124,7 @@ export default function MenuBar() {
         {APP_MENUS.map((menu) => (
           <button
             key={menu}
-            className="mr-3.5 cursor-default hover:bg-white/10 px-1.5 py-0.5 rounded text-[13px] text-label-primary"
+            className="mr-3.5 cursor-default px-1.5 py-0.5 rounded text-[13px] text-label-primary hover:bg-[var(--color-control-hover)]"
             aria-haspopup="menu"
             aria-label={menu}
           >
@@ -128,15 +135,27 @@ export default function MenuBar() {
 
       {/* ── Right side ── */}
       <div
-        className="ml-auto flex items-center gap-3 text-[12.5px] text-white/85"
+        className="ml-auto flex items-center gap-3 text-[12.5px] text-label-primary"
+        style={{ color: "var(--color-label-tertiary)" }}
         aria-label="Status icons"
       >
+        <button
+          type="button"
+          className="flex h-5 w-5 items-center justify-center rounded text-label-primary hover:bg-[var(--color-control-hover)]"
+          style={{ color: "var(--color-label-tertiary)" }}
+          onClick={() => setTheme(isLight ? "dark" : "light")}
+          disabled={!mounted}
+          aria-label={isLight ? "Switch to dark mode" : "Switch to light mode"}
+          title={isLight ? "Dark mode" : "Light mode"}
+        >
+          {isLight ? <Moon size={14} /> : <Sun size={14} />}
+        </button>
         <ControlCentreIcon />
         <BatteryIcon />
         <WifiIcon />
         {/* Date — shown once client-side clock is ready */}
         {dateStr && (
-          <span className="ml-1 text-white/80">{dateStr}</span>
+          <span className="ml-1">{dateStr}</span>
         )}
         {/* Live clock — tabular-nums for stable width */}
         {timeStr && (

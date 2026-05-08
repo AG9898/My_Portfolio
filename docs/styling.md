@@ -27,10 +27,10 @@ macOS Tahoe replaces flat dark surfaces with translucent glass panels. Four name
 
 | Class | Used for | Background (dark) | Blur |
 |---|---|---|---|
-| `.glass` | Window panels, sheets, popovers | `rgba(28,28,30,0.78)` | `blur(28px) saturate(180%)` |
-| `.glass-chrome` | Window title bars, toolbars | `rgba(44,44,46,0.72)` | `blur(28px) saturate(180%)` |
-| `.glass-dock` | Dock background | `rgba(255,255,255,0.14)` | `blur(28px) saturate(180%)` |
-| `.glass-menubar` | Menu bar | `rgba(20,20,22,0.45)` | `blur(28px) saturate(180%)` |
+| `.glass` | Window panels, sheets, popovers | `var(--color-window)` | `blur(28px) saturate(180%)` |
+| `.glass-chrome` | Window title bars, toolbars | `var(--color-chrome)` | `blur(28px) saturate(180%)` |
+| `.glass-dock` | Dock background | `var(--color-dock)` | `blur(28px) saturate(180%)` |
+| `.glass-menubar` | Menu bar | `var(--color-menubar)` | `blur(28px) saturate(180%)` |
 
 All glass surfaces use the same blur stack: `backdrop-filter: blur(28px) saturate(180%)`. The inset top-edge highlight `inset 0 1px 0 rgba(255,255,255,N)` varies by surface weight (see shadow specs below).
 
@@ -57,6 +57,8 @@ All semantic colors are Tailwind utilities backed by CSS variables. The variable
 | `--color-desktop` | `bg-desktop` | Desktop wallpaper fallback |
 | `--color-window` | `bg-window` | Window panel background |
 | `--color-chrome` | `bg-chrome` | Title bar / toolbar background |
+| `--color-dock` | `.glass-dock` | Dock material background |
+| `--color-menubar` | `.glass-menubar` | Menu bar material background |
 | `--color-glass-edge` | `border-glass-edge` | Glass border / edge highlight |
 
 **Text:**
@@ -65,6 +67,7 @@ All semantic colors are Tailwind utilities backed by CSS variables. The variable
 |---|---|---|
 | `--color-label-primary` | `text-label-primary` | Primary body text |
 | `--color-label-secondary` | `text-label-secondary` | Secondary / muted text |
+| `--color-label-tertiary` | CSS var | Status-icon and tertiary chrome text |
 | `--color-accent` | `text-accent` / `bg-accent` | Links, focus rings, active state |
 
 **macOS system colors (fixed, no CSS var needed):**
@@ -162,6 +165,8 @@ Future: Canvas + `simplex-noise` flow field replaces the CSS gradient as the ani
 | Dock bottom offset | `12px` from viewport bottom |
 | Traffic light button diameter | `12px` |
 | Traffic light gap | `8px` |
+| Boot logo size | `64×64px`, centered in viewport |
+| Boot progress bar | `176×4px`, positioned `64px` below center |
 
 ---
 
@@ -177,7 +182,7 @@ if (dist < 100) {
   size = 56 + (86 - 56) * eased
   lift = -8 * eased // translateY upward at peak
 }
-// on mouseleave: 220ms transition back; spring { stiffness: 600, damping: 35 }
+// implemented with a 220ms exit transition and spring { stiffness: 600, damping: 35 }
 ```
 
 ---
@@ -200,6 +205,9 @@ const dockMagnify = { type: 'spring', stiffness: 600, damping: 35 }
 
 // Page / content transitions
 const contentFade = { duration: 0.15, ease: 'easeOut' }
+
+// Boot overlay fade
+const bootFade = { duration: 0.4, ease: 'easeOut' }
 ```
 
 ---
@@ -208,6 +216,7 @@ const contentFade = { duration: 0.15, ease: 'easeOut' }
 
 - `next-themes` manages dark/light via a `[data-theme="light"]` attribute on `<html>`
 - CSS variables in `:root` are the dark (canonical) values; `[data-theme="light"]` overrides them
+- `.glass-*` utilities must reference CSS variables so light mode flips material colors without component-level overrides
 - Tailwind `dark:` prefix is almost never needed — token classes handle both modes automatically
 
 ```tsx

@@ -362,7 +362,7 @@
       "id": "V1_004B",
       "title": "Boot sequence component",
       "description": "Create a BootScreen component that renders: Apple logo SVG centered on a full-screen black overlay, a 176x4px progress bar that fills over 2400ms, and overlay fade-out over 400ms when progress > 85%. Must not use Apple-owned chime audio assets. Any audio must require a user gesture.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V1_DESKTOP",
       "depends_on": [
@@ -391,7 +391,7 @@
       "id": "V1_004C",
       "title": "Dark/light theme toggle and mobile fallback",
       "description": "Wire next-themes so dark mode is the default and light mode inverts tokens. Add a theme toggle control to the menu bar or shell chrome. Implement a deliberate mobile fallback screen (not broken desktop UI) that renders for small viewports instead of the desktop shell.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V1_DESKTOP",
       "depends_on": [
@@ -631,7 +631,7 @@
       "id": "V1_007C",
       "title": "URL sync: focused window updates the URL",
       "description": "When a window is focused, push its route to the browser URL using Next.js router. When a window is closed and another becomes focused, the URL updates to that window's route. When no window is focused, the URL may remain on the last route.",
-      "status": "todo",
+      "status": "done",
       "priority": "critical",
       "group_id": "V1_DESKTOP",
       "depends_on": [
@@ -657,7 +657,7 @@
       "id": "V1_007D",
       "title": "Direct route entry opens the matching app window",
       "description": "When the user navigates directly to /projects, /about, /contact, or /cv in the browser, the desktop shell mounts and the matching app window opens automatically. The URL on load triggers a syncRoute action in the reducer.",
-      "status": "todo",
+      "status": "done",
       "priority": "critical",
       "group_id": "V1_DESKTOP",
       "depends_on": [
@@ -741,7 +741,7 @@
       "id": "V1_009A",
       "title": "Window open/close/minimize/restore animations",
       "description": "Wrap AppWindow renders in framer-motion AnimatePresence for open/close scale+fade. Add minimize animation (scale down toward dock, fade) and restore animation. All animations must respect prefers-reduced-motion.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V1_DESKTOP",
       "depends_on": [
@@ -770,7 +770,7 @@
       "id": "V1_009B",
       "title": "Dock magnification, tooltips, and open indicators",
       "description": "Add framer-motion dock magnification using the cosine falloff algorithm from docs/styling.md: dist radius 100px, base 56px, max 86px, lift -8px at peak. Exit transition is 220ms; spring { stiffness: 600, damping: 35 }. Show tooltip labels above dock icons on hover (within 30px). Show a 4x4px dot below open non-minimized app icons.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V1_DESKTOP",
       "depends_on": [

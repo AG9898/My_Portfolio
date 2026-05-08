@@ -11,11 +11,16 @@
   --color-desktop:    #0a0a0f;
   --color-window:     rgba(28, 28, 30, 0.78);
   --color-chrome:     rgba(44, 44, 46, 0.72);
+  --color-dock:       rgba(255, 255, 255, 0.14);
+  --color-menubar:    rgba(20, 20, 22, 0.45);
   --color-glass-edge: rgba(255, 255, 255, 0.10);
+  --color-dock-edge:  rgba(255, 255, 255, 0.22);
+  --color-control-hover: rgba(255, 255, 255, 0.10);
 
   /* Text */
   --color-label-primary:   #F5F5F7;
   --color-label-secondary: rgba(255, 255, 255, 0.50);
+  --color-label-tertiary:  rgba(255, 255, 255, 0.85);
 
   /* Accent */
   --color-accent: #0A84FF;
@@ -34,10 +39,15 @@
   --color-desktop:    #e8e8ed;
   --color-window:     rgba(242, 242, 247, 0.92);
   --color-chrome:     rgba(255, 255, 255, 0.90);
+  --color-dock:       rgba(0, 0, 0, 0.08);
+  --color-menubar:    rgba(236, 236, 236, 0.80);
   --color-glass-edge: rgba(0, 0, 0, 0.08);
+  --color-dock-edge:  rgba(0, 0, 0, 0.14);
+  --color-control-hover: rgba(0, 0, 0, 0.08);
 
   --color-label-primary:   #1C1C1E;
   --color-label-secondary: rgba(0, 0, 0, 0.50);
+  --color-label-tertiary:  rgba(0, 0, 0, 0.72);
 
   --color-accent: #007AFF;
 }
@@ -97,25 +107,25 @@ select {
 
 @layer utilities {
   .glass {
-    background: rgba(28, 28, 30, 0.78);
+    background: var(--color-window);
     backdrop-filter: blur(28px) saturate(180%);
     -webkit-backdrop-filter: blur(28px) saturate(180%);
   }
 
   .glass-chrome {
-    background: rgba(44, 44, 46, 0.72);
+    background: var(--color-chrome);
     backdrop-filter: blur(28px) saturate(180%);
     -webkit-backdrop-filter: blur(28px) saturate(180%);
   }
 
   .glass-dock {
-    background: rgba(255, 255, 255, 0.14);
+    background: var(--color-dock);
     backdrop-filter: blur(28px) saturate(180%);
     -webkit-backdrop-filter: blur(28px) saturate(180%);
   }
 
   .glass-menubar {
-    background: rgba(20, 20, 22, 0.45);
+    background: var(--color-menubar);
     backdrop-filter: blur(28px) saturate(180%);
     -webkit-backdrop-filter: blur(28px) saturate(180%);
   }

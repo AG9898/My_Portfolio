@@ -6,10 +6,12 @@
 
 import React, {
   createContext,
+  useEffect,
   useContext,
   useReducer,
   ReactNode,
 } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import {
   WindowState,
   WindowAction,
@@ -46,6 +48,23 @@ interface WindowManagerProviderProps {
 
 export function WindowManagerProvider({ children }: WindowManagerProviderProps) {
   const [state, dispatch] = useReducer(windowReducer, initialWindowState);
+  const pathname = usePathname();
+  const router = useRouter();
+  const focusedWindow = state.openWindows.find(
+    (win) => win.id === state.focusedId
+  );
+
+  useEffect(() => {
+    dispatch({ type: "syncRoute", payload: { route: pathname } });
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!focusedWindow || focusedWindow.route === pathname) {
+      return;
+    }
+
+    router.push(focusedWindow.route);
+  }, [focusedWindow, pathname, router]);
 
   return (
     <WindowManagerContext.Provider value={{ state, dispatch }}>

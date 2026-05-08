@@ -27,12 +27,13 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
   - `html` element carries `suppressHydrationWarning` (required by `next-themes`).
   - `ThemeProvider` uses `attribute="data-theme"` to match the CSS selector `[data-theme="light"]` in `globals.css`; `defaultTheme="dark"`, `enableSystem={false}`.
   - `WindowManagerProvider` wraps the desktop root, making window state available to all client components.
+  - `MobileFallback` renders outside the desktop provider and is visible below the `md` breakpoint; the desktop provider/root are hidden at those widths.
   - `#desktop-root` div is `position: fixed; inset: 0; overflow: hidden; bg-desktop` — the stable shell container that never unmounts.
   - Font is set via inline `style` on `body` using the macOS system font stack (`-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif`); no Google Fonts import.
   - Inside `#desktop-root`, from back to front: `<Wallpaper />`, `<MenuBar />` (`z-50`, `h-7`), `<DesktopShortcuts />` (`z-10`, top: 48px), `<WindowRenderer />` (window z-index 21+), `<main>` page content area (`absolute`, `top: 28`, `bottom: 80`, `overflow-hidden`), `<Dock />` (`z-40`, `bottom-3`).
   - The `<main>` content area sits between the menu bar (28px tall) and the dock (80px clearance at the bottom), so route children never overlap shell chrome.
 - Route pages provide content for their app windows.
-- Route changes focus/open app windows without unmounting wallpaper, menu bar, dock, desktop icons, or other open windows.
+- Route changes dispatch `syncRoute` so direct browser entry to `/`, `/projects`, `/about`, `/contact`, or `/cv` opens and focuses the matching app window without unmounting wallpaper, menu bar, dock, desktop icons, or other open windows.
 
 ### Desktop Shell
 
@@ -44,6 +45,7 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 - Static 28px bar using `.glass-menubar` with `borderBottom: 1px solid rgba(255,255,255,0.08)`.
 - Left: Apple logo SVG → app name placeholder (static "Finder" until V1_008A wires focused-app name) → File / Edit / View / Window / Help menu buttons.
 - Right: Control Centre SVG → Battery visual (24×12px rect, 78% fill, decorative) → Wi-Fi SVG → date → live clock.
+- Includes a right-side icon button that toggles the `next-themes` theme between dark and light.
 - Clock uses `useState<Date | null>(null)` initialised null on the server; `useEffect` populates it on the client and starts a 1000ms interval. Date and time strings are only rendered once non-null, eliminating SSR/client hydration mismatch. Requires `"use client"` directive.
 
 #### Dock (`src/app/components/Dock/Dock.tsx`)
@@ -88,6 +90,7 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 - **`WindowEntry`**: `id`, `route`, `geometry` (`x, y, width, height`), `restoreGeometry`, `minimized`, `maximized`, `snapped: "none" | "left" | "right"`.
 - **`WindowAction`** union covers all 11 action types: `open`, `focus`, `close`, `minimize`, `restore`, `maximize`, `snapLeft`, `snapRight`, `drag`, `resize`, `syncRoute`.
 - `open` action: if the app is already in `openWindows`, it focuses and unminimizes that entry without duplicating. Otherwise appends a new `WindowEntry` using `defaultSize`/`defaultPosition` from the caller.
+- `syncRoute` action: maps the current pathname to the `APPS` registry, then opens/focuses/restores the matching app window using its default metadata. Existing windows are updated in place, so hydration and route changes do not create duplicates.
 - `close` action: removes the entry and selects the next highest z-index open window as `focusedId`, or null if none remain.
 - `maximize` action: saves current geometry to `restoreGeometry` and sets `geometry` to a zero-size sentinel — the WindowRenderer fills the desktop area using viewport dimensions. Toggling maximize again calls `restore`.
 - `snapLeft`/`snapRight` actions: accept `desktopWidth`/`desktopHeight` from the caller and compute exact half-screen geometry.
@@ -98,6 +101,8 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 
 - `"use client"` component that wraps the app tree via `WindowManagerContext`.
 - Owns the single `useReducer(windowReducer, initialWindowState)` call; provides `{ state, dispatch }` via context.
+- Observes the current pathname and dispatches `syncRoute` so direct browser entry opens the corresponding app window.
+- Observes `focusedId` and the focused window route, then calls `router.push(route)` when the focused window changes and the browser URL is stale. If no window is focused, the current URL is left unchanged.
 - `useWindowManager()` hook returns context value; throws if called outside the provider.
 - Mounted in `layout.tsx` wrapping the desktop root so all shell components (Dock, DesktopShortcuts, MenuBar) and window components share one state instance.
 
@@ -122,17 +127,18 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 
 - `next-themes` controls dark/light mode.
 - Dark mode tokens are canonical; light mode overrides invert the frosted-glass system.
+- `ThemeProvider` disables system theme detection and defaults to dark, so first paint follows the canonical dark theme unless the user explicitly toggles light.
 
 ---
 
 ## Routing and State Flow
 
-1. User clicks a desktop icon, dock item, or in-window navigation target.
+1. User clicks a desktop icon, dock item, in-window navigation target, or enters an app route directly in the browser.
 2. Window manager opens or restores the corresponding app window.
 3. Focused app becomes the highest z-index window.
 4. URL updates to the focused app route.
 5. Desktop shell remains mounted throughout the transition.
-6. Closing the focused window focuses the next highest z-index open window or returns to `/` if none remain.
+6. Closing the focused window focuses the next highest z-index open window; if no window remains focused, the URL is left unchanged.
 
 ---
 

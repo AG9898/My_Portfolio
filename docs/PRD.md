@@ -30,7 +30,7 @@ Build a memorable frontend portfolio where the browser behaves like a macOS desk
 
 - Persistent desktop wallpaper, menu bar, dock, desktop icons, and boot screen.
 - Static shell mounts from `src/app/layout.tsx` and does not unmount across route changes.
-- Mobile fallback message for small screens.
+- Mobile fallback for small screens, including CV access and theme switching instead of rendering cramped draggable windows.
 
 ### Phase 2 — Window Manager
 
@@ -59,12 +59,12 @@ Build a memorable frontend portfolio where the browser behaves like a macOS desk
 
 ## Success Criteria
 
-- Desktop shell persists while navigating between `/`, `/projects`, `/about`, `/contact`, and `/cv`.
+- Desktop shell persists while navigating between `/`, `/projects`, `/about`, `/contact`, and `/cv`, including direct browser entry to any of those routes.
 - Users can open multiple app windows, focus existing windows, minimize to dock, restore, close, maximize, and snap.
 - URL reflects the focused app without unmounting the desktop chrome.
 - The visual system reads as macOS-inspired: frosted glass, traffic lights, dock, menu bar, system typography, and dark canonical theme.
 - Production build succeeds and the core experience works on modern desktop Chromium, Safari, and Firefox.
-- Small screens receive an intentional fallback instead of a broken desktop layout.
+- Small screens receive an intentional full-screen fallback instead of a broken desktop layout.
 
 ---
 
