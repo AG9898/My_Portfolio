@@ -303,7 +303,7 @@
       "id": "V1_003D",
       "title": "Wire static shell into layout.tsx",
       "description": "Mount MenuBar, Dock, and DesktopShortcuts persistently in layout.tsx so they remain visible across all route changes. Add a wallpaper placeholder div (bg-desktop fill). Children (page routes) render in the remaining desktop area between menu bar and dock.",
-      "status": "todo",
+      "status": "done",
       "priority": "critical",
       "group_id": "V1_DESKTOP",
       "depends_on": [

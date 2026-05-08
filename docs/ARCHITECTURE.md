@@ -26,8 +26,10 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 - `src/app/layout.tsx` mounts the persistent desktop shell and window manager provider.
   - `html` element carries `suppressHydrationWarning` (required by `next-themes`).
   - `ThemeProvider` uses `attribute="data-theme"` to match the CSS selector `[data-theme="light"]` in `globals.css`; `defaultTheme="dark"`, `enableSystem={false}`.
-  - `#desktop-root` div is `position: fixed; inset: 0; overflow: hidden` — the stable shell container that never unmounts.
-  - Font is set via inline `style` on `body` using the macOS system font stack; no Google Fonts import.
+  - `#desktop-root` div is `position: fixed; inset: 0; overflow: hidden; bg-desktop` — the stable shell container that never unmounts.
+  - Font is set via inline `style` on `body` using the macOS system font stack (`-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif`); no Google Fonts import.
+  - Inside `#desktop-root`, from back to front: wallpaper placeholder div (`absolute inset-0 bg-desktop`), `<MenuBar />` (`z-50`, `h-7`), `<DesktopShortcuts />` (`z-10`, top: 48px), `<main>` page content area (`absolute`, `top: 28`, `bottom: 80`, `overflow-hidden`), `<Dock />` (`z-40`, `bottom-3`).
+  - The `<main>` content area sits between the menu bar (28px tall) and the dock (80px clearance at the bottom), so route children never overlap shell chrome.
 - Route pages provide content for their app windows.
 - Route changes focus/open app windows without unmounting wallpaper, menu bar, dock, desktop icons, or other open windows.
 
