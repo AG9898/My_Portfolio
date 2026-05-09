@@ -169,3 +169,10 @@ select {
     -webkit-backdrop-filter: blur(28px) saturate(180%);
   }
 }
+
+/* During window drag: reduce backdrop-filter cost for browsers that recompute it every frame */
+body.is-dragging .glass,
+body.is-dragging .glass-chrome {
+  backdrop-filter: blur(10px) saturate(150%);
+  -webkit-backdrop-filter: blur(10px) saturate(150%);
+}

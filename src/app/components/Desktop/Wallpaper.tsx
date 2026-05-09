@@ -73,8 +73,11 @@ export default function Wallpaper() {
       {wallpaperTypes.map((type) => {
         const isActive = type === wallpaper;
         const isPrevious = type === previousWallpaper;
+        // Only mount the active wallpaper and the previous one while it fades out.
+        // This stops idle animation loops on all non-visible wallpapers.
+        if (!isActive && !isPrevious) return null;
         const opacity = isActive || (isPrevious && isPreviousVisible) ? 1 : 0;
-        const zIndex = isPrevious ? 2 : isActive ? 1 : 0;
+        const zIndex = isPrevious ? 2 : 1;
 
         return (
           <div
@@ -360,6 +363,7 @@ function GradientDots({ settings }: { settings: GradientDotsSettings }) {
     scene.add(mesh);
 
     let hasPainted = false;
+    let rafPointer: number | null = null;
 
     const resize = () => {
       const rect = root.getBoundingClientRect();
@@ -371,12 +375,23 @@ function GradientDots({ settings }: { settings: GradientDotsSettings }) {
       uniforms.iResolution.value.set(width, height);
     };
 
+    // Throttle pointer updates to once per rAF frame — pointermove can fire at 1000Hz.
     const setPointerState = (event: PointerEvent) => {
-      const rect = root.getBoundingClientRect();
-      targetMouse.set(event.clientX - rect.left, rect.height - (event.clientY - rect.top));
+      const x = event.clientX;
+      const y = event.clientY;
+      if (rafPointer !== null) return;
+      rafPointer = requestAnimationFrame(() => {
+        rafPointer = null;
+        const rect = root.getBoundingClientRect();
+        targetMouse.set(x - rect.left, rect.height - (y - rect.top));
+      });
     };
 
     const resetPointerState = () => {
+      if (rafPointer !== null) {
+        cancelAnimationFrame(rafPointer);
+        rafPointer = null;
+      }
       targetMouse.set(uniforms.iResolution.value.x / 2, uniforms.iResolution.value.y / 2);
     };
 
@@ -409,6 +424,7 @@ function GradientDots({ settings }: { settings: GradientDotsSettings }) {
 
     return () => {
       renderer.setAnimationLoop(null);
+      if (rafPointer !== null) cancelAnimationFrame(rafPointer);
       window.removeEventListener("pointermove", setPointerState);
       window.removeEventListener("resize", resize);
       document.removeEventListener("pointerleave", resetPointerState);

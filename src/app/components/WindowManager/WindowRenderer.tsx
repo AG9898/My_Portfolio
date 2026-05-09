@@ -242,12 +242,16 @@ function AppWindow({
     <Rnd
       position={{ x, y }}
       size={{ width, height }}
-      style={{ zIndex: WINDOW_Z_BASE + zIndex, pointerEvents: "all" }}
+      style={{ zIndex: WINDOW_Z_BASE + zIndex, pointerEvents: "all", willChange: "transform" }}
       minWidth={320}
       minHeight={200}
       bounds="parent"
       dragHandleClassName="glass-chrome"
-      onDragStop={(_e, d) => onDragStop(d.x, d.y)}
+      onDragStart={() => { document.body.classList.add("is-dragging"); }}
+      onDragStop={(_e, d) => {
+        document.body.classList.remove("is-dragging");
+        onDragStop(d.x, d.y);
+      }}
       onResizeStop={(_e, _dir, ref, _delta, pos) =>
         onResizeStop(
           pos.x,
