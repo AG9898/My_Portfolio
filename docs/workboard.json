@@ -1,7 +1,7 @@
 {
   "$schema": "./workboard.schema.json",
   "schema_version": "1.0.0",
-  "last_updated": "2026-05-08",
+  "last_updated": "2026-05-11",
   "tasks": [
     {
       "id": "V1_001",
@@ -1145,6 +1145,180 @@
       "commands": [
         "npm run lint",
         "npm run build"
+      ]
+    },
+    {
+      "id": "V2_001",
+      "title": "Extend AppMetadata registry with showInDock flag and four project apps",
+      "description": "Extend AppId union type to include glass-atlas, techy, sparse, and weather. Add showInDock?: boolean field to AppMetadata interface (default behavior: show in dock when omitted or true; exclude when false). Add four new APPS entries with showInDock: false, appropriate defaultSize and defaultPosition, and correct route strings (/glass-atlas, /techy, /sparse, /weather). Update windowReducer.ts to handle the extended AppId union (zIndexMap and focusedId types). Update Dock.tsx to filter APPS to showInDock !== false so the dock continues showing only the five core apps.",
+      "status": "todo",
+      "priority": "critical",
+      "group_id": "V2_CONTENT",
+      "depends_on": [],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "AppId union includes glass-atlas, techy, sparse, and weather.",
+        "AppMetadata interface includes showInDock?: boolean field.",
+        "APPS registry has nine entries; the four new entries have showInDock: false.",
+        "Dock renders only the five core apps — no new icons appear in the dock.",
+        "windowReducer.ts compiles cleanly with the extended AppId union.",
+        "npm run lint and npm run build pass."
+      ],
+      "docs": [
+        "docs/ARCHITECTURE.md",
+        "docs/CONVENTIONS.md"
+      ],
+      "files": [
+        "src/app/components/appMetadata.ts",
+        "src/app/components/WindowManager/windowReducer.ts",
+        "src/app/components/Dock/Dock.tsx"
+      ],
+      "commands": [
+        "npm run lint",
+        "npm run build"
+      ]
+    },
+    {
+      "id": "V2_002",
+      "title": "Create iframe route pages for Glass Atlas and Techy",
+      "description": "Create src/app/glass-atlas/page.tsx and src/app/techy/page.tsx as client components. Each page renders a full-height iframe with a hardcoded src URL (Glass Atlas: https://glass-atlas-production.up.railway.app; Techy: https://techy-psi.vercel.app). Include a visible open-in-new-tab fallback button for the case where the target site blocks iframe embedding. Style the fallback consistently with the glass window system using Tailwind tokens and glass utilities only — no inline hex.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V2_CONTENT",
+      "depends_on": [
+        "V2_001"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "src/app/glass-atlas/page.tsx and src/app/techy/page.tsx exist and export default React components.",
+        "Each page renders a full-height iframe with the correct hardcoded src URL.",
+        "An open-in-new-tab fallback button is present and links to the correct URL.",
+        "Pages use only Tailwind tokens and glass utilities — no inline hex.",
+        "npm run lint and npm run build pass."
+      ],
+      "docs": [
+        "docs/ARCHITECTURE.md"
+      ],
+      "files": [
+        "src/app/glass-atlas/page.tsx",
+        "src/app/techy/page.tsx"
+      ],
+      "commands": [
+        "npm run lint",
+        "npm run build"
+      ]
+    },
+    {
+      "id": "V2_003",
+      "title": "Create project showcase route pages for Sparse and Weather & Wellness",
+      "description": "Create src/app/sparse/page.tsx and src/app/weather/page.tsx as static project detail pages styled consistently with existing app window content. Each page shows: project name, short description, status badge, tech stack tags, and a GitHub or external link. Sparse: private SvelteKit timesheet and expense management app for Utilicom Technologies (active development); stack: SvelteKit, TypeScript, Drizzle, Supabase, Bun, Tailwind; GitHub link only. Weather & Wellness: Python/Flask dashboard at https://weather-and-wellness-dashboard.vercel.app; link to deployed site. Style using existing Notes/Finder Tailwind patterns — no inline hex.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V2_CONTENT",
+      "depends_on": [
+        "V2_001"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "src/app/sparse/page.tsx and src/app/weather/page.tsx exist and export default React components.",
+        "Each page shows name, description, status badge, tech stack tags, and an appropriate link.",
+        "Styling uses only Tailwind tokens and glass utilities — no inline hex.",
+        "Content is real, not placeholder.",
+        "npm run lint and npm run build pass."
+      ],
+      "docs": [
+        "docs/ARCHITECTURE.md",
+        "docs/PRD.md"
+      ],
+      "files": [
+        "src/app/sparse/page.tsx",
+        "src/app/weather/page.tsx"
+      ],
+      "commands": [
+        "npm run lint",
+        "npm run build"
+      ]
+    },
+    {
+      "id": "V2_004",
+      "title": "Extend DesktopShortcuts with icons for four new project apps",
+      "description": "Extend DesktopShortcuts.tsx to render shortcuts for the four new app entries. Add ICON_LABELS entries for glass-atlas (glass_atlas/), techy (techy.app), sparse (sparse.app), and weather (weather.dash). Add four new SVG icon components with distinct thematic metaphors: globe (glass-atlas), graph-node network (techy), table/grid (sparse), cloud (weather). Wire the new IDs into the ShortcutFileIcon dispatcher. All SVGs must follow the existing 56x56px viewport convention using light fill, subtle stroke, and a badge label or clearly consistent thematic treatment.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V2_CONTENT",
+      "depends_on": [
+        "V2_001"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "All nine app shortcuts appear in the desktop sidebar.",
+        "Each of the four new icons uses a distinct SVG metaphor (globe, graph-node, grid, cloud) at 56x56px.",
+        "ICON_LABELS has entries for all nine app IDs.",
+        "ShortcutFileIcon dispatcher returns a component for all nine IDs with no default null fallback hit.",
+        "npm run lint passes."
+      ],
+      "docs": [
+        "docs/ARCHITECTURE.md"
+      ],
+      "files": [
+        "src/app/components/Desktop/DesktopShortcuts.tsx"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V2_005_1",
+      "title": "Projects window: expand project list and wire real links",
+      "description": "Update src/app/projects/page.tsx with two data-focused changes. First, replace the four-entry PROJECTS array with a full nine-entry array covering: My Portfolio, PigeonCoop, Zellaude-Plus, Glass Atlas, Techy, Sparse, Weather & Wellness, Interactive MapLibre, and movieboxd. Each entry must include name, kind, status, path, description, stack, a category field (frontend | agent-tools | client-work | tooling), and a link field. Second, convert every ExternalLink icon from decorative to a real anchor tag wrapping an href — use the correct GitHub URL or deployed URL for each project. Entries with no public URL (e.g. Sparse) must omit the ExternalLink icon entirely rather than render a dead link.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V2_CONTENT",
+      "depends_on": [],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "PROJECTS array has nine entries covering all active projects; von-ralph is removed.",
+        "Every entry has a category field matching one of: frontend, agent-tools, client-work, tooling.",
+        "ExternalLink icons that have a real URL are wrapped in anchor tags with the correct href and target=_blank.",
+        "Entries with no public URL (Sparse) omit the ExternalLink icon.",
+        "npm run lint passes."
+      ],
+      "docs": [
+        "docs/PRD.md"
+      ],
+      "files": [
+        "src/app/projects/page.tsx"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V2_005_2",
+      "title": "Projects window: interactive sidebar category filter",
+      "description": "Add client-side category filtering to src/app/projects/page.tsx. Add useState for the selected category (default null, meaning show all). Update the SIDEBAR_ITEMS array to derive counts from the PROJECTS array using the category field added in V2_005_1. Wire each sidebar item onClick to set the selected category; clicking the active category deselects and shows all. Filter the project cards grid to show only entries matching the selected category, or all entries when no category is selected. The sidebar item for the selected category must use the active highlight style already present in the component. Add use client directive if not already present.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V2_CONTENT",
+      "depends_on": [
+        "V2_005_1"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Clicking a sidebar category filters the displayed project cards to that category.",
+        "Clicking the active category again shows all projects.",
+        "Sidebar item counts reflect the actual PROJECTS array, not hardcoded numbers.",
+        "The active sidebar item uses the existing blue highlight style.",
+        "npm run lint passes."
+      ],
+      "docs": [
+        "docs/PRD.md"
+      ],
+      "files": [
+        "src/app/projects/page.tsx"
+      ],
+      "commands": [
+        "npm run lint"
       ]
     }
   ]

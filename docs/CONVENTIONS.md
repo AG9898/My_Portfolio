@@ -32,7 +32,9 @@ Normative guide for code in this portfolio. Read before writing new UI architect
 - Window chrome belongs under `src/app/components/Window/`.
 - Menu bar components belong under `src/app/components/MenuBar/`.
 - Dock components belong under `src/app/components/Dock/`.
-- Keep shared app metadata in a registry module (`src/app/components/appMetadata.ts`) instead of duplicating route titles, icons, default sizes, positions, or app IDs. The `APPS` array is the canonical source for id, route, label, title, icon, defaultSize, and defaultPosition.
+- Keep shared app metadata in a registry module (`src/app/components/appMetadata.ts`) instead of duplicating route titles, icons, default sizes, positions, or app IDs. The `APPS` array is the canonical source for id, route, label, title, icon, defaultSize, defaultPosition, and showInDock.
+- `showInDock: false` on an `AppMetadata` entry keeps the app in `DesktopShortcuts` but excludes it from the Dock. Use this for project-specific windows that are not core navigation destinations. The Dock filters `APPS` to entries where `showInDock !== false`; `DesktopShortcuts` renders the full registry.
+- Iframe route pages hardcode their `src` URL directly — there is no shared generic browser component. Each deployed project gets its own route file. If the target blocks iframe embedding, the page must include an "open in new tab" fallback button.
 
 ### Styling
 

@@ -33,7 +33,7 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
   - Inside `#desktop-root`, from back to front: `<Wallpaper />`, `<MenuBar />` (`z-50`, `h-7`), `<DesktopShortcuts />` (`z-10`, top: 48px), `<WindowRenderer />` (window z-index 21+), `<main>` page content area (`absolute`, `top: 28`, `bottom: 80`, `overflow-hidden`), `<Dock />` (`z-40`, `bottom-3`).
   - The `<main>` content area sits between the menu bar (28px tall) and the dock (80px clearance at the bottom), so route children never overlap shell chrome.
 - Route pages provide content for their app windows.
-- Route changes dispatch `syncRoute` so direct browser entry to `/`, `/projects`, `/about`, `/contact`, or `/cv` opens and focuses the matching app window without unmounting wallpaper, menu bar, dock, desktop icons, or other open windows.
+- Route changes dispatch `syncRoute` so direct browser entry to `/`, `/projects`, `/about`, `/contact`, `/cv`, `/glass-atlas`, `/techy`, `/sparse`, or `/weather` opens and focuses the matching app window without unmounting wallpaper, menu bar, dock, desktop icons, or other open windows.
 
 ### Desktop Shell
 
@@ -72,7 +72,7 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 - Static bottom dock using `.glass-dock`, absolutely positioned at `bottom-3`, centered horizontally.
 - Dock border: `1px solid rgba(255,255,255,0.22)`. Dock shadow: inset top/bottom highlights + `0 30px 80px rgba(0,0,0,0.5)`.
 - Dock padding: `8px 12px`, border radius: `22px`. Icon base size: `56px`.
-- Renders one button per app from the `APPS` registry. Each icon uses an individual SVG matching the design handoff.
+- Renders one button per app from `APPS` filtered to `showInDock !== false` — the five core apps only (Home, Projects, About, Contact, CV). Project-specific apps set `showInDock: false` and appear only in `DesktopShortcuts`. Each icon uses an individual SVG matching the design handoff.
 - Clicking a dock icon dispatches the `open` action; if the app is already open, focuses and restores it without duplicating.
 - Magnification uses a cosine-falloff algorithm: 100px radius, 56px base, 86px max, -8px lift at peak. Implemented with `framer-motion` `useTransform`/`useSpring` reading a `useMotionValue` tracking `clientX`.
 - Spring config: `{ stiffness: 600, damping: 35, duration: 0.22 }`.
@@ -83,19 +83,22 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 #### Desktop Shortcuts (`src/app/components/Desktop/DesktopShortcuts.tsx`)
 
 - 88px-wide left sidebar column, positioned `left: 16px; top: 48px` (clears menu bar).
-- Renders one shortcut item per app from the `APPS` registry (all five apps).
-- Each shortcut is a 56×56px SVG using file-type metaphors: txt (home), folder (projects), person (about), msg (contact), pdf (cv).
-- File labels are mapped via `ICON_LABELS` record (e.g., `"about_me.txt"`, `"projects/"`, `"aden_guo_cv.pdf"`); route/id come from `APPS`.
+- Renders one shortcut item per app from the full `APPS` registry — all nine apps, including the four project apps that are excluded from the Dock.
+- Each shortcut is a 56×56px SVG using file-type or thematic metaphors: txt (home), folder (projects), person (about), msg (contact), pdf (cv), globe (glass-atlas), graph-node (techy), table/grid (sparse), cloud (weather).
+- File labels are mapped via `ICON_LABELS` record (e.g., `"about_me.txt"`, `"projects/"`, `"aden_guo_cv.pdf"`, `"glass_atlas/"`, `"techy.app"`, `"sparse.app"`, `"weather.dash"`); route/id come from `APPS`.
 - Single click: selected state — `rgba(10,132,255,0.28)` background + `1px solid rgba(10,132,255,0.55)` border; label becomes `rgba(10,132,255,0.95)` pill.
 - Double click: dispatches `open` action to the window manager; focuses and restores the window if already open.
 - Requires `"use client"` directive; selection state is local (`useState<AppId | null>`).
 
 #### App Metadata (`src/app/components/appMetadata.ts`)
 
-- Shared registry of all five portfolio apps: Home, Projects, About, Contact, CV.
-- Exports `AppId` union type, `AppSize` and `AppPosition` helper types, `AppMetadata` interface (id, route, label, title, icon, defaultSize, defaultPosition), and `APPS` array.
+- Shared registry of all portfolio apps: Home, Projects, About, Contact, CV, Glass Atlas, Techy, Sparse, and Weather & Wellness.
+- Exports `AppId` union type, `AppSize` and `AppPosition` helper types, `AppMetadata` interface (id, route, label, title, icon, defaultSize, defaultPosition, showInDock), and `APPS` array.
+- `AppId` is `"home" | "projects" | "about" | "contact" | "cv" | "glass-atlas" | "techy" | "sparse" | "weather"`.
+- `AppMetadata.route` is a string literal union covering `/`, `/projects`, `/about`, `/contact`, `/cv`, `/glass-atlas`, `/techy`, `/sparse`, `/weather`.
 - `defaultSize` provides the window's initial `{width, height}` in pixels; `defaultPosition` provides the initial top-left `{x, y}` offset from the desktop area.
 - `title` is the full window title bar string; `label` is the short dock/shortcut label.
+- `showInDock?: boolean` — when explicitly `false`, the app appears in `DesktopShortcuts` only and is excluded from the Dock. When omitted or `true`, the app appears in both. The five core apps (Home, Projects, About, Contact, CV) omit this field; the four project apps (Glass Atlas, Techy, Sparse, Weather) set it to `false`.
 - No state, no hooks, no reducer logic — pure static metadata consumed by the window manager and shell components.
 
 ### Window Manager
@@ -145,6 +148,21 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 - Render macOS-style chrome, traffic lights, optional toolbar, and the route app content.
 - Use `react-rnd` for drag and resize behavior.
 - Use `framer-motion` for opening, closing, minimizing, restoring, and inner page transitions.
+
+#### Iframe window routes (`/glass-atlas`, `/techy`)
+
+- Route pages for live deployed projects render a full-height `<iframe>` as the window content area.
+- Each iframe page is a self-contained client component that hardcodes its `src` URL — no shared generic browser component.
+- URLs: Glass Atlas → `https://glass-atlas-production.up.railway.app`; Techy → `https://techy-psi.vercel.app`.
+- If the target site blocks iframe embedding via `X-Frame-Options` or `Content-Security-Policy`, the page falls back to an "open in new tab" button.
+- `syncRoute` handles direct browser entry to these routes the same as core app routes.
+
+#### Project showcase routes (`/sparse`, `/weather`)
+
+- Route pages for private or non-web-native projects render a static, styled detail page: name, description, status badge, tech stack tags, and GitHub or external link.
+- Content is hardcoded in the route file — no backend, no CMS.
+- Sparse: private SvelteKit timesheet/expense management app for Utilicom Technologies (active development). Stack: SvelteKit, TypeScript, Drizzle, Supabase, Bun, Tailwind.
+- Weather & Wellness: Python/Flask dashboard deployed at `https://weather-and-wellness-dashboard.vercel.app`. Stack: Python, Flask, Vercel.
 
 ### Theme
 

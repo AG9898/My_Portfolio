@@ -1,12 +1,12 @@
 # PRD — My Portfolio
 
-> **Status** (2026-05-06)
+> **Status** (2026-05-11)
 >
 > | Track | State |
 > |---|---|
-> | Shipped | Previous single-page portfolio exists but is no longer canonical. |
-> | In Progress | macOS desktop OS redesign. See [`macos-redesign.md`](macos-redesign.md). |
-> | Planned | Accessibility, menu bar, wallpaper, and polish follow-up tasks remain. |
+> | Shipped | V1 complete — boot, persistent shell, window manager, 5 core app windows, motion, mobile fallback, wallpaper themes. |
+> | In Progress | V2 — project shortcut windows, embedded live sites, Projects sidebar filter, project link polish. |
+> | Planned | Further content updates and project additions as portfolio grows. |
 
 ---
 
@@ -52,6 +52,14 @@ Build a memorable frontend portfolio where the browser behaves like a macOS desk
 
 - V1 is considered complete when the boot sequence, persistent desktop shell, working shortcut routes, full window interactions, complete motion/styling pass, mobile fallback, and first-pass real app content are implemented.
 
+### Phase 4 — V2 Project Expansion
+
+- Four new desktop shortcut icons: Glass Atlas, Techy, Sparse, and Weather & Wellness. Each has a distinctive SVG icon and appears only in the desktop shortcuts sidebar (not the dock).
+- Glass Atlas and Techy open as iframe windows rendering their deployed sites (`https://glass-atlas-production.up.railway.app` and `https://techy-psi.vercel.app`). Each has an "open in new tab" fallback if embedding is blocked.
+- Sparse and Weather & Wellness open as project showcase windows — static styled detail pages with description, status, stack, and links. No iframe.
+- Projects window: sidebar categories become interactive filters. Project list updated with real clickable links and expanded to include all active projects (Zellaude-Plus, Glass Atlas, Techy, Sparse, Weather & Wellness, PigeonCoop).
+- All existing project `ExternalLink` icons wired to real `href` values.
+
 ### Out of Scope
 
 - Backend services, databases, authentication, or user accounts.
@@ -63,7 +71,7 @@ Build a memorable frontend portfolio where the browser behaves like a macOS desk
 
 ## Success Criteria
 
-- Desktop shell persists while navigating between `/`, `/projects`, `/about`, `/contact`, and `/cv`, including direct browser entry to any of those routes.
+- Desktop shell persists while navigating between `/`, `/projects`, `/about`, `/contact`, `/cv`, `/glass-atlas`, `/techy`, `/sparse`, and `/weather`, including direct browser entry to any of those routes.
 - Users can open multiple app windows, focus existing windows, minimize to dock, restore, close, maximize, and snap.
 - URL reflects the focused app without unmounting the desktop chrome.
 - The visual system reads as macOS-inspired: frosted glass, traffic lights, dock, menu bar, system typography, and dark canonical theme.
