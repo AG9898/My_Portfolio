@@ -1182,7 +1182,7 @@
       "id": "V2_002",
       "title": "Create iframe route pages for Glass Atlas and Techy",
       "description": "Create src/app/glass-atlas/page.tsx and src/app/techy/page.tsx as client components. Each page renders a full-height iframe with a hardcoded src URL (Glass Atlas: https://glass-atlas-production.up.railway.app; Techy: https://techy-psi.vercel.app). Include a visible open-in-new-tab fallback button for the case where the target site blocks iframe embedding. Style the fallback consistently with the glass window system using Tailwind tokens and glass utilities only — no inline hex.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V2_CONTENT",
       "depends_on": [
