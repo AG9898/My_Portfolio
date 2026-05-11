@@ -1401,7 +1401,7 @@
       "id": "V2_009",
       "title": "Convert About page to panel-switching sidebar",
       "description": "Replace the decorative static sidebar in src/app/about/page.tsx with a working panel-switching pattern matching CONVENTIONS.md. Add \"use client\", useState<Section>, and convert sidebar divs to <button> elements. Four sections matching existing sidebar labels: About Aden (existing profile copy), How I Work (placeholder: 2-3 sentences about process — iterative, documented, motion-intentional), Frontend Focus (placeholder: 2-3 sentences about craft focus — interaction models, desktop metaphors, polish tied to behavior), What I Value (placeholder: 2-3 sentences about principles — deterministic state, accessible motion, docs as first-class output). Each section has its own main-pane panel with appropriate heading and breadcrumb.",
-      "status": "todo",
+      "status": "done",
       "priority": "medium",
       "group_id": "V2_CONTENT",
       "depends_on": [],
