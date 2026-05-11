@@ -1351,7 +1351,7 @@
       "id": "V2_007",
       "title": "Convert Techy page to panel-switching sidebar",
       "description": "Replace the decorative static sidebar in src/app/techy/page.tsx with a working panel-switching pattern matching CONVENTIONS.md. Add \"use client\", useState<Section>, and convert sidebar divs to <button> elements. Four sections: Overview (project description + status chips + 2x aspect-video placeholder slots for screenshots \u2014 Techy is auth-gated so no iframe), Features (feature list with one sentence each), Tech Stack (stack tags), Links (external link to live app + GitHub auth note card). Remove the existing single-scroll layout.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V2_CONTENT",
       "depends_on": [],
