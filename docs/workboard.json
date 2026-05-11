@@ -1297,7 +1297,7 @@
       "id": "V2_005_2",
       "title": "Projects window: interactive sidebar category filter",
       "description": "Add client-side category filtering to src/app/projects/page.tsx. Add useState for the selected category (default null, meaning show all). Update the SIDEBAR_ITEMS array to derive counts from the PROJECTS array using the category field added in V2_005_1. Wire each sidebar item onClick to set the selected category; clicking the active category deselects and shows all. Filter the project cards grid to show only entries matching the selected category, or all entries when no category is selected. The sidebar item for the selected category must use the active highlight style already present in the component. Add use client directive if not already present.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V2_CONTENT",
       "depends_on": [

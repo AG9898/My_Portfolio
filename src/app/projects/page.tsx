@@ -1,4 +1,9 @@
+"use client";
+
+import { useState } from "react";
 import { ExternalLink, Folder, Grid3X3, List, Search } from "lucide-react";
+
+type Category = "frontend" | "agent-tools" | "client-work" | "tooling";
 
 const PROJECTS = [
   {
@@ -9,7 +14,7 @@ const PROJECTS = [
     description:
       "A browser-based macOS desktop portfolio with a persistent shell, dock, shortcuts, route-synced windows, and first-pass app content.",
     stack: ["Next.js", "TypeScript", "Tailwind", "framer-motion"],
-    category: "frontend" as const,
+    category: "frontend" as Category,
     link: "https://github.com/AG9898/My_Portfolio",
   },
   {
@@ -20,7 +25,7 @@ const PROJECTS = [
     description:
       "A local-first Tauri app for designing, running, monitoring, and replaying agent workflows through a game-inspired 2D interface.",
     stack: ["Rust", "Tauri", "React", "SQLite"],
-    category: "agent-tools" as const,
+    category: "agent-tools" as Category,
     link: "https://github.com/AG9898/PigeonCoop",
   },
   {
@@ -31,7 +36,7 @@ const PROJECTS = [
     description:
       "An extended Claude API wrapper and chat interface with prompt-caching utilities, streaming controls, and conversation management.",
     stack: ["TypeScript", "Node.js", "Anthropic SDK"],
-    category: "agent-tools" as const,
+    category: "agent-tools" as Category,
     link: "https://github.com/AG9898/Zellaude-Plus",
   },
   {
@@ -42,7 +47,7 @@ const PROJECTS = [
     description:
       "An interactive three-dimensional geospatial atlas with frosted-glass UI, animated globe layers, and dataset overlays served from Railway.",
     stack: ["React", "Three.js", "TypeScript", "Railway"],
-    category: "frontend" as const,
+    category: "frontend" as Category,
     link: "https://glass-atlas-production.up.railway.app",
   },
   {
@@ -53,7 +58,7 @@ const PROJECTS = [
     description:
       "A personal, single-user tech knowledge graph built around notes, wikilinks, D3 graph views, Auth.js, Drizzle, and Neon PostgreSQL.",
     stack: ["SvelteKit", "TypeScript", "Drizzle", "D3"],
-    category: "frontend" as const,
+    category: "frontend" as Category,
     link: "https://techy-psi.vercel.app",
   },
   {
@@ -64,7 +69,7 @@ const PROJECTS = [
     description:
       "A distraction-free writing environment with a single-file approach, markdown preview, and a calm typographic baseline — no cloud sync.",
     stack: ["Electron", "TypeScript", "CodeMirror"],
-    category: "tooling" as const,
+    category: "tooling" as Category,
     link: null,
   },
   {
@@ -75,7 +80,7 @@ const PROJECTS = [
     description:
       "A personal wellness tracker that correlates local weather data with logged mood, sleep, and activity entries using lightweight ML models.",
     stack: ["Next.js", "Python", "FastAPI", "Chart.js"],
-    category: "client-work" as const,
+    category: "client-work" as Category,
     link: "https://github.com/AG9898/Weather_Wellness",
   },
   {
@@ -86,7 +91,7 @@ const PROJECTS = [
     description:
       "A MapLibre GL JS prototype with custom vector tile styling, dynamic layer controls, and gesture-driven navigation experiments.",
     stack: ["MapLibre GL", "TypeScript", "Vite"],
-    category: "frontend" as const,
+    category: "frontend" as Category,
     link: "https://github.com/AG9898/Interactive_MapLibre",
   },
   {
@@ -97,36 +102,33 @@ const PROJECTS = [
     description:
       "A Letterboxd-inspired personal movie log with a clean card-grid UI, watchlist management, and TMDB API integration.",
     stack: ["React", "TypeScript", "TMDB API", "Supabase"],
-    category: "frontend" as const,
+    category: "frontend" as Category,
     link: "https://github.com/AG9898/movieboxd",
   },
 ];
 
-const SIDEBAR_ITEMS = [
-  { label: "Recents", count: PROJECTS.length, active: true },
-  {
-    label: "Frontend",
-    count: PROJECTS.filter((p) => p.category === "frontend").length,
-    active: false,
-  },
-  {
-    label: "Agent Tools",
-    count: PROJECTS.filter((p) => p.category === "agent-tools").length,
-    active: false,
-  },
-  {
-    label: "Client Work",
-    count: PROJECTS.filter((p) => p.category === "client-work").length,
-    active: false,
-  },
-  {
-    label: "Tooling",
-    count: PROJECTS.filter((p) => p.category === "tooling").length,
-    active: false,
-  },
+const SIDEBAR_ITEMS: { label: string; category: Category | null }[] = [
+  { label: "Recents", category: null },
+  { label: "Frontend", category: "frontend" },
+  { label: "Agent Tools", category: "agent-tools" },
+  { label: "Client Work", category: "client-work" },
+  { label: "Tooling", category: "tooling" },
 ];
 
 export default function Projects() {
+  const [selectedCategory, setSelectedCategory] = useState<Category | null>(
+    null,
+  );
+
+  const filteredProjects =
+    selectedCategory === null
+      ? PROJECTS
+      : PROJECTS.filter((p) => p.category === selectedCategory);
+
+  function handleSidebarClick(category: Category | null) {
+    setSelectedCategory((prev) => (prev === category ? null : category));
+  }
+
   return (
     <div className="flex min-h-full bg-window text-label-primary">
       <aside className="hidden w-52 shrink-0 border-r border-glass-edge bg-chrome/70 p-2 md:block">
@@ -134,28 +136,37 @@ export default function Projects() {
           projects/
         </div>
         <div className="space-y-1">
-          {SIDEBAR_ITEMS.map((item) => (
-            <div
-              key={item.label}
-              className={`flex items-center justify-between rounded-lg px-3 py-2 text-[13px] ${
-                item.active
-                  ? "bg-accent text-label-primary"
-                  : "text-label-secondary hover:bg-[var(--color-control-hover)]"
-              }`}
-            >
-              <span className="flex min-w-0 items-center gap-2">
-                <Folder className="h-4 w-4 shrink-0" aria-hidden="true" />
-                <span className="truncate">{item.label}</span>
-              </span>
-              <span
-                className={`text-[11px] ${
-                  item.active ? "text-label-primary" : "text-label-secondary"
+          {SIDEBAR_ITEMS.map((item) => {
+            const count =
+              item.category === null
+                ? PROJECTS.length
+                : PROJECTS.filter((p) => p.category === item.category).length;
+            const isActive = selectedCategory === item.category;
+            return (
+              <button
+                key={item.label}
+                type="button"
+                onClick={() => handleSidebarClick(item.category)}
+                className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-[13px] text-left ${
+                  isActive
+                    ? "bg-accent text-label-primary"
+                    : "text-label-secondary hover:bg-[var(--color-control-hover)]"
                 }`}
               >
-                {item.count}
-              </span>
-            </div>
-          ))}
+                <span className="flex min-w-0 items-center gap-2">
+                  <Folder className="h-4 w-4 shrink-0" aria-hidden="true" />
+                  <span className="truncate">{item.label}</span>
+                </span>
+                <span
+                  className={`text-[11px] ${
+                    isActive ? "text-label-primary" : "text-label-secondary"
+                  }`}
+                >
+                  {count}
+                </span>
+              </button>
+            );
+          })}
         </div>
       </aside>
 
@@ -192,12 +203,12 @@ export default function Projects() {
               <h1 className="mt-1 text-[22px] font-semibold">Projects</h1>
             </div>
             <p className="hidden text-[12px] text-label-secondary sm:block">
-              {PROJECTS.length} items
+              {filteredProjects.length} items
             </p>
           </div>
 
           <div className="grid gap-3 lg:grid-cols-2">
-            {PROJECTS.map((project) => (
+            {filteredProjects.map((project) => (
               <article
                 key={project.name}
                 className="rounded-lg border border-glass-edge bg-chrome p-4"
