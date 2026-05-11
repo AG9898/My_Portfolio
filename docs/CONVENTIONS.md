@@ -34,7 +34,10 @@ Normative guide for code in this portfolio. Read before writing new UI architect
 - Dock components belong under `src/app/components/Dock/`.
 - Keep shared app metadata in a registry module (`src/app/components/appMetadata.ts`) instead of duplicating route titles, icons, default sizes, positions, or app IDs. The `APPS` array is the canonical source for id, route, label, title, icon, defaultSize, defaultPosition, and showInDock.
 - `showInDock: false` on an `AppMetadata` entry keeps the app in `DesktopShortcuts` but excludes it from the Dock. Use this for project-specific windows that are not core navigation destinations. The Dock filters `APPS` to entries where `showInDock !== false`; `DesktopShortcuts` renders the full registry.
-- Iframe route pages hardcode their `src` URL directly — there is no shared generic browser component. Each deployed project gets its own route file. If the target blocks iframe embedding, the page must include an "open in new tab" fallback button.
+- **Project showcase pages** follow one of two patterns:
+  - **Static showcase** (Sparse, Weather, Techy): a static server component with a decorative sidebar and a scrollable article. The sidebar items are not interactive — all content renders as one document. Use for projects that are private, auth-gated, or otherwise not embeddable.
+  - **Interactive sidebar + iframe** (Glass Atlas): a `"use client"` component with `useState` tracking the active sidebar section. The Overview section renders a full-bleed iframe filling the entire main pane (no toolbar, no footer strip). Non-overview sections render scrollable article content. Use for deployed projects where direct in-window interaction is meaningful.
+- Iframe route pages hardcode their `src` URL directly — there is no shared generic browser component. Each deployed project gets its own route file. Full-bleed iframes must have `h-full w-full border-0` on the `<iframe>` and `min-h-0 flex-1` on the containing `<div>`, with the outer window container using `flex h-full`.
 
 ### Styling
 

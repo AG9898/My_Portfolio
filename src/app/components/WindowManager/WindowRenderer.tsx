@@ -206,6 +206,7 @@ function AppWindow({
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={contentKey}
+            style={{ height: "100%" }}
             initial={reduceMotion ? false : { opacity: 0, y: 8 }}
             animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
             exit={reduceMotion ? undefined : { opacity: 0, y: -4 }}

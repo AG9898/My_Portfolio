@@ -95,8 +95,8 @@ export const APPS: AppMetadata[] = [
     label: "Glass Atlas",
     title: "Glass Atlas — Aden Guo",
     icon: "glass-atlas",
-    defaultSize: { width: 900, height: 620 },
-    defaultPosition: { x: 140, y: 60 },
+    defaultSize: { width: 900, height: 580 },
+    defaultPosition: { x: 160, y: 70 },
     showInDock: false,
   },
   {
