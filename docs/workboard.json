@@ -1212,7 +1212,7 @@
       "id": "V2_003",
       "title": "Create project showcase route pages for Sparse and Weather & Wellness",
       "description": "Create src/app/sparse/page.tsx and src/app/weather/page.tsx as static project detail pages styled consistently with existing app window content. Each page shows: project name, short description, status badge, tech stack tags, and a GitHub or external link. Sparse: private SvelteKit timesheet and expense management app for Utilicom Technologies (active development); stack: SvelteKit, TypeScript, Drizzle, Supabase, Bun, Tailwind; GitHub link only. Weather & Wellness: Python/Flask dashboard at https://weather-and-wellness-dashboard.vercel.app; link to deployed site. Style using existing Notes/Finder Tailwind patterns — no inline hex.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V2_CONTENT",
       "depends_on": [
