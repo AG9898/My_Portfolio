@@ -1243,7 +1243,7 @@
       "id": "V2_004",
       "title": "Extend DesktopShortcuts with icons for four new project apps",
       "description": "Extend DesktopShortcuts.tsx to render shortcuts for the four new app entries. Add ICON_LABELS entries for glass-atlas (glass_atlas/), techy (techy.app), sparse (sparse.app), and weather (weather.dash). Add four new SVG icon components with distinct thematic metaphors: globe (glass-atlas), graph-node network (techy), table/grid (sparse), cloud (weather). Wire the new IDs into the ShortcutFileIcon dispatcher. All SVGs must follow the existing 56x56px viewport convention using light fill, subtle stroke, and a badge label or clearly consistent thematic treatment.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V2_CONTENT",
       "depends_on": [
