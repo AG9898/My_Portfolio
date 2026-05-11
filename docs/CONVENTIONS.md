@@ -34,10 +34,12 @@ Normative guide for code in this portfolio. Read before writing new UI architect
 - Dock components belong under `src/app/components/Dock/`.
 - Keep shared app metadata in a registry module (`src/app/components/appMetadata.ts`) instead of duplicating route titles, icons, default sizes, positions, or app IDs. The `APPS` array is the canonical source for id, route, label, title, icon, defaultSize, defaultPosition, and showInDock.
 - `showInDock: false` on an `AppMetadata` entry keeps the app in `DesktopShortcuts` but excludes it from the Dock. Use this for project-specific windows that are not core navigation destinations. The Dock filters `APPS` to entries where `showInDock !== false`; `DesktopShortcuts` renders the full registry.
-- **Project showcase pages** follow one of two patterns:
-  - **Static showcase** (Sparse, Weather, Techy): a static server component with a decorative sidebar and a scrollable article. The sidebar items are not interactive — all content renders as one document. Use for projects that are private, auth-gated, or otherwise not embeddable.
-  - **Interactive sidebar + iframe** (Glass Atlas): a `"use client"` component with `useState` tracking the active sidebar section. The Overview section renders a full-bleed iframe filling the entire main pane (no toolbar, no footer strip). Non-overview sections render scrollable article content. Use for deployed projects where direct in-window interaction is meaningful.
-- Iframe route pages hardcode their `src` URL directly — there is no shared generic browser component. Each deployed project gets its own route file. Full-bleed iframes must have `h-full w-full border-0` on the `<iframe>` and `min-h-0 flex-1` on the containing `<div>`, with the outer window container using `flex h-full`.
+- **All app window pages** (project showcases and About) use a **panel-switching sidebar pattern**: a `"use client"` component with `useState` tracking the active section. Sidebar items are `<button>` elements that set the active section; the main pane renders only the active panel. There are no non-interactive (decorative) sidebars.
+  - **Standard project nav** (Sparse, Techy, Weather & Wellness): four sections — Overview, Features, Tech Stack, Links. Each page defines its own typed `Section` union and `NAV` array. No shared component; each page is self-contained.
+  - **Glass Atlas** (embeddable): Overview renders a full-bleed iframe (the live app). Its nav is Overview / About / Tech Stack / Links — "Overview" means the live embed, not the project description.
+  - **About page**: four personal sections — About Aden, How I Work, Frontend Focus, What I Value.
+  - **Media assets** — screenshots and video clips go inside the Overview or Features panel, in `aspect-video` placeholder slots (`<div>` or `<img>`) pointing to `/public/projects/<slug>/`. Placeholder divs stay in place until assets arrive so no layout changes are needed when they do.
+- Iframe pages hardcode their `src` URL directly — no shared generic browser component. Full-bleed iframes use `h-full w-full border-0` on the `<iframe>` and `min-h-0 flex-1` on the containing `<div>`, with the outer window container using `flex h-full`.
 
 ### Styling
 

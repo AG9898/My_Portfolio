@@ -1320,6 +1320,107 @@
       "commands": [
         "npm run lint"
       ]
+    },
+    {
+      "id": "V2_006",
+      "title": "Convert Sparse page to panel-switching sidebar",
+      "description": "Replace the decorative static sidebar in src/app/sparse/page.tsx with a working panel-switching pattern. Add \"use client\", useState<Section> for active panel, and convert sidebar divs to <button> elements. Implement four sections: Overview (project description + status chips + aspect-video placeholder slot for a future screenshot), Features (existing feature list, expanded with one sentence per feature), Tech Stack (existing stack tags), Links (private repo notice card). Each section renders as a dedicated main-pane panel. Follow CONVENTIONS.md panel-switching pattern exactly.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V2_CONTENT",
+      "depends_on": [],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Clicking each sidebar item switches the main pane to that section's content only",
+        "Sidebar shows the active item highlighted (bg-accent) and inactive items with hover state",
+        "Overview panel contains an aspect-video placeholder div for a future screenshot asset",
+        "Features, Tech Stack, and Links panels render dedicated content (not duplicate scroll content)",
+        "Page has \"use client\" directive; no TypeScript errors; npm run lint passes"
+      ],
+      "docs": [
+        "docs/CONVENTIONS.md"
+      ],
+      "files": [
+        "src/app/sparse/page.tsx"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V2_007",
+      "title": "Convert Techy page to panel-switching sidebar",
+      "description": "Replace the decorative static sidebar in src/app/techy/page.tsx with a working panel-switching pattern matching CONVENTIONS.md. Add \"use client\", useState<Section>, and convert sidebar divs to <button> elements. Four sections: Overview (project description + status chips + 2x aspect-video placeholder slots for screenshots — Techy is auth-gated so no iframe), Features (feature list with one sentence each), Tech Stack (stack tags), Links (external link to live app + GitHub auth note card). Remove the existing single-scroll layout.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V2_CONTENT",
+      "depends_on": [],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Clicking each sidebar item switches the main pane to that section only",
+        "Overview panel has two aspect-video placeholder divs in a 2-column grid",
+        "Links panel shows the live app external link and the auth-required notice",
+        "No TypeScript errors; npm run lint passes"
+      ],
+      "docs": [
+        "docs/CONVENTIONS.md"
+      ],
+      "files": [
+        "src/app/techy/page.tsx"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V2_008",
+      "title": "Convert Weather & Wellness page to panel-switching sidebar",
+      "description": "Replace the decorative static sidebar in src/app/weather/page.tsx with a working panel-switching pattern matching CONVENTIONS.md. Add \"use client\", useState<Section>, and convert sidebar divs to <button> elements. Four sections: Overview (project description + status chips + aspect-video placeholder slot), Features (existing 4 features, expanded with one sentence each), Tech Stack (existing stack tags), Links (external link to the live Vercel dashboard). Remove the existing single-scroll layout.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V2_CONTENT",
+      "depends_on": [],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Clicking each sidebar item switches the main pane to that section only",
+        "Overview panel has an aspect-video placeholder div",
+        "Links panel shows the live dashboard external link",
+        "No TypeScript errors; npm run lint passes"
+      ],
+      "docs": [
+        "docs/CONVENTIONS.md"
+      ],
+      "files": [
+        "src/app/weather/page.tsx"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V2_009",
+      "title": "Convert About page to panel-switching sidebar",
+      "description": "Replace the decorative static sidebar in src/app/about/page.tsx with a working panel-switching pattern matching CONVENTIONS.md. Add \"use client\", useState<Section>, and convert sidebar divs to <button> elements. Four sections matching existing sidebar labels: About Aden (existing profile copy), How I Work (placeholder: 2-3 sentences about process — iterative, documented, motion-intentional), Frontend Focus (placeholder: 2-3 sentences about craft focus — interaction models, desktop metaphors, polish tied to behavior), What I Value (placeholder: 2-3 sentences about principles — deterministic state, accessible motion, docs as first-class output). Each section has its own main-pane panel with appropriate heading and breadcrumb.",
+      "status": "todo",
+      "priority": "medium",
+      "group_id": "V2_CONTENT",
+      "depends_on": [],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Clicking each of the four sidebar items switches the main pane panel",
+        "All four panels render meaningful placeholder copy (not empty)",
+        "Breadcrumb in each panel reflects the active section (e.g. \"Notes / How I Work\")",
+        "No TypeScript errors; npm run lint passes"
+      ],
+      "docs": [
+        "docs/CONVENTIONS.md"
+      ],
+      "files": [
+        "src/app/about/page.tsx"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
     }
   ]
 }

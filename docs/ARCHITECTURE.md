@@ -149,20 +149,17 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 - Use `react-rnd` for drag and resize behavior.
 - Use `framer-motion` for opening, closing, minimizing, restoring, and inner page transitions.
 
-#### Iframe window routes (`/glass-atlas`, `/techy`)
+#### App window routes (project showcases and About)
 
-- Route pages for live deployed projects render a full-height `<iframe>` as the window content area.
-- Each iframe page is a self-contained client component that hardcodes its `src` URL — no shared generic browser component.
-- URLs: Glass Atlas → `https://glass-atlas-production.up.railway.app`; Techy → `https://techy-psi.vercel.app`.
-- If the target site blocks iframe embedding via `X-Frame-Options` or `Content-Security-Policy`, the page falls back to an "open in new tab" button.
-- `syncRoute` handles direct browser entry to these routes the same as core app routes.
+All app window pages use a **panel-switching sidebar pattern**: `"use client"` with `useState` for the active section; sidebar items are `<button>` elements; each section renders a dedicated content panel. See CONVENTIONS.md for the full pattern spec.
 
-#### Project showcase routes (`/sparse`, `/weather`)
-
-- Route pages for private or non-web-native projects render a static, styled detail page: name, description, status badge, tech stack tags, and GitHub or external link.
-- Content is hardcoded in the route file — no backend, no CMS.
-- Sparse: private SvelteKit timesheet/expense management app for Utilicom Technologies (active development). Stack: SvelteKit, TypeScript, Drizzle, Supabase, Bun, Tailwind.
-- Weather & Wellness: Python/Flask dashboard deployed at `https://weather-and-wellness-dashboard.vercel.app`. Stack: Python, Flask, Vercel.
+- **`/sparse`** — Sparse (SvelteKit timesheet/expense app for Utilicom Technologies). Nav: Overview, Features, Tech Stack, Links. Private repo, no iframe.
+- **`/weather`** — Weather & Wellness (Python/Flask dashboard). Nav: Overview, Features, Tech Stack, Links. Live at `https://weather-and-wellness-dashboard.vercel.app`.
+- **`/techy`** — Techy (React app, GitHub auth required). Nav: Overview, Features, Tech Stack, Links. Live at `https://techy-psi.vercel.app`.
+- **`/glass-atlas`** — Glass Atlas (embeddable Next.js app). Nav: Overview (full-bleed iframe), About, Tech Stack, Links. Live at `https://glass-atlas-production.up.railway.app`.
+- **`/about`** — About page. Nav: About Aden, How I Work, Frontend Focus, What I Value.
+- Content is hardcoded in each route file — no backend, no CMS.
+- Media assets (screenshots, video) go in `aspect-video` placeholder slots within Overview or Features panels, pointing to `/public/projects/<slug>/`.
 
 ### Theme
 
