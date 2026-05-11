@@ -62,7 +62,7 @@ export type WindowAction =
   | { type: "snapRight"; payload: { id: AppId; desktopWidth: number; desktopHeight: number; desktopTop: number } }
   | { type: "drag"; payload: { id: AppId; x: number; y: number } }
   | { type: "resize"; payload: { id: AppId; x: number; y: number; width: number; height: number } }
-  | { type: "syncRoute"; payload: { route: string } };
+  | { type: "syncRoute"; payload: { route: string; defaultPosition?: AppPosition } };
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -383,9 +383,10 @@ export function windowReducer(
         };
       }
 
+      const defaultPosition = action.payload.defaultPosition ?? app.defaultPosition;
       const geometry: WindowGeometry = {
-        x: app.defaultPosition.x,
-        y: app.defaultPosition.y,
+        x: defaultPosition.x,
+        y: defaultPosition.y,
         width: app.defaultSize.width,
         height: app.defaultSize.height,
       };

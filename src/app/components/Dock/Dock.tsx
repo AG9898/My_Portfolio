@@ -15,6 +15,7 @@ import {
 import { useRef } from "react";
 import { APPS, type AppId } from "../appMetadata";
 import { useWindowManager } from "../WindowManager/WindowManagerProvider";
+import { getCenteredWindowPositionForViewport } from "../WindowManager/windowGeometry";
 
 // ─── Individual dock icon SVGs ─────────────────────────────────────────────────
 
@@ -170,6 +171,8 @@ function DockItem({ app, mouseX, isOpen, onClick }: DockItemProps) {
         {app.label}
       </motion.span>
       <motion.button
+        data-window-animation-target={app.id}
+        data-window-target-priority="dock"
         className="relative flex items-center justify-center rounded-[18px] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
         style={{
           width: size,
@@ -210,7 +213,7 @@ export default function Dock() {
         id: app.id,
         route: app.route,
         defaultSize: app.defaultSize,
-        defaultPosition: app.defaultPosition,
+        defaultPosition: getCenteredWindowPositionForViewport(app.defaultSize),
       },
     });
   }

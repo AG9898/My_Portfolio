@@ -22,6 +22,7 @@
 import { useState } from "react";
 import { APPS, type AppId } from "../appMetadata";
 import { useWindowManager } from "../WindowManager/WindowManagerProvider";
+import { getCenteredWindowPositionForViewport } from "../WindowManager/windowGeometry";
 
 // ─── Icon labels — file-system metaphors matching macos-redesign.md ───────────
 const ICON_LABELS: Record<AppId, string> = {
@@ -357,6 +358,8 @@ function DesktopShortcutItem({
 }: DesktopShortcutItemProps) {
   return (
     <button
+      data-window-animation-target={appId}
+      data-window-target-priority="desktop"
       className="flex flex-col items-center w-[88px] py-1.5 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
       style={{
         background: selected ? "rgba(10,132,255,0.28)" : "transparent",
@@ -402,7 +405,7 @@ export default function DesktopShortcuts() {
         id: app.id,
         route: app.route,
         defaultSize: app.defaultSize,
-        defaultPosition: app.defaultPosition,
+        defaultPosition: getCenteredWindowPositionForViewport(app.defaultSize),
       },
     });
   }

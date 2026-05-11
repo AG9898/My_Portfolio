@@ -212,9 +212,9 @@ Use `framer-motion`. Do not use CSS transitions for window open/close/minimize â
 
 ```ts
 // Window open / restore
-const windowSpring = { type: 'spring', stiffness: 400, damping: 30 }
+const windowSpring = { type: 'spring', stiffness: 240, damping: 32, mass: 0.95 }
 
-// Window minimize (scale to dock)
+// Window minimize (genie-style travel into dock/desktop icon)
 const minimizeSpring = { type: 'spring', stiffness: 300, damping: 28 }
 
 // Dock magnification
@@ -226,6 +226,13 @@ const contentFade = { duration: 0.15, ease: 'easeOut' }
 // Boot overlay fade
 const bootFade = { duration: 0.4, ease: 'easeOut' }
 ```
+
+Window open/restore/minimize animations resolve the matching icon with
+`data-window-animation-target`. Prefer dock targets when available, and fall
+back to desktop shortcut targets for shortcut-only project windows. The
+classic macOS `genie` feel is approximated with non-uniform `scaleX`/`scaleY`,
+travel keyframes, and a small skew toward the target icon; reduced motion keeps
+the state change functional with opacity only.
 
 ---
 

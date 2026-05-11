@@ -1,6 +1,6 @@
 // ─── Shared App Metadata ──────────────────────────────────────────────────────
 // Single source of truth for all portfolio apps.
-// Pure metadata — no state, no hooks, no window geometry beyond defaults.
+// Pure metadata — no state, no hooks, no runtime window geometry beyond defaults.
 
 export type AppId =
   | "home"
@@ -34,7 +34,7 @@ export interface AppMetadata {
   icon: AppId;
   /** Default window dimensions when the app is first opened */
   defaultSize: AppSize;
-  /** Default window position (top-left corner) when first opened */
+  /** Fallback top-left position; runtime open paths center windows in the viewport */
   defaultPosition: AppPosition;
   /**
    * When explicitly false, this app is excluded from the Dock and shown only
@@ -50,7 +50,7 @@ export const APPS: AppMetadata[] = [
     label: "Home",
     title: "Home — Aden Guo",
     icon: "home",
-    defaultSize: { width: 760, height: 520 },
+    defaultSize: { width: 1040, height: 680 },
     defaultPosition: { x: 120, y: 60 },
   },
   {
@@ -59,7 +59,7 @@ export const APPS: AppMetadata[] = [
     label: "Projects",
     title: "Projects — Aden Guo",
     icon: "projects",
-    defaultSize: { width: 820, height: 560 },
+    defaultSize: { width: 1040, height: 680 },
     defaultPosition: { x: 160, y: 80 },
   },
   {
@@ -68,7 +68,7 @@ export const APPS: AppMetadata[] = [
     label: "About",
     title: "About — Aden Guo",
     icon: "about",
-    defaultSize: { width: 760, height: 520 },
+    defaultSize: { width: 1040, height: 680 },
     defaultPosition: { x: 200, y: 70 },
   },
   {
@@ -77,7 +77,7 @@ export const APPS: AppMetadata[] = [
     label: "Contact",
     title: "Contact — Aden Guo",
     icon: "contact",
-    defaultSize: { width: 680, height: 480 },
+    defaultSize: { width: 960, height: 620 },
     defaultPosition: { x: 240, y: 90 },
   },
   {
@@ -86,7 +86,7 @@ export const APPS: AppMetadata[] = [
     label: "CV",
     title: "CV — Aden Guo",
     icon: "cv",
-    defaultSize: { width: 800, height: 600 },
+    defaultSize: { width: 1040, height: 700 },
     defaultPosition: { x: 180, y: 50 },
   },
   {
@@ -95,7 +95,7 @@ export const APPS: AppMetadata[] = [
     label: "Glass Atlas",
     title: "Glass Atlas — Aden Guo",
     icon: "glass-atlas",
-    defaultSize: { width: 900, height: 580 },
+    defaultSize: { width: 1040, height: 680 },
     defaultPosition: { x: 160, y: 70 },
     showInDock: false,
   },
@@ -105,7 +105,7 @@ export const APPS: AppMetadata[] = [
     label: "Techy",
     title: "Techy — Aden Guo",
     icon: "techy",
-    defaultSize: { width: 900, height: 620 },
+    defaultSize: { width: 1040, height: 680 },
     defaultPosition: { x: 160, y: 70 },
     showInDock: false,
   },
@@ -115,7 +115,7 @@ export const APPS: AppMetadata[] = [
     label: "Sparse",
     title: "Sparse — Aden Guo",
     icon: "sparse",
-    defaultSize: { width: 820, height: 580 },
+    defaultSize: { width: 1040, height: 680 },
     defaultPosition: { x: 180, y: 80 },
     showInDock: false,
   },
@@ -125,7 +125,7 @@ export const APPS: AppMetadata[] = [
     label: "Weather & Wellness",
     title: "Weather & Wellness — Aden Guo",
     icon: "weather",
-    defaultSize: { width: 820, height: 580 },
+    defaultSize: { width: 1040, height: 680 },
     defaultPosition: { x: 200, y: 90 },
     showInDock: false,
   },

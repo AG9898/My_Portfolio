@@ -26,6 +26,7 @@ import { useWindowManager } from "./WindowManagerProvider";
 import { AppId } from "../appMetadata";
 import { WindowChrome } from "../Window/WindowChrome";
 import { SnapState } from "./windowReducer";
+import { DOCK_HEIGHT, MENU_BAR_HEIGHT } from "./windowGeometry";
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -35,37 +36,130 @@ import { SnapState } from "./windowReducer";
  *  below dock (z-40) and menu bar (z-50). */
 const WINDOW_Z_BASE = 20;
 
-/**
- * Desktop safe area heights (px).
- * Menu bar: 28px top; Dock: 80px bottom.
- * Maximized windows fill the area between them.
- */
-const MENU_BAR_HEIGHT = 28;
-const DOCK_HEIGHT = 80;
-
 type WindowExitMode = "close" | "minimize";
 
 type WindowPresenceCustom = {
   id: AppId;
   exitModes: Partial<Record<AppId, WindowExitMode>>;
+  iconProjection: WindowIconProjection | null;
   reduceMotion: boolean;
 };
 
+type ViewportRect = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+};
+
+type WindowIconProjection = {
+  x: number;
+  y: number;
+  scaleX: number;
+  scaleY: number;
+  skewX: number;
+  transformOrigin: string;
+};
+
+function clamp(value: number, min: number, max: number) {
+  return Math.min(Math.max(value, min), max);
+}
+
+function queryAnimationTarget(id: AppId) {
+  if (typeof document === "undefined") return null;
+
+  return (
+    document.querySelector<HTMLElement>(
+      `[data-window-animation-target="${id}"][data-window-target-priority="dock"]`
+    ) ??
+    document.querySelector<HTMLElement>(
+      `[data-window-animation-target="${id}"][data-window-target-priority="desktop"]`
+    )
+  );
+}
+
+function getIconProjection(
+  id: AppId,
+  windowRect: ViewportRect
+): WindowIconProjection | null {
+  const target = queryAnimationTarget(id);
+  const targetRect = target?.getBoundingClientRect();
+
+  if (!targetRect || windowRect.width <= 0 || windowRect.height <= 0) {
+    return null;
+  }
+
+  const windowCenterX = windowRect.x + windowRect.width / 2;
+  const windowCenterY = windowRect.y + windowRect.height / 2;
+  const targetCenterX = targetRect.left + targetRect.width / 2;
+  const targetCenterY = targetRect.top + targetRect.height / 2;
+  const deltaX = targetCenterX - windowCenterX;
+  const deltaY = targetCenterY - windowCenterY;
+
+  return {
+    x: deltaX,
+    y: deltaY,
+    scaleX: clamp(targetRect.width / windowRect.width, 0.06, 0.18),
+    scaleY: clamp(targetRect.height / windowRect.height, 0.05, 0.16),
+    skewX: clamp(deltaX / 90, -10, 10),
+    transformOrigin: deltaY >= 0 ? "50% 100%" : "50% 0%",
+  };
+}
+
 const windowVariants: Variants = {
-  initial: ({ reduceMotion }: WindowPresenceCustom) =>
-    reduceMotion
-      ? { opacity: 0 }
-      : { opacity: 0, scale: 0.95, y: 10 },
+  initial: ({ iconProjection, reduceMotion }: WindowPresenceCustom) => {
+    if (reduceMotion) {
+      return { opacity: 0 };
+    }
+
+    if (iconProjection) {
+      return {
+        opacity: 0,
+        x: iconProjection.x,
+        y: iconProjection.y,
+        scaleX: iconProjection.scaleX,
+        scaleY: iconProjection.scaleY,
+        skewX: iconProjection.skewX,
+        transformOrigin: iconProjection.transformOrigin,
+        filter: "blur(1px)",
+      };
+    }
+
+    return { opacity: 0, scale: 0.95, y: 10 };
+  },
   animate: ({ reduceMotion }: WindowPresenceCustom) =>
     reduceMotion
       ? { opacity: 1 }
-      : { opacity: 1, scale: 1, y: 0 },
-  exit: ({ id, exitModes, reduceMotion }: WindowPresenceCustom) => {
+      : {
+          opacity: 1,
+          x: 0,
+          y: 0,
+          scale: 1,
+          scaleX: 1,
+          scaleY: 1,
+          skewX: 0,
+          filter: "blur(0px)",
+        },
+  exit: ({ id, exitModes, iconProjection, reduceMotion }: WindowPresenceCustom) => {
     if (reduceMotion) {
       return { opacity: 0, transition: windowExitTransition };
     }
 
     if (exitModes[id] === "minimize") {
+      if (iconProjection) {
+        return {
+          opacity: [1, 0.98, 0],
+          x: [0, iconProjection.x * 0.36, iconProjection.x],
+          y: [0, iconProjection.y * 0.64, iconProjection.y],
+          scaleX: [1, 0.68, iconProjection.scaleX],
+          scaleY: [1, 0.88, iconProjection.scaleY],
+          skewX: [0, iconProjection.skewX, 0],
+          transformOrigin: iconProjection.transformOrigin,
+          filter: ["blur(0px)", "blur(0px)", "blur(1px)"],
+          transition: genieMinimizeTransition,
+        };
+      }
+
       return {
         opacity: 0,
         scale: 0.82,
@@ -85,14 +179,21 @@ const windowVariants: Variants = {
 
 const windowTransition = {
   type: "spring",
-  stiffness: 400,
-  damping: 30,
+  stiffness: 240,
+  damping: 32,
+  mass: 0.95,
 } as const;
 
 const windowExitTransition = {
   duration: 0.15,
   ease: "easeOut",
 } as const;
+
+const genieMinimizeTransition = {
+  duration: 0.58,
+  ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+  times: [0, 0.58, 1],
+};
 
 // ---------------------------------------------------------------------------
 // AppWindow shell component
@@ -149,9 +250,19 @@ function AppWindow({
   onResizeStop,
   children,
 }: AppWindowProps) {
+  const windowRect: ViewportRect =
+    isMaximized && typeof window !== "undefined"
+      ? {
+          x: 0,
+          y: MENU_BAR_HEIGHT,
+          width: window.innerWidth,
+          height: window.innerHeight - MENU_BAR_HEIGHT - DOCK_HEIGHT,
+        }
+      : { x, y, width, height };
   const motionCustom: WindowPresenceCustom = {
     id,
     exitModes,
+    iconProjection: getIconProjection(id, windowRect),
     reduceMotion,
   };
 

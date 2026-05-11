@@ -96,7 +96,7 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 - Exports `AppId` union type, `AppSize` and `AppPosition` helper types, `AppMetadata` interface (id, route, label, title, icon, defaultSize, defaultPosition, showInDock), and `APPS` array.
 - `AppId` is `"home" | "projects" | "about" | "contact" | "cv" | "glass-atlas" | "techy" | "sparse" | "weather"`.
 - `AppMetadata.route` is a string literal union covering `/`, `/projects`, `/about`, `/contact`, `/cv`, `/glass-atlas`, `/techy`, `/sparse`, `/weather`.
-- `defaultSize` provides the window's initial `{width, height}` in pixels; `defaultPosition` provides the initial top-left `{x, y}` offset from the desktop area.
+- `defaultSize` provides the window's initial `{width, height}` in pixels; runtime open paths center the window in the desktop safe area with `getCenteredWindowPositionForViewport()`. `defaultPosition` remains a fallback for non-browser contexts.
 - `title` is the full window title bar string; `label` is the short dock/shortcut label.
 - `showInDock?: boolean` — when explicitly `false`, the app appears in `DesktopShortcuts` only and is excluded from the Dock. When omitted or `true`, the app appears in both. The five core apps (Home, Projects, About, Contact, CV) omit this field; the four project apps (Glass Atlas, Techy, Sparse, Weather) set it to `false`.
 - No state, no hooks, no reducer logic — pure static metadata consumed by the window manager and shell components.
@@ -129,6 +129,8 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 - Observes `focusedId` and the focused window route, then calls `router.push(route)` when the focused window changes and the browser URL is stale. If no window is focused, the current URL is left unchanged.
 - `useWindowManager()` hook returns context value; throws if called outside the provider.
 - Mounted in `layout.tsx` wrapping the desktop root so all shell components (Dock, DesktopShortcuts, MenuBar) and window components share one state instance.
+- Focus-driven URL sync uses `router.push(route, { scroll: false })` so opening, focusing, closing, and restoring windows does not trigger browser or App Router scroll restoration jumps inside the fixed desktop shell.
+- Dock opens, desktop shortcut opens, and direct route entry pass centered default positions into the reducer so new windows appear centered by default.
 
 #### WindowRenderer (`src/app/components/WindowManager/WindowRenderer.tsx`)
 
@@ -138,7 +140,8 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 - Clicking any part of a window dispatches a `focus` action via `onMouseDown`.
 - z-index: each window's `zIndexMap[id]` value is added to `WINDOW_Z_BASE = 20`, placing windows above the wallpaper (0) and shortcuts (z-10) but below the dock (z-40) and menu bar (z-50).
 - Maximized windows bypass `react-rnd` and render as a `position: fixed` div filling the desktop area (top: 28px, bottom: 80px).
-- Each window is wrapped in a `framer-motion` `motion.div` inside `AnimatePresence`; open uses scale/opacity spring, close uses a quick 150ms ease-out exit. Minimize exit scales down toward the dock (scale 0.82, y+72). `prefers-reduced-motion` collapses all exit/enter to a plain opacity transition.
+- Each window is wrapped in a `framer-motion` `motion.div` inside `AnimatePresence`; open/restore use a macOS-style source animation from the matching dock icon or desktop shortcut, close uses a quick 150ms ease-out exit, and minimize uses a classic `genie`-style non-uniform scale/travel animation into the matching icon. `prefers-reduced-motion` collapses all exit/enter to a plain opacity transition.
+- Dock buttons and desktop shortcuts expose `data-window-animation-target` attributes so `WindowRenderer` can resolve the correct icon rectangle at animation time. Dock targets are preferred when present; desktop shortcut targets are used for apps excluded from the dock.
 - Window drag handle is scoped to elements with the `.glass-chrome` class on the title bar.
 - `exitModes` state tracks whether the last action for each window was `"close"` or `"minimize"` so `AnimatePresence` can choose the correct exit variant. `flushSync` is used when setting exitModes before dispatching the reducer action to avoid exit-before-set races.
 - `visibleIdsRef` is kept current each render cycle; `onExitComplete` cleans up `exitModes` entries only for windows no longer visible, avoiding stale closure values.

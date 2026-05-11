@@ -18,6 +18,8 @@ import {
   initialWindowState,
   windowReducer,
 } from "./windowReducer";
+import { APPS } from "../appMetadata";
+import { getCenteredWindowPositionForViewport } from "./windowGeometry";
 
 // ---------------------------------------------------------------------------
 // Context type
@@ -55,7 +57,16 @@ export function WindowManagerProvider({ children }: WindowManagerProviderProps) 
   );
 
   useEffect(() => {
-    dispatch({ type: "syncRoute", payload: { route: pathname } });
+    const app = APPS.find((candidate) => candidate.route === pathname);
+    dispatch({
+      type: "syncRoute",
+      payload: {
+        route: pathname,
+        defaultPosition: app
+          ? getCenteredWindowPositionForViewport(app.defaultSize)
+          : undefined,
+      },
+    });
   }, [pathname]);
 
   useEffect(() => {
@@ -63,7 +74,7 @@ export function WindowManagerProvider({ children }: WindowManagerProviderProps) 
       return;
     }
 
-    router.push(focusedWindow.route);
+    router.push(focusedWindow.route, { scroll: false });
   }, [focusedWindow, pathname, router]);
 
   return (
