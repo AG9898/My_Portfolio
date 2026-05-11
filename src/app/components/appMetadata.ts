@@ -2,7 +2,16 @@
 // Single source of truth for all portfolio apps.
 // Pure metadata — no state, no hooks, no window geometry beyond defaults.
 
-export type AppId = "home" | "projects" | "about" | "contact" | "cv";
+export type AppId =
+  | "home"
+  | "projects"
+  | "about"
+  | "contact"
+  | "cv"
+  | "glass-atlas"
+  | "techy"
+  | "sparse"
+  | "weather";
 
 export interface AppSize {
   width: number;
@@ -16,7 +25,7 @@ export interface AppPosition {
 
 export interface AppMetadata {
   id: AppId;
-  route: "/" | "/projects" | "/about" | "/contact" | "/cv";
+  route: "/" | "/projects" | "/about" | "/contact" | "/cv" | "/glass-atlas" | "/techy" | "/sparse" | "/weather";
   /** Short label used in dock, desktop shortcuts, and window list */
   label: string;
   /** Full title shown in the window title bar */
@@ -27,6 +36,11 @@ export interface AppMetadata {
   defaultSize: AppSize;
   /** Default window position (top-left corner) when first opened */
   defaultPosition: AppPosition;
+  /**
+   * When explicitly false, this app is excluded from the Dock and shown only
+   * in DesktopShortcuts. When omitted or true, the app appears in both.
+   */
+  showInDock?: boolean;
 }
 
 export const APPS: AppMetadata[] = [
@@ -74,5 +88,45 @@ export const APPS: AppMetadata[] = [
     icon: "cv",
     defaultSize: { width: 800, height: 600 },
     defaultPosition: { x: 180, y: 50 },
+  },
+  {
+    id: "glass-atlas",
+    route: "/glass-atlas",
+    label: "Glass Atlas",
+    title: "Glass Atlas — Aden Guo",
+    icon: "glass-atlas",
+    defaultSize: { width: 900, height: 620 },
+    defaultPosition: { x: 140, y: 60 },
+    showInDock: false,
+  },
+  {
+    id: "techy",
+    route: "/techy",
+    label: "Techy",
+    title: "Techy — Aden Guo",
+    icon: "techy",
+    defaultSize: { width: 900, height: 620 },
+    defaultPosition: { x: 160, y: 70 },
+    showInDock: false,
+  },
+  {
+    id: "sparse",
+    route: "/sparse",
+    label: "Sparse",
+    title: "Sparse — Aden Guo",
+    icon: "sparse",
+    defaultSize: { width: 820, height: 580 },
+    defaultPosition: { x: 180, y: 80 },
+    showInDock: false,
+  },
+  {
+    id: "weather",
+    route: "/weather",
+    label: "Weather & Wellness",
+    title: "Weather & Wellness — Aden Guo",
+    icon: "weather",
+    defaultSize: { width: 820, height: 580 },
+    defaultPosition: { x: 200, y: 90 },
+    showInDock: false,
   },
 ];

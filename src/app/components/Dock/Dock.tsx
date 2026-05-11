@@ -231,7 +231,7 @@ export default function Dock() {
         onMouseMove={(event) => mouseX.set(event.clientX)}
         onMouseLeave={() => mouseX.set(Number.POSITIVE_INFINITY)}
       >
-        {APPS.map((app) => {
+        {APPS.filter((app) => app.showInDock !== false).map((app) => {
           const isOpen = state.openWindows.some(
             (window) => window.id === app.id && !window.minimized
           );

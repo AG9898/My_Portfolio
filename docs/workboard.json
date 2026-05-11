@@ -1151,7 +1151,7 @@
       "id": "V2_001",
       "title": "Extend AppMetadata registry with showInDock flag and four project apps",
       "description": "Extend AppId union type to include glass-atlas, techy, sparse, and weather. Add showInDock?: boolean field to AppMetadata interface (default behavior: show in dock when omitted or true; exclude when false). Add four new APPS entries with showInDock: false, appropriate defaultSize and defaultPosition, and correct route strings (/glass-atlas, /techy, /sparse, /weather). Update windowReducer.ts to handle the extended AppId union (zIndexMap and focusedId types). Update Dock.tsx to filter APPS to showInDock !== false so the dock continues showing only the five core apps.",
-      "status": "todo",
+      "status": "done",
       "priority": "critical",
       "group_id": "V2_CONTENT",
       "depends_on": [],

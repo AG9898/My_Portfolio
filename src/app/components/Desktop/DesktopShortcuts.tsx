@@ -25,11 +25,15 @@ import { useWindowManager } from "../WindowManager/WindowManagerProvider";
 
 // ─── Icon labels — file-system metaphors matching macos-redesign.md ───────────
 const ICON_LABELS: Record<AppId, string> = {
-  home:     "Home",
-  projects: "projects/",
-  about:    "about_me.txt",
-  contact:  "contact.msg",
-  cv:       "aden_guo_cv.pdf",
+  home:           "Home",
+  projects:       "projects/",
+  about:          "about_me.txt",
+  contact:        "contact.msg",
+  cv:             "aden_guo_cv.pdf",
+  "glass-atlas":  "glass_atlas/",
+  techy:          "techy.app",
+  sparse:         "sparse.app",
+  weather:        "weather.dash",
 };
 
 // ─── File icon SVGs — 56×56, folded-corner document shape ────────────────────
@@ -203,16 +207,134 @@ function PdfIcon() {
   );
 }
 
+function GlobeIcon() {
+  return (
+    <svg width="56" height="56" viewBox={`-4 0 ${DOC_W + 8} ${DOC_H + 4}`} aria-hidden="true">
+      <defs>
+        <linearGradient id="doc-globe" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#FFFFFF" />
+          <stop offset="100%" stopColor="#E2E2E6" />
+        </linearGradient>
+      </defs>
+      <path d={DOC_PATH} fill="url(#doc-globe)" stroke="rgba(0,0,0,0.15)" strokeWidth="0.5" />
+      <path d={FOLD_PATH} fill="#C7C7CC" />
+      <path
+        d={`M${DOC_W - FOLD} 0 V${FOLD} H${DOC_W}`}
+        fill="none"
+        stroke="rgba(0,0,0,0.18)"
+        strokeWidth="0.5"
+      />
+      {/* Globe */}
+      <circle cx="24" cy="28" r="12" fill="none" stroke="#30B0C7" strokeWidth="1.4" />
+      <ellipse cx="24" cy="28" rx="6" ry="12" fill="none" stroke="#30B0C7" strokeWidth="1" />
+      <line x1="12" y1="28" x2="36" y2="28" stroke="#30B0C7" strokeWidth="1" />
+      <line x1="14" y1="21" x2="34" y2="21" stroke="#30B0C7" strokeWidth="0.8" />
+      <line x1="14" y1="35" x2="34" y2="35" stroke="#30B0C7" strokeWidth="0.8" />
+    </svg>
+  );
+}
+
+function GraphIcon() {
+  return (
+    <svg width="56" height="56" viewBox={`-4 0 ${DOC_W + 8} ${DOC_H + 4}`} aria-hidden="true">
+      <defs>
+        <linearGradient id="doc-graph" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#FFFFFF" />
+          <stop offset="100%" stopColor="#E2E2E6" />
+        </linearGradient>
+      </defs>
+      <path d={DOC_PATH} fill="url(#doc-graph)" stroke="rgba(0,0,0,0.15)" strokeWidth="0.5" />
+      <path d={FOLD_PATH} fill="#C7C7CC" />
+      <path
+        d={`M${DOC_W - FOLD} 0 V${FOLD} H${DOC_W}`}
+        fill="none"
+        stroke="rgba(0,0,0,0.18)"
+        strokeWidth="0.5"
+      />
+      {/* Graph node network */}
+      <circle cx="24" cy="24" r="4" fill="#5E5CE6" />
+      <circle cx="12" cy="34" r="3" fill="#5E5CE6" />
+      <circle cx="36" cy="34" r="3" fill="#5E5CE6" />
+      <circle cx="18" cy="14" r="3" fill="#5E5CE6" />
+      <line x1="24" y1="24" x2="12" y2="34" stroke="#5E5CE6" strokeWidth="1.2" />
+      <line x1="24" y1="24" x2="36" y2="34" stroke="#5E5CE6" strokeWidth="1.2" />
+      <line x1="24" y1="24" x2="18" y2="14" stroke="#5E5CE6" strokeWidth="1.2" />
+      <line x1="12" y1="34" x2="36" y2="34" stroke="#5E5CE6" strokeWidth="0.8" />
+    </svg>
+  );
+}
+
+function GridIcon() {
+  return (
+    <svg width="56" height="56" viewBox={`-4 0 ${DOC_W + 8} ${DOC_H + 4}`} aria-hidden="true">
+      <defs>
+        <linearGradient id="doc-grid" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#FFFFFF" />
+          <stop offset="100%" stopColor="#E2E2E6" />
+        </linearGradient>
+      </defs>
+      <path d={DOC_PATH} fill="url(#doc-grid)" stroke="rgba(0,0,0,0.15)" strokeWidth="0.5" />
+      <path d={FOLD_PATH} fill="#C7C7CC" />
+      <path
+        d={`M${DOC_W - FOLD} 0 V${FOLD} H${DOC_W}`}
+        fill="none"
+        stroke="rgba(0,0,0,0.18)"
+        strokeWidth="0.5"
+      />
+      {/* Table / grid */}
+      <rect x="8" y="14" width="32" height="28" fill="none" stroke="#34C759" strokeWidth="1.2" />
+      <line x1="8" y1="21" x2="40" y2="21" stroke="#34C759" strokeWidth="1" />
+      <line x1="8" y1="28" x2="40" y2="28" stroke="#34C759" strokeWidth="1" />
+      <line x1="8" y1="35" x2="40" y2="35" stroke="#34C759" strokeWidth="1" />
+      <line x1="19" y1="14" x2="19" y2="42" stroke="#34C759" strokeWidth="1" />
+      <line x1="29" y1="14" x2="29" y2="42" stroke="#34C759" strokeWidth="1" />
+    </svg>
+  );
+}
+
+function CloudIcon() {
+  return (
+    <svg width="56" height="56" viewBox={`-4 0 ${DOC_W + 8} ${DOC_H + 4}`} aria-hidden="true">
+      <defs>
+        <linearGradient id="doc-cloud" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#FFFFFF" />
+          <stop offset="100%" stopColor="#E2E2E6" />
+        </linearGradient>
+      </defs>
+      <path d={DOC_PATH} fill="url(#doc-cloud)" stroke="rgba(0,0,0,0.15)" strokeWidth="0.5" />
+      <path d={FOLD_PATH} fill="#C7C7CC" />
+      <path
+        d={`M${DOC_W - FOLD} 0 V${FOLD} H${DOC_W}`}
+        fill="none"
+        stroke="rgba(0,0,0,0.18)"
+        strokeWidth="0.5"
+      />
+      {/* Cloud shape */}
+      <path
+        d="M10 36 Q10 28 18 28 Q18 20 26 20 Q34 20 36 28 Q42 28 40 36 Z"
+        fill="#0A84FF"
+        fillOpacity="0.7"
+        stroke="#0A84FF"
+        strokeWidth="1"
+      />
+    </svg>
+  );
+}
+
 // ─── Icon dispatcher ──────────────────────────────────────────────────────────
 
 function ShortcutFileIcon({ appId }: { appId: AppId }) {
   switch (appId) {
-    case "home":     return <TxtIcon />;
-    case "projects": return <FolderIcon />;
-    case "about":    return <PersonIcon />;
-    case "contact":  return <MsgIcon />;
-    case "cv":       return <PdfIcon />;
-    default:         return null;
+    case "home":        return <TxtIcon />;
+    case "projects":    return <FolderIcon />;
+    case "about":       return <PersonIcon />;
+    case "contact":     return <MsgIcon />;
+    case "cv":          return <PdfIcon />;
+    case "glass-atlas": return <GlobeIcon />;
+    case "techy":       return <GraphIcon />;
+    case "sparse":      return <GridIcon />;
+    case "weather":     return <CloudIcon />;
+    default:            return null;
   }
 }
 

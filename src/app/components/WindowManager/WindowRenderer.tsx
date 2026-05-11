@@ -288,6 +288,10 @@ const WINDOW_TITLES: Record<AppId, string> = {
   about: "About — Aden Guo",
   contact: "Contact — Aden Guo",
   cv: "CV — Aden Guo",
+  "glass-atlas": "Glass Atlas — Aden Guo",
+  techy: "Techy — Aden Guo",
+  sparse: "Sparse — Aden Guo",
+  weather: "Weather & Wellness — Aden Guo",
 };
 
 interface WindowRendererProps {
