@@ -112,7 +112,7 @@
       ],
       "blocked_by": [],
       "acceptance_criteria": [
-        "globals.css contains only resets, viewport rules, and CSS variable token declarations \u2014 no component styles.",
+        "globals.css contains only resets, viewport rules, and CSS variable token declarations — no component styles.",
         "All desktop surface, text, border, and traffic-light variables are defined for the default (dark) theme.",
         "[data-theme=\"light\"] block inverts the canonical dark values as specified in docs/styling.md.",
         "No Google Fonts imports or Heroicons references are present."
@@ -216,7 +216,7 @@
     {
       "id": "V1_003A",
       "title": "Build static MenuBar component",
-      "description": "Create src/app/components/MenuBar/MenuBar.tsx as a static 28px-tall menu bar using .glass-menubar. Right side shows: control center icon, battery visual, Wi-Fi glyph, date, and a live clock (updates every 1000ms, tabular-nums font variant). Left side shows Apple logo and static app name placeholder. No dropdown interactivity yet \u2014 that is V1_008A.",
+      "description": "Create src/app/components/MenuBar/MenuBar.tsx as a static 28px-tall menu bar using .glass-menubar. Right side shows: control center icon, battery visual, Wi-Fi glyph, date, and a live clock (updates every 1000ms, tabular-nums font variant). Left side shows Apple logo and static app name placeholder. No dropdown interactivity yet — that is V1_008A.",
       "status": "done",
       "priority": "critical",
       "group_id": "V1_DESKTOP",
@@ -244,7 +244,7 @@
     {
       "id": "V1_003B",
       "title": "Build static Dock component with SVG icons",
-      "description": "Create src/app/components/Dock/Dock.tsx as a static bottom dock using .glass-dock. Dock icons are 56px base size with individual SVG designs per the design handoff reference (reference/design draft/design_handoff_macos_desktop_shell/). Apps: Home, Projects, About, Contact, CV. No magnification yet \u2014 that is V1_009B. Create src/app/components/appMetadata.ts with shared app ID, route, label, and icon for all five apps.",
+      "description": "Create src/app/components/Dock/Dock.tsx as a static bottom dock using .glass-dock. Dock icons are 56px base size with individual SVG designs per the design handoff reference (reference/design draft/design_handoff_macos_desktop_shell/). Apps: Home, Projects, About, Contact, CV. No magnification yet — that is V1_009B. Create src/app/components/appMetadata.ts with shared app ID, route, label, and icon for all five apps.",
       "status": "done",
       "priority": "critical",
       "group_id": "V1_DESKTOP",
@@ -254,7 +254,7 @@
       "blocked_by": [],
       "acceptance_criteria": [
         "Dock renders at the bottom of the viewport using .glass-dock.",
-        "Each dock icon uses its SVG design from the design handoff \u2014 not generic placeholder icons.",
+        "Each dock icon uses its SVG design from the design handoff — not generic placeholder icons.",
         "Shared appMetadata.ts exports app ID, route, label, and icon for all five apps.",
         "No magnification or animation present yet."
       ],
@@ -273,7 +273,7 @@
     {
       "id": "V1_003C",
       "title": "Build desktop shortcuts sidebar",
-      "description": "Create src/app/components/Desktop/DesktopShortcuts.tsx as an 88px-wide left sidebar column (16px left, 48px top padding) with 56x56px SVG shortcut icons. Icon metaphors: txt for Home, folder for Projects, person for About, msg for Contact, pdf for CV \u2014 matching docs/macos-redesign.md. Single click applies selected state (blue highlight box + label pill). Double click will trigger open (wired in V1_007B). Use shared appMetadata for labels.",
+      "description": "Create src/app/components/Desktop/DesktopShortcuts.tsx as an 88px-wide left sidebar column (16px left, 48px top padding) with 56x56px SVG shortcut icons. Icon metaphors: txt for Home, folder for Projects, person for About, msg for Contact, pdf for CV — matching docs/macos-redesign.md. Single click applies selected state (blue highlight box + label pill). Double click will trigger open (wired in V1_007B). Use shared appMetadata for labels.",
       "status": "done",
       "priority": "critical",
       "group_id": "V1_DESKTOP",
@@ -285,7 +285,7 @@
         "Shortcut column is 88px wide, positioned 16px from left, 48px from top.",
         "Icons are 56x56px SVGs with txt/folder/person/msg/pdf metaphors.",
         "Single click applies selected state with blue highlight box and label pill.",
-        "Shared appMetadata is used for labels and routes \u2014 no duplicated labels.",
+        "Shared appMetadata is used for labels and routes — no duplicated labels.",
         "No Heroicons usage introduced."
       ],
       "docs": [
@@ -401,7 +401,7 @@
       "acceptance_criteria": [
         "Dark mode is the default canonical theme.",
         "Light mode renders through token inversion with no hardcoded color overrides.",
-        "Small screens show a deliberate, intentional fallback component \u2014 not cramped draggable windows.",
+        "Small screens show a deliberate, intentional fallback component — not cramped draggable windows.",
         "Build succeeds."
       ],
       "docs": [
@@ -508,7 +508,7 @@
     {
       "id": "V1_006B",
       "title": "Window chrome and traffic light controls",
-      "description": "Implement window chrome with title bar and traffic light controls. Traffic light buttons (close, minimize, maximize) reveal x, -, + glyphs simultaneously on group container hover \u2014 not per-button hover. This is the canonical macOS behavior. Window shadow is 0 22px 70px rgba(0,0,0,0.55). Default window size is 760x520px. Use .glass-chrome for the title bar.",
+      "description": "Implement window chrome with title bar and traffic light controls. Traffic light buttons (close, minimize, maximize) reveal x, -, + glyphs simultaneously on group container hover — not per-button hover. This is the canonical macOS behavior. Window shadow is 0 22px 70px rgba(0,0,0,0.55). Default window size is 760x520px. Use .glass-chrome for the title bar.",
       "status": "done",
       "priority": "critical",
       "group_id": "V1_DESKTOP",
@@ -548,7 +548,7 @@
         "Maximize fills the desktop area (below menu bar, above dock); restore returns to previous geometry.",
         "Snap-left fills the left half of the desktop; snap-right fills the right half.",
         "restoreGeometry is saved before any maximize or snap action.",
-        "All geometry changes go through reducer actions \u2014 no local state for window bounds."
+        "All geometry changes go through reducer actions — no local state for window bounds."
       ],
       "docs": [
         "docs/macos-redesign.md",
@@ -565,7 +565,7 @@
     {
       "id": "V1_007A",
       "title": "Create route files for all five apps",
-      "description": "Create the five Next.js App Router page files: src/app/page.tsx (Home), src/app/projects/page.tsx, src/app/about/page.tsx, src/app/contact/page.tsx, src/app/cv/page.tsx. Each page exports a minimal component with the app name as a placeholder \u2014 real content comes in V1_010A\u2013D. Pages must not render any desktop shell chrome (that lives in layout.tsx).",
+      "description": "Create the five Next.js App Router page files: src/app/page.tsx (Home), src/app/projects/page.tsx, src/app/about/page.tsx, src/app/contact/page.tsx, src/app/cv/page.tsx. Each page exports a minimal component with the app name as a placeholder — real content comes in V1_010A–D. Pages must not render any desktop shell chrome (that lives in layout.tsx).",
       "status": "done",
       "priority": "critical",
       "group_id": "V1_DESKTOP",
@@ -575,7 +575,7 @@
       "blocked_by": [],
       "acceptance_criteria": [
         "All five route files exist and export a default React component.",
-        "Each component is a minimal placeholder \u2014 no desktop chrome.",
+        "Each component is a minimal placeholder — no desktop chrome.",
         "Build succeeds with no missing route errors."
       ],
       "docs": [
@@ -826,7 +826,7 @@
     {
       "id": "V1_010A",
       "title": "Home and About window content",
-      "description": "Fill src/app/page.tsx (Home) and src/app/about/page.tsx with first-pass portfolio content using a Notes or TextEdit metaphor \u2014 sidebar list and a main content pane styled like a macOS document editor. Content should be real, not lorem ipsum.",
+      "description": "Fill src/app/page.tsx (Home) and src/app/about/page.tsx with first-pass portfolio content using a Notes or TextEdit metaphor — sidebar list and a main content pane styled like a macOS document editor. Content should be real, not lorem ipsum.",
       "status": "done",
       "priority": "high",
       "group_id": "V1_DESKTOP",
@@ -837,7 +837,7 @@
       "acceptance_criteria": [
         "Home and About windows render Notes/TextEdit-style UI with real portfolio content.",
         "No placeholder lorem ipsum text.",
-        "Styling uses Tailwind and glass utilities only \u2014 no inline hex."
+        "Styling uses Tailwind and glass utilities only — no inline hex."
       ],
       "docs": [
         "docs/PRD.md",
@@ -981,7 +981,7 @@
       "blocked_by": [],
       "acceptance_criteria": [
         "No text overflows or overlaps in any shell or window element at 1280px and 1440px widths.",
-        "All glass surfaces use utility classes \u2014 no inline backdrop-filter or RGBA values.",
+        "All glass surfaces use utility classes — no inline backdrop-filter or RGBA values.",
         "No inline hex color values remain in component files."
       ],
       "docs": [
@@ -1160,7 +1160,7 @@
         "AppId union includes glass-atlas, techy, sparse, and weather.",
         "AppMetadata interface includes showInDock?: boolean field.",
         "APPS registry has nine entries; the four new entries have showInDock: false.",
-        "Dock renders only the five core apps \u2014 no new icons appear in the dock.",
+        "Dock renders only the five core apps — no new icons appear in the dock.",
         "windowReducer.ts compiles cleanly with the extended AppId union.",
         "npm run lint and npm run build pass."
       ],
@@ -1181,7 +1181,7 @@
     {
       "id": "V2_002",
       "title": "Create iframe route pages for Glass Atlas and Techy",
-      "description": "Create src/app/glass-atlas/page.tsx and src/app/techy/page.tsx as client components. Each page renders a full-height iframe with a hardcoded src URL (Glass Atlas: https://glass-atlas-production.up.railway.app; Techy: https://techy-psi.vercel.app). Include a visible open-in-new-tab fallback button for the case where the target site blocks iframe embedding. Style the fallback consistently with the glass window system using Tailwind tokens and glass utilities only \u2014 no inline hex.",
+      "description": "Create src/app/glass-atlas/page.tsx and src/app/techy/page.tsx as client components. Each page renders a full-height iframe with a hardcoded src URL (Glass Atlas: https://glass-atlas-production.up.railway.app; Techy: https://techy-psi.vercel.app). Include a visible open-in-new-tab fallback button for the case where the target site blocks iframe embedding. Style the fallback consistently with the glass window system using Tailwind tokens and glass utilities only — no inline hex.",
       "status": "done",
       "priority": "high",
       "group_id": "V2_CONTENT",
@@ -1193,7 +1193,7 @@
         "src/app/glass-atlas/page.tsx and src/app/techy/page.tsx exist and export default React components.",
         "Each page renders a full-height iframe with the correct hardcoded src URL.",
         "An open-in-new-tab fallback button is present and links to the correct URL.",
-        "Pages use only Tailwind tokens and glass utilities \u2014 no inline hex.",
+        "Pages use only Tailwind tokens and glass utilities — no inline hex.",
         "npm run lint and npm run build pass."
       ],
       "docs": [
@@ -1211,7 +1211,7 @@
     {
       "id": "V2_003",
       "title": "Create project showcase route pages for Sparse and Weather & Wellness",
-      "description": "Create src/app/sparse/page.tsx and src/app/weather/page.tsx as static project detail pages styled consistently with existing app window content. Each page shows: project name, short description, status badge, tech stack tags, and a GitHub or external link. Sparse: private SvelteKit timesheet and expense management app for Utilicom Technologies (active development); stack: SvelteKit, TypeScript, Drizzle, Supabase, Bun, Tailwind; GitHub link only. Weather & Wellness: Python/Flask dashboard at https://weather-and-wellness-dashboard.vercel.app; link to deployed site. Style using existing Notes/Finder Tailwind patterns \u2014 no inline hex.",
+      "description": "Create src/app/sparse/page.tsx and src/app/weather/page.tsx as static project detail pages styled consistently with existing app window content. Each page shows: project name, short description, status badge, tech stack tags, and a GitHub or external link. Sparse: private SvelteKit timesheet and expense management app for Utilicom Technologies (active development); stack: SvelteKit, TypeScript, Drizzle, Supabase, Bun, Tailwind; GitHub link only. Weather & Wellness: Python/Flask dashboard at https://weather-and-wellness-dashboard.vercel.app; link to deployed site. Style using existing Notes/Finder Tailwind patterns — no inline hex.",
       "status": "done",
       "priority": "high",
       "group_id": "V2_CONTENT",
@@ -1222,7 +1222,7 @@
       "acceptance_criteria": [
         "src/app/sparse/page.tsx and src/app/weather/page.tsx exist and export default React components.",
         "Each page shows name, description, status badge, tech stack tags, and an appropriate link.",
-        "Styling uses only Tailwind tokens and glass utilities \u2014 no inline hex.",
+        "Styling uses only Tailwind tokens and glass utilities — no inline hex.",
         "Content is real, not placeholder.",
         "npm run lint and npm run build pass."
       ],
@@ -1270,7 +1270,7 @@
     {
       "id": "V2_005_1",
       "title": "Projects window: expand project list and wire real links",
-      "description": "Update src/app/projects/page.tsx with two data-focused changes. First, replace the four-entry PROJECTS array with a full nine-entry array covering: My Portfolio, PigeonCoop, Zellaude-Plus, Glass Atlas, Techy, Sparse, Weather & Wellness, Interactive MapLibre, and movieboxd. Each entry must include name, kind, status, path, description, stack, a category field (frontend | agent-tools | client-work | tooling), and a link field. Second, convert every ExternalLink icon from decorative to a real anchor tag wrapping an href \u2014 use the correct GitHub URL or deployed URL for each project. Entries with no public URL (e.g. Sparse) must omit the ExternalLink icon entirely rather than render a dead link.",
+      "description": "Update src/app/projects/page.tsx with two data-focused changes. First, replace the four-entry PROJECTS array with a full nine-entry array covering: My Portfolio, PigeonCoop, Zellaude-Plus, Glass Atlas, Techy, Sparse, Weather & Wellness, Interactive MapLibre, and movieboxd. Each entry must include name, kind, status, path, description, stack, a category field (frontend | agent-tools | client-work | tooling), and a link field. Second, convert every ExternalLink icon from decorative to a real anchor tag wrapping an href — use the correct GitHub URL or deployed URL for each project. Entries with no public URL (e.g. Sparse) must omit the ExternalLink icon entirely rather than render a dead link.",
       "status": "done",
       "priority": "high",
       "group_id": "V2_CONTENT",
@@ -1350,7 +1350,7 @@
     {
       "id": "V2_007",
       "title": "Convert Techy page to panel-switching sidebar",
-      "description": "Replace the decorative static sidebar in src/app/techy/page.tsx with a working panel-switching pattern matching CONVENTIONS.md. Add \"use client\", useState<Section>, and convert sidebar divs to <button> elements. Four sections: Overview (project description + status chips + 2x aspect-video placeholder slots for screenshots \u2014 Techy is auth-gated so no iframe), Features (feature list with one sentence each), Tech Stack (stack tags), Links (external link to live app + GitHub auth note card). Remove the existing single-scroll layout.",
+      "description": "Replace the decorative static sidebar in src/app/techy/page.tsx with a working panel-switching pattern matching CONVENTIONS.md. Add \"use client\", useState<Section>, and convert sidebar divs to <button> elements. Four sections: Overview (project description + status chips + 2x aspect-video placeholder slots for screenshots — Techy is auth-gated so no iframe), Features (feature list with one sentence each), Tech Stack (stack tags), Links (external link to live app + GitHub auth note card). Remove the existing single-scroll layout.",
       "status": "done",
       "priority": "high",
       "group_id": "V2_CONTENT",
@@ -1376,7 +1376,7 @@
       "id": "V2_008",
       "title": "Convert Weather & Wellness page to panel-switching sidebar",
       "description": "Replace the decorative static sidebar in src/app/weather/page.tsx with a working panel-switching pattern matching CONVENTIONS.md. Add \"use client\", useState<Section>, and convert sidebar divs to <button> elements. Four sections: Overview (project description + status chips + aspect-video placeholder slot), Features (existing 4 features, expanded with one sentence each), Tech Stack (existing stack tags), Links (external link to the live Vercel dashboard). Remove the existing single-scroll layout.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V2_CONTENT",
       "depends_on": [],
@@ -1400,7 +1400,7 @@
     {
       "id": "V2_009",
       "title": "Convert About page to panel-switching sidebar",
-      "description": "Replace the decorative static sidebar in src/app/about/page.tsx with a working panel-switching pattern matching CONVENTIONS.md. Add \"use client\", useState<Section>, and convert sidebar divs to <button> elements. Four sections matching existing sidebar labels: About Aden (existing profile copy), How I Work (placeholder: 2-3 sentences about process \u2014 iterative, documented, motion-intentional), Frontend Focus (placeholder: 2-3 sentences about craft focus \u2014 interaction models, desktop metaphors, polish tied to behavior), What I Value (placeholder: 2-3 sentences about principles \u2014 deterministic state, accessible motion, docs as first-class output). Each section has its own main-pane panel with appropriate heading and breadcrumb.",
+      "description": "Replace the decorative static sidebar in src/app/about/page.tsx with a working panel-switching pattern matching CONVENTIONS.md. Add \"use client\", useState<Section>, and convert sidebar divs to <button> elements. Four sections matching existing sidebar labels: About Aden (existing profile copy), How I Work (placeholder: 2-3 sentences about process — iterative, documented, motion-intentional), Frontend Focus (placeholder: 2-3 sentences about craft focus — interaction models, desktop metaphors, polish tied to behavior), What I Value (placeholder: 2-3 sentences about principles — deterministic state, accessible motion, docs as first-class output). Each section has its own main-pane panel with appropriate heading and breadcrumb.",
       "status": "todo",
       "priority": "medium",
       "group_id": "V2_CONTENT",
