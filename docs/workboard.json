@@ -1271,7 +1271,7 @@
       "id": "V2_005_1",
       "title": "Projects window: expand project list and wire real links",
       "description": "Update src/app/projects/page.tsx with two data-focused changes. First, replace the four-entry PROJECTS array with a full nine-entry array covering: My Portfolio, PigeonCoop, Zellaude-Plus, Glass Atlas, Techy, Sparse, Weather & Wellness, Interactive MapLibre, and movieboxd. Each entry must include name, kind, status, path, description, stack, a category field (frontend | agent-tools | client-work | tooling), and a link field. Second, convert every ExternalLink icon from decorative to a real anchor tag wrapping an href — use the correct GitHub URL or deployed URL for each project. Entries with no public URL (e.g. Sparse) must omit the ExternalLink icon entirely rather than render a dead link.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V2_CONTENT",
       "depends_on": [],
