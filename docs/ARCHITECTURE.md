@@ -14,7 +14,8 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 
 - **Frontend:** Next.js 14, React 18, TypeScript, Tailwind CSS.
 - **Client interaction layer:** `framer-motion`, `react-rnd`, `next-themes`, Radix dropdown menus, `lucide-react`, canvas wallpaper using `simplex-noise`, and optional WebGL2 wallpaper rendering.
-- **Static assets:** served from `public/`, including the carried-forward `cv.pdf`.
+- **Static assets:** served from `public/`, including `cv.pdf` (generated artifact for CV download).
+- **Static data:** `src/data/resume.json` — JSON Resume v1 schema file; agent-editable source of truth for all CV content.
 - **Backend/database/auth:** none.
 
 ---
@@ -163,6 +164,13 @@ All app window pages use a **panel-switching sidebar pattern**: `"use client"` w
 - **`/glass-atlas`** — Glass Atlas (embeddable Next.js app). Nav: Overview (full-bleed iframe), About, Tech Stack, Links. Live at `https://glass-atlas-production.up.railway.app`.
 - **`/about`** — About page. Nav: About Aden, How I Work, Frontend Focus, What I Value.
 - Content is hardcoded in each route file — no backend, no CMS.
+
+#### CV window (`/cv`)
+
+- `ResumeRenderer` (`src/app/components/CV/ResumeRenderer.tsx`) reads `src/data/resume.json` via a static import and renders all resume sections as styled HTML inside the window.
+- The macOS Preview chrome is preserved: a toolbar row (open-in-tab, download buttons) and a left sidebar showing section names (Summary, Experience, Education, Skills, Projects) as a mini nav.
+- The sidebar section nav is the only interactive sidebar in the CV window; clicking a section name scrolls the main content pane to that section.
+- `public/cv.pdf` is a generated artifact used exclusively for the download and open-in-tab buttons. It is not kept in sync automatically — run `npm run export:cv` to regenerate it after editing `resume.json`.
 - Media assets (screenshots, video) go in `aspect-video` placeholder slots within Overview or Features panels, pointing to `/public/projects/<slug>/`.
 
 ### Theme
@@ -170,6 +178,19 @@ All app window pages use a **panel-switching sidebar pattern**: `"use client"` w
 - `next-themes` controls dark/light mode.
 - Dark mode tokens are canonical; light mode overrides invert the frosted-glass system.
 - `ThemeProvider` disables system theme detection and defaults to dark, so first paint follows the canonical dark theme unless the user explicitly toggles light.
+
+---
+
+---
+
+## Build & Tooling
+
+### CV Export Script (`scripts/export-cv.js`)
+
+- Node.js script using `puppeteer` that starts a local dev server, navigates to `/cv`, prints the rendered resume page to PDF, and writes the output to `public/cv.pdf`.
+- Run via `npm run export:cv` (defined in `package.json`).
+- Not run as part of CI or the production build — on-demand only.
+- After running, `public/cv.pdf` is the up-to-date artifact to commit for the download button.
 
 ---
 

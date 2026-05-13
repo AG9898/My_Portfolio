@@ -63,6 +63,22 @@
 
 **Affects:** [`ARCHITECTURE.md`](ARCHITECTURE.md)
 
+### RESOLVED-04 — JSON Resume as CV Source of Truth
+
+**Resolved:** 2026-05-13
+
+**Decision:** CV content lives in `src/data/resume.json` following the JSON Resume v1 schema. The CV window renders it as styled HTML via `ResumeRenderer`. `public/cv.pdf` is a generated artifact produced on demand by a local puppeteer script (`npm run export:cv`).
+
+**Why:** A PDF iframe is opaque to agents and requires manual file replacement to update. A structured JSON file is diff-friendly, agent-editable, and keeps the web display and the downloadable PDF derived from the same source.
+
+**Alternatives rejected:**
+- **RenderCV** — excellent PDF output but requires a Python environment in an otherwise Node.js-only project.
+- **Reactive Resume** — feature-rich but database-backed and not designed for file-based programmatic editing.
+
+**PDF export strategy:** On-demand local script only (not CI-automated). Run `npm run export:cv` after editing `resume.json` to regenerate `public/cv.pdf`.
+
+**Affects:** [`ARCHITECTURE.md`](ARCHITECTURE.md), [`CONVENTIONS.md`](CONVENTIONS.md)
+
 ### RESOLVED-03 — One Window Per App by Default
 
 **Resolved:** 2026-05-06

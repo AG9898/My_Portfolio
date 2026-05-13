@@ -201,6 +201,10 @@ Deployment details are not documented in this repo yet. Do not manually deploy o
 
 App window content is no longer driven by the Next.js `children` prop. `WindowRenderer` now imports every page component directly and maps them in a static `WINDOW_CONTENT: Record<AppId, React.ComponentType>` registry. All open windows render their content simultaneously regardless of which window has focus. Adding a new app window requires updating three places: `src/app/<slug>/page.tsx`, `appMetadata.ts` (`APPS` array), and `WINDOW_CONTENT` in `WindowRenderer.tsx`. Page components must never use `useParams`, `useSearchParams`, or other route-context hooks — they are always mounted as standalone component instances.
 
+### 2026-05-13 — JSON Resume as CV Source of Truth
+
+`src/data/resume.json` (JSON Resume v1 schema) is the agent-editable source for all CV content. The CV window renders it as styled HTML via `ResumeRenderer` — there is no PDF iframe. `public/cv.pdf` is a generated artifact for the download button only; it is not kept in sync automatically. Run `npm run export:cv` (puppeteer script) to regenerate it after editing `resume.json`.
+
 ### 2026-05-08 — V1 Complete: Key Implementation Patterns
 
 The following patterns emerged during the complete V1 implementation and are now canonical:
