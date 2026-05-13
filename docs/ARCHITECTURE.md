@@ -159,7 +159,7 @@ All app window pages use a **panel-switching sidebar pattern**: `"use client"` w
 
 - **`/sparse`** — Sparse (SvelteKit timesheet/expense app for Utilicom Technologies). Nav: Overview, Features, Tech Stack, Links. Private repo, no iframe.
 - **`/weather`** — Weather & Wellness (Python/Flask dashboard). Nav: Overview, Features, Tech Stack, Links. Live at `https://weather-and-wellness-dashboard.vercel.app`.
-- **`/techy`** — Techy (React app, GitHub auth required). Nav: Overview, Features, Tech Stack, Links. Live at `https://techy-psi.vercel.app`.
+- **`/techy`** — Techy (SvelteKit knowledge graph, GitHub auth required). Nav: Overview, Features, Tech Stack, Links. Live at `https://techy-psi.vercel.app`. Source: `https://github.com/AG9898/Techy`.
 - **`/glass-atlas`** — Glass Atlas (embeddable Next.js app). Nav: Overview (full-bleed iframe), About, Tech Stack, Links. Live at `https://glass-atlas-production.up.railway.app`.
 - **`/about`** — About page. Nav: About Aden, How I Work, Frontend Focus, What I Value.
 - Content is hardcoded in each route file — no backend, no CMS.

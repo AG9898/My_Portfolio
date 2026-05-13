@@ -43,7 +43,7 @@ Normative guide for code in this portfolio. Read before writing new UI architect
   - **Standard project nav** (Sparse, Techy, Weather & Wellness): four sections — Overview, Features, Tech Stack, Links. Each page defines its own typed `Section` union and `NAV` array. No shared component; each page is self-contained.
   - **Glass Atlas** (embeddable): Overview renders a full-bleed iframe (the live app). Its nav is Overview / About / Tech Stack / Links — "Overview" means the live embed, not the project description.
   - **About page**: four personal sections — About Aden, How I Work, Frontend Focus, What I Value.
-  - **Media assets** — screenshots and video clips go inside the Overview or Features panel, in `aspect-video` placeholder slots (`<div>` or `<img>`) pointing to `/public/projects/<slug>/`. Placeholder divs stay in place until assets arrive so no layout changes are needed when they do.
+  - **Media assets** — screenshots and video clips go inside the Overview or Features panel, pointing to `/public/projects/<slug>/`. Placeholder `<div>` cards stay in place until assets arrive so no layout changes are needed when they do. All screenshot thumbnails must follow the **Screenshot Lightbox pattern** (see Interaction Patterns below).
 - Iframe pages hardcode their `src` URL directly — no shared generic browser component. Full-bleed iframes use `h-full w-full border-0` on the `<iframe>` and `min-h-0 flex-1` on the containing `<div>`, with the outer window container using `flex h-full`.
 
 ### Styling
@@ -73,6 +73,37 @@ Normative guide for code in this portfolio. Read before writing new UI architect
 - Inner window page transitions use a short opacity/y motion and must skip animation when `prefers-reduced-motion` is active.
 - Menu bar dropdowns use `@radix-ui/react-dropdown-menu`.
 - **`lucide-react` is for UI chrome glyphs only** (status bar icons, toolbar buttons, decorative controls). Desktop shortcut icons and dock app icons use custom SVG artwork — see `reference/design draft/design_handoff_macos_desktop_shell/desktop.jsx` for the exact SVG designs. Never substitute a lucide icon for an app icon.
+
+### Screenshot Lightbox Pattern
+
+All project page screenshots must use a consistent click-to-enlarge lightbox. Apply this pattern to every screenshot thumbnail in every project window page:
+
+**Thumbnail wrapper:**
+- `cursor-pointer` — no magnifying-glass cursor on the base page; that is reserved for inside the lightbox.
+- `overflow-hidden rounded-* border border-glass-edge` — consistent card framing.
+- `onClick` opens the lightbox: `setLightbox({ src, alt, zoomed: false })`.
+- Images use `next/image` with explicit `width`/`height` (intrinsic pixel dimensions) and `style={{ width: "100%", height: "auto" }}` for responsive sizing.
+- Store intrinsic dimensions in a `IMAGE_DIMS` constant keyed by src path.
+
+**Lightbox overlay:**
+- `position: fixed; inset: 0; z-index: 50` — **must be `fixed`, not `absolute`**. `react-rnd` positions windows with a CSS `transform`, which makes the window the containing block for `position: fixed` descendants. This means `fixed inset-0` fills exactly the visible window area regardless of scroll depth. Using `absolute` instead causes the overlay to span the full scrollable content height and requires the user to scroll back to see the centered image.
+- `overflow: hidden` — clips the zoomed image cleanly to the window bounds.
+- `flex items-center justify-center` — always centers the image in the visible area.
+- `bg-black/80 backdrop-blur-sm` — dark scrim with blur.
+- Clicking the backdrop closes the lightbox. An `X` button in `top-3 right-3` also closes it.
+- Escape key closes via `useEffect` + `window.addEventListener("keydown", ...)`, cleaned up on unmount or when `lightbox` becomes null.
+
+**Zoom inside the lightbox:**
+- Image `onClick` toggles `zoomed` (with `e.stopPropagation()` so the backdrop click-to-close is not triggered).
+- `transform: scale(1)` → `scale(1.85)` with `transition: transform 0.25s ease`.
+- `cursor: zoom-in` when not zoomed; `cursor: zoom-out` when zoomed.
+- Backdrop click closes regardless of zoom state.
+
+**State shape:**
+```ts
+type Lightbox = { src: string; alt: string; zoomed: boolean };
+const [lightbox, setLightbox] = useState<Lightbox | null>(null);
+```
 
 ### Wallpaper Patterns
 
