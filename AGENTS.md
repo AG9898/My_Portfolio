@@ -197,6 +197,10 @@ Deployment details are not documented in this repo yet. Do not manually deploy o
 
 `docs/macos-redesign.md` is the source of truth for new portfolio work. Existing brutalist/Stitch UI and styling in `src/` should be treated as scrap material, not as a design system to preserve.
 
+### 2026-05-12 — Window Content Decoupled from Next.js Routing
+
+App window content is no longer driven by the Next.js `children` prop. `WindowRenderer` now imports every page component directly and maps them in a static `WINDOW_CONTENT: Record<AppId, React.ComponentType>` registry. All open windows render their content simultaneously regardless of which window has focus. Adding a new app window requires updating three places: `src/app/<slug>/page.tsx`, `appMetadata.ts` (`APPS` array), and `WINDOW_CONTENT` in `WindowRenderer.tsx`. Page components must never use `useParams`, `useSearchParams`, or other route-context hooks — they are always mounted as standalone component instances.
+
 ### 2026-05-08 — V1 Complete: Key Implementation Patterns
 
 The following patterns emerged during the complete V1 implementation and are now canonical:

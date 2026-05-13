@@ -20,11 +20,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout(_props: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -61,10 +57,8 @@ export default function RootLayout({
                 {/* Desktop shortcut icons — left sidebar column, clears menu bar */}
                 <DesktopShortcuts />
 
-                {/* App windows — render the active route content inside window chrome */}
-                <WindowRenderer>
-                  {children}
-                </WindowRenderer>
+                {/* App windows — each window renders its own content independently */}
+                <WindowRenderer />
 
                 {/* Dock — pinned to bottom, z-40 */}
                 <Dock />

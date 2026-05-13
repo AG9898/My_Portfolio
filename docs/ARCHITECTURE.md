@@ -30,9 +30,9 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
   - `MobileFallback` renders outside the desktop provider and is visible below the `md` breakpoint; the desktop provider/root are hidden at those widths.
   - `#desktop-root` div is `position: fixed; inset: 0; overflow: hidden; bg-desktop` — the stable shell container that never unmounts.
   - Font is set via inline `style` on `body` using the macOS system font stack (`-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif`); no Google Fonts import.
-  - Inside `#desktop-root`, from back to front: `<Wallpaper />`, `<MenuBar />` (`z-50`, `h-7`), `<DesktopShortcuts />` (`z-10`, top: 48px), `<WindowRenderer />` (window z-index 21+), `<main>` page content area (`absolute`, `top: 28`, `bottom: 80`, `overflow-hidden`), `<Dock />` (`z-40`, `bottom-3`).
-  - The `<main>` content area sits between the menu bar (28px tall) and the dock (80px clearance at the bottom), so route children never overlap shell chrome.
-- Route pages provide content for their app windows.
+  - Inside `#desktop-root`, from back to front: `<Wallpaper />`, `<MenuBar />` (`z-50`, `h-7`), `<DesktopShortcuts />` (`z-10`, top: 48px), `<WindowRenderer />` (window z-index 21+), `<Dock />` (`z-40`, `bottom-3`).
+  - `<WindowRenderer />` takes no children — it resolves content from the `WINDOW_CONTENT` registry internally.
+- App window content is decoupled from Next.js routing. `WindowRenderer` imports every page component directly and maps them to their `AppId` in a static `WINDOW_CONTENT` registry. Each open window always mounts its own component instance, so multiple windows are simultaneously visible regardless of which window has focus.
 - Route changes dispatch `syncRoute` so direct browser entry to `/`, `/projects`, `/about`, `/contact`, `/cv`, `/glass-atlas`, `/techy`, `/sparse`, or `/weather` opens and focuses the matching app window without unmounting wallpaper, menu bar, dock, desktop icons, or other open windows.
 
 ### Desktop Shell
@@ -135,6 +135,7 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 #### WindowRenderer (`src/app/components/WindowManager/WindowRenderer.tsx`)
 
 - `"use client"` component that reads `state.openWindows` from `useWindowManager()` and renders one `AppWindow` shell per entry.
+- Accepts no children prop. A static `WINDOW_CONTENT: Record<AppId, React.ComponentType>` maps every `AppId` to its page component. Each `AppWindow` always renders `<WindowContent />` for its id — content is never conditionally suppressed based on focus state.
 - Skips rendering for minimized windows (returns null).
 - Uses `react-rnd` (`<Rnd>`) for drag and resize; `onDragStop` dispatches `drag` action, `onResizeStop` dispatches `resize` action.
 - Clicking any part of a window dispatches a `focus` action via `onMouseDown`.

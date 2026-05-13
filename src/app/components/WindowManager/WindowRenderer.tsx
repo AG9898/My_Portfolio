@@ -27,6 +27,15 @@ import { AppId } from "../appMetadata";
 import { WindowChrome } from "../Window/WindowChrome";
 import { SnapState } from "./windowReducer";
 import { DOCK_HEIGHT, MENU_BAR_HEIGHT } from "./windowGeometry";
+import HomePage from "../../page";
+import ProjectsPage from "../../projects/page";
+import AboutPage from "../../about/page";
+import ContactPage from "../../contact/page";
+import CvPage from "../../cv/page";
+import GlassAtlasPage from "../../glass-atlas/page";
+import TechyPage from "../../techy/page";
+import SparsePage from "../../sparse/page";
+import WeatherPage from "../../weather/page";
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -393,6 +402,18 @@ function AppWindow({
 // WindowRenderer
 // ---------------------------------------------------------------------------
 
+const WINDOW_CONTENT: Record<AppId, React.ComponentType> = {
+  home: HomePage,
+  projects: ProjectsPage,
+  about: AboutPage,
+  contact: ContactPage,
+  cv: CvPage,
+  "glass-atlas": GlassAtlasPage,
+  techy: TechyPage,
+  sparse: SparsePage,
+  weather: WeatherPage,
+};
+
 /** Maps AppId to window title strings. */
 const WINDOW_TITLES: Record<AppId, string> = {
   home: "Home — Aden Guo",
@@ -406,11 +427,7 @@ const WINDOW_TITLES: Record<AppId, string> = {
   weather: "Weather & Wellness — Aden Guo",
 };
 
-interface WindowRendererProps {
-  children: React.ReactNode;
-}
-
-export function WindowRenderer({ children }: WindowRendererProps) {
+export function WindowRenderer() {
   const { state, dispatch } = useWindowManager();
   const [exitModes, setExitModes] = useState<
     Partial<Record<AppId, WindowExitMode>>
@@ -525,6 +542,7 @@ export function WindowRenderer({ children }: WindowRendererProps) {
         const isFocused = state.focusedId === win.id;
         const title = WINDOW_TITLES[win.id] ?? win.id;
 
+        const WindowContent = WINDOW_CONTENT[win.id];
         return (
           <AppWindow
             key={win.id}
@@ -553,7 +571,7 @@ export function WindowRenderer({ children }: WindowRendererProps) {
               handleResizeStop(win.id, x, y, w, h)
             }
           >
-            {isFocused ? children : null}
+            <WindowContent />
           </AppWindow>
         );
       })}

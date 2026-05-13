@@ -34,6 +34,11 @@ Normative guide for code in this portfolio. Read before writing new UI architect
 - Dock components belong under `src/app/components/Dock/`.
 - Keep shared app metadata in a registry module (`src/app/components/appMetadata.ts`) instead of duplicating route titles, icons, default sizes, positions, or app IDs. The `APPS` array is the canonical source for id, route, label, title, icon, defaultSize, defaultPosition, and showInDock.
 - `showInDock: false` on an `AppMetadata` entry keeps the app in `DesktopShortcuts` but excludes it from the Dock. Use this for project-specific windows that are not core navigation destinations. The Dock filters `APPS` to entries where `showInDock !== false`; `DesktopShortcuts` renders the full registry.
+- **Adding a new app window requires three coordinated changes:**
+  1. Create the page component at `src/app/<slug>/page.tsx`.
+  2. Add an entry to `APPS` in `src/app/components/appMetadata.ts` (new `AppId`, route, label, title, icon, defaultSize, showInDock).
+  3. Add an entry to `WINDOW_CONTENT` in `src/app/components/WindowManager/WindowRenderer.tsx` mapping the new `AppId` to the imported component.
+- App window page components must be self-contained: no `useParams`, `useSearchParams`, `useRouter`, or other route-context hooks. Content is always mounted independently of the active URL.
 - **All app window pages** (project showcases and About) use a **panel-switching sidebar pattern**: a `"use client"` component with `useState` tracking the active section. Sidebar items are `<button>` elements that set the active section; the main pane renders only the active panel. There are no non-interactive (decorative) sidebars.
   - **Standard project nav** (Sparse, Techy, Weather & Wellness): four sections — Overview, Features, Tech Stack, Links. Each page defines its own typed `Section` union and `NAV` array. No shared component; each page is self-contained.
   - **Glass Atlas** (embeddable): Overview renders a full-bleed iframe (the live app). Its nav is Overview / About / Tech Stack / Links — "Overview" means the live embed, not the project description.
