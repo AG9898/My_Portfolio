@@ -14,10 +14,10 @@ import ResumeRenderer from "@/app/components/CV/ResumeRenderer";
 
 const PDF_URL = "/cv.pdf";
 const SECTION_NAV = [
-  { id: "summary", label: "Summary" },
-  { id: "experience", label: "Experience" },
+  { id: "summary", label: "Header" },
+  { id: "skills", label: "Tech Stack" },
   { id: "education", label: "Education" },
-  { id: "skills", label: "Skills" },
+  { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
 ] as const;
 
@@ -40,7 +40,7 @@ export default function CV() {
       <section
         data-cv-print-view="true"
         data-cv-print-ready="true"
-        className="bg-white p-4 sm:p-6"
+        className="bg-white p-0 text-black"
       >
         <ResumeRenderer />
       </section>

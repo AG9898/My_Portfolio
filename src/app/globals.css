@@ -179,11 +179,17 @@ body.is-dragging .glass-chrome {
 
 /* CV PDF export mode */
 @media print {
+  @page {
+    size: A4;
+    margin: 8mm;
+  }
+
   html,
   body {
     width: auto;
     height: auto;
     overflow: visible;
+    background: #fff;
   }
 
   body.cv-print-mode #desktop-root {
@@ -227,8 +233,16 @@ body.is-dragging .glass-chrome {
   body.cv-print-mode [data-app-window="cv"] .window-shell {
     border: none !important;
     border-radius: 0 !important;
+    display: block !important;
+    height: auto !important;
     box-shadow: none !important;
     background: transparent !important;
+  }
+
+  body.cv-print-mode [data-app-window="cv"] .window-shell > div,
+  body.cv-print-mode [data-app-window="cv"] .window-shell > div > div {
+    height: auto !important;
+    overflow: visible !important;
   }
 
   body.cv-print-mode [data-app-window="cv"] .glass-chrome {
@@ -247,6 +261,10 @@ body.is-dragging .glass-chrome {
     border-radius: 0 !important;
     box-shadow: none !important;
     background: #fff !important;
+    color: #111 !important;
+  }
+
+  body.cv-print-mode [data-cv-print-view="true"] a {
     color: #111 !important;
   }
 }

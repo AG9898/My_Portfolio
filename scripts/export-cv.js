@@ -31,11 +31,12 @@ async function exportCvPdf() {
       path: OUTPUT_PATH,
       format: "A4",
       printBackground: true,
+      preferCSSPageSize: true,
       margin: {
-        top: "10mm",
-        right: "10mm",
-        bottom: "10mm",
-        left: "10mm",
+        top: "8mm",
+        right: "8mm",
+        bottom: "8mm",
+        left: "8mm",
       },
     });
 
