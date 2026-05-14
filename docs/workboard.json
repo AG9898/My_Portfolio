@@ -1,7 +1,7 @@
 {
   "$schema": "./workboard.schema.json",
   "schema_version": "1.0.0",
-  "last_updated": "2026-05-13",
+  "last_updated": "2026-05-14",
   "tasks": [
     {
       "id": "V1_001",
@@ -1571,6 +1571,115 @@
       "commands": [
         "npm run lint",
         "npm run build"
+      ]
+    },
+    {
+      "id": "V2_015",
+      "title": "Audit source repos for recruiter-facing project details",
+      "description": "Inspect /home/ag9898/projects/Glass-Atlas and /home/ag9898/projects/Weather-and-Wellness-Dashboard before editing portfolio content. Extract concrete implementation details for each project: product purpose, user roles, major workflows, architecture, data/auth boundaries, external services, testing posture, and deployment state. Use Techy page depth as the baseline, but go deeper where the source repos expose notable engineering decisions. Do not add broad docs; keep findings in the task notes or directly apply them in later page edits.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V2_CONTENT",
+      "depends_on": [],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Glass Atlas details are sourced from its README, docs, package.json, and key src routes/lib files.",
+        "Weather & Wellness details are sourced from its README, docs, frontend, backend, API, analytics, auth, scoring, import/export, and weather modules.",
+        "The audit identifies any stale portfolio assumptions that must be removed, especially the incorrect Flask/weather-dashboard framing."
+      ],
+      "docs": [],
+      "files": [
+        "src/app/glass-atlas/page.tsx",
+        "src/app/weather/page.tsx",
+        "src/app/projects/page.tsx"
+      ],
+      "commands": []
+    },
+    {
+      "id": "V2_016",
+      "title": "Populate Glass Atlas project page with concrete case-study content",
+      "description": "Replace Glass Atlas placeholder copy in src/app/glass-atlas/page.tsx with recruiter-facing details sourced from /home/ag9898/projects/Glass-Atlas. Preserve the current Overview iframe as the primary first panel, but make About, Tech Stack, and Links read like a compact engineering case study covering the SvelteKit editorial notes system, GitHub OAuth admin authoring, markdown/wiki-link workflows, Neon Postgres + pgvector retrieval, OpenRouter streaming RAG chat, Railway deployment, private bucket media uploads, rate limiting, and testing/tooling.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V2_CONTENT",
+      "depends_on": [
+        "V2_015"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "No placeholder Glass Atlas strings remain.",
+        "Overview iframe remains full-bleed and usable.",
+        "About section explains what the product is, who it serves, and the engineering problem it solves.",
+        "Tech Stack section includes concrete dependencies and grouped architecture details, not just four tags.",
+        "Links section includes live app and repository/source links where available.",
+        "Tone is concise, specific, and aimed at recruiters and SE managers."
+      ],
+      "docs": [
+        "docs/ARCHITECTURE.md"
+      ],
+      "files": [
+        "src/app/glass-atlas/page.tsx"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V2_017",
+      "title": "Replace Weather & Wellness page with UBC research platform content",
+      "description": "Rewrite src/app/weather/page.tsx so Weather & Wellness reflects /home/ag9898/projects/Weather-and-Wellness-Dashboard rather than the incorrect Flask weather-dashboard copy. Frame the project as a UBC Psychology lab research platform for RA/admin workflows, participant study sessions, weather-linked analytics, surveys/tasks, scoring, Supabase-backed data operations, imports/exports, lab-scoped auth, and dashboard analytics. Use concrete implementation details from the local frontend and backend repos, with sections matching the Techy pattern.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V2_CONTENT",
+      "depends_on": [
+        "V2_015"
+      ],
+      "blocked_by": [
+        "User-provided Weather & Wellness screenshots"
+      ],
+      "acceptance_criteria": [
+        "All incorrect Python/Flask daily-weather-dashboard copy is removed.",
+        "Overview clearly identifies the project as a research platform, not a consumer weather dashboard.",
+        "Features cover RA/admin user management, participant sessions, validated study tasks/surveys, scoring, import/export, weather data, analytics snapshots, and cache/auth boundaries where appropriate.",
+        "Tech Stack reflects Next.js, React, TypeScript, FastAPI, Supabase/Postgres, Upstash Redis, Vercel, Render/Railway direction, and relevant testing tools.",
+        "Screenshot slots are replaced with provided Weather & Wellness assets and include meaningful alt text.",
+        "Links section points to the deployed site and source repo when appropriate."
+      ],
+      "docs": [
+        "docs/ARCHITECTURE.md"
+      ],
+      "files": [
+        "src/app/weather/page.tsx",
+        "public/weather/*"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V2_018",
+      "title": "Align project index cards with updated Glass Atlas and Weather content",
+      "description": "Update src/app/projects/page.tsx so the project list summaries do not contradict the richer project pages. Keep this narrow: adjust Glass Atlas and Weather & Wellness descriptions, stack tags, status/link metadata, and category language only as needed after V2_016 and V2_017. Preserve the existing projects window layout and filtering behavior.",
+      "status": "todo",
+      "priority": "medium",
+      "group_id": "V2_CONTENT",
+      "depends_on": [
+        "V2_016",
+        "V2_017"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Projects list summary for Glass Atlas matches the Glass Atlas page framing.",
+        "Projects list summary for Weather & Wellness matches the UBC research platform framing.",
+        "No stale Flask/weather-dashboard stack tags remain for Weather & Wellness unless verified from source.",
+        "Existing category filtering and external-link behavior still works."
+      ],
+      "docs": [],
+      "files": [
+        "src/app/projects/page.tsx"
+      ],
+      "commands": [
+        "npm run lint"
       ]
     }
   ]
