@@ -1426,7 +1426,7 @@
       "id": "V2_010",
       "title": "Seed src/data/resume.json from CV_AG.md",
       "description": "Create src/data/resume.json following the JSON Resume v1 schema (https://github.com/jsonresume/resume-schema). Populate all sections — basics (name, email, phone, location, profiles), skills, education, work experience, and projects — by mapping content from public/CV_AG.md. The JSON must be valid against the JSON Resume schema. No npm package install needed for validation — manually check structure against the spec. This file is the agent-editable source of truth for all CV content going forward.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V2",
       "depends_on": [],
@@ -1452,7 +1452,7 @@
       "id": "V2_011",
       "title": "Build ResumeRenderer component",
       "description": "Create src/app/components/CV/ResumeRenderer.tsx — a React client component that statically imports src/data/resume.json and renders all resume sections as styled HTML. Sections: basics (name, contact, summary), work experience, education, skills, and projects. Style using Tailwind and the project glass-chrome design tokens (text-label-primary, text-label-secondary, bg-window, border-glass-edge) so it reads cleanly against the dark-mode window background. The component accepts no props — it owns the data import. Typography must use the macOS system font stack already set on body.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V2",
       "depends_on": [
@@ -1482,7 +1482,7 @@
       "id": "V2_012",
       "title": "Wire CV window — replace PDF iframe with ResumeRenderer",
       "description": "Update src/app/cv/page.tsx to replace the PDF iframe with ResumeRenderer. Preserve the macOS Preview chrome exactly: toolbar row (open-in-tab and download buttons still pointing to /cv.pdf) and the left sidebar. Replace the decorative thumbnail in the sidebar with a section mini-nav listing the resume sections (Summary, Experience, Education, Skills, Projects) as clickable items that scroll the main content pane to the corresponding section anchor. The main content area becomes a scrollable pane rendering ResumeRenderer. Keep all existing toolbar button aria-labels and icon choices.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V2",
       "depends_on": [
@@ -1514,7 +1514,7 @@
       "id": "V2_013",
       "title": "Add puppeteer CV export script (npm run export:cv)",
       "description": "Create scripts/export-cv.js — a Node.js script using puppeteer that (1) assumes the dev server is already running on localhost:3000, (2) navigates to the CV route rendered as a clean print view (create a /cv/print route or use a ?print=1 query param to render ResumeRenderer without the window chrome), (3) calls page.pdf() with A4 format and saves the output to public/cv.pdf. Add \"export:cv\": \"node scripts/export-cv.js\" to package.json scripts. Add puppeteer as a devDependency. Document usage in a comment at the top of the script: start dev server first, then run npm run export:cv.",
-      "status": "todo",
+      "status": "done",
       "priority": "medium",
       "group_id": "V2",
       "depends_on": [
@@ -1544,7 +1544,7 @@
       "id": "V2_014",
       "title": "Verify JSON Resume integration end-to-end",
       "description": "Final verification pass for the JSON Resume feature. Open the CV window in the browser and confirm: all resume sections render correctly from the JSON, the section mini-nav scrolls to anchors, the download button serves the existing cv.pdf, and lint and build both pass cleanly. If any visual issues or lint errors were introduced in V2_010–V2_013, fix them here. This task is a quality gate, not a new implementation task.",
-      "status": "todo",
+      "status": "done",
       "priority": "medium",
       "group_id": "V2",
       "depends_on": [

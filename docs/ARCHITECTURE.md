@@ -31,7 +31,7 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
   - `MobileFallback` renders outside the desktop provider and is visible below the `md` breakpoint; the desktop provider/root are hidden at those widths.
   - `#desktop-root` div is `position: fixed; inset: 0; overflow: hidden; bg-desktop` — the stable shell container that never unmounts.
   - Font is set via inline `style` on `body` using the macOS system font stack (`-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif`); no Google Fonts import.
-  - Inside `#desktop-root`, from back to front: `<Wallpaper />`, `<MenuBar />` (`z-50`, `h-7`), `<DesktopShortcuts />` (`z-10`, top: 48px), `<WindowRenderer />` (window z-index 21+), `<Dock />` (`z-40`, `bottom-3`).
+  - Inside `#desktop-root`, from back to front: `<Wallpaper />`, `<MenuBar />` (`z-50`, `h-7`), `<DesktopShortcuts />` (`z-10`, top: 48px), a desktop-sized `[data-desktop-layer="windows"]` wrapper containing `<WindowRenderer />` (window z-index 21+), `<Dock />` (`z-40`, `bottom-3`).
   - `<WindowRenderer />` takes no children — it resolves content from the `WINDOW_CONTENT` registry internally.
 - App window content is decoupled from Next.js routing. `WindowRenderer` imports every page component directly and maps them to their `AppId` in a static `WINDOW_CONTENT` registry. Each open window always mounts its own component instance, so multiple windows are simultaneously visible regardless of which window has focus.
 - Route changes dispatch `syncRoute` so direct browser entry to `/`, `/projects`, `/about`, `/contact`, `/cv`, `/glass-atlas`, `/techy`, `/sparse`, or `/weather` opens and focuses the matching app window without unmounting wallpaper, menu bar, dock, desktop icons, or other open windows.
@@ -139,12 +139,13 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 - Accepts no children prop. A static `WINDOW_CONTENT: Record<AppId, React.ComponentType>` maps every `AppId` to its page component. Each `AppWindow` always renders `<WindowContent />` for its id — content is never conditionally suppressed based on focus state.
 - Skips rendering for minimized windows (returns null).
 - Uses `react-rnd` (`<Rnd>`) for drag and resize; `onDragStop` dispatches `drag` action, `onResizeStop` dispatches `resize` action.
+- The layout wrapper around `WindowRenderer` must remain `position:absolute; inset:0` because `react-rnd` uses `bounds="parent"` for draggable window limits.
 - Clicking any part of a window dispatches a `focus` action via `onMouseDown`.
 - z-index: each window's `zIndexMap[id]` value is added to `WINDOW_Z_BASE = 20`, placing windows above the wallpaper (0) and shortcuts (z-10) but below the dock (z-40) and menu bar (z-50).
 - Maximized windows bypass `react-rnd` and render as a `position: fixed` div filling the desktop area (top: 28px, bottom: 80px).
 - Each window is wrapped in a `framer-motion` `motion.div` inside `AnimatePresence`; open/restore use a macOS-style source animation from the matching dock icon or desktop shortcut, close uses a quick 150ms ease-out exit, and minimize uses a classic `genie`-style non-uniform scale/travel animation into the matching icon. `prefers-reduced-motion` collapses all exit/enter to a plain opacity transition.
 - Dock buttons and desktop shortcuts expose `data-window-animation-target` attributes so `WindowRenderer` can resolve the correct icon rectangle at animation time. Dock targets are preferred when present; desktop shortcut targets are used for apps excluded from the dock.
-- Window drag handle is scoped to elements with the `.glass-chrome` class on the title bar.
+- Window drag handle is scoped to the `.window-drag-handle` title bar class, not the reusable `.glass-chrome` material class. Toolbar chrome can use `.glass-chrome` without becoming a drag surface.
 - `exitModes` state tracks whether the last action for each window was `"close"` or `"minimize"` so `AnimatePresence` can choose the correct exit variant. `flushSync` is used when setting exitModes before dispatching the reducer action to avoid exit-before-set races.
 - `visibleIdsRef` is kept current each render cycle; `onExitComplete` cleans up `exitModes` entries only for windows no longer visible, avoiding stale closure values.
 
@@ -170,6 +171,7 @@ All app window pages use a **panel-switching sidebar pattern**: `"use client"` w
 - `ResumeRenderer` (`src/app/components/CV/ResumeRenderer.tsx`) reads `src/data/resume.json` via a static import and renders all resume sections as styled HTML inside the window.
 - The macOS Preview chrome is preserved: a toolbar row (open-in-tab, download buttons) and a left sidebar showing section names (Summary, Experience, Education, Skills, Projects) as a mini nav.
 - The sidebar section nav is the only interactive sidebar in the CV window; clicking a section name scrolls the main content pane to that section.
+- `?print=1` on `/cv` enables a print-only surface that renders `ResumeRenderer` without the CV toolbar/sidebar chrome, used by the PDF export script.
 - `public/cv.pdf` is a generated artifact used exclusively for the download and open-in-tab buttons. It is not kept in sync automatically — run `npm run export:cv` to regenerate it after editing `resume.json`.
 - Media assets (screenshots, video) go in `aspect-video` placeholder slots within Overview or Features panels, pointing to `/public/projects/<slug>/`.
 
@@ -187,8 +189,9 @@ All app window pages use a **panel-switching sidebar pattern**: `"use client"` w
 
 ### CV Export Script (`scripts/export-cv.js`)
 
-- Node.js script using `puppeteer` that starts a local dev server, navigates to `/cv`, prints the rendered resume page to PDF, and writes the output to `public/cv.pdf`.
+- Node.js script using `puppeteer` that assumes `npm run dev` is already running on `localhost:3000`, navigates to `/cv?print=1`, prints the rendered resume page to PDF, and writes the output to `public/cv.pdf`.
 - Run via `npm run export:cv` (defined in `package.json`).
+- If the dev server is running on a different port, run `CV_EXPORT_ORIGIN=http://localhost:<port> npm run export:cv` so Puppeteer exports this app instead of whichever process owns port 3000.
 - Not run as part of CI or the production build — on-demand only.
 - After running, `public/cv.pdf` is the up-to-date artifact to commit for the download button.
 

@@ -1,0 +1,163 @@
+{
+  "basics": {
+    "name": "Aden Guo",
+    "label": "Geomatics Engineering Graduate",
+    "email": "aden.guowe@gmail.com",
+    "phone": "587-888-4188",
+    "location": {
+      "city": "Calgary",
+      "region": "AB",
+      "countryCode": "CA"
+    },
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "username": "aden-guo-b39743362",
+        "url": "https://linkedin.com/in/aden-guo-b39743362"
+      }
+    ],
+    "summary": "Geomatics engineering graduate with hands-on experience in photogrammetry, geospatial data analysis, and field survey workflows. Builds practical data and simulation pipelines using Python/C++ and communicates results through technical reporting and presentations."
+  },
+  "work": [
+    {
+      "name": "University of Calgary",
+      "position": "Engineering Capstone Project Lead",
+      "location": "Calgary, AB",
+      "startDate": "2024-09",
+      "endDate": "2025-04",
+      "summary": "Led a team project evaluating surveying methods for disc golf course mapping and delivered final technical findings.",
+      "highlights": [
+        "Compared RTK GNSS, range finder, and odometer techniques to assess mapping accuracy and efficiency.",
+        "Operated drones for photogrammetric capture and executed spatial intersection workflows for 3D modeling.",
+        "Processed and validated geospatial datasets with photogrammetry tools and Python-based analysis pipelines.",
+        "Authored and presented the final report at the SaGES Project Presentation."
+      ]
+    },
+    {
+      "name": "Gongcha",
+      "position": "Shift Lead / Team Trainer",
+      "startDate": "2020-11",
+      "endDate": "2024-05",
+      "summary": "Managed high-volume shift operations while training team members on standardized service workflows.",
+      "highlights": [
+        "Trained and mentored staff to improve consistency and teamwork.",
+        "Balanced service demands and operational tasks under time constraints.",
+        "Strengthened team coordination, problem-solving, and day-to-day execution."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "University of Calgary",
+      "location": "Calgary, AB",
+      "studyType": "Bachelor of Science",
+      "area": "Geomatics Engineering",
+      "endDate": "2025-04",
+      "score": "Graduated",
+      "courses": [
+        "Photogrammetry, 3D modeling, and digital imaging workflows",
+        "Geospatial data analysis, error modeling, and quality control",
+        "Spatial database design, SQL, and geospatial data mining",
+        "Project management, technical reporting, and collaborative problem-solving",
+        "Applied geomatics workflow through capstone and ENGO 500 field survey camp"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "Programming & Data Science",
+      "keywords": [
+        "Python",
+        "JavaScript",
+        "TypeScript",
+        "SQL",
+        "MATLAB",
+        "C++",
+        "NumPy",
+        "Pandas",
+        "SciPy",
+        "scikit-learn",
+        "PyTorch",
+        "OpenCV"
+      ]
+    },
+    {
+      "name": "GIS & Survey Tools",
+      "keywords": [
+        "ArcGIS",
+        "QGIS",
+        "Google Earth Engine",
+        "PostGIS",
+        "GeoPandas",
+        "GDAL/PROJ",
+        "RTK GNSS workflows",
+        "Total Stations",
+        "Digital leveling"
+      ]
+    },
+    {
+      "name": "Workflow & Version Control",
+      "keywords": [
+        "Git",
+        "GitHub",
+        "VS Code",
+        "Jupyter",
+        "Anaconda",
+        "virtualenv",
+        "Docker (basic)"
+      ]
+    },
+    {
+      "name": "Sensor Simulation & Estimation",
+      "keywords": [
+        "IMU/GNSS simulation",
+        "Extended Kalman Filter (EKF)"
+      ]
+    },
+    {
+      "name": "Proprietary & Survey Software",
+      "keywords": [
+        "AutoCAD",
+        "Civil 3D",
+        "MicroStation",
+        "Agisoft Metashape",
+        "Trimble Business Center (TBC)"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Photogrammetry Pipeline - Bundle Adjustment & Spatial Intersection",
+      "description": "Modular photogrammetry workflow using synthetic and real-world datasets for spatial intersection and bundle adjustment.",
+      "highlights": [
+        "Implemented camera models, pose estimation, and 3D reconstruction with C++ and Python.",
+        "Built residual, optimization, and quality-assessment components to improve reconstruction accuracy."
+      ],
+      "keywords": [
+        "Photogrammetry",
+        "Bundle adjustment",
+        "Spatial intersection",
+        "Computer vision",
+        "3D reconstruction"
+      ]
+    },
+    {
+      "name": "ML-Driven Sensor Simulation + EKF Sensor Fusion",
+      "description": "Simulation framework for IMU/GNSS trajectory generation with machine learning and EKF fusion.",
+      "highlights": [
+        "Developing RNN/Transformer-based models for trajectory simulation.",
+        "Integrating EKF for real-time estimation of pose, velocity, and orientation.",
+        "Designing modular training, visualization, and evaluation pipelines."
+      ],
+      "keywords": [
+        "Machine learning",
+        "Sensor fusion",
+        "EKF",
+        "RNN",
+        "Transformer",
+        "GNSS",
+        "IMU"
+      ]
+    }
+  ]
+}

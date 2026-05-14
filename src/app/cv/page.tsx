@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect } from "react";
 import {
   ChevronLeft,
   ChevronRight,
@@ -7,38 +10,71 @@ import {
   ZoomIn,
   ZoomOut,
 } from "lucide-react";
+import ResumeRenderer from "@/app/components/CV/ResumeRenderer";
 
 const PDF_URL = "/cv.pdf";
+const SECTION_NAV = [
+  { id: "summary", label: "Summary" },
+  { id: "experience", label: "Experience" },
+  { id: "education", label: "Education" },
+  { id: "skills", label: "Skills" },
+  { id: "projects", label: "Projects" },
+] as const;
 
 export default function CV() {
+  const isPrintMode =
+    typeof window !== "undefined" &&
+    new URLSearchParams(window.location.search).get("print") === "1";
+
+  useEffect(() => {
+    if (!isPrintMode) return;
+
+    document.body.classList.add("cv-print-mode");
+    return () => {
+      document.body.classList.remove("cv-print-mode");
+    };
+  }, [isPrintMode]);
+
+  if (isPrintMode) {
+    return (
+      <section
+        data-cv-print-view="true"
+        data-cv-print-ready="true"
+        className="bg-white p-4 sm:p-6"
+      >
+        <ResumeRenderer />
+      </section>
+    );
+  }
+
+  const scrollToSection = (id: (typeof SECTION_NAV)[number]["id"]) => {
+    const section = document.getElementById(id);
+    section?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
-    <div className="flex min-h-full bg-window text-label-primary">
+    <div className="flex h-full min-h-0 bg-window text-label-primary">
       <aside className="hidden w-40 shrink-0 border-r border-glass-edge bg-chrome/70 p-3 md:block">
         <div className="mb-3 text-[11px] font-medium uppercase text-label-secondary">
-          Preview
+          Sections
         </div>
         <div className="rounded-lg border border-glass-edge bg-window p-2 shadow-[0_8px_28px_rgba(0,0,0,0.2)]">
-          <div className="aspect-[8.5/11] rounded border border-glass-edge bg-white/90 p-2">
-            <div className="h-2 w-16 rounded-sm bg-black/20" />
-            <div className="mt-3 space-y-1.5">
-              <div className="h-1.5 rounded-sm bg-black/30" />
-              <div className="h-1.5 rounded-sm bg-black/20" />
-              <div className="h-1.5 w-3/4 rounded-sm bg-black/20" />
-            </div>
-            <div className="mt-4 h-10 rounded-sm border border-black/20" />
-            <div className="mt-4 space-y-1.5">
-              <div className="h-1.5 rounded-sm bg-black/20" />
-              <div className="h-1.5 rounded-sm bg-black/20" />
-              <div className="h-1.5 w-2/3 rounded-sm bg-black/20" />
-            </div>
-          </div>
-        </div>
-        <div className="mt-2 text-center text-[12px] text-label-secondary">
-          1 page
+          <nav aria-label="CV sections" className="space-y-1">
+            {SECTION_NAV.map((section) => (
+              <button
+                key={section.id}
+                type="button"
+                onClick={() => scrollToSection(section.id)}
+                className="w-full rounded-md px-2 py-1.5 text-left text-[12px] text-label-secondary transition hover:bg-[var(--color-control-hover)] hover:text-label-primary focus-visible:ring-2 focus-visible:ring-accent"
+              >
+                {section.label}
+              </button>
+            ))}
+          </nav>
         </div>
       </aside>
 
-      <main className="flex min-w-0 flex-1 flex-col">
+      <main className="flex min-h-0 min-w-0 flex-1 flex-col">
         <div className="glass-chrome flex h-10 shrink-0 items-center gap-1 border-b border-glass-edge px-3">
           <div className="flex h-7 items-center rounded-md border border-glass-edge bg-window">
             <button
@@ -101,13 +137,7 @@ export default function CV() {
         </div>
 
         <section className="min-h-0 flex-1 overflow-auto bg-chrome p-3 sm:p-5">
-          <div className="mx-auto h-full min-h-[520px] max-w-4xl overflow-hidden rounded-lg border border-glass-edge bg-window shadow-[0_18px_60px_rgba(0,0,0,0.38)]">
-            <iframe
-              title="Aden Guo CV"
-              src={`${PDF_URL}#toolbar=0&navpanes=0`}
-              className="h-full min-h-[520px] w-full bg-white"
-            />
-          </div>
+          <ResumeRenderer />
         </section>
       </main>
     </div>

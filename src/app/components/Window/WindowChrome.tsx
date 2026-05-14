@@ -131,7 +131,7 @@ export function WindowChrome({
 
   return (
     <div
-      className="glass-chrome"
+      className="window-drag-handle glass-chrome"
       style={{
         height: 40,
         display: "flex",

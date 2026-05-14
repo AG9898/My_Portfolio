@@ -39,7 +39,7 @@ export default function RootLayout(_props: Readonly<{ children: React.ReactNode 
           disableTransitionOnChange
         >
           <MobileFallback />
-          <div className="hidden md:block">
+          <div className="hidden md:block" data-desktop-shell="true">
             <WindowManagerProvider>
               <WallpaperProvider>
               {/* Desktop shell root — persistent across all route changes */}
@@ -49,21 +49,36 @@ export default function RootLayout(_props: Readonly<{ children: React.ReactNode 
                 aria-label="Desktop"
               >
                 {/* Wallpaper — simplex-noise canvas over a tahoe-dawn fallback */}
-                <Wallpaper />
+                <div data-desktop-layer="wallpaper">
+                  <Wallpaper />
+                </div>
 
                 {/* Menu bar — 28px pinned to top, z-50 */}
-                <MenuBar />
+                <div data-desktop-layer="menubar">
+                  <MenuBar />
+                </div>
 
                 {/* Desktop shortcut icons — left sidebar column, clears menu bar */}
-                <DesktopShortcuts />
+                <div data-desktop-layer="shortcuts">
+                  <DesktopShortcuts />
+                </div>
 
                 {/* App windows — each window renders its own content independently */}
-                <WindowRenderer />
+                <div
+                  data-desktop-layer="windows"
+                  className="pointer-events-none absolute inset-0"
+                >
+                  <WindowRenderer />
+                </div>
 
                 {/* Dock — pinned to bottom, z-40 */}
-                <Dock />
+                <div data-desktop-layer="dock">
+                  <Dock />
+                </div>
 
-                <BootScreen />
+                <div data-desktop-layer="boot">
+                  <BootScreen />
+                </div>
               </div>
               </WallpaperProvider>
             </WindowManagerProvider>

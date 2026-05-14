@@ -343,6 +343,7 @@ function AppWindow({
     // Maximized: bypass react-rnd; fill desktop area between menu bar and dock.
     return (
       <div
+        data-app-window={id}
         style={{
           position: "fixed",
           top: MENU_BAR_HEIGHT,
@@ -361,13 +362,16 @@ function AppWindow({
 
   return (
     <Rnd
+      data-app-window={id}
+      className="app-window-rnd"
       position={{ x, y }}
       size={{ width, height }}
       style={{ zIndex: WINDOW_Z_BASE + zIndex, pointerEvents: "all", willChange: "transform" }}
       minWidth={320}
       minHeight={200}
       bounds="parent"
-      dragHandleClassName="glass-chrome"
+      dragHandleClassName="window-drag-handle"
+      cancel="button, a, input, textarea, select, [role='button'], [role='menu'], [role='menuitem']"
       onDragStart={() => { document.body.classList.add("is-dragging"); }}
       onDragStop={(_e, d) => {
         document.body.classList.remove("is-dragging");

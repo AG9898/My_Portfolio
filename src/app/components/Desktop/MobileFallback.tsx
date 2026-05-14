@@ -16,6 +16,7 @@ export default function MobileFallback() {
 
   return (
     <section
+      data-mobile-fallback="true"
       className="fixed inset-0 isolate flex min-h-dvh items-center justify-center overflow-hidden bg-desktop px-6 py-10 text-label-primary md:hidden"
       aria-label="Mobile portfolio fallback"
     >
