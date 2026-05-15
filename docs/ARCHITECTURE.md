@@ -34,7 +34,7 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
   - Inside `#desktop-root`, from back to front: `<Wallpaper />`, `<MenuBar />` (`z-50`, `h-7`), `<DesktopShortcuts />` (`z-10`, top: 48px), a desktop-sized `[data-desktop-layer="windows"]` wrapper containing `<WindowRenderer />` (window z-index 21+), `<Dock />` (`z-40`, `bottom-3`).
   - `<WindowRenderer />` takes no children — it resolves content from the `WINDOW_CONTENT` registry internally.
 - App window content is decoupled from Next.js routing. `WindowRenderer` imports every page component directly and maps them to their `AppId` in a static `WINDOW_CONTENT` registry. Each open window always mounts its own component instance, so multiple windows are simultaneously visible regardless of which window has focus.
-- Route changes dispatch `syncRoute` so direct browser entry to `/`, `/projects`, `/about`, `/contact`, `/cv`, `/glass-atlas`, `/techy`, `/sparse`, or `/weather` opens and focuses the matching app window without unmounting wallpaper, menu bar, dock, desktop icons, or other open windows.
+- Route changes dispatch `syncRoute` so direct browser entry to `/`, `/projects`, `/about`, `/contact`, `/cv`, `/glass-atlas`, `/techy`, `/sparse`, `/weather`, or `/pigeoncoop` opens and focuses the matching app window without unmounting wallpaper, menu bar, dock, desktop icons, or other open windows.
 
 ### Desktop Shell
 

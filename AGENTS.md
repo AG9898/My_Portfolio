@@ -205,6 +205,10 @@ App window content is no longer driven by the Next.js `children` prop. `WindowRe
 
 `src/data/resume.json` (JSON Resume v1 schema) is the agent-editable source for all CV content. The CV window renders it as styled HTML via `ResumeRenderer` — there is no PDF iframe. `public/cv.pdf` is a generated artifact for the download button only; it is not kept in sync automatically. Run `npm run export:cv` (puppeteer script) to regenerate it after editing `resume.json`.
 
+### 2026-05-15 — PigeonCoop Added as Desktop Shortcut
+
+PigeonCoop (`/pigeoncoop`) is a Rust/Tauri local-first desktop app for designing, running, monitoring, and replaying agent workflows through a game-inspired 2D interface. Source codebase: `/projects/PigeonCoop`. GitHub: `github.com/AG9898/PigeonCoop`. Status: in active development, no live URL. Image assets: `/public/PigeonCoop/` (three images: `Pigeon-workspace.png`, `Pigeon-workspace-planned.png`, `Pigeon-mermaid-diagram.png`). The page component is authored from the source codebase docs at `/projects/PigeonCoop/docs/` — read `PRD.md`, `DESIGN_SPEC.md`, and `Cargo.toml` for content; `ARCHITECTURE.md` for tech architecture highlights. Detail level and page structure must match `src/app/techy/page.tsx` — four sidebar panels (Overview, Features, Tech Stack, Links), lightbox, real content throughout, no placeholder text.
+
 ### 2026-05-08 — V1 Complete: Key Implementation Patterns
 
 The following patterns emerged during the complete V1 implementation and are now canonical:
