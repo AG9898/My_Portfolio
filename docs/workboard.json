@@ -1577,7 +1577,7 @@
       "id": "V2_015",
       "title": "Audit source repos for recruiter-facing project details",
       "description": "Inspect /home/ag9898/projects/Glass-Atlas and /home/ag9898/projects/Weather-and-Wellness-Dashboard before editing portfolio content. Extract concrete implementation details for each project: product purpose, user roles, major workflows, architecture, data/auth boundaries, external services, testing posture, and deployment state. Use Techy page depth as the baseline, but go deeper where the source repos expose notable engineering decisions. Do not add broad docs; keep findings in the task notes or directly apply them in later page edits.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V2_CONTENT",
       "depends_on": [],

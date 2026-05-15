@@ -5,12 +5,28 @@ import { ExternalLink, Globe, Layers, Zap } from "lucide-react";
 
 const APP_URL = "https://glass-atlas-production.up.railway.app";
 
-const STACK = ["Next.js", "TypeScript", "Tailwind CSS", "Railway"];
+const STACK = [
+  "SvelteKit 2",
+  "Svelte 5 (runes)",
+  "TypeScript",
+  "Tailwind CSS v4",
+  "Drizzle ORM",
+  "Neon PostgreSQL",
+  "pgvector",
+  "OpenRouter",
+  "Auth.js",
+  "Railway",
+  "Bun",
+];
 
 const FEATURES = [
-  "Add your Glass Atlas features here",
-  "Feature two",
-  "Feature three",
+  "Public notes library with markdown CRUD and wiki-link relationships ([[slug]] syntax)",
+  "GitHub OAuth-protected admin authoring workspace with series and category support",
+  "Streaming RAG chat (SSE) grounded exclusively in published notes via pgvector cosine search",
+  "Write-time embeddings generated on note save for semantic retrieval (OpenRouter embeddings)",
+  "First-party media upload via Railway Storage Buckets with presigned S3-compatible URLs",
+  "Anonymous cookie-based chat rate limiting with per-hour message quotas",
+  "Section-aware chunked retrieval with lexical + semantic fusion and confidence tiers",
 ];
 
 type Section = "overview" | "about" | "stack" | "links";
@@ -99,13 +115,26 @@ export default function GlassAtlas() {
 
                 <div className="mt-6 space-y-4">
                   <p>
-                    Glass Atlas is a live web application deployed on Railway.
-                    You can interact with it directly in the Overview section, or
-                    open it in a new tab via the Links section.
+                    Glass Atlas is a SvelteKit editorial knowledge site for a single
+                    author. It combines a public notes library, a GitHub
+                    OAuth-protected admin writing workspace, and a streaming RAG chat
+                    experience that answers questions grounded exclusively in
+                    published notes.
+                  </p>
+                  <p>
+                    The project is built around strict server-side boundaries: all
+                    database access, embedding generation, and AI I/O live in
+                    SvelteKit server routes and load functions. The chat endpoint
+                    streams responses via SSE using a hybrid retrieval pipeline —
+                    pgvector cosine search fused with lexical matching — with
+                    confidence tiers that gate whether the LLM path fires or falls
+                    back to a deterministic reply.
                   </p>
                   <p className="text-label-secondary">
-                    Add a description of what Glass Atlas does, its motivation,
-                    and any interesting implementation details here.
+                    Deployed on Railway with a Bun HTTP server, Neon PostgreSQL (with
+                    pgvector), and Railway Storage Buckets for first-party media. The
+                    database shares a Neon project with my Techy knowledge graph,
+                    isolated under a separate Postgres schema.
                   </p>
                 </div>
               </>

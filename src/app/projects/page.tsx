@@ -41,12 +41,12 @@ const PROJECTS = [
   },
   {
     name: "Glass Atlas",
-    kind: "3D data visualiser",
+    kind: "Editorial knowledge site",
     status: "Deployed",
-    path: "~/projects/Glass_Atlas",
+    path: "~/projects/Glass-Atlas",
     description:
-      "An interactive three-dimensional geospatial atlas with frosted-glass UI, animated globe layers, and dataset overlays served from Railway.",
-    stack: ["React", "Three.js", "TypeScript", "Railway"],
+      "A SvelteKit editorial knowledge site with a public notes library, GitHub OAuth-protected admin workspace, and a streaming RAG chat grounded in published notes via pgvector cosine search.",
+    stack: ["SvelteKit", "TypeScript", "Neon + pgvector", "OpenRouter", "Railway"],
     category: "frontend" as Category,
     link: "https://glass-atlas-production.up.railway.app",
   },
@@ -74,14 +74,14 @@ const PROJECTS = [
   },
   {
     name: "Weather & Wellness",
-    kind: "Health dashboard",
-    status: "In progress",
-    path: "~/projects/Weather_Wellness",
+    kind: "Research web app",
+    status: "Deployed",
+    path: "~/projects/Weather-and-Wellness-Dashboard",
     description:
-      "A personal wellness tracker that correlates local weather data with logged mood, sleep, and activity entries using lightweight ML models.",
-    stack: ["Next.js", "Python", "FastAPI", "Chart.js"],
+      "A UBC Psychology lab platform for administering validated psychological tasks and surveys, with server-side auto-scoring, weather-outcome mixed-effects modeling, and per-lab data isolation.",
+    stack: ["Next.js", "FastAPI", "PostgreSQL", "Supabase Auth", "statsmodels"],
     category: "client-work" as Category,
-    link: "https://github.com/AG9898/Weather_Wellness",
+    link: "https://weather-and-wellness-dashboard.vercel.app",
   },
   {
     name: "Interactive MapLibre",

@@ -5,28 +5,54 @@ import { ExternalLink, CloudRain, BarChart3 } from "lucide-react";
 
 const APP_URL = "https://weather-and-wellness-dashboard.vercel.app";
 
-const STACK = ["Python", "Flask", "Vercel", "HTML/CSS", "JavaScript"];
+const STACK = [
+  "Next.js 16",
+  "React 19",
+  "TypeScript",
+  "Tailwind CSS v4",
+  "FastAPI",
+  "Python",
+  "SQLAlchemy",
+  "Alembic",
+  "PostgreSQL",
+  "Supabase Auth",
+  "Highcharts",
+  "Anime.js",
+  "statsmodels",
+  "NumPy / Pandas",
+  "Vercel",
+];
 
 const FEATURES: { title: string; detail: string }[] = [
   {
-    title: "Local weather conditions fetched from a public weather API",
+    title: "Multi-instrument session runner for validated psychological tasks",
     detail:
-      "Current temperature, wind speed, and conditions are retrieved on page load from an open-source weather API, requiring no user account or API key setup.",
+      "RAs start a session for an anonymous participant and administer a fixed battery: Backwards Digit Span (working memory), ULS-8 (loneliness), CES-D 10 (depression), GAD-7 (anxiety), CogFunc 8a (cognitive function), and an optional Misokinesia video-clip task.",
   },
   {
-    title: "Air quality index and UV index alongside temperature and wind data",
+    title: "Server-side auto-scoring for all instruments",
     detail:
-      "AQI and UV readings are surfaced next to the core weather figures so users can assess outdoor safety at a glance without switching between services.",
+      "Each instrument has a pure-function Python scorer (reverse-scored items, severity bands, z-score transforms). Scores are computed on submit and stored alongside raw responses — no manual scoring required.",
   },
   {
-    title: "Wellness tips that adapt to current weather conditions",
+    title: "Weather-psychology mixed linear model analytics",
     detail:
-      "The dashboard generates condition-aware recommendations — hydration reminders on hot days, air-quality alerts on poor-visibility days — rendered server-side by Flask.",
+      "Daily weather data (temperature, precipitation, daylight hours) from the UBC EOS station is correlated with session outcomes using statsmodels mixed-effects regressions. Effect cards with fitted lines and confidence intervals are visualised via Highcharts.",
   },
   {
-    title: "Responsive dashboard layout suitable for a daily overview",
+    title: "Daily weather ingestion and historical backfill",
     detail:
-      "The single-page layout scales from mobile to desktop without a frontend build step, relying on plain CSS grid and the Flask template engine.",
+      "A FastAPI endpoint (with GitHub Actions trigger) fetches and upserts daily weather observations. A separate Open-Meteo backfill service populates historical rows for the full study period, with idempotent upserts and per-station advisory locks.",
+  },
+  {
+    title: "RA import/export and data management",
+    detail:
+      "A protected /import-export page lets RAs preview-import legacy CSV/XLSX data and export study data as XLSX workbooks or zipped CSVs. All bulk data access is audit-logged and RA-only.",
+  },
+  {
+    title: "Anonymous participant model with per-lab data isolation",
+    detail:
+      "Participants have no login — identity is a stable UUID assigned at first session. All data is scoped to a lab slug via Supabase Auth app_metadata, keeping multi-lab rows strictly isolated.",
   },
 ];
 
@@ -36,7 +62,7 @@ const NAV: { id: Section; label: string; sub: string }[] = [
   { id: "overview", label: "Overview", sub: "Project detail" },
   { id: "features", label: "Features", sub: "Scope" },
   { id: "stack", label: "Tech Stack", sub: "Dependencies" },
-  { id: "links", label: "Links", sub: "Live dashboard" },
+  { id: "links", label: "Links", sub: "Research platform" },
 ];
 
 export default function WeatherWellness() {
@@ -47,7 +73,7 @@ export default function WeatherWellness() {
       {/* Notes-style sidebar */}
       <aside className="hidden w-56 shrink-0 border-r border-glass-edge bg-chrome/70 p-2 md:block">
         <div className="px-2 pb-2 pt-1 text-[11px] font-medium uppercase text-label-secondary">
-          weather.dash
+          weather_wellness/
         </div>
         <div className="space-y-1">
           {NAV.map((item) => (
@@ -83,7 +109,7 @@ export default function WeatherWellness() {
           {active === "overview" && (
             <>
               <p className="text-[13px] text-label-secondary">
-                weather.dash / Overview
+                weather_wellness / Overview
               </p>
               <h1 className="mt-1 text-[22px] font-semibold">
                 Weather &amp; Wellness
@@ -100,38 +126,40 @@ export default function WeatherWellness() {
                     className="h-3.5 w-3.5 shrink-0"
                     aria-hidden="true"
                   />
-                  Weather dashboard
+                  Research platform
                 </span>
                 <span className="flex items-center gap-1.5 rounded-full border border-glass-edge bg-chrome px-3 py-1 text-[11px] text-label-secondary">
                   <BarChart3
                     className="h-3.5 w-3.5 shrink-0"
                     aria-hidden="true"
                   />
-                  Python / Flask
+                  Next.js + FastAPI
                 </span>
               </div>
 
               {/* Description */}
               <div className="mt-6 space-y-4">
                 <p>
-                  Weather &amp; Wellness is a deployed Python/Flask dashboard
-                  that surfaces local weather data alongside wellness context —
-                  air quality, UV index, and condition-aware tips — in a single
-                  daily overview.
+                  Weather &amp; Wellness is a multi-instrument research web
+                  application built for a UBC Psychology lab. Research
+                  assistants use it to run validated psychological tasks and
+                  surveys with anonymous participants, with full server-side
+                  auto-scoring and per-lab data isolation.
+                </p>
+                <p>
+                  The platform correlates daily weather data — temperature,
+                  precipitation, and daylight hours from the UBC EOS station —
+                  with session outcomes (digit span, loneliness, depression,
+                  anxiety, cognitive function) using server-side mixed-effects
+                  regression models via statsmodels. Effect cards and fitted
+                  lines are rendered in an RA-only analytics dashboard.
                 </p>
                 <p className="text-label-secondary">
-                  The project was built to explore server-side rendering with
-                  Flask and Vercel deployment. It pulls from a public weather
-                  API and presents the output in a clean dashboard layout
-                  without a frontend build step.
+                  Frontend on Vercel (Next.js 16 + React 19), backend on
+                  Render/Railway (FastAPI + Python + PostgreSQL). Supabase Auth
+                  handles RA sessions with lab-scoped claims. Import/export
+                  for legacy data via XLSX/CSV with preview-first ingestion.
                 </p>
-              </div>
-
-              {/* Screenshot placeholder */}
-              <div className="mt-8">
-                <div className="flex aspect-video items-center justify-center rounded-lg border border-glass-edge bg-chrome text-[12px] text-label-secondary">
-                  Screenshot coming soon
-                </div>
               </div>
             </>
           )}
@@ -139,7 +167,7 @@ export default function WeatherWellness() {
           {active === "features" && (
             <>
               <p className="text-[13px] text-label-secondary">
-                weather.dash / Features
+                weather_wellness / Features
               </p>
               <h1 className="mt-1 text-[22px] font-semibold">Features</h1>
 
@@ -169,7 +197,7 @@ export default function WeatherWellness() {
           {active === "stack" && (
             <>
               <p className="text-[13px] text-label-secondary">
-                weather.dash / Tech Stack
+                weather_wellness / Tech Stack
               </p>
               <h1 className="mt-1 text-[22px] font-semibold">Tech Stack</h1>
 
@@ -194,10 +222,10 @@ export default function WeatherWellness() {
           {active === "links" && (
             <>
               <p className="text-[13px] text-label-secondary">
-                weather.dash / Links
+                weather_wellness / Links
               </p>
               <h1 className="mt-1 text-[22px] font-semibold">
-                Live Dashboard
+                Research Platform
               </h1>
 
               <div className="mt-6">
@@ -213,7 +241,7 @@ export default function WeatherWellness() {
                   />
                   <div className="min-w-0">
                     <p className="text-[13px] font-medium text-accent">
-                      View live dashboard
+                      View live platform
                     </p>
                     <p className="mt-0.5 truncate text-[12px] text-label-secondary">
                       {APP_URL}
