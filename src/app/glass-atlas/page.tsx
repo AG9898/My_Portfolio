@@ -202,6 +202,24 @@ export default function GlassAtlas() {
                     ))}
                   </ul>
                 </section>
+
+                {/* RAG architecture diagram */}
+                <div className="mt-8">
+                  <div className="overflow-hidden rounded-lg border border-glass-edge bg-chrome">
+                    <Image
+                      src="/Glass-Atlas/Glass-Atlas RAG diagram.png"
+                      alt="Glass Atlas RAG pipeline diagram"
+                      width={912}
+                      height={1427}
+                      className="mx-auto block w-1/2"
+                      style={{ height: "auto" }}
+                    />
+                  </div>
+                  <p className="mt-2 text-center text-[11px] text-label-secondary">
+                    RAG pipeline: query embedding → hybrid retrieval → confidence
+                    gating → streaming LLM response
+                  </p>
+                </div>
               </>
             )}
 
@@ -211,22 +229,6 @@ export default function GlassAtlas() {
                   glass_atlas / Tech Stack
                 </p>
                 <h1 className="mt-1 text-[22px] font-semibold">Tech Stack</h1>
-
-                {/* RAG architecture diagram */}
-                <div className="mt-6 overflow-hidden rounded-lg border border-glass-edge bg-chrome">
-                  <Image
-                    src="/Glass-Atlas/Glass-Atlas RAG diagram.png"
-                    alt="Glass Atlas RAG pipeline diagram"
-                    width={912}
-                    height={1427}
-                    style={{ width: "100%", height: "auto" }}
-                    priority
-                  />
-                </div>
-                <p className="mt-2 text-center text-[11px] text-label-secondary">
-                  RAG pipeline: query embedding → hybrid retrieval → confidence
-                  gating → streaming LLM response
-                </p>
 
                 {/* Stack groups */}
                 <div className="mt-6 space-y-3">

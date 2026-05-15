@@ -52,48 +52,6 @@ const STACK_GROUPS: { label: string; items: string[] }[] = [
   },
 ];
 
-const FEATURES: { title: string; detail: string }[] = [
-  {
-    title: "RA and admin user management with lab-scoped access",
-    detail:
-      "Lab admins invite RAs by email through a protected /users page. Supabase Auth app_metadata carries a lab slug that scopes every DB read and write — rows from one lab are never visible to another. Role guards in Next.js middleware prevent unauthorized access to RA routes.",
-  },
-  {
-    title: "Anonymous participant sessions with UUID-based identity",
-    detail:
-      "Participants have no login. An RA creates a session and a stable participant_uuid is assigned at first visit. Subsequent sessions for the same participant are linked by UUID without requiring any personal identifiers, satisfying ethics review requirements.",
-  },
-  {
-    title: "Multi-instrument session runner for validated psychological tasks",
-    detail:
-      "RAs run a fixed battery per session: Backward Digit Span (working memory), ULS-8 (loneliness), CES-D 10 (depression), GAD-7 (anxiety), CogFunc 8a (cognitive function), and an optional Misokinesia 29-clip video sensitivity task. Each instrument has its own validated question set and response format.",
-  },
-  {
-    title: "Server-side auto-scoring for all instruments",
-    detail:
-      "Each instrument has a pure-function Python scorer handling reverse-scored items, severity bands, and z-score transforms. Scores are computed on submit and stored alongside raw responses — no manual scoring required, and the scorer is unit-tested against reference values.",
-  },
-  {
-    title: "Weather-psychology mixed linear model analytics",
-    detail:
-      "Daily weather data (temperature, precipitation, daylight hours) from the UBC EOS station is correlated with session outcomes using statsmodels mixed-effects regressions. Backend-generated statistical snapshots power an RA-only analytics dashboard with effect cards, fitted lines, and confidence intervals via Highcharts.",
-  },
-  {
-    title: "Daily weather ingestion and historical backfill",
-    detail:
-      "A FastAPI endpoint (with GitHub Actions trigger) fetches and upserts daily weather observations from the UBC EOS station. A separate Open-Meteo backfill service populates historical rows for the full study period with idempotent upserts and per-station advisory locks.",
-  },
-  {
-    title: "RA import/export and data management",
-    detail:
-      "A protected /import-export page lets RAs preview-import legacy CSV/XLSX data from Qualtrics exports and export study data as XLSX workbooks or zipped CSVs. All bulk data access is audit-logged and RA-only, with preview-first ingestion to prevent bad imports.",
-  },
-  {
-    title: "Upstash Redis caching and session undo",
-    detail:
-      "Select RA dashboard reads are cached via Next.js Route Handlers backed by Upstash Redis on Vercel, reducing backend load for frequent weather and analytics reads. A narrow RA-only undo action allows transactional hard-delete of the most recent native session, with audit logging.",
-  },
-];
 
 type Section = "overview" | "features" | "stack" | "links";
 
@@ -226,29 +184,27 @@ export default function WeatherWellness() {
               </p>
               <h1 className="mt-1 text-[22px] font-semibold">Features</h1>
 
-              <ul className="mt-6 space-y-4">
-                {FEATURES.map((feature) => (
-                  <li
-                    key={feature.title}
-                    className="rounded-lg border border-glass-edge bg-chrome p-4"
-                  >
-                    <div className="flex gap-3">
-                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                      <div className="min-w-0">
-                        <p className="text-[13px] font-medium">
-                          {feature.title}
-                        </p>
-                        <p className="mt-1 text-[13px] text-label-secondary">
-                          {feature.detail}
-                        </p>
-                      </div>
+              <div className="mt-6 space-y-6">
+                {/* Daily weather ingestion */}
+                <div className="rounded-lg border border-glass-edge bg-chrome p-4">
+                  <div className="flex gap-3">
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                    <div className="min-w-0">
+                      <p className="text-[13px] font-medium">
+                        Daily weather ingestion and historical backfill
+                      </p>
+                      <p className="mt-1 text-[13px] text-label-secondary">
+                        A FastAPI endpoint (with GitHub Actions trigger) fetches
+                        and upserts daily weather observations from the UBC EOS
+                        station. A separate Open-Meteo backfill service populates
+                        historical rows for the full study period with idempotent
+                        upserts and per-station advisory locks.
+                      </p>
                     </div>
-                  </li>
-                ))}
-              </ul>
+                  </div>
+                </div>
 
-              {/* Stat screenshots */}
-              <div className="mt-8 space-y-6">
+                {/* Stat-example1: weather data visualization */}
                 <div>
                   <div className="overflow-hidden rounded-lg border border-glass-edge bg-chrome">
                     <Image
@@ -264,6 +220,28 @@ export default function WeatherWellness() {
                     confidentiality policy.
                   </p>
                 </div>
+
+                {/* MLM analytics */}
+                <div className="rounded-lg border border-glass-edge bg-chrome p-4">
+                  <div className="flex gap-3">
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                    <div className="min-w-0">
+                      <p className="text-[13px] font-medium">
+                        Weather-psychology mixed linear model analytics
+                      </p>
+                      <p className="mt-1 text-[13px] text-label-secondary">
+                        Daily weather data (temperature, precipitation, daylight
+                        hours) from the UBC EOS station is correlated with session
+                        outcomes using statsmodels mixed-effects regressions.
+                        Backend-generated statistical snapshots power an RA-only
+                        analytics dashboard with effect cards, fitted lines, and
+                        confidence intervals via Highcharts.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Stat-example2: MLM result card */}
                 <div>
                   <div className="overflow-hidden rounded-lg border border-glass-edge bg-chrome">
                     <Image
@@ -278,6 +256,25 @@ export default function WeatherWellness() {
                     Stat card values have been obscured in accordance with
                     confidentiality policy.
                   </p>
+                </div>
+
+                {/* Redis caching */}
+                <div className="rounded-lg border border-glass-edge bg-chrome p-4">
+                  <div className="flex gap-3">
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                    <div className="min-w-0">
+                      <p className="text-[13px] font-medium">
+                        Upstash Redis caching and session undo
+                      </p>
+                      <p className="mt-1 text-[13px] text-label-secondary">
+                        Select RA dashboard reads are cached via Next.js Route
+                        Handlers backed by Upstash Redis on Vercel, reducing
+                        backend load for frequent weather and analytics reads. A
+                        narrow RA-only undo action allows transactional hard-delete
+                        of the most recent native session, with audit logging.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </>
