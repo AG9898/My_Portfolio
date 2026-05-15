@@ -45,8 +45,8 @@ const PROJECTS = [
     status: "Deployed",
     path: "~/projects/Glass-Atlas",
     description:
-      "A SvelteKit editorial knowledge site with a public notes library, GitHub OAuth-protected admin workspace, and a streaming RAG chat grounded in published notes via pgvector cosine search.",
-    stack: ["SvelteKit", "TypeScript", "Neon + pgvector", "OpenRouter", "Railway"],
+      "A SvelteKit 2 (Svelte 5 runes) editorial knowledge site that makes a personal note library conversational. Visitors query published notes through a streaming RAG chat grounded exclusively in the author's content via hybrid pgvector + lexical retrieval, confidence-tiered fallbacks, and Gemini 2.0 Flash.",
+    stack: ["SvelteKit", "TypeScript", "Drizzle + pgvector", "OpenRouter", "Bun", "Railway"],
     category: "frontend" as Category,
     link: "https://glass-atlas-production.up.railway.app",
   },
@@ -74,14 +74,14 @@ const PROJECTS = [
   },
   {
     name: "Weather & Wellness",
-    kind: "Research web app",
+    kind: "UBC research platform",
     status: "Deployed",
     path: "~/projects/Weather-and-Wellness-Dashboard",
     description:
-      "A UBC Psychology lab platform for administering validated psychological tasks and surveys, with server-side auto-scoring, weather-outcome mixed-effects modeling, and per-lab data isolation.",
-    stack: ["Next.js", "FastAPI", "PostgreSQL", "Supabase Auth", "statsmodels"],
+      "A multi-instrument research platform for a UBC Psychology lab. RAs run validated psychological tasks (digit span, loneliness, depression, anxiety) with anonymous participants; a FastAPI backend auto-scores responses and runs weather-psychology mixed-effects models via statsmodels, with per-lab data isolation.",
+    stack: ["Next.js", "FastAPI", "Supabase", "statsmodels", "Upstash Redis"],
     category: "client-work" as Category,
-    link: "https://weather-and-wellness-dashboard.vercel.app",
+    link: "https://ubcpsych.com",
   },
   {
     name: "Interactive MapLibre",

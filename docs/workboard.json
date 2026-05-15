@@ -1663,7 +1663,7 @@
       "id": "V2_018",
       "title": "Align project index cards with updated Glass Atlas and Weather content",
       "description": "Update src/app/projects/page.tsx so the project list summaries do not contradict the richer project pages. Keep this narrow: adjust Glass Atlas and Weather & Wellness descriptions, stack tags, status/link metadata, and category language only as needed after V2_016 and V2_017. Preserve the existing projects window layout and filtering behavior.",
-      "status": "todo",
+      "status": "done",
       "priority": "medium",
       "group_id": "V2_CONTENT",
       "depends_on": [
