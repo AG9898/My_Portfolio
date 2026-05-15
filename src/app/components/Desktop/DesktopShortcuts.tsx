@@ -456,7 +456,7 @@ export default function DesktopShortcuts() {
         if (e.target === e.currentTarget) setSelectedId(null);
       }}
     >
-      {APPS.map((app) => (
+      {APPS.filter((app) => app.showInDock === false).map((app) => (
         <DesktopShortcutItem
           key={app.id}
           appId={app.id}
