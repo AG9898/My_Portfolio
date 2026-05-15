@@ -1598,7 +1598,7 @@
     {
       "id": "V2_016",
       "title": "Populate Glass Atlas project page with concrete case-study content",
-      "description": "Replace Glass Atlas placeholder copy in src/app/glass-atlas/page.tsx with recruiter-facing details sourced from /home/ag9898/projects/Glass-Atlas. Preserve the current Overview iframe as the primary first panel, but make About, Tech Stack, and Links read like a compact engineering case study covering the SvelteKit editorial notes system, GitHub OAuth admin authoring, markdown/wiki-link workflows, Neon Postgres + pgvector retrieval, OpenRouter streaming RAG chat, Railway deployment, private bucket media uploads, rate limiting, and testing/tooling.",
+      "description": "Replace Glass Atlas placeholder copy in src/app/glass-atlas/page.tsx with recruiter-facing details sourced from /home/ag9898/projects/Glass-Atlas. Preserve the current Overview iframe as the primary first panel, but make About, Tech Stack, and Links read like a compact engineering case study covering the SvelteKit editorial notes system, GitHub OAuth admin authoring, markdown/wiki-link workflows, Neon Postgres + pgvector retrieval, OpenRouter streaming RAG chat, Railway deployment, private bucket media uploads, rate limiting, and testing/tooling. In the Tech Stack panel, render the RAG architecture diagram at /Glass-Atlas/Glass-Atlas RAG diagram.png as a full-width <img> with alt text \"Glass Atlas RAG pipeline diagram\" — place it above the stack tag list so it visually anchors the architecture explanation.",
       "status": "todo",
       "priority": "high",
       "group_id": "V2_CONTENT",
@@ -1610,6 +1610,7 @@
         "No placeholder Glass Atlas strings remain.",
         "Overview iframe remains full-bleed and usable.",
         "About section explains what the product is, who it serves, and the engineering problem it solves.",
+        "Tech Stack panel renders /Glass-Atlas/Glass-Atlas RAG diagram.png above the stack tag list with alt=\"Glass Atlas RAG pipeline diagram\".",
         "Tech Stack section includes concrete dependencies and grouped architecture details, not just four tags.",
         "Links section includes live app and repository/source links where available.",
         "Tone is concise, specific, and aimed at recruiters and SE managers."
@@ -1618,7 +1619,8 @@
         "docs/ARCHITECTURE.md"
       ],
       "files": [
-        "src/app/glass-atlas/page.tsx"
+        "src/app/glass-atlas/page.tsx",
+        "public/Glass-Atlas/Glass-Atlas RAG diagram.png"
       ],
       "commands": [
         "npm run lint"
@@ -1627,22 +1629,21 @@
     {
       "id": "V2_017",
       "title": "Replace Weather & Wellness page with UBC research platform content",
-      "description": "Rewrite src/app/weather/page.tsx so Weather & Wellness reflects /home/ag9898/projects/Weather-and-Wellness-Dashboard rather than the incorrect Flask weather-dashboard copy. Frame the project as a UBC Psychology lab research platform for RA/admin workflows, participant study sessions, weather-linked analytics, surveys/tasks, scoring, Supabase-backed data operations, imports/exports, lab-scoped auth, and dashboard analytics. Use concrete implementation details from the local frontend and backend repos, with sections matching the Techy pattern.",
+      "description": "Rewrite src/app/weather/page.tsx so Weather & Wellness reflects /home/ag9898/projects/Weather-and-Wellness-Dashboard rather than the incorrect Flask weather-dashboard copy. Frame the project as a UBC Psychology lab research platform for RA/admin workflows, participant study sessions, weather-linked analytics, surveys/tasks, scoring, Supabase-backed data operations, imports/exports, lab-scoped auth, and dashboard analytics. Use concrete implementation details from the local frontend and backend repos, with sections matching the Techy pattern. Image placement: (1) Overview panel — replace the single aspect-video placeholder with /Weather-Wellness/WeatherCard.png (alt: \"Weather timeline chart showing temperature over the study period\"). (2) Features panel — add two screenshots side-by-side or stacked: /Weather-Wellness/Stat-example1.png (alt: \"Day-level temperature summary with histogram and participant drill-down\") and /Weather-Wellness/Stat-example2.png (alt: \"MLM statistical model result card showing effect plot and model fit\"). Both stat screenshots must have an italicised caption directly below them: \"Stat card values have been obscured in accordance with confidentiality policy.\" Images are at public/Weather-Wellness/ — note the capital W in the folder name.",
       "status": "todo",
       "priority": "high",
       "group_id": "V2_CONTENT",
       "depends_on": [
         "V2_015"
       ],
-      "blocked_by": [
-        "User-provided Weather & Wellness screenshots"
-      ],
+      "blocked_by": [],
       "acceptance_criteria": [
         "All incorrect Python/Flask daily-weather-dashboard copy is removed.",
         "Overview clearly identifies the project as a research platform, not a consumer weather dashboard.",
+        "Overview panel renders /Weather-Wellness/WeatherCard.png with correct alt text in place of the aspect-video placeholder.",
+        "Features panel renders /Weather-Wellness/Stat-example1.png and /Weather-Wellness/Stat-example2.png each followed by the italic confidentiality caption.",
         "Features cover RA/admin user management, participant sessions, validated study tasks/surveys, scoring, import/export, weather data, analytics snapshots, and cache/auth boundaries where appropriate.",
         "Tech Stack reflects Next.js, React, TypeScript, FastAPI, Supabase/Postgres, Upstash Redis, Vercel, Render/Railway direction, and relevant testing tools.",
-        "Screenshot slots are replaced with provided Weather & Wellness assets and include meaningful alt text.",
         "Links section points to the deployed site and source repo when appropriate."
       ],
       "docs": [
@@ -1650,7 +1651,9 @@
       ],
       "files": [
         "src/app/weather/page.tsx",
-        "public/weather/*"
+        "public/Weather-Wellness/WeatherCard.png",
+        "public/Weather-Wellness/Stat-example1.png",
+        "public/Weather-Wellness/Stat-example2.png"
       ],
       "commands": [
         "npm run lint"
