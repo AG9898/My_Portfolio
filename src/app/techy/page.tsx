@@ -7,16 +7,57 @@ import { ExternalLink, Lock, Monitor, GitBranch, GitFork, X } from "lucide-react
 const APP_URL = "https://techy-psi.vercel.app";
 const GITHUB_URL = "https://github.com/AG9898/Techy";
 
-const STACK = [
-  "SvelteKit",
-  "Svelte 5",
-  "TypeScript",
-  "Tailwind CSS",
-  "D3.js",
-  "Drizzle ORM",
-  "Auth.js",
-  "Neon PostgreSQL",
-  "Vercel",
+const STACK_GROUPS: { label: string; items: string[] }[] = [
+  {
+    label: "Framework & Language",
+    items: ["SvelteKit 2", "Svelte 5 (runes)", "TypeScript (strict)", "Vite 7"],
+  },
+  {
+    label: "Styling & UI",
+    items: ["Tailwind CSS v4", "Melt UI", "GSAP", "marked"],
+  },
+  {
+    label: "Database & ORM",
+    items: [
+      "Neon PostgreSQL",
+      "@neondatabase/serverless",
+      "Drizzle ORM",
+      "drizzle-kit (migrations)",
+    ],
+  },
+  {
+    label: "AI & Providers",
+    items: [
+      "Anthropic Claude SDK",
+      "OpenAI SDK",
+      "OpenRouter (OpenAI-compatible)",
+      "Multi-provider abstraction (models.ts)",
+    ],
+  },
+  {
+    label: "Auth",
+    items: [
+      "Auth.js + GitHub OAuth",
+      "@auth/drizzle-adapter",
+      "Single-user allowlist gate",
+    ],
+  },
+  {
+    label: "Visualisation",
+    items: [
+      "D3.js v7 (force-directed graph)",
+      "Node radius by link degree",
+      "Graph settings → localStorage",
+    ],
+  },
+  {
+    label: "Runtime & Tooling",
+    items: [
+      "@sveltejs/adapter-auto (Vercel)",
+      "PWA (Workbox / service worker)",
+      "Vitest + svelte-check + ESLint",
+    ],
+  },
 ];
 
 const IMAGE_DIMS: Record<string, { width: number; height: number }> = {
@@ -275,20 +316,47 @@ export default function Techy() {
               </p>
               <h1 className="mt-1 text-[22px] font-semibold">Tech Stack</h1>
 
-              <section className="mt-6 rounded-lg border border-glass-edge bg-chrome p-4">
-                <h2 className="text-[13px] font-semibold uppercase text-label-secondary">
-                  Dependencies
+              <div className="mt-6 space-y-3">
+                {STACK_GROUPS.map((group) => (
+                  <section
+                    key={group.label}
+                    className="rounded-lg border border-glass-edge bg-chrome p-4"
+                  >
+                    <h2 className="text-[11px] font-semibold uppercase text-label-secondary">
+                      {group.label}
+                    </h2>
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {group.items.map((item) => (
+                        <span
+                          key={item}
+                          className="rounded-full border border-glass-edge bg-window px-2.5 py-1 text-[11px] text-label-secondary"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </section>
+                ))}
+              </div>
+
+              <section className="mt-4 rounded-lg border border-glass-edge bg-chrome p-4">
+                <h2 className="text-[11px] font-semibold uppercase text-label-secondary">
+                  Architecture Rules
                 </h2>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {STACK.map((item) => (
-                    <span
-                      key={item}
-                      className="rounded-full border border-glass-edge bg-window px-2.5 py-1 text-[11px] text-label-secondary"
-                    >
-                      {item}
-                    </span>
+                <ul className="mt-3 space-y-2">
+                  {[
+                    "All server work lives in SvelteKit server modules (+page.server.ts, +server.ts) — no separate backend service.",
+                    "AI provider calls are routed through a unified request contract; models.ts is the single provider/model registry.",
+                    "Auth is enforced server-side in hooks.server.ts — no client-side route guards.",
+                    "Graph view settings are persisted to localStorage only and never written to the database.",
+                    "Schema changes apply through Drizzle ORM migrations only — no direct ALTER TABLE.",
+                  ].map((rule) => (
+                    <li key={rule} className="flex gap-3 text-[13px]">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-label-secondary" />
+                      <span className="text-label-secondary">{rule}</span>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </section>
             </>
           )}
