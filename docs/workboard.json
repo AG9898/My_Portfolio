@@ -1689,7 +1689,7 @@
       "id": "V2_019",
       "title": "Explore PigeonCoop source and write page data constants",
       "description": "Read the PigeonCoop source codebase at /projects/PigeonCoop to extract real content for the portfolio page. Read the following files in order: /projects/PigeonCoop/docs/PRD.md (project summary, problem statement, features), /projects/PigeonCoop/docs/DESIGN_SPEC.md (UI features and agent workflow details), /projects/PigeonCoop/Cargo.toml (dependencies and crate names for tech stack). Then read src/app/techy/page.tsx as the reference for data shape and detail level — the PigeonCoop page must match Techy in specificity, depth, and content richness throughout all panels; no placeholder text is acceptable. Create src/app/pigeoncoop/page.tsx containing only the data layer: (1) STACK_GROUPS array with grouped tech stack entries drawn from Cargo.toml and the docs, (2) IMAGE_DIMS record for the three images in /public/PigeonCoop/ (Pigeon-workspace.png, Pigeon-workspace-planned.png, Pigeon-mermaid-diagram.png — actual pixel dimensions must be measured by reading the files or inferred from context), (3) FEATURES array with real feature titles and detailed descriptions matching Techy's level of specificity, (4) a NAV array with four sections: overview, features, stack, links, (5) a minimal shell export default function PigeonCoop() { return null; } so the file compiles. Do not implement any UI rendering in this task. This keeps the context footprint small — read only the four files listed and write the data layer.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V2_CONTENT",
       "depends_on": [],
