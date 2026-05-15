@@ -36,6 +36,7 @@ import GlassAtlasPage from "../../glass-atlas/page";
 import TechyPage from "../../techy/page";
 import SparsePage from "../../sparse/page";
 import WeatherPage from "../../weather/page";
+import PigeonCoopPage from "../../pigeoncoop/page";
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -416,6 +417,7 @@ const WINDOW_CONTENT: Record<AppId, React.ComponentType> = {
   techy: TechyPage,
   sparse: SparsePage,
   weather: WeatherPage,
+  pigeoncoop: PigeonCoopPage,
 };
 
 /** Maps AppId to window title strings. */
@@ -429,6 +431,7 @@ const WINDOW_TITLES: Record<AppId, string> = {
   techy: "Techy — Aden Guo",
   sparse: "Sparse — Aden Guo",
   weather: "Weather & Wellness — Aden Guo",
+  pigeoncoop: "PigeonCoop — Aden Guo",
 };
 
 export function WindowRenderer() {

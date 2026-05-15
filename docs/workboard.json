@@ -1748,7 +1748,7 @@
       "id": "V2_021",
       "title": "Wire PigeonCoop desktop shortcut plumbing",
       "description": "Register pigeoncoop in all three required locations so the desktop shortcut opens the window. (1) src/app/components/appMetadata.ts: add pigeoncoop to the AppId union type; add /pigeoncoop to the route union in AppMetadata; add an APPS entry with id: pigeoncoop, route: /pigeoncoop, label: PigeonCoop, title: PigeonCoop — Aden Guo, icon: pigeoncoop, defaultSize: { width: 1040, height: 680 }, defaultPosition: { x: 200, y: 90 }, showInDock: false. (2) src/app/components/Desktop/DesktopShortcuts.tsx: add pigeoncoop to the ICON_LABELS record with value pigeoncoop.app; create a new PigeonIcon SVG component (56x56px, document-shape base using DOC_PATH/FOLD_PATH constants, bird/pigeon silhouette in orange/amber accent color drawn on the document body, consistent with existing icon style); add the case pigeoncoop: return <PigeonIcon /> to the ShortcutFileIcon dispatcher. (3) src/app/components/WindowManager/WindowRenderer.tsx: import the PigeonCoop page component and add it to the WINDOW_CONTENT registry under the key pigeoncoop. Read each target file before editing it. Run npm run lint after all three edits.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V2_CONTENT",
       "depends_on": [

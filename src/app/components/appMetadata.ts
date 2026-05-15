@@ -11,7 +11,8 @@ export type AppId =
   | "glass-atlas"
   | "techy"
   | "sparse"
-  | "weather";
+  | "weather"
+  | "pigeoncoop";
 
 export interface AppSize {
   width: number;
@@ -25,7 +26,7 @@ export interface AppPosition {
 
 export interface AppMetadata {
   id: AppId;
-  route: "/" | "/projects" | "/about" | "/contact" | "/cv" | "/glass-atlas" | "/techy" | "/sparse" | "/weather";
+  route: "/" | "/projects" | "/about" | "/contact" | "/cv" | "/glass-atlas" | "/techy" | "/sparse" | "/weather" | "/pigeoncoop";
   /** Short label used in dock, desktop shortcuts, and window list */
   label: string;
   /** Full title shown in the window title bar */
@@ -125,6 +126,16 @@ export const APPS: AppMetadata[] = [
     label: "Weather & Wellness",
     title: "Weather & Wellness — Aden Guo",
     icon: "weather",
+    defaultSize: { width: 1040, height: 680 },
+    defaultPosition: { x: 200, y: 90 },
+    showInDock: false,
+  },
+  {
+    id: "pigeoncoop",
+    route: "/pigeoncoop",
+    label: "PigeonCoop",
+    title: "PigeonCoop — Aden Guo",
+    icon: "pigeoncoop",
     defaultSize: { width: 1040, height: 680 },
     defaultPosition: { x: 200, y: 90 },
     showInDock: false,

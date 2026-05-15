@@ -35,6 +35,7 @@ const ICON_LABELS: Record<AppId, string> = {
   techy:          "techy.app",
   sparse:         "sparse.app",
   weather:        "weather.dash",
+  pigeoncoop:     "pigeoncoop.app",
 };
 
 // ─── File icon SVGs — 56×56, folded-corner document shape ────────────────────
@@ -322,6 +323,40 @@ function CloudIcon() {
   );
 }
 
+function PigeonIcon() {
+  return (
+    <svg width="56" height="56" viewBox={`-4 0 ${DOC_W + 8} ${DOC_H + 4}`} aria-hidden="true">
+      <defs>
+        <linearGradient id="doc-pigeon" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#FFFFFF" />
+          <stop offset="100%" stopColor="#E2E2E6" />
+        </linearGradient>
+      </defs>
+      <path d={DOC_PATH} fill="url(#doc-pigeon)" stroke="rgba(0,0,0,0.15)" strokeWidth="0.5" />
+      <path d={FOLD_PATH} fill="#C7C7CC" />
+      <path
+        d={`M${DOC_W - FOLD} 0 V${FOLD} H${DOC_W}`}
+        fill="none"
+        stroke="rgba(0,0,0,0.18)"
+        strokeWidth="0.5"
+      />
+      {/* Pigeon/bird silhouette in orange-amber */}
+      {/* Body */}
+      <ellipse cx="22" cy="32" rx="9" ry="7" fill="#FF9F0A" />
+      {/* Head */}
+      <circle cx="32" cy="25" r="5" fill="#FF9F0A" />
+      {/* Beak */}
+      <path d="M36 24 L40 25 L36 26 Z" fill="#FF9F0A" />
+      {/* Tail */}
+      <path d="M13 30 Q8 28 6 34 Q10 32 13 36 Z" fill="#FF9F0A" />
+      {/* Wing detail */}
+      <path d="M14 30 Q20 24 30 28" fill="none" stroke="#CC7700" strokeWidth="1.2" strokeLinecap="round" />
+      {/* Eye */}
+      <circle cx="33" cy="24" r="1.2" fill="#1C1C1E" />
+    </svg>
+  );
+}
+
 // ─── Icon dispatcher ──────────────────────────────────────────────────────────
 
 function ShortcutFileIcon({ appId }: { appId: AppId }) {
@@ -335,6 +370,7 @@ function ShortcutFileIcon({ appId }: { appId: AppId }) {
     case "techy":       return <GraphIcon />;
     case "sparse":      return <GridIcon />;
     case "weather":     return <CloudIcon />;
+    case "pigeoncoop":  return <PigeonIcon />;
     default:            return null;
   }
 }
