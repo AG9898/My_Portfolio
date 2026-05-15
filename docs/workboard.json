@@ -1630,7 +1630,7 @@
       "id": "V2_017",
       "title": "Replace Weather & Wellness page with UBC research platform content",
       "description": "Rewrite src/app/weather/page.tsx so Weather & Wellness reflects /home/ag9898/projects/Weather-and-Wellness-Dashboard rather than the incorrect Flask weather-dashboard copy. Frame the project as a UBC Psychology lab research platform for RA/admin workflows, participant study sessions, weather-linked analytics, surveys/tasks, scoring, Supabase-backed data operations, imports/exports, lab-scoped auth, and dashboard analytics. Use concrete implementation details from the local frontend and backend repos, with sections matching the Techy pattern. Image placement: (1) Overview panel \u2014 replace the single aspect-video placeholder with /Weather-Wellness/WeatherCard.png (alt: \"Weather timeline chart showing temperature over the study period\"). (2) Features panel \u2014 add two screenshots side-by-side or stacked: /Weather-Wellness/Stat-example1.png (alt: \"Day-level temperature summary with histogram and participant drill-down\") and /Weather-Wellness/Stat-example2.png (alt: \"MLM statistical model result card showing effect plot and model fit\"). Both stat screenshots must have an italicised caption directly below them: \"Stat card values have been obscured in accordance with confidentiality policy.\" Images are at public/Weather-Wellness/ \u2014 note the capital W in the folder name.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V2_CONTENT",
       "depends_on": [
