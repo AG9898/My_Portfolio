@@ -53,7 +53,6 @@ export default function PetSprite({ state }: PetSpriteProps) {
 }
 
 function AnimatedSprite({ state }: { state: string }) {
-  const stateData = getStateData(state)
   const [frameIdx, setFrameIdx] = useState(0)
 
   // Track current state and frame idx in refs to avoid stale closures in rAF
