@@ -2,6 +2,7 @@
   "$schema": "./workboard.schema.json",
   "schema_version": "1.0.0",
   "last_updated": "2026-05-25",
+
   "tasks": [
     {
       "id": "V1_001",
@@ -1808,7 +1809,7 @@
       "id": "V2_023",
       "title": "Build PetSprite component",
       "description": "Write src/app/buddy/PetSprite.tsx — a \"use client\" React component that animates the Ragdoll cat spritesheet using CSS background-position stepping. The component accepts a state prop typed against the keys of PET_ANIMATION_STATES from buddyData.ts, reads the frame data for that state, and drives a requestAnimationFrame loop that advances the current frame index at the per-frame duration defined in pet.json. CSS background-size is \"800% 900%\" (8 cols x 9 rows). Column and row offsets are computed as col/(columns-1)*100% and row/(rows-1)*100%. The rendered element is a fixed-size div (192x208px) with background-image pointing to /buddy/spritesheet.webp. Wrap the rAF loop in useEffect with cleanup. Check useReducedMotion from framer-motion — if true, render a static first frame of the idle state instead of animating. When the state prop changes, restart the loop from frame 0 of the new state.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V2_CONTENT",
       "depends_on": [
