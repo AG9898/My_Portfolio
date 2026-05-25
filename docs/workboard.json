@@ -1,7 +1,7 @@
 {
   "$schema": "./workboard.schema.json",
   "schema_version": "1.0.0",
-  "last_updated": "2026-05-15",
+  "last_updated": "2026-05-25",
   "tasks": [
     {
       "id": "V1_001",
@@ -1762,6 +1762,157 @@
         "ShortcutFileIcon dispatcher handles pigeoncoop without hitting the default null case.",
         "WINDOW_CONTENT registry in WindowRenderer.tsx includes the pigeoncoop key mapped to the PigeonCoop page component.",
         "npm run lint and npm run build pass."
+      ],
+      "docs": [
+        "AGENTS.md",
+        "docs/ARCHITECTURE.md"
+      ],
+      "files": [
+        "src/app/components/appMetadata.ts",
+        "src/app/components/Desktop/DesktopShortcuts.tsx",
+        "src/app/components/WindowManager/WindowRenderer.tsx"
+      ],
+      "commands": [
+        "npm run lint",
+        "npm run build"
+      ]
+    },
+    {
+      "id": "V2_022",
+      "title": "Copy spritesheet asset and write buddy data constants",
+      "description": "Read /projects/buddy/pets/default/pet.json, /projects/buddy/docs/CLI.md, /projects/buddy/src/cli/output.ts, and /projects/buddy/README.md to understand the animation state machine and CLI output format. Copy /projects/buddy/pets/default/spritesheet.webp to public/buddy/spritesheet.webp. Write src/app/buddy/buddyData.ts containing: (1) FEATURES array of feature objects with title and detail strings drawn from the actual project; (2) STACK_GROUPS array grouped by CLI Layer, Electron Runtime, Svelte Renderer, Rust WSL Bridge, Tooling; (3) TERMINAL_SCRIPT — a typed array of {command: string, output: string[], petState: string} objects representing the auto-play demo sequence (banner, buddy doctor, buddy state running, buddy state waving, buddy stop), using the real ANSI output format from CLI.md; (4) PET_ANIMATION_STATES — a record mapping each state name to {row, frameCount, frameDurations[]} from pet.json.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V2_CONTENT",
+      "depends_on": [],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "public/buddy/spritesheet.webp exists and is a valid WebP",
+        "src/app/buddy/buddyData.ts exports FEATURES, STACK_GROUPS, TERMINAL_SCRIPT, PET_ANIMATION_STATES",
+        "TERMINAL_SCRIPT contains at least 4 entries with realistic CLI output strings",
+        "npm run lint passes"
+      ],
+      "docs": [
+        "AGENTS.md",
+        "docs/ARCHITECTURE.md"
+      ],
+      "files": [
+        "public/buddy/spritesheet.webp",
+        "src/app/buddy/buddyData.ts"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V2_023",
+      "title": "Build PetSprite component",
+      "description": "Write src/app/buddy/PetSprite.tsx — a \"use client\" React component that animates the Ragdoll cat spritesheet using CSS background-position stepping. The component accepts a state prop typed against the keys of PET_ANIMATION_STATES from buddyData.ts, reads the frame data for that state, and drives a requestAnimationFrame loop that advances the current frame index at the per-frame duration defined in pet.json. CSS background-size is \"800% 900%\" (8 cols x 9 rows). Column and row offsets are computed as col/(columns-1)*100% and row/(rows-1)*100%. The rendered element is a fixed-size div (192x208px) with background-image pointing to /buddy/spritesheet.webp. Wrap the rAF loop in useEffect with cleanup. Check useReducedMotion from framer-motion — if true, render a static first frame of the idle state instead of animating. When the state prop changes, restart the loop from frame 0 of the new state.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V2_CONTENT",
+      "depends_on": [
+        "V2_022"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Component renders the correct sprite frame at each animation tick",
+        "Changing state prop switches to the new animation state from frame 0",
+        "useReducedMotion collapses to static idle frame with no rAF loop",
+        "No console errors about image loading",
+        "npm run lint passes"
+      ],
+      "docs": [
+        "AGENTS.md",
+        "docs/ARCHITECTURE.md"
+      ],
+      "files": [
+        "src/app/buddy/PetSprite.tsx",
+        "src/app/buddy/buddyData.ts"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V2_024",
+      "title": "Build TerminalSimulator component",
+      "description": "Write src/app/buddy/TerminalSimulator.tsx — a \"use client\" React component that auto-plays a scripted terminal demo on mount. On mount: render the ASCII banner (from TERMINAL_SCRIPT or hardcoded from output.ts) in warm orange, then step through each entry in TERMINAL_SCRIPT with a typewriter effect (type the command char-by-char at ~60ms/char, pause 400ms, then reveal output lines one at a time at 80ms/line, pause 600ms before next command). When each command step completes, call the onStateChange(entry.petState) prop callback. After the last command, show a Replay button (lucide-react RotateCcw icon) that resets and restarts the sequence. Style the terminal pane as a dark rounded container (bg-black/80 or similar) with monospace font, green prompt character, white command text, and dimmed output text. The component takes props: onStateChange: (state: string) => void.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V2_CONTENT",
+      "depends_on": [
+        "V2_022"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Banner renders in orange on mount",
+        "Commands type character by character, output appears line by line",
+        "onStateChange fires with the correct petState at each step",
+        "Replay button appears after final command and restarts the sequence",
+        "npm run lint passes"
+      ],
+      "docs": [
+        "AGENTS.md",
+        "docs/ARCHITECTURE.md"
+      ],
+      "files": [
+        "src/app/buddy/TerminalSimulator.tsx",
+        "src/app/buddy/buddyData.ts"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V2_025",
+      "title": "Implement buddy page component UI",
+      "description": "Write src/app/buddy/page.tsx — a \"use client\" 4-panel sidebar page using the same panel-switching pattern as src/app/pigeoncoop/page.tsx. Panels: Overview, Features, Tech Stack, Links. Overview panel: status badges (In Development, npm CLI, Windows), then a 2-column layout where the left column holds 2-3 description paragraphs (what buddy is, the hook-event to pet-reaction mechanic, tech summary) and the right column stacks PetSprite (petState driven by TerminalSimulator) above TerminalSimulator. Use local useState for petState (default \"idle\") and pass setPetState as onStateChange to TerminalSimulator. Features panel: render FEATURES cards using the same bullet-point card style as pigeoncoop. Tech Stack panel: render STACK_GROUPS using the same chip-group style as pigeoncoop, plus an Architecture Notes list covering the 4-component topology (CLI, Electron, Svelte renderer, Rust WSL bridge). Links panel: \"In Development\" notice card + GitHub link card (no npm link since pre-release). No lightbox needed — no screenshot images. Import all data from buddyData.ts. Do not add any placeholder text.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V2_CONTENT",
+      "depends_on": [
+        "V2_023",
+        "V2_024"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "All 4 panels render with real content from buddyData.ts",
+        "Pet sprite animates and changes state in sync with terminal demo",
+        "No placeholder text anywhere in the component",
+        "Matches visual pattern of pigeoncoop/page.tsx",
+        "npm run lint passes"
+      ],
+      "docs": [
+        "AGENTS.md",
+        "docs/ARCHITECTURE.md"
+      ],
+      "files": [
+        "src/app/buddy/page.tsx",
+        "src/app/buddy/PetSprite.tsx",
+        "src/app/buddy/TerminalSimulator.tsx"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V2_026",
+      "title": "Wire buddy desktop shortcut plumbing",
+      "description": "Three surgical edits to register buddy in the desktop shell, following the exact same pattern used for pigeoncoop in V2_021. (1) src/app/components/appMetadata.ts — add \"buddy\" to AppId union type, add \"/buddy\" to AppMetadata.route union, add a buddy entry to APPS with id:\"buddy\", route:\"/buddy\", label:\"buddy\", title:\"buddy — Aden Guo\", icon:\"buddy\", defaultSize:{width:1040,height:680}, defaultPosition:{x:200,y:90}, showInDock:false. (2) src/app/components/Desktop/DesktopShortcuts.tsx — add a \"buddy\" case to the icon SVG switch/map (use a terminal/command-line style SVG icon, e.g. a rectangle with > prompt lines), add ICON_LABELS entry for \"buddy\" to \"buddy.cli\". (3) src/app/components/WindowManager/WindowRenderer.tsx — import the buddy page component and add \"buddy\" to the WINDOW_CONTENT registry. Run npm run lint and npm run build to verify no TypeScript errors.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V2_CONTENT",
+      "depends_on": [
+        "V2_025"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "buddy shortcut appears in DesktopShortcuts column",
+        "Double-clicking shortcut opens the buddy app window",
+        "No TypeScript errors (npm run build passes)",
+        "Direct browser entry to /buddy opens and focuses the buddy window",
+        "npm run lint passes, npm run build passes"
       ],
       "docs": [
         "AGENTS.md",

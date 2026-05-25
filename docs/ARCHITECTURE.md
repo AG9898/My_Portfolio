@@ -34,7 +34,7 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
   - Inside `#desktop-root`, from back to front: `<Wallpaper />`, `<MenuBar />` (`z-50`, `h-7`), `<DesktopShortcuts />` (`z-10`, top: 48px), a desktop-sized `[data-desktop-layer="windows"]` wrapper containing `<WindowRenderer />` (window z-index 21+), `<Dock />` (`z-40`, `bottom-3`).
   - `<WindowRenderer />` takes no children — it resolves content from the `WINDOW_CONTENT` registry internally.
 - App window content is decoupled from Next.js routing. `WindowRenderer` imports every page component directly and maps them to their `AppId` in a static `WINDOW_CONTENT` registry. Each open window always mounts its own component instance, so multiple windows are simultaneously visible regardless of which window has focus.
-- Route changes dispatch `syncRoute` so direct browser entry to `/`, `/projects`, `/about`, `/contact`, `/cv`, `/glass-atlas`, `/techy`, `/sparse`, `/weather`, or `/pigeoncoop` opens and focuses the matching app window without unmounting wallpaper, menu bar, dock, desktop icons, or other open windows.
+- Route changes dispatch `syncRoute` so direct browser entry to `/`, `/projects`, `/about`, `/contact`, `/cv`, `/glass-atlas`, `/techy`, `/sparse`, `/weather`, `/pigeoncoop`, or `/buddy` opens and focuses the matching app window without unmounting wallpaper, menu bar, dock, desktop icons, or other open windows.
 
 ### Desktop Shell
 
@@ -93,13 +93,13 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 
 #### App Metadata (`src/app/components/appMetadata.ts`)
 
-- Shared registry of all portfolio apps: Home, Projects, About, Contact, CV, Glass Atlas, Techy, Sparse, and Weather & Wellness.
+- Shared registry of all portfolio apps: Home, Projects, About, Contact, CV, Glass Atlas, Techy, Sparse, Weather & Wellness, PigeonCoop, and buddy.
 - Exports `AppId` union type, `AppSize` and `AppPosition` helper types, `AppMetadata` interface (id, route, label, title, icon, defaultSize, defaultPosition, showInDock), and `APPS` array.
-- `AppId` is `"home" | "projects" | "about" | "contact" | "cv" | "glass-atlas" | "techy" | "sparse" | "weather"`.
-- `AppMetadata.route` is a string literal union covering `/`, `/projects`, `/about`, `/contact`, `/cv`, `/glass-atlas`, `/techy`, `/sparse`, `/weather`.
+- `AppId` is `"home" | "projects" | "about" | "contact" | "cv" | "glass-atlas" | "techy" | "sparse" | "weather" | "pigeoncoop" | "buddy"`.
+- `AppMetadata.route` is a string literal union covering `/`, `/projects`, `/about`, `/contact`, `/cv`, `/glass-atlas`, `/techy`, `/sparse`, `/weather`, `/pigeoncoop`, `/buddy`.
 - `defaultSize` provides the window's initial `{width, height}` in pixels; runtime open paths center the window in the desktop safe area with `getCenteredWindowPositionForViewport()`. `defaultPosition` remains a fallback for non-browser contexts.
 - `title` is the full window title bar string; `label` is the short dock/shortcut label.
-- `showInDock?: boolean` — when explicitly `false`, the app appears in `DesktopShortcuts` only and is excluded from the Dock. When omitted or `true`, the app appears in both. The five core apps (Home, Projects, About, Contact, CV) omit this field; the four project apps (Glass Atlas, Techy, Sparse, Weather) set it to `false`.
+- `showInDock?: boolean` — when explicitly `false`, the app appears in `DesktopShortcuts` only and is excluded from the Dock. When omitted or `true`, the app appears in both. The five core apps (Home, Projects, About, Contact, CV) omit this field; the project apps (Glass Atlas, Techy, Sparse, Weather, PigeonCoop, buddy) set it to `false`.
 - No state, no hooks, no reducer logic — pure static metadata consumed by the window manager and shell components.
 
 ### Window Manager
@@ -163,6 +163,8 @@ All app window pages use a **panel-switching sidebar pattern**: `"use client"` w
 - **`/weather`** — Weather & Wellness (Python/Flask dashboard). Nav: Overview, Features, Tech Stack, Links. Live at `https://weather-and-wellness-dashboard.vercel.app`.
 - **`/techy`** — Techy (SvelteKit knowledge graph, GitHub auth required). Nav: Overview, Features, Tech Stack, Links. Live at `https://techy-psi.vercel.app`. Source: `https://github.com/AG9898/Techy`.
 - **`/glass-atlas`** — Glass Atlas (embeddable Next.js app). Nav: Overview (full-bleed iframe), About, Tech Stack, Links. Live at `https://glass-atlas-production.up.railway.app`.
+- **`/pigeoncoop`** — PigeonCoop (Rust/Tauri agent workflow desktop app). Nav: Overview, Features, Tech Stack, Links. In active development, no live URL.
+- **`/buddy`** — buddy (Windows npm CLI + Electron floating pet). Nav: Overview (terminal demo + pet sprite), Features, Tech Stack, Links. In active development, pre-release. Two co-located sub-components live alongside the page: `PetSprite.tsx` (CSS spritesheet animation) and `TerminalSimulator.tsx` (auto-play typewriter demo). Sprite asset: `public/buddy/spritesheet.webp` (8 cols × 9 rows WebP, copied from source project). Terminal demo sequences through real CLI commands and emits `onStateChange` to drive the pet's animation state.
 - **`/about`** — About page. Nav: About Aden, How I Work, Frontend Focus, What I Value.
 - Content is hardcoded in each route file — no backend, no CMS.
 
