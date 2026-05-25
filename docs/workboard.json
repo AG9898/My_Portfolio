@@ -1839,7 +1839,7 @@
       "id": "V2_024",
       "title": "Build TerminalSimulator component",
       "description": "Write src/app/buddy/TerminalSimulator.tsx — a \"use client\" React component that auto-plays a scripted terminal demo on mount. On mount: render the ASCII banner (from TERMINAL_SCRIPT or hardcoded from output.ts) in warm orange, then step through each entry in TERMINAL_SCRIPT with a typewriter effect (type the command char-by-char at ~60ms/char, pause 400ms, then reveal output lines one at a time at 80ms/line, pause 600ms before next command). When each command step completes, call the onStateChange(entry.petState) prop callback. After the last command, show a Replay button (lucide-react RotateCcw icon) that resets and restarts the sequence. Style the terminal pane as a dark rounded container (bg-black/80 or similar) with monospace font, green prompt character, white command text, and dimmed output text. The component takes props: onStateChange: (state: string) => void.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V2_CONTENT",
       "depends_on": [
