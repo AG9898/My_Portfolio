@@ -1781,7 +1781,7 @@
       "id": "V2_022",
       "title": "Copy spritesheet asset and write buddy data constants",
       "description": "Read /projects/buddy/pets/default/pet.json, /projects/buddy/docs/CLI.md, /projects/buddy/src/cli/output.ts, and /projects/buddy/README.md to understand the animation state machine and CLI output format. Copy /projects/buddy/pets/default/spritesheet.webp to public/buddy/spritesheet.webp. Write src/app/buddy/buddyData.ts containing: (1) FEATURES array of feature objects with title and detail strings drawn from the actual project; (2) STACK_GROUPS array grouped by CLI Layer, Electron Runtime, Svelte Renderer, Rust WSL Bridge, Tooling; (3) TERMINAL_SCRIPT — a typed array of {command: string, output: string[], petState: string} objects representing the auto-play demo sequence (banner, buddy doctor, buddy state running, buddy state waving, buddy stop), using the real ANSI output format from CLI.md; (4) PET_ANIMATION_STATES — a record mapping each state name to {row, frameCount, frameDurations[]} from pet.json.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V2_CONTENT",
       "depends_on": [],
