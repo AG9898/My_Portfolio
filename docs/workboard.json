@@ -1869,7 +1869,7 @@
       "id": "V2_025",
       "title": "Implement buddy page component UI",
       "description": "Write src/app/buddy/page.tsx — a \"use client\" 4-panel sidebar page using the same panel-switching pattern as src/app/pigeoncoop/page.tsx. Panels: Overview, Features, Tech Stack, Links. Overview panel: status badges (In Development, npm CLI, Windows), then a 2-column layout where the left column holds 2-3 description paragraphs (what buddy is, the hook-event to pet-reaction mechanic, tech summary) and the right column stacks PetSprite (petState driven by TerminalSimulator) above TerminalSimulator. Use local useState for petState (default \"idle\") and pass setPetState as onStateChange to TerminalSimulator. Features panel: render FEATURES cards using the same bullet-point card style as pigeoncoop. Tech Stack panel: render STACK_GROUPS using the same chip-group style as pigeoncoop, plus an Architecture Notes list covering the 4-component topology (CLI, Electron, Svelte renderer, Rust WSL bridge). Links panel: \"In Development\" notice card + GitHub link card (no npm link since pre-release). No lightbox needed — no screenshot images. Import all data from buddyData.ts. Do not add any placeholder text.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V2_CONTENT",
       "depends_on": [
