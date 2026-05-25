@@ -1,5 +1,3 @@
-"use client"
-
 import { useCallback, useEffect, useRef, useState } from "react"
 import { RotateCcw } from "lucide-react"
 import { BUDDY_BANNER, BUDDY_TAGLINE, TERMINAL_SCRIPT } from "./buddyData"
