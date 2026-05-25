@@ -1901,7 +1901,7 @@
       "id": "V2_026",
       "title": "Wire buddy desktop shortcut plumbing",
       "description": "Three surgical edits to register buddy in the desktop shell, following the exact same pattern used for pigeoncoop in V2_021. (1) src/app/components/appMetadata.ts — add \"buddy\" to AppId union type, add \"/buddy\" to AppMetadata.route union, add a buddy entry to APPS with id:\"buddy\", route:\"/buddy\", label:\"buddy\", title:\"buddy — Aden Guo\", icon:\"buddy\", defaultSize:{width:1040,height:680}, defaultPosition:{x:200,y:90}, showInDock:false. (2) src/app/components/Desktop/DesktopShortcuts.tsx — add a \"buddy\" case to the icon SVG switch/map (use a terminal/command-line style SVG icon, e.g. a rectangle with > prompt lines), add ICON_LABELS entry for \"buddy\" to \"buddy.cli\". (3) src/app/components/WindowManager/WindowRenderer.tsx — import the buddy page component and add \"buddy\" to the WINDOW_CONTENT registry. Run npm run lint and npm run build to verify no TypeScript errors.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V2_CONTENT",
       "depends_on": [

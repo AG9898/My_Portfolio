@@ -12,7 +12,8 @@ export type AppId =
   | "techy"
   | "sparse"
   | "weather"
-  | "pigeoncoop";
+  | "pigeoncoop"
+  | "buddy";
 
 export interface AppSize {
   width: number;
@@ -26,7 +27,7 @@ export interface AppPosition {
 
 export interface AppMetadata {
   id: AppId;
-  route: "/" | "/projects" | "/about" | "/contact" | "/cv" | "/glass-atlas" | "/techy" | "/sparse" | "/weather" | "/pigeoncoop";
+  route: "/" | "/projects" | "/about" | "/contact" | "/cv" | "/glass-atlas" | "/techy" | "/sparse" | "/weather" | "/pigeoncoop" | "/buddy";
   /** Short label used in dock, desktop shortcuts, and window list */
   label: string;
   /** Full title shown in the window title bar */
@@ -136,6 +137,16 @@ export const APPS: AppMetadata[] = [
     label: "PigeonCoop",
     title: "PigeonCoop — Aden Guo",
     icon: "pigeoncoop",
+    defaultSize: { width: 1040, height: 680 },
+    defaultPosition: { x: 200, y: 90 },
+    showInDock: false,
+  },
+  {
+    id: "buddy",
+    route: "/buddy",
+    label: "buddy",
+    title: "buddy — Aden Guo",
+    icon: "buddy",
     defaultSize: { width: 1040, height: 680 },
     defaultPosition: { x: 200, y: 90 },
     showInDock: false,

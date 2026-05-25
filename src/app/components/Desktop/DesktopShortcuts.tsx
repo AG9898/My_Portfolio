@@ -36,6 +36,7 @@ const ICON_LABELS: Record<AppId, string> = {
   sparse:         "sparse.app",
   weather:        "weather.dash",
   pigeoncoop:     "pigeoncoop.app",
+  buddy:          "buddy.cli",
 };
 
 // ─── File icon SVGs — 56×56, folded-corner document shape ────────────────────
@@ -357,6 +358,51 @@ function PigeonIcon() {
   );
 }
 
+function BuddyIcon() {
+  return (
+    <svg width="56" height="56" viewBox={`-4 0 ${DOC_W + 8} ${DOC_H + 4}`} aria-hidden="true">
+      <defs>
+        <linearGradient id="doc-buddy" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#1C1C1E" />
+          <stop offset="100%" stopColor="#2C2C2E" />
+        </linearGradient>
+      </defs>
+      {/* Dark terminal document body */}
+      <path d={DOC_PATH} fill="url(#doc-buddy)" stroke="rgba(255,255,255,0.12)" strokeWidth="0.5" />
+      <path d={FOLD_PATH} fill="#3A3A3C" />
+      <path
+        d={`M${DOC_W - FOLD} 0 V${FOLD} H${DOC_W}`}
+        fill="none"
+        stroke="rgba(255,255,255,0.14)"
+        strokeWidth="0.5"
+      />
+      {/* Prompt line 1: > command */}
+      <text x="7" y="22" fontSize="6.5" fontFamily="monospace" fill="#32D74B">{">"}</text>
+      <line x1="13" y1="19" x2={DOC_W - 6} y2="19" stroke="#32D74B" strokeWidth="1" strokeOpacity="0.6" strokeLinecap="round" />
+      {/* Prompt line 2: > command */}
+      <text x="7" y="30" fontSize="6.5" fontFamily="monospace" fill="#32D74B">{">"}</text>
+      <line x1="13" y1="27" x2={DOC_W - 10} y2="27" stroke="#32D74B" strokeWidth="1" strokeOpacity="0.6" strokeLinecap="round" />
+      {/* Output line */}
+      <line x1="7" y1="34" x2={DOC_W - 8} y2="34" stroke="#FFD60A" strokeWidth="0.9" strokeOpacity="0.5" strokeLinecap="round" />
+      {/* Prompt line 3 with cursor */}
+      <text x="7" y="42" fontSize="6.5" fontFamily="monospace" fill="#32D74B">{">"}</text>
+      <rect x="13" y="35.5" width="4" height="7" rx="0.5" fill="#32D74B" fillOpacity="0.8" />
+      {/* CLI badge */}
+      <rect x="6" y={DOC_H - 18} width="18" height="10" rx="2" fill="#32D74B" />
+      <text
+        x="15"
+        y={DOC_H - 10}
+        textAnchor="middle"
+        fontSize="6"
+        fontWeight="700"
+        fill="#1C1C1E"
+      >
+        CLI
+      </text>
+    </svg>
+  );
+}
+
 // ─── Icon dispatcher ──────────────────────────────────────────────────────────
 
 function ShortcutFileIcon({ appId }: { appId: AppId }) {
@@ -371,6 +417,7 @@ function ShortcutFileIcon({ appId }: { appId: AppId }) {
     case "sparse":      return <GridIcon />;
     case "weather":     return <CloudIcon />;
     case "pigeoncoop":  return <PigeonIcon />;
+    case "buddy":       return <BuddyIcon />;
     default:            return null;
   }
 }
