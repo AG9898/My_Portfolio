@@ -51,6 +51,15 @@ const STACK_GROUPS: { label: string; items: string[] }[] = [
     ],
   },
   {
+    label: "Practice Workspace",
+    items: [
+      "LeetCode daily challenge GraphQL fetch",
+      "Manual JSON import fallback",
+      "CodeMirror 6 editor",
+      "Python / JS / TS / Java / C++ modes",
+    ],
+  },
+  {
     label: "Runtime & Tooling",
     items: [
       "@sveltejs/adapter-auto (Vercel)",
@@ -91,6 +100,16 @@ const FEATURES: { title: string; detail: string; images?: string[] }[] = [
     detail:
       "A built-in chat interface backed by Anthropic, OpenAI, or OpenRouter can research a topic and propose a fully structured note: title, category, status, tags, aliases, and a Markdown body with pre-wired wikilinks. The draft is reviewed in-chat and committed with a single click.",
     images: ["/techy/chat.png", "/techy/create.png"],
+  },
+  {
+    title: "Daily coding-practice workspace",
+    detail:
+      "The /practice section turns Techy into a focused LeetCode-style practice desk. It can fetch the current daily challenge through an authenticated, opt-in server endpoint, normalize the problem into local storage, and fall back to manual JSON import whenever the unofficial LeetCode path is disabled or breaks.",
+  },
+  {
+    title: "Local progress, notes, and multi-language code snapshots",
+    detail:
+      "Each stored practice problem gets per-user progress only: status, attempts, notes, completion timestamps, source URL, and the latest code snapshot. The workspace uses a 3-column layout with the problem statement, a CodeMirror 6 editor for Python, JavaScript, TypeScript, Java, and C++, plus a sidebar for progress and notes.",
   },
 ];
 
@@ -208,6 +227,12 @@ export default function Techy() {
                 <p className="text-label-secondary">
                   Access is gated behind GitHub OAuth so only I can log in, but
                   the architecture and screenshots are documented here.
+                </p>
+                <p className="text-label-secondary">
+                  The newest section adds a daily coding-practice workflow:
+                  Techy can load a LeetCode daily challenge into a local
+                  workspace, keep personal progress and code snapshots, and
+                  link back to LeetCode for final submission.
                 </p>
               </div>
 
@@ -349,6 +374,8 @@ export default function Techy() {
                     "AI provider calls are routed through a unified request contract; models.ts is the single provider/model registry.",
                     "Auth is enforced server-side in hooks.server.ts — no client-side route guards.",
                     "Graph view settings are persisted to localStorage only and never written to the database.",
+                    "The practice workspace stores normalized problem and progress rows only: source metadata, prompt content, notes, attempts, code snapshot, and completion state.",
+                    "LeetCode daily fetching is opt-in and server-only; manual JSON import stays available as the fallback path.",
                     "Schema changes apply through Drizzle ORM migrations only — no direct ALTER TABLE.",
                   ].map((rule) => (
                     <li key={rule} className="flex gap-3 text-[13px]">
