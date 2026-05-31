@@ -31,6 +31,7 @@ const STACK_GROUPS: { label: string; items: string[] }[] = [
       "Anthropic Claude SDK",
       "OpenAI SDK",
       "OpenRouter (OpenAI-compatible)",
+      "Qwen3 Coder practice tutor",
       "Multi-provider abstraction (models.ts)",
     ],
   },
@@ -110,6 +111,11 @@ const FEATURES: { title: string; detail: string; images?: string[] }[] = [
     title: "Local progress, notes, and multi-language code snapshots",
     detail:
       "Each stored practice problem gets per-user progress only: status, attempts, notes, completion timestamps, source URL, and the latest code snapshot. The workspace uses a 3-column layout with the problem statement, a CodeMirror 6 editor for Python, JavaScript, TypeScript, Java, and C++, plus a sidebar for progress and notes.",
+  },
+  {
+    title: "Transient OpenRouter tutor for algorithm practice",
+    detail:
+      "Inside the practice workspace, a collapsible Tutor panel offers stepwise help modes: nudge, pattern, approach, review, and solve. Each request sends the current problem, selected hint level, user question, and live editor code snapshot to a fixed Qwen3 Coder OpenRouter model; tutor turns stay in client state only and are never written to the chat conversation tables.",
   },
 ];
 
@@ -233,6 +239,12 @@ export default function Techy() {
                   Techy can load a LeetCode daily challenge into a local
                   workspace, keep personal progress and code snapshots, and
                   link back to LeetCode for final submission.
+                </p>
+                <p className="text-label-secondary">
+                  A practice tutor sits beside the editor for scoped algorithm
+                  guidance. It can give a small nudge, name the underlying
+                  pattern, review the current code, or provide a full
+                  step-by-step solution when explicitly asked.
                 </p>
               </div>
 
@@ -375,6 +387,8 @@ export default function Techy() {
                     "Auth is enforced server-side in hooks.server.ts — no client-side route guards.",
                     "Graph view settings are persisted to localStorage only and never written to the database.",
                     "The practice workspace stores normalized problem and progress rows only: source metadata, prompt content, notes, attempts, code snapshot, and completion state.",
+                    "Practice tutoring is transient client state: no conversation rows, message rows, or saved transcript table are created.",
+                    "The tutor uses a fixed OpenRouter coding model through a practice-specific prompt contract instead of the main note-authoring chat flow.",
                     "LeetCode daily fetching is opt-in and server-only; manual JSON import stays available as the fallback path.",
                     "Schema changes apply through Drizzle ORM migrations only — no direct ALTER TABLE.",
                   ].map((rule) => (
