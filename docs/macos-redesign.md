@@ -289,13 +289,15 @@ All existing page content is scrapped. Fresh content is being written for each a
 
 ## Boot / Launch Sequence
 
-On every page load, before the desktop is shown, a macOS-style boot screen plays:
+On the first desktop page load in each browser tab/session, before the desktop is shown, a macOS-style startup sequence plays:
 
 1. **Black full-screen overlay** mounts immediately (z-index above everything)
-2. **White Apple logo SVG** centered
+2. **Strawberry logo** centered as the portfolio-safe boot mark
 3. **Progress bar** below center fills linearly over `2400ms`
-4. When progress exceeds `85%`, overlay **fades out** (opacity 1 → 0, `400ms`) to reveal the desktop
-5. Desktop appears with wallpaper, dock, menu bar, shortcuts, and any route-synced windows already mounted underneath
+4. Overlay transitions into a Tahoe-inspired sign-in screen over the already-mounted desktop wallpaper
+5. Sign-in screen shows a large clock/date, strawberry avatar, `Aden Guo`, and a glassy **Click to enter** control
+6. Visitor click or keypress triggers an automatic sign-in animation with password dots and a short loading bar
+7. Overlay fades out to reveal the desktop with wallpaper, dock, menu bar, shortcuts, and any route-synced windows already mounted underneath
 
 **Sound note**: The original Apple startup chime is Apple IP. Options:
 - Use a royalty-free recreation (available on freesound.org)
@@ -303,11 +305,13 @@ On every page load, before the desktop is shown, a macOS-style boot screen plays
 - Make the sound opt-in (click anywhere to start + play chime) — this also solves browser autoplay restrictions
 - Current implementation uses no audio. Any future audio path must require a user gesture.
 
-**Timing**: Progress bar fills linearly over `2400ms`. When progress > 85%, container opacity fades from 1 → 0 over `400ms`. Total visible ~`2800ms`. Progress bar dimensions: `176×4px`, track `rgba(255,255,255,0.15)`, fill `rgba(255,255,255,0.85)`.
+**Timing**: Boot progress fills linearly over `2400ms`. The transition between boot and sign-in fades over `400ms`. After click/key activation, the sign-in loading bar runs for ~`1350ms`, then the overlay fades away. Progress bar dimensions: `176×4px`, track `rgba(255,255,255,0.15)`, fill `rgba(255,255,255,0.85)`.
 
-**Browser autoplay policy**: Most browsers block audio autoplay without a user gesture. Recommended approach: show a subtle "Click to enter" prompt over the boot screen, user click triggers both the audio and the boot animation.
+**Replay policy**: `sessionStorage` records completion under a startup-only key so the sequence plays once per browser tab/session. If browser storage is unavailable, the sequence safely replays.
 
-**Implementation**: `BootScreen.tsx` component, rendered in `layout.tsx` above everything else, uses `framer-motion` to fade and unmount after the sequence completes. The current implementation replays on each full page load; a `sessionStorage` flag to skip replay is optional later.
+**Browser autoplay policy**: The current implementation uses no audio. Any future audio path must require a user gesture.
+
+**Implementation**: `StartupSequence.tsx` component, rendered in `layout.tsx` above everything else, uses `framer-motion` to fade between boot, sign-in, signing-in, and unmounted states. The desktop shell is mounted underneath throughout the sequence. Reduced-motion users get the same phases with shortened fade-only transitions.
 
 ---
 
@@ -321,7 +325,7 @@ On every page load, before the desktop is shown, a macOS-style boot screen plays
 - Boot screen composition
 - Traffic light group hover behavior
 
-**What the mockup covers**: Phase 1 static shell + boot screen + home window open animation.
+**What the mockup covers**: Phase 1 static shell + startup sequence + home window open animation.
 
 **What is intentionally not in the mockup** (implement from docs, Phases 2–9):
 - Window dragging / resizing (`react-rnd`)

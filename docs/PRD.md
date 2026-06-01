@@ -28,7 +28,7 @@ Build a memorable frontend portfolio where the browser behaves like a macOS desk
 
 ### Phase 1 — Desktop Shell
 
-- Persistent desktop wallpaper, menu bar, dock, desktop icons, and boot screen.
+- Persistent desktop wallpaper, menu bar, dock, desktop icons, and startup sequence.
 - Static shell mounts from `src/app/layout.tsx` and does not unmount across route changes.
 - Mobile fallback for small screens, including CV access and theme switching instead of rendering cramped draggable windows.
 

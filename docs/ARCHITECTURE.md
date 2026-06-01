@@ -38,8 +38,16 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 
 ### Desktop Shell
 
-- Owns wallpaper, boot sequence, desktop icon column, menu bar, dock, and mobile fallback.
+- Owns wallpaper, startup sequence, desktop icon column, menu bar, dock, and mobile fallback.
 - Does not own per-window content state beyond shell-level navigation affordances.
+
+#### StartupSequence (`src/app/components/Desktop/StartupSequence.tsx`)
+
+- Renders above the mounted desktop shell as the boot/sign-in overlay for `md` and larger viewports.
+- Plays once per browser tab/session using a startup-specific `sessionStorage` flag, falling back to replay when storage is unavailable.
+- Phases: black boot panel with strawberry logo and progress bar, Tahoe-inspired sign-in panel with clock/date and `Aden Guo`, signing-in password dots/loading bar, then unmount.
+- Click or non-Tab keypress on the sign-in panel starts the signing-in phase. No startup audio is used.
+- Respects `prefers-reduced-motion` by shortening timing and using fade-only transitions.
 
 #### MenuBar (`src/app/components/MenuBar/MenuBar.tsx`)
 

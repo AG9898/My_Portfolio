@@ -58,7 +58,7 @@ Normative guide for code in this portfolio. Read before writing new UI architect
 
 ### App Router client boundary
 
-- Shell components that use state, effects, event handlers, or framer-motion must include `"use client"` at the top of the file. This applies to: `MenuBar`, `Dock`, `DockIcon`, `Window`, `TrafficLights`, `DesktopIcon`, `BootScreen`, and any component using `useWindowManager`.
+- Shell components that use state, effects, event handlers, or framer-motion must include `"use client"` at the top of the file. This applies to: `MenuBar`, `Dock`, `DockIcon`, `Window`, `TrafficLights`, `DesktopIcon`, `StartupSequence`, and any component using `useWindowManager`.
 - Prefer pushing `"use client"` to leaf components so parent layouts remain server components where possible.
 - Never add `"use client"` to layout.tsx itself — mount client shell components as children instead.
 

@@ -52,6 +52,20 @@ Run manually when shell chrome changes:
 
 ---
 
+## Startup Sequence Checklist
+
+Run manually when the desktop shell startup overlay changes:
+
+- [ ] First desktop load in a browser tab shows boot progress, then the sign-in screen.
+- [ ] Sign-in screen shows clock/date, `Aden Guo`, the strawberry avatar, and a click-to-enter control.
+- [ ] Click or non-Tab keypress starts the signing-in animation and reveals the desktop.
+- [ ] Refreshing after completion in the same tab skips the startup sequence.
+- [ ] Direct entry to a route such as `/projects` still opens the matching window under the overlay.
+- [ ] Reduced-motion mode keeps the same phases with fade-only/shortened motion.
+- [ ] Small viewports still render the mobile fallback instead of the desktop startup sequence.
+
+---
+
 ## Test File Inventory
 
 *(No test files yet — add rows when a test suite is introduced.)*

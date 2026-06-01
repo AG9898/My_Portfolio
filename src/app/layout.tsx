@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import MenuBar from "./components/MenuBar/MenuBar";
 import Dock from "./components/Dock/Dock";
-import BootScreen from "./components/Desktop/BootScreen";
+import StartupSequence from "./components/Desktop/StartupSequence";
 import MobileFallback from "./components/Desktop/MobileFallback";
 import DesktopShortcuts from "./components/Desktop/DesktopShortcuts";
 import Wallpaper from "./components/Desktop/Wallpaper";
@@ -42,44 +42,44 @@ export default function RootLayout(_props: Readonly<{ children: React.ReactNode 
           <div className="hidden md:block" data-desktop-shell="true">
             <WindowManagerProvider>
               <WallpaperProvider>
-              {/* Desktop shell root — persistent across all route changes */}
-              <div
-                id="desktop-root"
-                className="fixed inset-0 overflow-hidden bg-desktop"
-                aria-label="Desktop"
-              >
-                {/* Wallpaper — simplex-noise canvas over a tahoe-dawn fallback */}
-                <div data-desktop-layer="wallpaper">
-                  <Wallpaper />
-                </div>
-
-                {/* Menu bar — 28px pinned to top, z-50 */}
-                <div data-desktop-layer="menubar">
-                  <MenuBar />
-                </div>
-
-                {/* Desktop shortcut icons — left sidebar column, clears menu bar */}
-                <div data-desktop-layer="shortcuts">
-                  <DesktopShortcuts />
-                </div>
-
-                {/* App windows — each window renders its own content independently */}
+                {/* Desktop shell root — persistent across all route changes */}
                 <div
-                  data-desktop-layer="windows"
-                  className="pointer-events-none absolute inset-0"
+                  id="desktop-root"
+                  className="fixed inset-0 overflow-hidden bg-desktop"
+                  aria-label="Desktop"
                 >
-                  <WindowRenderer />
-                </div>
+                  {/* Wallpaper — simplex-noise canvas over a tahoe-dawn fallback */}
+                  <div data-desktop-layer="wallpaper">
+                    <Wallpaper />
+                  </div>
 
-                {/* Dock — pinned to bottom, z-40 */}
-                <div data-desktop-layer="dock">
-                  <Dock />
-                </div>
+                  {/* Menu bar — 28px pinned to top, z-50 */}
+                  <div data-desktop-layer="menubar">
+                    <MenuBar />
+                  </div>
 
-                <div data-desktop-layer="boot">
-                  <BootScreen />
+                  {/* Desktop shortcut icons — left sidebar column, clears menu bar */}
+                  <div data-desktop-layer="shortcuts">
+                    <DesktopShortcuts />
+                  </div>
+
+                  {/* App windows — each window renders its own content independently */}
+                  <div
+                    data-desktop-layer="windows"
+                    className="pointer-events-none absolute inset-0"
+                  >
+                    <WindowRenderer />
+                  </div>
+
+                  {/* Dock — pinned to bottom, z-40 */}
+                  <div data-desktop-layer="dock">
+                    <Dock />
+                  </div>
+
+                  <div data-desktop-layer="boot">
+                    <StartupSequence />
+                  </div>
                 </div>
-              </div>
               </WallpaperProvider>
             </WindowManagerProvider>
           </div>
