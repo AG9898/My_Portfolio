@@ -9,11 +9,11 @@ import { useWindowManager } from "../WindowManager/WindowManagerProvider";
 import { useWallpaper } from "../Desktop/WallpaperProvider";
 import { MenuDropdown, MenuEntry } from "./MenuDropdown";
 
-// ─── Strawberry logo ─────────────────────────────────────────────────────────
-function AppleLogo() {
+// ─── Portfolio logo ──────────────────────────────────────────────────────────
+function PortfolioMenuLogo() {
   return (
     <Image
-      src="/strawberry-logo.png"
+      src="/new-logo.png"
       alt=""
       aria-hidden="true"
       width={22}
@@ -106,8 +106,8 @@ function WifiIcon() {
   );
 }
 
-// ─── Apple menu items ─────────────────────────────────────────────────────────
-const APPLE_MENU_ITEMS: MenuEntry[] = [
+// ─── Portfolio menu items ─────────────────────────────────────────────────────
+const PORTFOLIO_MENU_ITEMS: MenuEntry[] = [
   { label: "About This Portfolio" },
   { separator: true },
   { label: "System Preferences…", disabled: true },
@@ -411,10 +411,10 @@ export default function MenuBar() {
     >
       {/* ── Left side ── */}
       <nav className="flex min-w-0 flex-1 items-center overflow-hidden" aria-label="App menus">
-        {/* Apple menu */}
+        {/* Portfolio menu */}
         <MenuDropdown
-          trigger={<AppleLogo />}
-          items={APPLE_MENU_ITEMS}
+          trigger={<PortfolioMenuLogo />}
+          items={PORTFOLIO_MENU_ITEMS}
           triggerClassName="mr-2"
         />
 

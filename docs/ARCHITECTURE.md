@@ -45,14 +45,14 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 
 - Renders above the mounted desktop shell as the boot/sign-in overlay for `md` and larger viewports.
 - Plays once per browser tab/session using a startup-specific `sessionStorage` flag, falling back to replay when storage is unavailable.
-- Phases: black boot panel with strawberry logo and progress bar, Tahoe-inspired sign-in panel with clock/date and `Aden Guo`, signing-in password dots/loading bar, then unmount.
+- Phases: black boot panel with the portfolio logo and progress bar, Tahoe-inspired sign-in panel with clock/date and `Aden Guo`, signing-in password dots/loading bar, then unmount.
 - Click or non-Tab keypress on the sign-in panel starts the signing-in phase. No startup audio is used.
 - Respects `prefers-reduced-motion` by shortening timing and using fade-only transitions.
 
 #### MenuBar (`src/app/components/MenuBar/MenuBar.tsx`)
 
 - Static 28px bar using `.glass-menubar` with `borderBottom: 1px solid rgba(255,255,255,0.08)`.
-- Left: Apple logo Radix dropdown → focused-app name Radix dropdown (updates live as window focus changes, falls back to "Finder") → app-specific Radix dropdowns (File / Edit / View / Window / Help).
+- Left: portfolio logo Radix dropdown → focused-app name Radix dropdown (updates live as window focus changes, falls back to "Finder") → app-specific Radix dropdowns (File / Edit / View / Window / Help).
 - Right: theme toggle button → Control Centre SVG → Battery visual (24×12px rect, 78% fill, decorative) → Wi-Fi SVG → date → live clock.
 - Includes a right-side icon button that toggles the `next-themes` theme between dark and light.
 - Includes a wallpaper picker in the right-side status cluster. The picker selects the active wallpaper theme and exposes compact color controls only for the active customizable theme inline inside the existing dropdown; it does not open a separate settings window.

@@ -15,8 +15,8 @@ export const metadata: Metadata = {
   title: "Aden Guo Portfolio",
   description: "A macOS-inspired portfolio redesign for Aden Guo.",
   icons: {
-    icon: "/strawberry-logo.png",
-    apple: "/strawberry-logo.png",
+    icon: "/new-logo.png",
+    apple: "/new-logo.png",
   },
 };
 

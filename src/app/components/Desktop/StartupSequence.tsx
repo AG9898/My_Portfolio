@@ -11,10 +11,10 @@ const STARTUP_SESSION_KEY = "portfolio-startup-complete";
 
 type StartupPhase = "checking" | "boot" | "login" | "signing-in" | "done";
 
-function StrawberryLogo({ size = 128 }: { size?: number }) {
+function PortfolioLogo({ size = 128 }: { size?: number }) {
   return (
     <Image
-      src="/strawberry-logo.png"
+      src="/new-logo.png"
       alt=""
       aria-hidden="true"
       width={size}
@@ -75,7 +75,7 @@ function BootPanel({
       transition={{ duration: reduceMotion ? 0.12 : BOOT_FADE_DURATION_SECONDS, ease: "easeOut" }}
     >
       <div className="absolute left-1/2 top-1/2 h-16 w-16 -translate-x-1/2 -translate-y-1/2">
-        <StrawberryLogo />
+        <PortfolioLogo />
       </div>
 
       <div
@@ -192,7 +192,7 @@ function LoginPanel({
           transition={{ duration: reduceMotion ? 0.12 : 0.35, ease: "easeOut" }}
         >
           <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border border-white/30 bg-white/15 shadow-[0_18px_60px_rgba(0,0,0,0.45)] backdrop-blur-2xl">
-            <StrawberryLogo size={96} />
+            <PortfolioLogo size={96} />
           </div>
           <div className="mt-5 text-[1.35rem] font-semibold tracking-normal text-white drop-shadow-[0_2px_16px_rgba(0,0,0,0.42)]">
             Aden Guo

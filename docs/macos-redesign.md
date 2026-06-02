@@ -68,7 +68,7 @@ src/app/
       WindowManagerProvider.tsx ← Open/focus/close/minimize/snap/maximize state
       windowReducer.ts          ← Reducer/actions for deterministic window behavior
     MenuBar/
-      MenuBar.tsx     ← Top bar (clock, Apple menu, app name)
+      MenuBar.tsx     ← Top bar (clock, portfolio menu, app name)
       MenuDropdown.tsx← @radix-ui dropdown menus
     Dock/
       Dock.tsx        ← Bottom dock with magnification, tooltips, and open indicators
@@ -124,7 +124,7 @@ Initial implementation can enforce one window per route/app. Opening an already-
 
 ### Menu Bar
 - Top bar spanning full viewport width, `28px` height
-- Left side: Apple logo SVG → focused app name (bold) → menu items (File, Edit, View, Window, Help) — each `13px`, hover `bg-white/10`
+- Left side: portfolio logo → focused app name (bold) → menu items (File, Edit, View, Window, Help) — each `13px`, hover `bg-white/10`
 - Right side (all `12.5px`, `white/85` opacity, left-to-right): Control center icon (4 rounded rects SVG) → Battery (24×12px rect, 78% fill visual, decorative) → Wi-Fi glyph → Date (`weekday short, month short, day numeric`) → Time (`hour numeric, minute 2-digit`, `tabular-nums`, updates every 1000ms)
 - Theme toggle: icon-only control in the right-side status cluster switches between dark and light modes through `next-themes`; dark remains the default canonical theme.
 - Glass treatment: `.glass-menubar` utility; bottom edge `1px solid rgba(255,255,255,0.08)`
@@ -292,10 +292,10 @@ All existing page content is scrapped. Fresh content is being written for each a
 On the first desktop page load in each browser tab/session, before the desktop is shown, a macOS-style startup sequence plays:
 
 1. **Black full-screen overlay** mounts immediately (z-index above everything)
-2. **Strawberry logo** centered as the portfolio-safe boot mark
+2. **Portfolio logo** centered as the portfolio-safe boot mark
 3. **Progress bar** below center fills linearly over `2400ms`
 4. Overlay transitions into a Tahoe-inspired sign-in screen over the already-mounted desktop wallpaper
-5. Sign-in screen shows a large clock/date, strawberry avatar, `Aden Guo`, and a glassy **Click to enter** control
+5. Sign-in screen shows a large clock/date, portfolio logo avatar, `Aden Guo`, and a glassy **Click to enter** control
 6. Visitor click or keypress triggers an automatic sign-in animation with password dots and a short loading bar
 7. Overlay fades out to reveal the desktop with wallpaper, dock, menu bar, shortcuts, and any route-synced windows already mounted underneath
 
