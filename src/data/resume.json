@@ -1,7 +1,7 @@
 {
   "basics": {
     "name": "Aden Guo",
-    "label": "Geomatics Engineering Graduate",
+    "label": "Software Engineer · Geomatics Engineering Graduate",
     "email": "aden.guowe@gmail.com",
     "phone": "587-888-4188",
     "location": {
@@ -16,7 +16,7 @@
         "url": "https://linkedin.com/in/aden-guo-b39743362"
       }
     ],
-    "summary": "Geomatics engineering graduate with hands-on experience in photogrammetry, geospatial data analysis, and field survey workflows. Builds practical data and simulation pipelines using Python/C++ and communicates results through technical reporting and presentations."
+    "summary": "Full-stack and systems developer who ships production web platforms, source-grounded AI products, and agentic CLI tooling across TypeScript, Python, and Rust. Comfortable owning a feature end to end — schema and retrieval layer through API to deployed UI — on Postgres/pgvector, FastAPI, and Next.js. Geomatics engineering background grounds the work in rigorous data analysis and spatial reasoning."
   },
   "work": [
     {
@@ -65,98 +65,131 @@
   ],
   "skills": [
     {
-      "name": "Programming & Data Science",
+      "name": "Languages & Data",
       "keywords": [
         "Python",
-        "JavaScript",
         "TypeScript",
-        "SQL",
-        "MATLAB",
+        "JavaScript",
+        "Rust",
         "C++",
+        "SQL",
         "NumPy",
         "Pandas",
-        "SciPy",
         "scikit-learn",
         "PyTorch",
         "OpenCV"
       ]
     },
     {
-      "name": "GIS & Survey Tools",
+      "name": "Web & Frameworks",
+      "keywords": [
+        "React",
+        "Next.js (App Router)",
+        "SvelteKit",
+        "Node.js",
+        "FastAPI",
+        "Tailwind CSS",
+        "Tauri",
+        "Drizzle ORM",
+        "Bun"
+      ]
+    },
+    {
+      "name": "Databases & Retrieval",
+      "keywords": [
+        "PostgreSQL",
+        "pgvector (hybrid semantic search)",
+        "SQLite",
+        "Redis",
+        "Supabase",
+        "Neon"
+      ]
+    },
+    {
+      "name": "Cloud & Infrastructure",
+      "keywords": [
+        "Azure",
+        "AWS S3",
+        "Vercel",
+        "Railway",
+        "Docker",
+        "CI/CD pipelines",
+        "Distributed & event-driven systems"
+      ]
+    },
+    {
+      "name": "AI & LLM Engineering",
+      "keywords": [
+        "Anthropic / Claude API",
+        "OpenAI",
+        "Vercel AI SDK",
+        "OpenRouter",
+        "RAG & vector retrieval",
+        "Prompt caching",
+        "MCP & agentic CLI tooling"
+      ]
+    },
+    {
+      "name": "Systems & DevOps",
+      "keywords": [
+        "Linux",
+        "Bash",
+        "Git & GitHub",
+        "Docker",
+        "VS Code"
+      ]
+    },
+    {
+      "name": "GIS & Survey",
       "keywords": [
         "ArcGIS",
         "QGIS",
-        "Google Earth Engine",
         "PostGIS",
         "GeoPandas",
         "GDAL/PROJ",
         "RTK GNSS workflows",
-        "Total Stations",
-        "Digital leveling"
-      ]
-    },
-    {
-      "name": "Workflow & Version Control",
-      "keywords": [
-        "Git",
-        "GitHub",
-        "VS Code",
-        "Jupyter",
-        "Anaconda",
-        "virtualenv",
-        "Docker (basic)"
-      ]
-    },
-    {
-      "name": "Sensor Simulation & Estimation",
-      "keywords": [
-        "IMU/GNSS simulation",
-        "Extended Kalman Filter (EKF)"
-      ]
-    },
-    {
-      "name": "Proprietary & Survey Software",
-      "keywords": [
-        "AutoCAD",
-        "Civil 3D",
-        "MicroStation",
-        "Agisoft Metashape",
-        "Trimble Business Center (TBC)"
+        "Agisoft Metashape"
       ]
     }
   ],
   "projects": [
     {
-      "name": "Photogrammetry Pipeline - Bundle Adjustment & Spatial Intersection",
-      "description": "Modular photogrammetry workflow using synthetic and real-world datasets for spatial intersection and bundle adjustment.",
+      "name": "Glass Atlas — Source-Grounded RAG Knowledge Site",
+      "description": "Deployed SvelteKit 2 (Svelte 5 runes) editorial site that turns a personal note library into a conversational, citation-backed assistant.",
+      "url": "https://glass-atlas-production.up.railway.app",
       "highlights": [
-        "Implemented camera models, pose estimation, and 3D reconstruction with C++ and Python.",
-        "Built residual, optimization, and quality-assessment components to improve reconstruction accuracy."
+        "Engineered hybrid semantic + lexical retrieval over Neon PostgreSQL with pgvector (cosine similarity) and Drizzle ORM, with confidence-tiered fallbacks that keep every answer grounded in source notes.",
+        "Built streaming RAG chat through OpenRouter (Gemini 2.0 Flash) on text-embedding-3-small 1536-dim vectors, with strict-TypeScript end-to-end typing.",
+        "Shipped on Railway with a Bun HTTP server, Auth.js GitHub OAuth, and private S3-compatible storage via presigned URLs."
       ],
       "keywords": [
-        "Photogrammetry",
-        "Bundle adjustment",
-        "Spatial intersection",
-        "Computer vision",
-        "3D reconstruction"
+        "SvelteKit",
+        "TypeScript",
+        "RAG",
+        "pgvector",
+        "Drizzle ORM",
+        "OpenRouter",
+        "Bun",
+        "Railway"
       ]
     },
     {
-      "name": "ML-Driven Sensor Simulation + EKF Sensor Fusion",
-      "description": "Simulation framework for IMU/GNSS trajectory generation with machine learning and EKF fusion.",
+      "name": "Weather & Wellness — UBC Research Platform",
+      "description": "Production multi-tenant research platform for a UBC Psychology lab where research assistants run validated psychological instruments with anonymous participants.",
+      "url": "https://ubcpsych.com",
       "highlights": [
-        "Developing RNN/Transformer-based models for trajectory simulation.",
-        "Integrating EKF for real-time estimation of pose, velocity, and orientation.",
-        "Designing modular training, visualization, and evaluation pipelines."
+        "Built a Next.js 15 / React 19 frontend and FastAPI backend that auto-scores validated instruments (digit span, loneliness, depression, anxiety) in real time.",
+        "Implemented weather–psychology mixed-effects models with statsmodels, NumPy, and Pandas over per-lab isolated datasets.",
+        "Architected per-lab data isolation on Supabase Postgres/Auth with Upstash Redis, shipped to production at ubcpsych.com."
       ],
       "keywords": [
-        "Machine learning",
-        "Sensor fusion",
-        "EKF",
-        "RNN",
-        "Transformer",
-        "GNSS",
-        "IMU"
+        "Next.js",
+        "FastAPI",
+        "statsmodels",
+        "Supabase",
+        "Python",
+        "Mixed-effects models",
+        "Multi-tenant"
       ]
     }
   ]

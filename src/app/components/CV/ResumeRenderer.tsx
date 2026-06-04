@@ -73,8 +73,9 @@ export default function ResumeRenderer() {
             <>
               <span aria-hidden="true">·</span>
               <a className="underline" href={linkedIn.url}>
-                {displayUrl(linkedIn.url)}
+                LinkedIn
               </a>
+              <span className="sr-only">{displayUrl(linkedIn.url)}</span>
             </>
           ) : null}
         </div>
@@ -157,9 +158,19 @@ export default function ResumeRenderer() {
       <section id="projects" className="scroll-mt-4">
         <SectionTitle>Projects</SectionTitle>
         <div className="mt-2 space-y-2.5">
-          {projects.map((project) => (
+          {projects.map((project) => {
+            const projectUrl = "url" in project ? project.url : undefined;
+            return (
             <div key={project.name}>
-              <h3 className="font-bold">{project.name}</h3>
+              <h3 className="font-bold">
+                {projectUrl ? (
+                  <a className="underline" href={projectUrl}>
+                    {project.name}
+                  </a>
+                ) : (
+                  project.name
+                )}
+              </h3>
               {project.description || project.highlights?.length ? (
                 <ul className="mt-1 list-disc space-y-0.5 pl-5">
                   {project.description ? <li>{project.description}</li> : null}
@@ -169,7 +180,8 @@ export default function ResumeRenderer() {
                 </ul>
               ) : null}
             </div>
-          ))}
+            );
+          })}
         </div>
       </section>
     </article>
