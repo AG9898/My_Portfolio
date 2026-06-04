@@ -30,7 +30,7 @@ function displayUrl(url: string) {
 
 function SectionTitle({ children }: { children: ReactNode }) {
   return (
-    <div className="mt-3 flex items-center gap-2 text-center text-[11px] font-bold uppercase leading-none text-black print:mt-2">
+    <div className="mt-3 flex items-center gap-2 text-center text-[11px] font-bold uppercase leading-none text-black print:mt-5 print:text-[12.5px]">
       <div className="h-px flex-1 bg-black" aria-hidden="true" />
       <h2 className="shrink-0">{children}</h2>
       <div className="h-px flex-1 bg-black" aria-hidden="true" />
@@ -48,12 +48,12 @@ export default function ResumeRenderer() {
   );
 
   return (
-    <article className="mx-auto w-full max-w-[820px] bg-white px-9 py-8 text-[10.5px] leading-[1.28] text-black shadow-[0_18px_60px_rgba(0,0,0,0.34)] print:max-w-none print:px-0 print:py-0 print:text-[9.4px] print:leading-[1.22] print:shadow-none">
+    <article className="mx-auto w-full max-w-[820px] bg-white px-9 py-8 text-[10.5px] leading-[1.28] text-black shadow-[0_18px_60px_rgba(0,0,0,0.34)] print:max-w-none print:px-0 print:py-0 print:text-[11.5px] print:leading-[1.42] print:shadow-none">
       <header id="summary" className="scroll-mt-4 text-center">
-        <h1 className="text-[16px] font-bold uppercase leading-none tracking-normal text-black print:text-[15px]">
+        <h1 className="text-[16px] font-bold uppercase leading-none tracking-normal text-black print:text-[18px]">
           {basics.name}
         </h1>
-        <div className="mt-1 flex flex-wrap items-center justify-center gap-x-1.5 gap-y-0.5 text-[10.5px] leading-tight text-black print:text-[9.4px]">
+        <div className="mt-1 flex flex-wrap items-center justify-center gap-x-1.5 gap-y-0.5 text-[10.5px] leading-tight text-black print:text-[11px]">
           {location ? <span>{location}</span> : null}
           {basics.phone ? (
             <>
@@ -83,7 +83,7 @@ export default function ResumeRenderer() {
 
       <section id="skills" className="scroll-mt-4">
         <SectionTitle>Tech Stack</SectionTitle>
-        <ul className="mt-2 list-disc space-y-0.5 pl-5">
+        <ul className="mt-2 list-disc space-y-0.5 pl-5 print:mt-2.5 print:space-y-1">
           {skills.map((skillGroup) => (
             <li key={skillGroup.name}>
               <span className="font-bold">{skillGroup.name}:</span>{" "}
@@ -95,7 +95,7 @@ export default function ResumeRenderer() {
 
       <section id="education" className="scroll-mt-4">
         <SectionTitle>Education</SectionTitle>
-        <div className="mt-2 space-y-2">
+        <div className="mt-2 space-y-2 print:mt-2.5 print:space-y-3">
           {education.map((school) => (
             <div key={`${school.institution}-${school.area}`}>
               <p>
@@ -114,7 +114,7 @@ export default function ResumeRenderer() {
               {school.courses?.length ? (
                 <>
                   <p className="mt-1">Relevant Skills:</p>
-                  <ul className="mt-0.5 list-disc space-y-0.5 pl-5">
+                  <ul className="mt-0.5 list-disc space-y-0.5 pl-5 print:space-y-1">
                     {school.courses.map((course) => (
                       <li key={course}>{course}</li>
                     ))}
@@ -128,7 +128,7 @@ export default function ResumeRenderer() {
 
       <section id="experience" className="scroll-mt-4">
         <SectionTitle>Professional Experience</SectionTitle>
-        <div className="mt-2 space-y-2.5">
+        <div className="mt-2 space-y-2.5 print:mt-2.5 print:space-y-3.5">
           {work.map((job) => (
             <div key={`${job.name}-${job.position}-${job.startDate}`}>
               <p>
@@ -140,7 +140,7 @@ export default function ResumeRenderer() {
                 {formatDateRange(job.startDate, job.endDate)}
               </p>
               {job.highlights?.length ? (
-                <ul className="mt-1 list-disc space-y-0.5 pl-5">
+                <ul className="mt-1 list-disc space-y-0.5 pl-5 print:mt-1.5 print:space-y-1">
                   {job.highlights.map((highlight) => (
                     <li key={highlight}>{highlight}</li>
                   ))}
@@ -157,7 +157,7 @@ export default function ResumeRenderer() {
 
       <section id="projects" className="scroll-mt-4">
         <SectionTitle>Projects</SectionTitle>
-        <div className="mt-2 space-y-2.5">
+        <div className="mt-2 space-y-2.5 print:mt-2.5 print:space-y-3.5">
           {projects.map((project) => {
             const projectUrl = "url" in project ? project.url : undefined;
             return (
@@ -172,7 +172,7 @@ export default function ResumeRenderer() {
                 )}
               </h3>
               {project.description || project.highlights?.length ? (
-                <ul className="mt-1 list-disc space-y-0.5 pl-5">
+                <ul className="mt-1 list-disc space-y-0.5 pl-5 print:mt-1.5 print:space-y-1">
                   {project.description ? <li>{project.description}</li> : null}
                   {project.highlights?.map((highlight) => (
                     <li key={highlight}>{highlight}</li>
