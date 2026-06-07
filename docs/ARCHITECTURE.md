@@ -181,7 +181,7 @@ All app window pages use a **panel-switching sidebar pattern**: `"use client"` w
 - `ResumeRenderer` (`src/app/components/CV/ResumeRenderer.tsx`) reads `src/data/resume.json` via a static import and renders all resume sections as styled HTML inside the window.
 - The macOS Preview chrome is preserved: a toolbar row (open-in-tab, download buttons) and a left sidebar showing section names (Summary, Experience, Education, Skills, Projects) as a mini nav.
 - The sidebar section nav is the only interactive sidebar in the CV window; clicking a section name scrolls the main content pane to that section.
-- `?print=1` on `/cv` enables a print-only surface that renders `ResumeRenderer` without the CV toolbar/sidebar chrome, used by the PDF export script.
+- `/cv/print` is a route handler that returns standalone, parser-safe resume HTML for PDF export. It intentionally bypasses the persistent desktop shell so exported PDFs contain selectable text instead of a rendered desktop screenshot.
 - `public/cv.pdf` is a generated artifact used exclusively for the download and open-in-tab buttons. It is not kept in sync automatically — run `npm run export:cv` to regenerate it after editing `resume.json`.
 - Media assets (screenshots, video) go in `aspect-video` placeholder slots within Overview or Features panels, pointing to `/public/projects/<slug>/`.
 
@@ -199,11 +199,11 @@ All app window pages use a **panel-switching sidebar pattern**: `"use client"` w
 
 ### CV Export Script (`scripts/export-cv.js`)
 
-- Node.js script using `puppeteer` that assumes `npm run dev` is already running on `localhost:3000`, navigates to `/cv?print=1`, prints the rendered resume page to PDF, and writes the output to `public/cv.pdf`.
+- Node.js script using `puppeteer` that assumes `npm run dev` is already running on `localhost:3000`, navigates to `/cv/print`, prints the standalone resume HTML to PDF, and writes the output to `public/cv.pdf`.
 - Run via `npm run export:cv` (defined in `package.json`).
 - If the dev server is running on a different port, run `CV_EXPORT_ORIGIN=http://localhost:<port> npm run export:cv` so Puppeteer exports this app instead of whichever process owns port 3000.
 - Not run as part of CI or the production build — on-demand only.
-- After running, `public/cv.pdf` is the up-to-date artifact to commit for the download button.
+- After running, `public/cv.pdf` is the up-to-date artifact to commit for the download button. Verify parser safety with `pdftotext -layout public/cv.pdf -` when available; the output should contain the resume text in reading order.
 
 ---
 

@@ -14,8 +14,8 @@ import ResumeRenderer from "@/app/components/CV/ResumeRenderer";
 
 const PDF_URL = "/cv.pdf";
 const SECTION_NAV = [
-  { id: "summary", label: "Header" },
-  { id: "skills", label: "Tech Stack" },
+  { id: "contact", label: "Contact" },
+  { id: "skills", label: "Technical Skills" },
   { id: "education", label: "Education" },
   { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },

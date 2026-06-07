@@ -14,9 +14,13 @@
         "network": "LinkedIn",
         "username": "aden-guo-b39743362",
         "url": "https://linkedin.com/in/aden-guo-b39743362"
+      },
+      {
+        "network": "GitHub",
+        "username": "AG9898",
+        "url": "https://github.com/AG9898"
       }
-    ],
-    "summary": "Full-stack and systems developer who ships production web platforms, source-grounded AI products, and agentic CLI tooling across TypeScript, Python, and Rust. Comfortable owning a feature end to end — schema and retrieval layer through API to deployed UI — on Postgres/pgvector, FastAPI, and Next.js. Geomatics engineering background grounds the work in rigorous data analysis and spatial reasoning."
+    ]
   },
   "work": [
     {

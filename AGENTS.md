@@ -205,6 +205,10 @@ App window content is no longer driven by the Next.js `children` prop. `WindowRe
 
 `src/data/resume.json` (JSON Resume v1 schema) is the agent-editable source for all CV content. The CV window renders it as styled HTML via `ResumeRenderer` — there is no PDF iframe. `public/cv.pdf` is a generated artifact for the download button only; it is not kept in sync automatically. Run `npm run export:cv` (puppeteer script) to regenerate it after editing `resume.json`.
 
+### 2026-06-06 — CV Export Must Use Route Handler
+
+The parser-safe PDF export surface is `/cv/print`, implemented as a route handler that returns standalone resume HTML. Do not export from `/cv?print=1`: the persistent desktop shell does not render route children directly, so Puppeteer can capture the desktop shell or a rasterized page instead of selectable resume text. After export, verify with `pdftotext -layout public/cv.pdf -`; empty output means the PDF is not ATS-safe.
+
 ### 2026-05-25 — buddy Added as Desktop Shortcut
 
 buddy (`/buddy`) is a Windows npm CLI + Electron floating pixel-art pet app. The pet (default: Ragdoll cat) reacts to Claude Code / Codex hook events. Source codebase: `/projects/buddy`. GitHub: `github.com/AG9898/buddy`. Status: in active development, pre-release, no npm publish yet. Spritesheet asset: `/projects/buddy/pets/default/spritesheet.webp` — copy to `public/buddy/spritesheet.webp` for use in the portfolio. Animation state machine: `/projects/buddy/pets/default/pet.json` (8 cols × 9 rows, 9 states). The page has two co-located helper components: `PetSprite.tsx` (mirrors PetSprite.svelte logic using CSS background-position stepping + requestAnimationFrame) and `TerminalSimulator.tsx` (auto-play typewriter that sequences through real CLI commands and fires `onStateChange` to update the sprite). CLI output format: read `/projects/buddy/src/cli/output.ts` and `/projects/buddy/docs/CLI.md`. Hook event → animation state mapping: `UserPromptSubmit → jumping`, `PreToolUse → running`, `PostToolUse → idle`, `PermissionRequest → waiting`, `Stop → waving`.

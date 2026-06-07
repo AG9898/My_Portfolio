@@ -153,6 +153,7 @@ Full testing guide: [`TESTING.md`](TESTING.md)
 
 - Always read [`macos-redesign.md`](macos-redesign.md) before redesign implementation.
 - Always treat `src/data/resume.json` as the CV source of truth. Edit it directly; do not hand-edit `public/cv.pdf`.
-- Regenerate `public/cv.pdf` via `npm run export:cv` after CV content changes. If Next starts on a non-3000 port, pass `CV_EXPORT_ORIGIN=http://localhost:<port>` to the export command.
+- Regenerate `public/cv.pdf` via `npm run export:cv` after CV content changes. If Next starts on a non-3000 port, pass `CV_EXPORT_ORIGIN=http://localhost:<port>` to the export command. The export script must use `/cv/print`, not `/cv?print=1`, because route handlers bypass the persistent desktop shell and produce parser-safe PDF text.
+- After regenerating `public/cv.pdf`, verify text extraction with `pdftotext -layout public/cv.pdf -` when available. Empty output usually means the PDF was exported as an image and is not ATS-safe.
 - Always keep `CLAUDE.md` as a symlink to root `AGENTS.md`.
 - Always update [`INDEX.md`](INDEX.md) when docs change.

@@ -67,7 +67,7 @@
 
 **Resolved:** 2026-05-13
 
-**Decision:** CV content lives in `src/data/resume.json` following the JSON Resume v1 schema. The CV window renders it as styled HTML via `ResumeRenderer`. `public/cv.pdf` is a generated artifact produced on demand by a local puppeteer script (`npm run export:cv`).
+**Decision:** CV content lives in `src/data/resume.json` following the JSON Resume v1 schema. The CV window renders it as styled HTML via `ResumeRenderer`. `public/cv.pdf` is a generated artifact produced on demand by a local puppeteer script (`npm run export:cv`) from standalone `/cv/print` HTML.
 
 **Why:** A PDF iframe is opaque to agents and requires manual file replacement to update. A structured JSON file is diff-friendly, agent-editable, and keeps the web display and the downloadable PDF derived from the same source.
 
@@ -75,7 +75,7 @@
 - **RenderCV** — excellent PDF output but requires a Python environment in an otherwise Node.js-only project.
 - **Reactive Resume** — feature-rich but database-backed and not designed for file-based programmatic editing.
 
-**PDF export strategy:** On-demand local script only (not CI-automated). Run `npm run export:cv` after editing `resume.json` to regenerate `public/cv.pdf`.
+**PDF export strategy:** On-demand local script only (not CI-automated). Run `npm run export:cv` after editing `resume.json` to regenerate `public/cv.pdf`. The export path is a route handler rather than `/cv?print=1` because the persistent desktop shell does not render route children directly.
 
 **Affects:** [`ARCHITECTURE.md`](ARCHITECTURE.md), [`CONVENTIONS.md`](CONVENTIONS.md)
 

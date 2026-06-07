@@ -43,13 +43,12 @@ export default function ResumeRenderer() {
   const location = basics.location
     ? [basics.location.city, basics.location.region].filter(Boolean).join(", ")
     : null;
-  const linkedIn = basics.profiles?.find(
-    (profile) => profile.network.toLowerCase() === "linkedin",
-  );
+  const profileLinks = basics.profiles?.filter((profile) => profile.url) ?? [];
+  const summary = "summary" in basics ? String(basics.summary ?? "") : "";
 
   return (
     <article className="mx-auto w-full max-w-[820px] bg-white px-9 py-8 text-[10.5px] leading-[1.28] text-black shadow-[0_18px_60px_rgba(0,0,0,0.34)] print:max-w-none print:px-0 print:py-0 print:text-[11.5px] print:leading-[1.42] print:shadow-none">
-      <header id="summary" className="scroll-mt-4 text-center">
+      <header id="contact" className="scroll-mt-4 text-center">
         <h1 className="text-[16px] font-bold uppercase leading-none tracking-normal text-black print:text-[18px]">
           {basics.name}
         </h1>
@@ -69,20 +68,26 @@ export default function ResumeRenderer() {
               </a>
             </>
           ) : null}
-          {linkedIn?.url ? (
-            <>
+          {profileLinks.map((profile) => (
+            <span key={profile.url} className="contents">
               <span aria-hidden="true">·</span>
-              <a className="underline" href={linkedIn.url}>
-                LinkedIn
+              <a className="underline" href={profile.url}>
+                {displayUrl(profile.url)}
               </a>
-              <span className="sr-only">{displayUrl(linkedIn.url)}</span>
-            </>
-          ) : null}
+            </span>
+          ))}
         </div>
       </header>
 
+      {summary ? (
+        <section id="summary-content" className="scroll-mt-4">
+          <SectionTitle>Professional Summary</SectionTitle>
+          <p className="mt-2 print:mt-2.5">{summary}</p>
+        </section>
+      ) : null}
+
       <section id="skills" className="scroll-mt-4">
-        <SectionTitle>Tech Stack</SectionTitle>
+        <SectionTitle>Technical Skills</SectionTitle>
         <ul className="mt-2 list-disc space-y-0.5 pl-5 print:mt-2.5 print:space-y-1">
           {skills.map((skillGroup) => (
             <li key={skillGroup.name}>
@@ -175,6 +180,9 @@ export default function ResumeRenderer() {
                   project.name
                 )}
               </h3>
+              {projectUrl ? (
+                <p className="mt-0.5">{displayUrl(projectUrl)}</p>
+              ) : null}
               {project.description || project.highlights?.length ? (
                 <ul className="mt-1 list-disc space-y-0.5 pl-5 print:mt-1.5 print:space-y-1">
                   {project.description ? <li>{project.description}</li> : null}

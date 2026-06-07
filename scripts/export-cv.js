@@ -11,7 +11,7 @@ const path = require("node:path");
 const puppeteer = require("puppeteer");
 
 const CV_EXPORT_ORIGIN = process.env.CV_EXPORT_ORIGIN ?? "http://localhost:3000";
-const CV_PRINT_URL = new URL("/cv?print=1", CV_EXPORT_ORIGIN).toString();
+const CV_PRINT_URL = new URL("/cv/print", CV_EXPORT_ORIGIN).toString();
 const OUTPUT_PATH = path.resolve(process.cwd(), "public/cv.pdf");
 
 async function exportCvPdf() {
