@@ -63,6 +63,23 @@ function renderList(items: string[]) {
   `;
 }
 
+function renderSkillsList(
+  skills: Array<{ name: string; keywords: string[] }>,
+) {
+  if (!skills.length) return "";
+
+  return `
+    <ul>
+      ${skills
+        .map(
+          (skillGroup) =>
+            `<li><strong>${escapeHtml(skillGroup.name)}:</strong> ${escapeHtml(skillGroup.keywords.join(", "))}</li>`,
+        )
+        .join("")}
+    </ul>
+  `;
+}
+
 function renderContactLinks(profiles: ResumeLink[] | undefined) {
   return (profiles ?? [])
     .filter((profile) => profile.url)
@@ -84,12 +101,7 @@ function renderResumeHtml() {
   const contact = escapeHtml(contactItems.join(" | "));
   const summary = "summary" in basics ? String(basics.summary ?? "") : "";
 
-  const skillsHtml = renderList(
-    skills.map(
-      (skillGroup) =>
-        `${skillGroup.name}: ${skillGroup.keywords.join(", ")}`,
-    ),
-  );
+  const skillsHtml = renderSkillsList(skills);
 
   const educationHtml = education
     .map((school) => {
@@ -165,10 +177,10 @@ function renderResumeHtml() {
         margin: 0;
         padding: 0;
         background: #fff;
-        color: #111;
+        color: #171717;
         font-family: Arial, Helvetica, sans-serif;
-        font-size: 10.1pt;
-        line-height: 1.2;
+        font-size: 9.6pt;
+        line-height: 1.19;
       }
 
       main {
@@ -182,36 +194,37 @@ function renderResumeHtml() {
       h1 {
         margin: 0;
         font-size: 16pt;
-        line-height: 1.1;
+        line-height: 1.06;
         text-transform: uppercase;
       }
 
       .contact {
         margin-top: 3px;
-        font-size: 9.5pt;
-        line-height: 1.15;
+        font-size: 9.2pt;
+        line-height: 1.12;
       }
 
       h2 {
         margin: 7px 0 3px;
-        border-bottom: 1px solid #111;
+        border-bottom: 0.7px solid #333;
         break-after: avoid;
-        font-size: 10.8pt;
-        line-height: 1.2;
+        font-size: 10.4pt;
+        letter-spacing: 0.02em;
+        line-height: 1.12;
         text-transform: uppercase;
       }
 
       p {
-        margin: 0 0 1px;
+        margin: 0;
       }
 
       ul {
-        margin: 2px 0 0;
-        padding-left: 16px;
+        margin: 1.5px 0 0;
+        padding-left: 15px;
       }
 
       li {
-        margin: 0 0 1px;
+        margin: 0 0 0.5px;
       }
 
       .entry {

@@ -192,6 +192,26 @@
         "Mixed-effects models",
         "Multi-tenant"
       ]
+    },
+    {
+      "name": "PigeonCoop — Local-First Agent Workflow IDE",
+      "description": "Active-development Rust/Tauri desktop app for designing, running, monitoring, and replaying agent workflows against local repositories.",
+      "url": "https://github.com/AG9898/PigeonCoop",
+      "highlights": [
+        "Built a React/TypeScript graph workspace with Start, End, Agent, Tool, Router, Memory, and Human Review nodes, plus pre-run validation and workspace-scoped CLI execution for repository tasks.",
+        "Designed Rust core crates for typed workflow definitions, RunEvent envelopes, deterministic run/node state machines, runtime adapters, and SQLite-backed workflow/run/event persistence.",
+        "Added replay/debugging and human-review surfaces backed by Rust unit tests, React component tests, and WebdriverIO/Tauri E2E coverage across builder, live run, review, and replay flows."
+      ],
+      "keywords": [
+        "Rust",
+        "Tauri",
+        "React",
+        "TypeScript",
+        "SQLite",
+        "Agent tooling",
+        "Workflow engine",
+        "WebdriverIO"
+      ]
     }
   ]
 }
