@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import resume from "@/data/resume.json";
+import { displayUrl, formatDateRange } from "@/app/components/CV/resumeFormat";
 
 export const dynamic = "force-static";
 
@@ -15,31 +16,6 @@ function escapeHtml(value: string | number | null | undefined) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
-}
-
-function formatDateRange(startDate?: string, endDate?: string) {
-  if (!startDate && !endDate) return "";
-  if (!startDate) return formatDate(endDate);
-  if (!endDate) return `${formatDate(startDate)} - Present`;
-  return `${formatDate(startDate)} - ${formatDate(endDate)}`;
-}
-
-function formatDate(date?: string) {
-  if (!date) return "";
-
-  const [year, month] = date.split("-");
-  if (!month) return year;
-
-  const parsed = new Date(Date.UTC(Number(year), Number(month) - 1));
-  return new Intl.DateTimeFormat("en", {
-    month: "short",
-    year: "numeric",
-    timeZone: "UTC",
-  }).format(parsed);
-}
-
-function displayUrl(url: string) {
-  return url.replace(/^https?:\/\//, "").replace(/\/$/, "");
 }
 
 function renderSection(title: string, body: string) {

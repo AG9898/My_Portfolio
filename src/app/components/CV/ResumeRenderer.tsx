@@ -2,31 +2,7 @@
 
 import type { ReactNode } from "react";
 import resume from "@/data/resume.json";
-
-function formatDateRange(startDate?: string, endDate?: string) {
-  if (!startDate && !endDate) return null;
-  if (!startDate) return formatDate(endDate);
-  if (!endDate) return `${formatDate(startDate)} - Present`;
-  return `${formatDate(startDate)} - ${formatDate(endDate)}`;
-}
-
-function formatDate(date?: string) {
-  if (!date) return "";
-
-  const [year, month] = date.split("-");
-  if (!month) return year;
-
-  const parsed = new Date(Date.UTC(Number(year), Number(month) - 1));
-  return new Intl.DateTimeFormat("en", {
-    month: "short",
-    year: "numeric",
-    timeZone: "UTC",
-  }).format(parsed);
-}
-
-function displayUrl(url: string) {
-  return url.replace(/^https?:\/\//, "").replace(/\/$/, "");
-}
+import { displayUrl, formatDateRange } from "./resumeFormat";
 
 function SectionTitle({ children }: { children: ReactNode }) {
   return (
@@ -98,6 +74,35 @@ export default function ResumeRenderer() {
         </ul>
       </section>
 
+      <section id="experience" className="scroll-mt-4">
+        <SectionTitle>Professional Experience</SectionTitle>
+        <div className="mt-2 space-y-2.5 print:mt-1.5 print:space-y-2">
+          {work.map((job) => (
+            <div key={`${job.name}-${job.position}-${job.startDate}`}>
+              <p>
+                <span className="font-bold">{job.position}</span>
+                {" - "}
+                <span className="italic">{job.name}</span>
+              </p>
+              <p className="mt-0.5 italic">
+                {formatDateRange(job.startDate, job.endDate)}
+              </p>
+              {job.highlights?.length ? (
+                <ul className="mt-1 list-disc space-y-0.5 pl-5 print:mt-1 print:space-y-0.5">
+                  {job.highlights.map((highlight) => (
+                    <li key={highlight}>{highlight}</li>
+                  ))}
+                </ul>
+              ) : job.summary ? (
+                <ul className="mt-1 list-disc pl-5">
+                  <li>{job.summary}</li>
+                </ul>
+              ) : null}
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section id="education" className="scroll-mt-4">
         <SectionTitle>Education</SectionTitle>
         <div className="mt-2 space-y-2 print:mt-1.5 print:space-y-1.5">
@@ -129,35 +134,6 @@ export default function ResumeRenderer() {
                     ))}
                   </ul>
                 </>
-              ) : null}
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section id="experience" className="scroll-mt-4">
-        <SectionTitle>Professional Experience</SectionTitle>
-        <div className="mt-2 space-y-2.5 print:mt-1.5 print:space-y-2">
-          {work.map((job) => (
-            <div key={`${job.name}-${job.position}-${job.startDate}`}>
-              <p>
-                <span className="font-bold">{job.position}</span>
-                {" - "}
-                <span className="italic">{job.name}</span>
-              </p>
-              <p className="mt-0.5 italic">
-                {formatDateRange(job.startDate, job.endDate)}
-              </p>
-              {job.highlights?.length ? (
-                <ul className="mt-1 list-disc space-y-0.5 pl-5 print:mt-1 print:space-y-0.5">
-                  {job.highlights.map((highlight) => (
-                    <li key={highlight}>{highlight}</li>
-                  ))}
-                </ul>
-              ) : job.summary ? (
-                <ul className="mt-1 list-disc pl-5">
-                  <li>{job.summary}</li>
-                </ul>
               ) : null}
             </div>
           ))}

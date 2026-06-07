@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import {
   ChevronLeft,
   ChevronRight,
@@ -16,37 +15,12 @@ const PDF_URL = "/cv.pdf";
 const SECTION_NAV = [
   { id: "contact", label: "Contact" },
   { id: "skills", label: "Technical Skills" },
-  { id: "education", label: "Education" },
   { id: "experience", label: "Experience" },
+  { id: "education", label: "Education" },
   { id: "projects", label: "Projects" },
 ] as const;
 
 export default function CV() {
-  const isPrintMode =
-    typeof window !== "undefined" &&
-    new URLSearchParams(window.location.search).get("print") === "1";
-
-  useEffect(() => {
-    if (!isPrintMode) return;
-
-    document.body.classList.add("cv-print-mode");
-    return () => {
-      document.body.classList.remove("cv-print-mode");
-    };
-  }, [isPrintMode]);
-
-  if (isPrintMode) {
-    return (
-      <section
-        data-cv-print-view="true"
-        data-cv-print-ready="true"
-        className="bg-white p-0 text-black"
-      >
-        <ResumeRenderer />
-      </section>
-    );
-  }
-
   const scrollToSection = (id: (typeof SECTION_NAV)[number]["id"]) => {
     const section = document.getElementById(id);
     section?.scrollIntoView({ behavior: "smooth", block: "start" });
