@@ -101,7 +101,6 @@ export default function ResumeRenderer() {
               <p>
                 <span className="font-bold">{school.studyType}:</span>{" "}
                 {school.area}
-                {school.score ? ` [${school.score}]` : ""}
               </p>
               <p className="mt-0.5">
                 <span className="font-bold">{school.institution}</span>
