@@ -107,6 +107,11 @@ export default function ResumeRenderer() {
                 <span className="font-bold">{school.institution}</span>
                 {school.location ? ` - ${school.location}` : ""}
               </p>
+              {school.startDate || school.endDate ? (
+                <p className="mt-0.5 italic">
+                  {formatDateRange(school.startDate, school.endDate)}
+                </p>
+              ) : null}
               <p className="sr-only">
                 {school.institution}
                 {school.location ? ` · ${school.location}` : ""}

@@ -52,14 +52,10 @@
       "location": "Calgary, AB",
       "studyType": "Bachelor of Science",
       "area": "Geomatics Engineering",
-      "endDate": "2025-04",
-      "score": "Graduated",
+      "startDate": "2020",
+      "endDate": "2026",
       "courses": [
-        "Photogrammetry, 3D modeling, and digital imaging workflows",
-        "Geospatial data analysis, error modeling, and quality control",
-        "Spatial database design, SQL, and geospatial data mining",
-        "Project management, technical reporting, and collaborative problem-solving",
-        "Applied geomatics workflow through capstone and ENGO 500 field survey camp"
+        "Software-relevant foundation in spatial databases, data analysis, Python workflows, and technical reporting"
       ]
     }
   ],
