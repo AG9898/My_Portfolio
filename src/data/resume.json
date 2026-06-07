@@ -20,30 +20,31 @@
   },
   "work": [
     {
+      "name": "Canada West Land",
+      "position": "GIS Technologist",
+      "location": "Calgary, AB",
+      "startDate": "2025-12",
+      "summary": "GIS technologist focused on enterprise GIS data management, ETL automation, map production, and AI-assisted pipeline development.",
+      "highlights": [
+        "Manage six production GIS maps for a major enterprise client and support data visualization workflows across feature, land, and reference datasets ranging from roughly 5,000 to 1M records.",
+        "Built end-to-end ETL and data-cleaning pipelines with Esri, FME, Python scripting, APIs, and HTML/CSS expression styling for polished professional map outputs.",
+        "Contributed to an internal Azure production app for agentic AI workflows using LangChain, LangGraph, n8n, Azure Repos/Pipelines, Doppler-managed secrets, and role-specific system prompt design; reduced selected full-day manual processes to 1-2 hours."
+      ]
+    },
+    {
       "name": "University of Calgary",
       "position": "Engineering Capstone Project Lead",
       "location": "Calgary, AB",
       "startDate": "2024-09",
       "endDate": "2025-04",
-      "summary": "Led a team project evaluating surveying methods for disc golf course mapping and delivered final technical findings.",
-      "highlights": [
-        "Compared RTK GNSS, range finder, and odometer techniques to assess mapping accuracy and efficiency.",
-        "Operated drones for photogrammetric capture and executed spatial intersection workflows for 3D modeling.",
-        "Processed and validated geospatial datasets with photogrammetry tools and Python-based analysis pipelines.",
-        "Authored and presented the final report at the SaGES Project Presentation."
-      ]
+      "summary": "Led capstone delivery for a geospatial mapping study, comparing survey methods and validating spatial datasets with photogrammetry tools and Python-based analysis."
     },
     {
       "name": "Gongcha",
       "position": "Shift Lead / Team Trainer",
       "startDate": "2020-11",
       "endDate": "2024-05",
-      "summary": "Managed high-volume shift operations while training team members on standardized service workflows.",
-      "highlights": [
-        "Trained and mentored staff to improve consistency and teamwork.",
-        "Balanced service demands and operational tasks under time constraints.",
-        "Strengthened team coordination, problem-solving, and day-to-day execution."
-      ]
+      "summary": "Managed high-volume shift operations and trained staff on standardized workflows, strengthening team coordination and execution under time constraints."
     }
   ],
   "education": [
