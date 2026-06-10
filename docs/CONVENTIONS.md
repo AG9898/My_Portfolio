@@ -44,7 +44,7 @@ Normative guide for code in this portfolio. Read before writing new UI architect
   - **Glass Atlas** (embeddable): Overview renders a full-bleed iframe (the live app). Its nav is Overview / About / Tech Stack / Links — "Overview" means the live embed, not the project description.
   - **About page**: four personal sections — About Aden, How I Work, Frontend Focus, What I Value.
   - **Media assets** — screenshots and video clips go inside the Overview or Features panel, pointing to `/public/projects/<slug>/`. Placeholder `<div>` cards stay in place until assets arrive so no layout changes are needed when they do. All screenshot thumbnails must follow the **Screenshot Lightbox pattern** (see Interaction Patterns below).
-- **CV content lives in `src/data/resume.json`** (JSON Resume v1 schema). Do not hardcode resume sections in `src/app/cv/page.tsx` or `ResumeRenderer`. To update CV content, edit `resume.json` directly. Run `npm run export:cv` after edits to regenerate `public/cv.pdf` for the download button.
+- **CV content lives in `src/data/resume.json`** (JSON Resume v1 schema). Do not hardcode resume sections in `src/app/cv/page.tsx` or `ResumeRenderer`. To update CV content, edit `resume.json` directly. After edits, run `npm run publish:resume` (= `export:cv` + `sync:resume`) — this regenerates `public/cv.pdf` for the download button **and** pushes the resume to the downstream Waunder app. Use `npm run export:cv` alone only when you intentionally do not want to sync (see the Resume Sync to Waunder discovery in `AGENTS.md`).
 - Iframe pages hardcode their `src` URL directly — no shared generic browser component. Full-bleed iframes use `h-full w-full border-0` on the `<iframe>` and `min-h-0 flex-1` on the containing `<div>`, with the outer window container using `flex h-full`.
 
 ### Styling
@@ -153,7 +153,7 @@ Full testing guide: [`TESTING.md`](TESTING.md)
 
 - Always read [`macos-redesign.md`](macos-redesign.md) before redesign implementation.
 - Always treat `src/data/resume.json` as the CV source of truth. Edit it directly; do not hand-edit `public/cv.pdf`.
-- Regenerate `public/cv.pdf` via `npm run export:cv` after CV content changes. If Next starts on a non-3000 port, pass `CV_EXPORT_ORIGIN=http://localhost:<port>` to the export command. The export script must use `/cv/print`, not `/cv?print=1`, because route handlers bypass the persistent desktop shell and produce parser-safe PDF text.
+- Regenerate `public/cv.pdf` via `npm run export:cv` after CV content changes — or `npm run publish:resume` to regenerate **and** sync the resume to Waunder in one step (preferred when the resume content itself changed). If Next starts on a non-3000 port, pass `CV_EXPORT_ORIGIN=http://localhost:<port>` to the export command. The export script must use `/cv/print`, not `/cv?print=1`, because route handlers bypass the persistent desktop shell and produce parser-safe PDF text.
 - After regenerating `public/cv.pdf`, verify text extraction with `pdftotext -layout public/cv.pdf -` when available. Empty output usually means the PDF was exported as an image and is not ATS-safe.
 - Always keep `CLAUDE.md` as a symlink to root `AGENTS.md`.
 - Always update [`INDEX.md`](INDEX.md) when docs change.

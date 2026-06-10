@@ -182,7 +182,7 @@ All app window pages use a **panel-switching sidebar pattern**: `"use client"` w
 - The macOS Preview chrome is preserved: a toolbar row (open-in-tab, download buttons) and a left sidebar showing section names (Summary, Experience, Education, Skills, Projects) as a mini nav.
 - The sidebar section nav is the only interactive sidebar in the CV window; clicking a section name scrolls the main content pane to that section.
 - `/cv/print` is a route handler that returns standalone, parser-safe resume HTML for PDF export. It intentionally bypasses the persistent desktop shell so exported PDFs contain selectable text instead of a rendered desktop screenshot.
-- `public/cv.pdf` is a generated artifact used exclusively for the download and open-in-tab buttons. It is not kept in sync automatically — run `npm run export:cv` to regenerate it after editing `resume.json`.
+- `public/cv.pdf` is a generated artifact used exclusively for the download and open-in-tab buttons. It is not kept in sync automatically — run `npm run export:cv` to regenerate it after editing `resume.json` (or `npm run publish:resume` to regenerate **and** push the resume to the downstream Waunder app — see *Resume Sync to Waunder* below).
 - Media assets (screenshots, video) go in `aspect-video` placeholder slots within Overview or Features panels, pointing to `/public/projects/<slug>/`.
 
 ### Theme

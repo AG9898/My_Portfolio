@@ -203,7 +203,7 @@ App window content is no longer driven by the Next.js `children` prop. `WindowRe
 
 ### 2026-05-13 — JSON Resume as CV Source of Truth
 
-`src/data/resume.json` (JSON Resume v1 schema) is the agent-editable source for all CV content. The CV window renders it as styled HTML via `ResumeRenderer` — there is no PDF iframe. `public/cv.pdf` is a generated artifact for the download button only; it is not kept in sync automatically. Run `npm run export:cv` (puppeteer script) to regenerate it after editing `resume.json`.
+`src/data/resume.json` (JSON Resume v1 schema) is the agent-editable source for all CV content. The CV window renders it as styled HTML via `ResumeRenderer` — there is no PDF iframe. `public/cv.pdf` is a generated artifact for the download button only; it is not kept in sync automatically. After editing `resume.json`, run `npm run publish:resume` to regenerate `public/cv.pdf` **and** push the resume to the downstream Waunder app (see the *Resume Sync to Waunder* discovery below); use `npm run export:cv` alone only when you deliberately want to skip the Waunder sync.
 
 ### 2026-06-06 — CV Export Must Use Route Handler
 

@@ -75,7 +75,7 @@
 - **RenderCV** — excellent PDF output but requires a Python environment in an otherwise Node.js-only project.
 - **Reactive Resume** — feature-rich but database-backed and not designed for file-based programmatic editing.
 
-**PDF export strategy:** On-demand local script only (not CI-automated). Run `npm run export:cv` after editing `resume.json` to regenerate `public/cv.pdf`. The export path is a route handler rather than `/cv?print=1` because the persistent desktop shell does not render route children directly.
+**PDF export strategy:** On-demand local script only (not CI-automated). Run `npm run export:cv` after editing `resume.json` to regenerate `public/cv.pdf`, or `npm run publish:resume` to also push the resume to the downstream Waunder app in the same step (see the *Resume Sync to Waunder* discovery in `AGENTS.md`). The export path is a route handler rather than `/cv?print=1` because the persistent desktop shell does not render route children directly.
 
 **Affects:** [`ARCHITECTURE.md`](ARCHITECTURE.md), [`CONVENTIONS.md`](CONVENTIONS.md)
 
