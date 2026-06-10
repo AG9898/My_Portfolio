@@ -12,11 +12,13 @@ This is the canonical source for environment variable and secret configuration.
 
 ## Variable Matrix
 
-This project currently has no required environment variables.
+The deployed frontend requires no environment variables. Two variables are needed only by the
+on-demand resume-sync script (`npm run sync:resume` / `publish:resume`), never by the site itself.
 
 | Variable | Required | Default | Description | Where set |
 |---|---|---|---|---|
-| None | No | N/A | No runtime environment variables are required for local development. | N/A |
+| `WAUNDER_BASE_URL` | Only for `sync:resume` | N/A | Public origin of the Waunder web service that receives the resume push (`POST /api/profile/resume`). | Shell env / `.env.local` when running the sync script |
+| `WAUNDER_APP_SECRET` | Only for `sync:resume` | N/A | Shared secret (Waunder's `APP_SHARED_SECRET`) used to open a Waunder session for the push. **Secret — never commit.** | Shell env / `.env.local` only |
 
 ---
 

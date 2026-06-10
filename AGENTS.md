@@ -221,6 +221,20 @@ buddy (`/buddy`) is a Windows npm CLI + Electron floating pixel-art pet app. The
 
 PigeonCoop (`/pigeoncoop`) is a Rust/Tauri local-first desktop app for designing, running, monitoring, and replaying agent workflows through a game-inspired 2D interface. Source codebase: `/projects/PigeonCoop`. GitHub: `github.com/AG9898/PigeonCoop`. Status: in active development, no live URL. Image assets: `/public/PigeonCoop/` (three images: `Pigeon-workspace.png`, `Pigeon-workspace-planned.png`, `Pigeon-mermaid-diagram.png`). The page component is authored from the source codebase docs at `/projects/PigeonCoop/docs/` — read `PRD.md`, `DESIGN_SPEC.md`, and `Cargo.toml` for content; `ARCHITECTURE.md` for tech architecture highlights. Detail level and page structure must match `src/app/techy/page.tsx` — four sidebar panels (Overview, Features, Tech Stack, Links), lightbox, real content throughout, no placeholder text.
 
+### 2026-06-10 — Resume Sync to Waunder (push-on-export)
+
+`scripts/sync-resume.js` (`npm run sync:resume`, or `publish:resume` = `export:cv` + `sync:resume`)
+pushes the resume to **Waunder**, a separate personal job-application assistant (`/projects/Waunder`)
+that uses the resume to score jobs and draft applications. This portfolio stays the single source of
+truth: the script POSTs `src/data/resume.json` (JSON Resume), `public/CV_AG.md`, and `public/cv.pdf` to
+`POST $WAUNDER_BASE_URL/api/profile/resume`. Waunder maps the JSON deterministically into its own
+Profile/ResumeDocument and does NOT parse the PDF, so keep `resume.json` canonical and rerun
+`export:cv` before syncing so the pushed PDF matches. Auth is a shared secret: the script opens a
+Waunder session via `POST /api/session` with `WAUNDER_APP_SECRET` (= Waunder's `APP_SHARED_SECRET`),
+then reuses the cookie. Needs `WAUNDER_BASE_URL` + `WAUNDER_APP_SECRET` (see `docs/ENV_VARS.md`); the
+secret is read from env and never logged. Node 22's global `fetch`/`FormData`/`Blob` are used — no deps
+added. This is dev-machine/on-demand only; it is not part of the deployed site, CI, or the build.
+
 ### 2026-05-08 — V1 Complete: Key Implementation Patterns
 
 The following patterns emerged during the complete V1 implementation and are now canonical:

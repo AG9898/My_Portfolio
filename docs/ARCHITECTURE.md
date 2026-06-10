@@ -205,6 +205,21 @@ All app window pages use a **panel-switching sidebar pattern**: `"use client"` w
 - Not run as part of CI or the production build — on-demand only.
 - After running, `public/cv.pdf` is the up-to-date artifact to commit for the download button. Verify parser safety with `pdftotext -layout public/cv.pdf -` when available; the output should contain the resume text in reading order.
 
+### Resume Sync to Waunder (`scripts/sync-resume.js`)
+
+- This portfolio is the **single source of truth** for the resume. A separate project, **Waunder**
+  (a personal job-application assistant), consumes the resume to score jobs and draft applications.
+- `npm run sync:resume` pushes three artifacts to Waunder's ingest endpoint
+  (`POST $WAUNDER_BASE_URL/api/profile/resume`): the canonical `src/data/resume.json` (JSON Resume),
+  `public/CV_AG.md` (text), and `public/cv.pdf` (the file Waunder's worker uploads to ATS forms).
+  Waunder maps the JSON deterministically — it does **not** parse the PDF.
+- Auth: Waunder is single-user. The script opens a session by POSTing `WAUNDER_APP_SECRET` to
+  `/api/session`, then reuses the returned cookie for the upload. The secret is read from the
+  environment and never logged.
+- Push-on-export convenience: `npm run publish:resume` runs `export:cv` then `sync:resume`. Run the
+  dev server first (export:cv needs it). Requires `WAUNDER_BASE_URL` and `WAUNDER_APP_SECRET` (see
+  [`ENV_VARS.md`](ENV_VARS.md)). On-demand only; not part of CI or the production build.
+
 ---
 
 ## Routing and State Flow
@@ -230,6 +245,7 @@ All app window pages use a **panel-switching sidebar pattern**: `"use client"` w
 | `simplex-noise` | Generative wallpaper | Yes |
 | `three` | Cyber Grid wallpaper shader renderer | Yes |
 | WebGL2 browser API | Smoke shader wallpaper | Optional with fallback |
+| Waunder (`POST /api/profile/resume`) | Downstream consumer of the resume; `sync:resume` pushes the JSON Resume + PDF/markdown to it. Outbound, on-demand, dev-machine only — not part of the deployed site. | Optional |
 
 ---
 

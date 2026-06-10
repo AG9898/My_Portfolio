@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "export:cv": "node scripts/export-cv.js",
+    "sync:resume": "node scripts/sync-resume.js",
+    "publish:resume": "npm run export:cv && npm run sync:resume",
     "analyze": "ANALYZE=true npm run build",
     "performance": "npm run build && npm run start",
     "bundle-analyzer": "cross-env ANALYZE=true npm run build"
