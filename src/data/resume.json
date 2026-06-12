@@ -30,10 +30,10 @@
       "startDate": "2025-12",
       "summary": "GIS technologist focused on enterprise GIS data management, ETL automation, map production, and AI-assisted pipeline development.",
       "highlights": [
-        "Manage six production GIS maps for a major enterprise client and support data visualization workflows across feature, land, and reference datasets ranging from roughly 5,000 to 1M records.",
+        "Serve as a key contributor on a large-scale enterprise GIS project for a major client, owning a workstream of six production maps and the supporting data visualization workflows across feature, land, and reference datasets ranging from roughly 5,000 to 1M records.",
         "Built end-to-end ETL and data-cleaning pipelines with Esri, FME, Python scripting, APIs, and HTML/CSS expression styling for polished professional map outputs.",
-        "Contributed to an internal Azure-hosted production app for agentic AI workflows using LangChain, LangGraph, and n8n, with role-specific system-prompt design; reduced selected full-day manual processes to 1-2 hours.",
-        "Developed and shipped within an Azure DevOps environment — source control and code review through Azure Repos, automated build and release via Azure Pipelines (CI/CD), and secrets managed with Doppler — collaborating in a branch-based workflow on the internal production application."
+        "Contributed to an internal Azure-hosted production app for agentic AI workflows using LangChain, LangGraph, and n8n, with role-specific system-prompt design; reduced selected full-day manual processes to 1 to 2 hours.",
+        "Developed and shipped within an Azure DevOps environment, using Azure Repos for source control and code review, Azure Pipelines for automated build and release (CI/CD), and Doppler for secrets management across a branch-based collaboration workflow."
       ]
     },
     {
@@ -153,19 +153,21 @@
     {
       "name": "GIS & Survey",
       "keywords": [
-        "ArcGIS",
+        "ArcGIS Online",
+        "ArcGIS Pro",
         "QGIS",
         "PostGIS",
         "GeoPandas",
         "GDAL/PROJ",
         "RTK GNSS workflows",
-        "Agisoft Metashape"
+        "FME Form",
+        "FME Flow"
       ]
     }
   ],
   "projects": [
     {
-      "name": "Glass Atlas — Source-Grounded RAG Knowledge Site",
+      "name": "Glass Atlas: Source-Grounded RAG Knowledge Site",
       "description": "Deployed SvelteKit 2 (Svelte 5 runes) editorial site that turns a personal note library into a conversational, citation-backed assistant.",
       "url": "https://glass-atlas-production.up.railway.app",
       "highlights": [
@@ -185,12 +187,11 @@
       ]
     },
     {
-      "name": "Weather & Wellness — UBC Research Platform",
+      "name": "Weather & Wellness: UBC Research Platform",
       "description": "Production multi-tenant research platform for a UBC Psychology lab where research assistants run validated psychological instruments with anonymous participants.",
       "url": "https://ubcpsych.com",
       "highlights": [
         "Built a Next.js 15 / React 19 frontend and FastAPI backend that auto-scores validated instruments (digit span, loneliness, depression, anxiety) in real time.",
-        "Implemented weather–psychology mixed-effects models with statsmodels, NumPy, and Pandas over per-lab isolated datasets.",
         "Architected per-lab data isolation on Supabase Postgres/Auth with Upstash Redis, shipped to production at ubcpsych.com."
       ],
       "keywords": [
@@ -204,7 +205,7 @@
       ]
     },
     {
-      "name": "PigeonCoop — Local-First Agent Workflow IDE",
+      "name": "PigeonCoop: Local-First Agent Workflow IDE",
       "description": "Active-development Rust/Tauri desktop app for designing, running, monitoring, and replaying agent workflows against local repositories.",
       "url": "https://github.com/AG9898/PigeonCoop",
       "highlights": [
