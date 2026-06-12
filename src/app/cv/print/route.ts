@@ -156,7 +156,7 @@ function renderResumeHtml() {
         color: #171717;
         font-family: Arial, Helvetica, sans-serif;
         font-size: 9.6pt;
-        line-height: 1.19;
+        line-height: 1.13;
       }
 
       main {

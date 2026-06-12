@@ -32,7 +32,8 @@
       "highlights": [
         "Manage six production GIS maps for a major enterprise client and support data visualization workflows across feature, land, and reference datasets ranging from roughly 5,000 to 1M records.",
         "Built end-to-end ETL and data-cleaning pipelines with Esri, FME, Python scripting, APIs, and HTML/CSS expression styling for polished professional map outputs.",
-        "Contributed to an internal Azure production app for agentic AI workflows using LangChain, LangGraph, n8n, Azure Repos/Pipelines, Doppler-managed secrets, and role-specific system prompt design; reduced selected full-day manual processes to 1-2 hours."
+        "Contributed to an internal Azure-hosted production app for agentic AI workflows using LangChain, LangGraph, and n8n, with role-specific system-prompt design; reduced selected full-day manual processes to 1-2 hours.",
+        "Developed and shipped within an Azure DevOps environment — source control and code review through Azure Repos, automated build and release via Azure Pipelines (CI/CD), and secrets managed with Doppler — collaborating in a branch-based workflow on the internal production application."
       ]
     },
     {
@@ -71,6 +72,8 @@
         "Python",
         "TypeScript",
         "JavaScript",
+        "Go",
+        "Ruby",
         "Rust",
         "C++",
         "SQL",
@@ -89,6 +92,9 @@
         "SvelteKit",
         "Node.js",
         "FastAPI",
+        "Ruby on Rails",
+        "Go + go-app (WebAssembly)",
+        "PWA / Service Workers",
         "Tailwind CSS",
         "Tauri",
         "Drizzle ORM",
@@ -110,6 +116,7 @@
       "name": "Cloud & Infrastructure",
       "keywords": [
         "Azure",
+        "Azure DevOps (Repos & Pipelines)",
         "AWS S3",
         "Vercel",
         "Railway",
@@ -137,6 +144,9 @@
         "Bash",
         "Git & GitHub",
         "Docker",
+        "Playwright",
+        "Web Push (VAPID)",
+        "RSpec / pytest",
         "VS Code"
       ]
     },
