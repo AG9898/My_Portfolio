@@ -19,13 +19,13 @@
 //
 // Shared appMetadata (APPS) is the single source of truth for labels/routes.
 
-import { useState } from "react";
 import { APPS, type AppId } from "../appMetadata";
 import { useWindowManager } from "../WindowManager/WindowManagerProvider";
 import { getCenteredWindowPositionForViewport } from "../WindowManager/windowGeometry";
+import { useDesktop } from "./DesktopProvider";
 
 // ─── Icon labels — file-system metaphors matching macos-redesign.md ───────────
-const ICON_LABELS: Record<AppId, string> = {
+export const ICON_LABELS: Record<AppId, string> = {
   home:           "Home",
   projects:       "projects/",
   about:          "about_me.txt",
@@ -405,7 +405,7 @@ function BuddyIcon() {
 
 // ─── Icon dispatcher ──────────────────────────────────────────────────────────
 
-function ShortcutFileIcon({ appId }: { appId: AppId }) {
+export function ShortcutFileIcon({ appId }: { appId: AppId }) {
   switch (appId) {
     case "home":        return <TxtIcon />;
     case "projects":    return <FolderIcon />;
@@ -430,6 +430,7 @@ interface DesktopShortcutItemProps {
   selected: boolean;
   onSelect: () => void;
   onOpen: () => void;
+  onContextMenu: (e: React.MouseEvent) => void;
 }
 
 function DesktopShortcutItem({
@@ -438,11 +439,14 @@ function DesktopShortcutItem({
   selected,
   onSelect,
   onOpen,
+  onContextMenu,
 }: DesktopShortcutItemProps) {
   return (
     <button
       data-window-animation-target={appId}
       data-window-target-priority="desktop"
+      data-desktop-icon
+      data-app-id={appId}
       className="flex flex-col items-center w-[88px] py-1.5 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
       style={{
         background: selected ? "rgba(10,132,255,0.28)" : "transparent",
@@ -452,6 +456,7 @@ function DesktopShortcutItem({
       }}
       onClick={onSelect}
       onDoubleClick={onOpen}
+      onContextMenu={onContextMenu}
       aria-label={label}
       aria-pressed={selected}
     >
@@ -472,12 +477,14 @@ function DesktopShortcutItem({
 // ─── DesktopShortcuts — the full sidebar column ───────────────────────────────
 
 export default function DesktopShortcuts() {
-  const [selectedId, setSelectedId] = useState<AppId | null>(null);
   const { dispatch } = useWindowManager();
-
-  function handleSelect(id: AppId) {
-    setSelectedId((prev) => (prev === id ? null : id));
-  }
+  const {
+    isSelected,
+    selectOnly,
+    clearSelection,
+    openMenu,
+    openInfo,
+  } = useDesktop();
 
   function handleOpen(id: AppId) {
     const app = APPS.find((a) => a.id === id);
@@ -493,6 +500,21 @@ export default function DesktopShortcuts() {
     });
   }
 
+  function handleContextMenu(e: React.MouseEvent, id: AppId) {
+    e.preventDefault();
+    e.stopPropagation();
+    selectOnly(id);
+    openMenu({
+      x: e.clientX,
+      y: e.clientY,
+      items: [
+        { type: "item", label: "Open", onSelect: () => handleOpen(id) },
+        { type: "separator" },
+        { type: "item", label: "Get Info", onSelect: () => openInfo(id) },
+      ],
+    });
+  }
+
   return (
     <div
       className="absolute z-10 flex flex-col gap-3"
@@ -500,7 +522,7 @@ export default function DesktopShortcuts() {
       aria-label="Desktop shortcuts"
       // Deselect when clicking empty area within the sidebar container
       onClick={(e) => {
-        if (e.target === e.currentTarget) setSelectedId(null);
+        if (e.target === e.currentTarget) clearSelection();
       }}
     >
       {APPS.filter((app) => app.showInDock === false).map((app) => (
@@ -508,9 +530,10 @@ export default function DesktopShortcuts() {
           key={app.id}
           appId={app.id}
           label={ICON_LABELS[app.id]}
-          selected={selectedId === app.id}
-          onSelect={() => handleSelect(app.id)}
+          selected={isSelected(app.id)}
+          onSelect={() => selectOnly(app.id)}
           onOpen={() => handleOpen(app.id)}
+          onContextMenu={(e) => handleContextMenu(e, app.id)}
         />
       ))}
     </div>

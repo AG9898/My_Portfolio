@@ -235,6 +235,33 @@ then reuses the cookie. Needs `WAUNDER_BASE_URL` + `WAUNDER_APP_SECRET` (see `do
 secret is read from env and never logged. Node 22's global `fetch`/`FormData`/`Blob` are used — no deps
 added. This is dev-machine/on-demand only; it is not part of the deployed site, CI, or the build.
 
+### 2026-06-17 — Native Desktop Interactions (marquee + context menus + Get Info)
+
+The empty desktop now supports macOS-style interactions, owned by a new `DesktopProvider`
+context (selection set, open context menu, open Get Info app id) that wraps the shell inside
+`WallpaperProvider`. Key constraints for future work:
+
+- **`DesktopSurface` is the empty-space catcher at `z-index: 5`** (above wallpaper `0`, below
+  shortcuts `10` and windows `20+`). It only acts when `e.target === e.currentTarget`, so it never
+  steals clicks from icons, windows, dock, or menu bar. Marquee hit-tests `[data-desktop-icon]`
+  elements by `getBoundingClientRect`; every shortcut therefore carries `data-desktop-icon` +
+  `data-app-id`. The marquee rectangle renders inside the surface, so it sits *behind* icons (z-10) —
+  acceptable since icons highlight on selection; do not expect the band to paint over icons.
+- **Icon selection is multi-select in `DesktopProvider`**, not local state. `DesktopShortcuts` no
+  longer owns `selectedId`. `ShortcutFileIcon` and `ICON_LABELS` are exported from
+  `DesktopShortcuts.tsx` for reuse (the Get Info panel renders the icon).
+- **Context menu + Get Info render via `DesktopMenuLayer`**, mounted last in the shell, at
+  `z-index: 10000` / `9000` so they stack above everything. `ContextMenu` dismisses on outside
+  click / Escape / scroll / resize / blur.
+- **Get Info content lives in `desktopInfo.ts` (`DESKTOP_INFO`)** keyed by `AppId` — only the six
+  desktop-shortcut apps have entries. The "Comments" field is the easter-egg line; keep additions
+  playful but accurate to what each app actually is.
+- **"Change Wallpaper" cycles** `flow-field → tahoe-dawn → spooky-smoke → gradient-dots` via
+  `WallpaperProvider.setWallpaper`; the desktop menu also toggles light/dark via `next-themes`.
+- Testing note: when the Home window is open and centered it overlaps the lower desktop icons, so a
+  Playwright `dblclick` on a lower icon (e.g. `buddy`) is intercepted by the window — drive top icons
+  or move the window first.
+
 ### 2026-05-08 — V1 Complete: Key Implementation Patterns
 
 The following patterns emerged during the complete V1 implementation and are now canonical:

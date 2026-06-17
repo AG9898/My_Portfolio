@@ -9,6 +9,9 @@ import Wallpaper from "./components/Desktop/Wallpaper";
 import { WindowManagerProvider } from "./components/WindowManager/WindowManagerProvider";
 import { WindowRenderer } from "./components/WindowManager/WindowRenderer";
 import { WallpaperProvider } from "./components/Desktop/WallpaperProvider";
+import { DesktopProvider } from "./components/Desktop/DesktopProvider";
+import DesktopSurface from "./components/Desktop/DesktopSurface";
+import DesktopMenuLayer from "./components/Desktop/DesktopMenuLayer";
 import { PORTFOLIO_LOGO_SRC } from "./components/logoAssets";
 import "./globals.css";
 
@@ -43,6 +46,7 @@ export default function RootLayout(_props: Readonly<{ children: React.ReactNode 
           <div className="hidden md:block" data-desktop-shell="true">
             <WindowManagerProvider>
               <WallpaperProvider>
+               <DesktopProvider>
                 {/* Desktop shell root — persistent across all route changes */}
                 <div
                   id="desktop-root"
@@ -52,6 +56,11 @@ export default function RootLayout(_props: Readonly<{ children: React.ReactNode 
                   {/* Wallpaper — simplex-noise canvas over a tahoe-dawn fallback */}
                   <div data-desktop-layer="wallpaper">
                     <Wallpaper />
+                  </div>
+
+                  {/* Empty-desktop interaction layer — marquee select + context menu */}
+                  <div data-desktop-layer="surface">
+                    <DesktopSurface />
                   </div>
 
                   {/* Menu bar — 28px pinned to top, z-50 */}
@@ -80,7 +89,11 @@ export default function RootLayout(_props: Readonly<{ children: React.ReactNode 
                   <div data-desktop-layer="boot">
                     <StartupSequence />
                   </div>
+
+                  {/* Context menu + Get Info panel — stacks above everything */}
+                  <DesktopMenuLayer />
                 </div>
+               </DesktopProvider>
               </WallpaperProvider>
             </WindowManagerProvider>
           </div>

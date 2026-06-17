@@ -31,7 +31,7 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
   - `MobileFallback` renders outside the desktop provider and is visible below the `md` breakpoint; the desktop provider/root are hidden at those widths.
   - `#desktop-root` div is `position: fixed; inset: 0; overflow: hidden; bg-desktop` — the stable shell container that never unmounts.
   - Font is set via inline `style` on `body` using the macOS system font stack (`-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif`); no Google Fonts import.
-  - Inside `#desktop-root`, from back to front: `<Wallpaper />`, `<MenuBar />` (`z-50`, `h-7`), `<DesktopShortcuts />` (`z-10`, top: 48px), a desktop-sized `[data-desktop-layer="windows"]` wrapper containing `<WindowRenderer />` (window z-index 21+), `<Dock />` (`z-40`, `bottom-3`).
+  - Inside `#desktop-root`, from back to front: `<Wallpaper />`, `<DesktopSurface />` (`z-index: 5`, empty-desktop interaction layer for marquee select + context menu), `<MenuBar />` (`z-50`, `h-7`), `<DesktopShortcuts />` (`z-10`, top: 48px), a desktop-sized `[data-desktop-layer="windows"]` wrapper containing `<WindowRenderer />` (window z-index 21+), `<Dock />` (`z-40`, `bottom-3`), and `<DesktopMenuLayer />` (renders the active context menu at `z-index: 10000` and the Get Info panel at `z-index: 9000`). The shell content is wrapped in `<DesktopProvider>` (inside `WallpaperProvider`) which owns icon selection, context-menu, and Get Info state.
   - `<WindowRenderer />` takes no children — it resolves content from the `WINDOW_CONTENT` registry internally.
 - App window content is decoupled from Next.js routing. `WindowRenderer` imports every page component directly and maps them to their `AppId` in a static `WINDOW_CONTENT` registry. Each open window always mounts its own component instance, so multiple windows are simultaneously visible regardless of which window has focus.
 - Route changes dispatch `syncRoute` so direct browser entry to `/`, `/projects`, `/about`, `/contact`, `/cv`, `/glass-atlas`, `/techy`, `/sparse`, `/weather`, `/pigeoncoop`, or `/buddy` opens and focuses the matching app window without unmounting wallpaper, menu bar, dock, desktop icons, or other open windows.
@@ -97,7 +97,16 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 - File labels are mapped via `ICON_LABELS` record (e.g., `"about_me.txt"`, `"projects/"`, `"aden_guo_cv.pdf"`, `"glass_atlas/"`, `"techy.app"`, `"sparse.app"`, `"weather.dash"`); route/id come from `APPS`.
 - Single click: selected state — `rgba(10,132,255,0.28)` background + `1px solid rgba(10,132,255,0.55)` border; label becomes `rgba(10,132,255,0.95)` pill.
 - Double click: dispatches `open` action to the window manager; focuses and restores the window if already open.
-- Requires `"use client"` directive; selection state is local (`useState<AppId | null>`).
+- Right click: selects the icon and opens a context menu (`Open`, `Get Info`).
+- Requires `"use client"` directive. Selection is multi-select and lives in `DesktopProvider` (`Set<AppId>`), shared with `DesktopSurface` (marquee). Each item carries `data-desktop-icon` + `data-app-id` so the marquee can hit-test it. `ShortcutFileIcon` and `ICON_LABELS` are exported for reuse by the Get Info panel.
+
+#### Desktop interaction layer (`DesktopProvider`, `DesktopSurface`, `ContextMenu`, `GetInfoPanel`, `DesktopMenuLayer`)
+
+- `DesktopProvider` (`src/app/components/Desktop/DesktopProvider.tsx`): context holding icon selection, the open context menu (`{x, y, items}`), and the open Get Info app id. Wraps the shell inside `WallpaperProvider`.
+- `DesktopSurface` (`DesktopSurface.tsx`): transparent `position: fixed; inset: 0; z-index: 5` layer that only handles events whose target is the surface itself (empty desktop). Click-hold drag draws a marquee and live-selects icons via `getBoundingClientRect` hit-testing against `[data-desktop-icon]`; a plain click clears selection. Right click opens the desktop context menu (Change Wallpaper — cycles `flow-field → tahoe-dawn → spooky-smoke → gradient-dots` via `WallpaperProvider`; light/dark toggle via `next-themes`; Open Projects/About/CV).
+- `ContextMenu` (`ContextMenu.tsx`): reusable glass menu rendered at the cursor, flips at viewport edges, dismisses on outside click / Escape / scroll / resize / blur. Mirrors the `WindowChrome` snap dropdown styling.
+- `GetInfoPanel` (`GetInfoPanel.tsx`): draggable (`react-rnd`, resize disabled) macOS-style inspector. Content per icon comes from `desktopInfo.ts` (`DESKTOP_INFO`), including a playful "Comments" easter egg. Carries `data-info-panel`.
+- `DesktopMenuLayer` (`DesktopMenuLayer.tsx`): mounted last in the shell; renders the active `ContextMenu` and `GetInfoPanel` from provider state above all other layers.
 
 #### App Metadata (`src/app/components/appMetadata.ts`)
 
