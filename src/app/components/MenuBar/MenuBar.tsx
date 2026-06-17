@@ -7,19 +7,19 @@ import { useTheme } from "next-themes";
 import { APPS } from "../appMetadata";
 import { useWindowManager } from "../WindowManager/WindowManagerProvider";
 import { useWallpaper } from "../Desktop/WallpaperProvider";
+import { PORTFOLIO_LOGO_DARK_SRC } from "../logoAssets";
 import { MenuDropdown, MenuEntry } from "./MenuDropdown";
 
 // ─── Portfolio logo ──────────────────────────────────────────────────────────
 function PortfolioMenuLogo() {
   return (
     <Image
-      src="/new-logo.png"
+      src={PORTFOLIO_LOGO_DARK_SRC}
       alt=""
       aria-hidden="true"
       width={22}
       height={22}
       className="mr-3 -mt-px opacity-90"
-      style={{ mixBlendMode: "screen" }}
     />
   );
 }

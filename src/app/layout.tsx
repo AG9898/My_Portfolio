@@ -9,14 +9,15 @@ import Wallpaper from "./components/Desktop/Wallpaper";
 import { WindowManagerProvider } from "./components/WindowManager/WindowManagerProvider";
 import { WindowRenderer } from "./components/WindowManager/WindowRenderer";
 import { WallpaperProvider } from "./components/Desktop/WallpaperProvider";
+import { PORTFOLIO_LOGO_SRC } from "./components/logoAssets";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Aden Guo Portfolio",
   description: "A macOS-inspired portfolio redesign for Aden Guo.",
   icons: {
-    icon: "/new-logo.png",
-    apple: "/new-logo.png",
+    icon: PORTFOLIO_LOGO_SRC,
+    apple: PORTFOLIO_LOGO_SRC,
   },
 };
 

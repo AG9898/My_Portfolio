@@ -3,6 +3,7 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { PORTFOLIO_LOGO_DARK_SRC } from "../logoAssets";
 
 const BOOT_DURATION_MS = 2400;
 const BOOT_FADE_DURATION_SECONDS = 0.4;
@@ -14,13 +15,12 @@ type StartupPhase = "checking" | "boot" | "login" | "signing-in" | "done";
 function PortfolioLogo({ size = 128 }: { size?: number }) {
   return (
     <Image
-      src="/new-logo.png"
+      src={PORTFOLIO_LOGO_DARK_SRC}
       alt=""
       aria-hidden="true"
       width={size}
       height={size}
       priority
-      style={{ mixBlendMode: "screen" }}
     />
   );
 }
