@@ -2,7 +2,6 @@
   "$schema": "./workboard.schema.json",
   "schema_version": "1.0.0",
   "last_updated": "2026-05-25",
-
   "tasks": [
     {
       "id": "V1_001",
