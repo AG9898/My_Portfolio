@@ -1,6 +1,6 @@
 ---
 name: edit-workboard
-description: Create new workboard tasks and edit existing task fields with targeted JSON patches, including dependency-safe deletion and split-task workflows, without using this skill for task selection or execution.
+description: Create and edit workboard tasks with targeted JSON patches, including dependency-safe deletion and split-task workflows, without using this skill for task selection or execution.
 version: 1.0.0
 ---
 
@@ -9,8 +9,6 @@ version: 1.0.0
 Use this skill to author, modify, and restructure tasks in `docs/workboard.json`.
 
 Use `$edit-workboard` when work needs to create tasks, refine task fields, or split heavy tasks into smaller scoped tasks.
-
-Do not use this skill for selecting the next task, executing tasks, or transitioning `todo -> in_progress -> done`; those belong to `$query-workboard` and `$start-task`.
 
 ## Workflow
 
@@ -44,10 +42,48 @@ Do not use this skill for selecting the next task, executing tasks, or transitio
 
 ## Shared Write Protocol
 
-Run after every command that writes to the board:
+### Preflight: confirm the board is jq-canonical
+
+Run this **before** any write, and read the result before proceeding.
+
+Every `jq ... > /tmp/wb.json && mv` template below re-serializes the **whole file** with jq's
+canonical formatting. jq has no formatting-preserving write. So if the board's on-disk bytes
+differ from jq's canonical output in any way, the first write silently reformats every task —
+a full-file rewrite wearing the disguise of a one-task patch. The task content is unchanged, so
+validation still passes and nothing looks wrong; only the diff gives it away.
+
+Divergences that occur in practice: short arrays kept on one line (jq expands each element onto
+its own line), non-ASCII stored as `\uXXXX` escapes (jq emits literal UTF-8, e.g. `—` becomes
+an em dash), and stray blank lines.
+
+```bash
+diff <(jq '.' docs/workboard.json) docs/workboard.json >/dev/null \
+  && echo "CANONICAL — jq templates below are safe" \
+  || echo "NOT CANONICAL — a jq write would bulk-reformat the whole board"
+```
+
+If it reports NOT CANONICAL, do not run the jq templates as written. Pick one:
+
+- **Preferred — preserve the file's formatting.** Apply the change as a targeted text edit in the
+  board's existing style (for `add-task`, splice the new task object in before the closing `]`,
+  matching the surrounding indentation), then run the validations below. Verify with
+  `git diff --numstat docs/workboard.json`: `add-task` must show **0 deletions**.
+- **Or — normalize deliberately, in its own commit.** Rewrite the file to canonical form
+  (`jq '.' docs/workboard.json > /tmp/wb.json && mv /tmp/wb.json docs/workboard.json`), prove it
+  changed no content, commit that alone, then apply your edit with the jq templates on top:
+  ```bash
+  diff <(git show HEAD:docs/workboard.json | jq -S '.tasks | sort_by(.id)') \
+       <(jq -S '.tasks | sort_by(.id)' docs/workboard.json) \
+    && echo "semantic no-op — safe to commit as a pure normalization"
+  ```
+
+Never let a normalization ride along inside a content commit; it buries the real change and makes
+the board's history unreviewable.
+
+### After every write
 
 1. Apply the targeted patch using the template for that command; never rewrite the full file.
-2. Update `last_updated` in the same jq expression as the patch. Never update it separately.
+2. Update `last_updated` in the same jq expression as the patch.
 3. Validate shape:
    ```bash
    jq -e '.tasks and (.tasks | type == "array")' docs/workboard.json >/dev/null
@@ -57,8 +93,14 @@ Run after every command that writes to the board:
    npx --yes ajv-cli validate -s docs/workboard.schema.json -d docs/workboard.json
    ```
 5. If schema validation fails due to pre-existing invalid records, isolate responsibility by shape-checking `/tmp/wb.json`; report pre-existing noise separately from your edit result.
-6. If either validation fails due to your change, stop immediately, report the failure, and do not attempt another write.
-7. Print a compact one-line summary of the changed task.
+6. If either validation fails due to your change: stop immediately, report the failure, and do not attempt another write.
+7. Confirm the write touched only what you intended — deletions must match the lines you meant to change, and must be `0` for `add-task`:
+   ```bash
+   git diff --numstat docs/workboard.json
+   ```
+   If the deletion count exceeds your intended change, the write reformatted the board: revert it
+   (`git checkout docs/workboard.json`) and re-apply as a targeted text edit.
+8. Print a compact one-line summary of the changed task.
 
 ## Commands
 
@@ -80,11 +122,11 @@ Before writing:
   ```bash
   jq -e --arg id "NEW-ID" '.tasks[] | select(.id == $id)' docs/workboard.json >/dev/null && echo "ID taken"
   ```
-- To find the next unused sequence number for a group:
+- Find the next unused sequence number for a group:
   ```bash
   jq --arg g "GROUP_ID" '[.tasks[] | select(.group_id == $g) | .id] | sort | last' docs/workboard.json
   ```
-- Confirm every `depends_on` ID exists in the board using the existence check above for each one.
+- Confirm every `depends_on` ID exists in the board.
 
 ```bash
 jq --argjson task '{
@@ -132,7 +174,7 @@ docs/workboard.json > /tmp/wb.json && mv /tmp/wb.json docs/workboard.json
 Array fields are `acceptance_criteria`, `docs`, `files`, and `commands`.
 (`depends_on` and `blocked_by` use dedicated commands below.)
 
-Use `append-to` and `remove-from` for incremental changes. Use `set-array` only when replacing the whole array is intentional; run `show <ID>` first so the current value is visible.
+Use `append-to` and `remove-from` for incremental changes. Use `set-array` only when replacing the entire array intentionally; run `show <ID>` first so current value is visible.
 
 ### `append-to <ID> <field> <value>`
 
@@ -144,7 +186,7 @@ docs/workboard.json > /tmp/wb.json && mv /tmp/wb.json docs/workboard.json
 
 ### `remove-from <ID> <field> <value>`
 
-Removes by exact string match. If the string is not present, the board is unchanged.
+Removes by exact string match. If absent, the board is unchanged.
 
 ```bash
 jq --arg val "item to remove" \
@@ -154,7 +196,7 @@ docs/workboard.json > /tmp/wb.json && mv /tmp/wb.json docs/workboard.json
 
 ### `set-array <ID> <field> <json-array>`
 
-Replaces the entire array. Run `show <ID>` first; the current array must be visible in context before this write executes.
+Replaces the entire array. Run `show <ID>` first.
 
 ```bash
 jq --argjson arr '["item 1", "item 2"]' \
@@ -329,7 +371,8 @@ Step 6: Report new IDs created, downstream `depends_on` updates, and removal of 
 
 ## Guardrails
 
-- Never rewrite the full file; apply targeted edits only.
+- Never rewrite the full file; apply targeted edits only. A jq write re-serializes the whole file, so on a board that is not already jq-canonical this happens by accident — run the preflight check and confirm `git diff --numstat` before trusting any write.
+- Never let a reformat ride along in a content commit; normalize separately or not at all.
 - Never edit `status` via `edit-task`; use `set-blocked`, `unblock`, or `$start-task`.
 - Never rename an `id`.
 - Warn before writing to an `in_progress` task.
