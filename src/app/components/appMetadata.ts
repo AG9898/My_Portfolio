@@ -13,7 +13,8 @@ export type AppId =
   | "sparse"
   | "weather"
   | "pigeoncoop"
-  | "buddy";
+  | "buddy"
+  | "bites";
 
 export interface AppSize {
   width: number;
@@ -27,7 +28,7 @@ export interface AppPosition {
 
 export interface AppMetadata {
   id: AppId;
-  route: "/" | "/projects" | "/about" | "/contact" | "/cv" | "/glass-atlas" | "/techy" | "/sparse" | "/weather" | "/pigeoncoop" | "/buddy";
+  route: "/" | "/projects" | "/about" | "/contact" | "/cv" | "/glass-atlas" | "/techy" | "/sparse" | "/weather" | "/pigeoncoop" | "/buddy" | "/bites";
   /** Short label used in dock, desktop shortcuts, and window list */
   label: string;
   /** Full title shown in the window title bar */
@@ -149,6 +150,16 @@ export const APPS: AppMetadata[] = [
     icon: "buddy",
     defaultSize: { width: 900, height: 600 },
     defaultPosition: { x: 200, y: 90 },
+    showInDock: false,
+  },
+  {
+    id: "bites",
+    route: "/bites",
+    label: "Bites",
+    title: "Bites — Aden Guo",
+    icon: "bites",
+    defaultSize: { width: 900, height: 600 },
+    defaultPosition: { x: 220, y: 100 },
     showInDock: false,
   },
 ];

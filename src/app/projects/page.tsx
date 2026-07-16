@@ -62,6 +62,17 @@ const PROJECTS = [
     link: "https://techy-psi.vercel.app",
   },
   {
+    name: "Bites",
+    kind: "Private food-map PWA",
+    status: "Private · single-owner",
+    path: "~/projects/bites",
+    description:
+      "A single-owner, mobile-first SvelteKit PWA that turns shared TikTok food posts into verified saved places on a personal MapLibre map. Server-side parsing and Tesseract OCR extract candidate venues, Google Places verifies each match, and an explicit confirm/correct/discard gate keeps every pin honest. Both the deployment and the repository are private.",
+    stack: ["SvelteKit", "TypeScript", "Drizzle + Neon", "MapLibre GL", "Google Places"],
+    category: "frontend" as Category,
+    link: null,
+  },
+  {
     name: "Sparse",
     kind: "Minimal text editor",
     status: "Local product",

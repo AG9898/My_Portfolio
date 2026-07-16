@@ -93,4 +93,16 @@ export const DESKTOP_INFO: Partial<Record<AppId, DesktopInfo>> = {
     comment:
       "Will judge your commits. Affectionately. Currently napping on the status bar. Do not pet during PreToolUse.",
   },
+  bites: {
+    name: "bites.app",
+    kind: "Private Food-Map PWA",
+    size: "9.8 MB on disk",
+    bytes: "10,276,864 bytes",
+    where: "/Desktop",
+    created: "Wednesday, 18 June 2025 at 8:15 PM",
+    modified: "Today at 1:19 AM",
+    version: "SvelteKit 2 · Single-owner",
+    comment:
+      "Turns your doom-scrolling into a dinner reservation. One TikTok in, several real pins out. Login required — it's a party of one.",
+  },
 };
