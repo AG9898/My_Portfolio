@@ -1,0 +1,50 @@
+%% Bites import-to-map workflow
+%% Editable source. Render with:
+%%   npx --yes @mermaid-js/mermaid-cli -i src/app/bites/bites-workflow.mmd -o public/bites/bites-workflow.svg -b transparent
+%% Classes distinguish transient parsing/provider work (dashed) from the
+%% explicit user review gate and durable Drizzle/Neon writes (solid).
+flowchart TD
+    URL["Paste TikTok URL<br/>POST /api/import"]:::input
+
+    subgraph TRANSIENT["Transient parsing &amp; provider work (nothing durable yet)"]
+        direction TB
+        NORM["Normalize URL, resolve short link,<br/>extract creator + post ID"]:::work
+        PARSE["Fetch public page (browser-like UA),<br/>parse hydration JSON, oEmbed fallback"]:::work
+        OCR["Extraction: Tesseract OCR slides,<br/>parse WebVTT captions"]:::work
+        EVID["Derive place candidates<br/>with text evidence + confidence"]:::work
+        VERIFY["Google Places verification<br/>IDs-only Text Search"]:::provider
+        NORM --> PARSE --> OCR --> EVID --> VERIFY
+    end
+
+    REVIEW{"Explicit user review<br/>confirm / correct / discard"}:::review
+
+    subgraph DURABLE["Durable writes — Drizzle ORM / Neon Postgres"]
+        direction TB
+        DETAILS["Place Details fetch<br/>(one typed request, cached snapshot)"]:::provider
+        WRITE["Atomic write: confirmed place,<br/>source-post link, candidate evidence"]:::db
+        DISCARD["Mark candidate discarded<br/>(no place, no link)"]:::db
+        DETAILS --> WRITE
+    end
+
+    API["GET /api/places<br/>saved-place DTO (shared parser)"]:::db
+
+    subgraph VIEWS["Client render (same DTO, no direct Google)"]
+        direction LR
+        MAP["MapLibre map<br/>OpenFreeMap pins"]:::view
+        LIST["Searchable List view"]:::view
+    end
+
+    URL --> NORM
+    VERIFY --> REVIEW
+    REVIEW -->|confirm / correct| DETAILS
+    REVIEW -->|discard| DISCARD
+    WRITE --> API
+    API --> MAP
+    API --> LIST
+
+    classDef input fill:#e11d5c,stroke:#9f1239,color:#fff,font-weight:bold
+    classDef work fill:#fdf2f4,stroke:#e11d5c,color:#5a1626,stroke-dasharray:5 4
+    classDef provider fill:#fef3c7,stroke:#d97706,color:#7c2d12,stroke-dasharray:5 4
+    classDef review fill:#fbcfe0,stroke:#be123c,color:#5a1626,font-weight:bold
+    classDef db fill:#dcfce7,stroke:#16a34a,color:#14532d
+    classDef view fill:#dbeafe,stroke:#2563eb,color:#1e3a8a
