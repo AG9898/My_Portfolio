@@ -262,6 +262,20 @@ context (selection set, open context menu, open Get Info app id) that wraps the 
   Playwright `dblclick` on a lower icon (e.g. `buddy`) is intercepted by the window — drive top icons
   or move the window first.
 
+### 2026-07-16 — Bites Showcase Direction
+
+Bites (`/bites`) is a private, single-owner SvelteKit PWA that turns TikTok food posts into
+verified saved places on a MapLibre map. Source codebase: `/projects/bites`. Both the deployed
+Railway application and GitHub repository are private; the portfolio Links panel must state that
+access is private and render no outbound links or URLs. The showcase follows the Techy/PigeonCoop
+four-panel structure (Overview, Features, Tech Stack, Links) and uses real deployed data in its
+map, expanded place-sheet, saved-list, and add-link screenshots. Assets belong under
+`public/bites/`. Keep an editable Mermaid source alongside the rendered workflow diagram; the
+diagram covers URL import → TikTok normalization/parsing → OCR/evidence extraction → Google
+Places verification → explicit confirm/correct/discard → Place Details → Drizzle/Neon writes →
+`GET /api/places` → MapLibre/List rendering. Never commit login credentials, cookies, or storage
+state used while capturing the private deployment.
+
 ### 2026-05-08 — V1 Complete: Key Implementation Patterns
 
 The following patterns emerged during the complete V1 implementation and are now canonical:

@@ -242,6 +242,8 @@ Icon visual: `56×56px` SVG (file-type document shape with folded corner), label
 | `contact.msg` | White document with blue envelope outline + flap | Blue "MSG" (`#0A84FF`) |
 | `aden_guo_cv.pdf` | White document, 4 content lines | Red "PDF" (`#FF453A`) |
 
+Project showcase apps are registered with `showInDock: false`, so they appear on the desktop without expanding the five-app Dock. Bites uses the label `bites.app`, opens `/bites`, and uses a rose-accented food-map/link mark that echoes the deployed product's warm notebook palette while remaining legible in the macOS document-icon system.
+
 ---
 
 ## Confirmed Decisions

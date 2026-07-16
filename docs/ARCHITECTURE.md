@@ -34,7 +34,7 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
   - Inside `#desktop-root`, from back to front: `<Wallpaper />`, `<DesktopSurface />` (`z-index: 5`, empty-desktop interaction layer for marquee select + context menu), `<MenuBar />` (`z-50`, `h-7`), `<DesktopShortcuts />` (`z-10`, top: 48px), a desktop-sized `[data-desktop-layer="windows"]` wrapper containing `<WindowRenderer />` (window z-index 21+), `<Dock />` (`z-40`, `bottom-3`), and `<DesktopMenuLayer />` (renders the active context menu at `z-index: 10000` and the Get Info panel at `z-index: 9000`). The shell content is wrapped in `<DesktopProvider>` (inside `WallpaperProvider`) which owns icon selection, context-menu, and Get Info state.
   - `<WindowRenderer />` takes no children — it resolves content from the `WINDOW_CONTENT` registry internally.
 - App window content is decoupled from Next.js routing. `WindowRenderer` imports every page component directly and maps them to their `AppId` in a static `WINDOW_CONTENT` registry. Each open window always mounts its own component instance, so multiple windows are simultaneously visible regardless of which window has focus.
-- Route changes dispatch `syncRoute` so direct browser entry to `/`, `/projects`, `/about`, `/contact`, `/cv`, `/glass-atlas`, `/techy`, `/sparse`, `/weather`, `/pigeoncoop`, or `/buddy` opens and focuses the matching app window without unmounting wallpaper, menu bar, dock, desktop icons, or other open windows.
+- Route changes dispatch `syncRoute` so direct browser entry to `/`, `/projects`, `/about`, `/contact`, `/cv`, `/glass-atlas`, `/techy`, `/sparse`, `/weather`, `/pigeoncoop`, `/buddy`, or `/bites` opens and focuses the matching app window without unmounting wallpaper, menu bar, dock, desktop icons, or other open windows.
 
 ### Desktop Shell
 
@@ -92,9 +92,9 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 #### Desktop Shortcuts (`src/app/components/Desktop/DesktopShortcuts.tsx`)
 
 - 88px-wide left sidebar column, positioned `left: 16px; top: 48px` (clears menu bar).
-- Renders one shortcut item per app from the full `APPS` registry — all nine apps, including the four project apps that are excluded from the Dock.
-- Each shortcut is a 56×56px SVG using file-type or thematic metaphors: txt (home), folder (projects), person (about), msg (contact), pdf (cv), globe (glass-atlas), graph-node (techy), table/grid (sparse), cloud (weather).
-- File labels are mapped via `ICON_LABELS` record (e.g., `"about_me.txt"`, `"projects/"`, `"aden_guo_cv.pdf"`, `"glass_atlas/"`, `"techy.app"`, `"sparse.app"`, `"weather.dash"`); route/id come from `APPS`.
+- Renders one shortcut item for every `APPS` entry with `showInDock === false` — seven project apps after Bites is added. Core Home, Projects, About, Contact, and CV apps remain Dock-only.
+- Each shortcut is a 56×56px SVG using a thematic file/app metaphor: globe (glass-atlas), graph-node (techy), table/grid (sparse), cloud (weather), pigeon (pigeoncoop), terminal/pet (buddy), and a rose food-map/link mark (bites).
+- File labels are mapped via the `ICON_LABELS` record (`"glass_atlas/"`, `"techy.app"`, `"sparse.app"`, `"weather.dash"`, `"pigeoncoop.app"`, `"buddy.cli"`, and `"bites.app"`); route/id come from `APPS`.
 - Single click: selected state — `rgba(10,132,255,0.28)` background + `1px solid rgba(10,132,255,0.55)` border; label becomes `rgba(10,132,255,0.95)` pill.
 - Double click: dispatches `open` action to the window manager; focuses and restores the window if already open.
 - Right click: selects the icon and opens a context menu (`Open`, `Get Info`).
@@ -110,13 +110,13 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 
 #### App Metadata (`src/app/components/appMetadata.ts`)
 
-- Shared registry of all portfolio apps: Home, Projects, About, Contact, CV, Glass Atlas, Techy, Sparse, Weather & Wellness, PigeonCoop, and buddy.
+- Shared registry of all portfolio apps: Home, Projects, About, Contact, CV, Glass Atlas, Techy, Sparse, Weather & Wellness, PigeonCoop, buddy, and Bites.
 - Exports `AppId` union type, `AppSize` and `AppPosition` helper types, `AppMetadata` interface (id, route, label, title, icon, defaultSize, defaultPosition, showInDock), and `APPS` array.
-- `AppId` is `"home" | "projects" | "about" | "contact" | "cv" | "glass-atlas" | "techy" | "sparse" | "weather" | "pigeoncoop" | "buddy"`.
-- `AppMetadata.route` is a string literal union covering `/`, `/projects`, `/about`, `/contact`, `/cv`, `/glass-atlas`, `/techy`, `/sparse`, `/weather`, `/pigeoncoop`, `/buddy`.
+- `AppId` is `"home" | "projects" | "about" | "contact" | "cv" | "glass-atlas" | "techy" | "sparse" | "weather" | "pigeoncoop" | "buddy" | "bites"`.
+- `AppMetadata.route` is a string literal union covering `/`, `/projects`, `/about`, `/contact`, `/cv`, `/glass-atlas`, `/techy`, `/sparse`, `/weather`, `/pigeoncoop`, `/buddy`, `/bites`.
 - `defaultSize` provides the window's initial `{width, height}` in pixels; runtime open paths center the window in the desktop safe area with `getCenteredWindowPositionForViewport()`. `defaultPosition` remains a fallback for non-browser contexts.
 - `title` is the full window title bar string; `label` is the short dock/shortcut label.
-- `showInDock?: boolean` — when explicitly `false`, the app appears in `DesktopShortcuts` only and is excluded from the Dock. When omitted or `true`, the app appears in both. The five core apps (Home, Projects, About, Contact, CV) omit this field; the project apps (Glass Atlas, Techy, Sparse, Weather, PigeonCoop, buddy) set it to `false`.
+- `showInDock?: boolean` — when explicitly `false`, the app appears in `DesktopShortcuts` only and is excluded from the Dock. When omitted or `true`, the app appears in the Dock. The five core apps (Home, Projects, About, Contact, CV) omit this field; the project apps (Glass Atlas, Techy, Sparse, Weather, PigeonCoop, buddy, Bites) set it to `false`.
 - No state, no hooks, no reducer logic — pure static metadata consumed by the window manager and shell components.
 
 ### Window Manager
@@ -182,6 +182,7 @@ All app window pages use a **panel-switching sidebar pattern**: `"use client"` w
 - **`/glass-atlas`** — Glass Atlas (embeddable Next.js app). Nav: Overview (full-bleed iframe), About, Tech Stack, Links. Live at `https://glass-atlas-production.up.railway.app`.
 - **`/pigeoncoop`** — PigeonCoop (Rust/Tauri agent workflow desktop app). Nav: Overview, Features, Tech Stack, Links. In active development, no live URL.
 - **`/buddy`** — buddy (Windows npm CLI + Electron floating pet). Nav: Overview (terminal demo + pet sprite), Features, Tech Stack, Links. In active development, pre-release. Two co-located sub-components live alongside the page: `PetSprite.tsx` (CSS spritesheet animation) and `TerminalSimulator.tsx` (auto-play typewriter demo). Sprite asset: `public/buddy/spritesheet.webp` (8 cols × 9 rows WebP, copied from source project). Terminal demo sequences through real CLI commands and emits `onStateChange` to drive the pet's animation state.
+- **`/bites`** — Bites (private, single-owner SvelteKit food-place PWA). Nav: Overview, Features, Tech Stack, Links. Overview uses real deployed screenshots of the map, expanded Bites-owned place sheet, saved-place list, and add-link intake. Tech Stack includes a rendered Mermaid diagram whose editable source is retained alongside the showcase. The Links panel states that both the deployed app and repository are private and contains no anchors or outbound URLs.
 - **`/about`** — About page. Nav: About Aden, How I Work, Frontend Focus, What I Value.
 - Content is hardcoded in each route file — no backend, no CMS.
 
@@ -192,7 +193,7 @@ All app window pages use a **panel-switching sidebar pattern**: `"use client"` w
 - The sidebar section nav is the only interactive sidebar in the CV window; clicking a section name scrolls the main content pane to that section.
 - `/cv/print` is a route handler that returns standalone, parser-safe resume HTML for PDF export. It intentionally bypasses the persistent desktop shell so exported PDFs contain selectable text instead of a rendered desktop screenshot.
 - `public/cv.pdf` is a generated artifact used exclusively for the download and open-in-tab buttons. It is not kept in sync automatically — run `npm run export:cv` to regenerate it after editing `resume.json` (or `npm run publish:resume` to regenerate **and** push the resume to the downstream Waunder app — see *Resume Sync to Waunder* below).
-- Media assets (screenshots, video) go in `aspect-video` placeholder slots within Overview or Features panels, pointing to `/public/projects/<slug>/`.
+- Media assets (screenshots and generated diagrams) live under a project-specific folder in `public/` and render within Overview, Features, or Tech Stack using the shared screenshot-lightbox pattern.
 
 ### Theme
 

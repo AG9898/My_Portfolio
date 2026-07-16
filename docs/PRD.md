@@ -1,11 +1,11 @@
 # PRD — My Portfolio
 
-> **Status** (2026-05-11)
+> **Status** (2026-07-16)
 >
 > | Track | State |
 > |---|---|
 > | Shipped | V1 complete — boot, persistent shell, window manager, 5 core app windows, motion, mobile fallback, wallpaper themes. |
-> | In Progress | V2 — project shortcut windows, embedded live sites, Projects sidebar filter, project link polish. |
+> | In Progress | V2 — project shortcut windows, static showcases for private apps, Projects sidebar filtering, and project content expansion. |
 > | Planned | Further content updates and project additions as portfolio grows. |
 
 ---
@@ -54,11 +54,11 @@ Build a memorable frontend portfolio where the browser behaves like a macOS desk
 
 ### Phase 4 — V2 Project Expansion
 
-- Four new desktop shortcut icons: Glass Atlas, Techy, Sparse, and Weather & Wellness. Each has a distinctive SVG icon and appears only in the desktop shortcuts sidebar (not the dock).
-- Glass Atlas and Techy open as iframe windows rendering their deployed sites (`https://glass-atlas-production.up.railway.app` and `https://techy-psi.vercel.app`). Each has an "open in new tab" fallback if embedding is blocked.
-- Sparse and Weather & Wellness open as project showcase windows — static styled detail pages with description, status, stack, and links. No iframe.
-- Projects window: sidebar categories become interactive filters. Project list updated with real clickable links and expanded to include all active projects (Zellaude-Plus, Glass Atlas, Techy, Sparse, Weather & Wellness, PigeonCoop).
-- All existing project `ExternalLink` icons wired to real `href` values.
+- Project-specific apps appear as distinctive desktop shortcuts only, not in the Dock. The current showcase set is Glass Atlas, Techy, Sparse, Weather & Wellness, PigeonCoop, buddy, and Bites.
+- Public, embeddable projects may render their deployed site in-window. Authenticated, private, native, or pre-release projects use static showcase windows with real descriptions, screenshots or demonstrations, stack details, and access-aware link panels.
+- Bites opens at `/bites` as a static four-panel showcase (`Overview`, `Features`, `Tech Stack`, `Links`) for the private, single-owner food-place PWA. It uses real deployed screenshots for the map, expanded place sheet, saved-place list, and TikTok-link intake, plus a rendered Mermaid diagram of the import-to-database workflow.
+- The Bites Links panel states that both the deployed application and source repository are private and renders no outbound links.
+- Projects window sidebar categories are interactive filters. The project list includes all active showcase projects, including Bites, and exposes an external link only when the destination is intentionally public.
 
 ### Out of Scope
 
@@ -71,7 +71,7 @@ Build a memorable frontend portfolio where the browser behaves like a macOS desk
 
 ## Success Criteria
 
-- Desktop shell persists while navigating between `/`, `/projects`, `/about`, `/contact`, `/cv`, `/glass-atlas`, `/techy`, `/sparse`, and `/weather`, including direct browser entry to any of those routes.
+- Desktop shell persists while navigating between `/`, `/projects`, `/about`, `/contact`, `/cv`, `/glass-atlas`, `/techy`, `/sparse`, `/weather`, `/pigeoncoop`, `/buddy`, and `/bites`, including direct browser entry to any of those routes.
 - Users can open multiple app windows, focus existing windows, minimize to dock, restore, close, maximize, and snap.
 - URL reflects the focused app without unmounting the desktop chrome.
 - The visual system reads as macOS-inspired: frosted glass, traffic lights, dock, menu bar, system typography, and dark canonical theme.
