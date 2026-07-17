@@ -15,12 +15,27 @@ import DesktopMenuLayer from "./components/Desktop/DesktopMenuLayer";
 import { PORTFOLIO_LOGO_SRC } from "./components/logoAssets";
 import "./globals.css";
 
+const SITE_TITLE = "Aden Guo Portfolio";
+const SITE_DESCRIPTION =
+  "A macOS desktop in the browser — the portfolio of Aden Guo, software engineer building full-stack web apps, AI/LLM tools, and spatial systems.";
+
 export const metadata: Metadata = {
-  title: "Aden Guo Portfolio",
-  description: "A macOS-inspired portfolio redesign for Aden Guo.",
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
   icons: {
     icon: PORTFOLIO_LOGO_SRC,
     apple: PORTFOLIO_LOGO_SRC,
+  },
+  openGraph: {
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: ["/og-image.png"],
   },
 };
 

@@ -133,13 +133,15 @@ out *because* the rest is polished.
       visitor-facing README.
 
 ### P0.5 — Metadata + OpenGraph
-- [ ] In `src/app/layout.tsx`: replace the description with visitor-facing copy, e.g.
+- [x] In `src/app/layout.tsx`: replace the description with visitor-facing copy, e.g.
       "A macOS desktop in the browser — the portfolio of Aden Guo, software engineer building
       full-stack web apps, AI/LLM tools, and spatial systems." Drop the word "redesign".
-- [ ] Add an OpenGraph + Twitter card image (a clean screenshot of the desktop with a window
+- [x] Add an OpenGraph + Twitter card image (a clean screenshot of the desktop with a window
       open) via Next Metadata (`openGraph.images`, `twitter.card = "summary_large_image"`).
       Static file under `public/` is fine; `opengraph-image.tsx` also acceptable.
-- [ ] Run `npm run build` after metadata changes.
+      *(`public/og-image.png`, 1200×630. `metadataBase` is intentionally unset until the live
+      URL is known — see P2.2.)*
+- [x] Run `npm run build` after metadata changes.
 
 ---
 
