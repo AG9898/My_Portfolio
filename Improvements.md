@@ -102,14 +102,15 @@ out *because* the rest is polished.
       from "Search Aden Guo" to something like `linkedin.com/in/aden-guo…`.
 
 ### P0.2 — Real mobile experience
-- [ ] Replace the single-card `src/app/components/Desktop/MobileFallback.tsx` with a simple
+- [x] Replace the single-card `src/app/components/Desktop/MobileFallback.tsx` with a simple
       stacked, scrollable page (no windows, no dock): name + one-line pitch, 3–4 featured
       project cards (name, one-liner, stack chips, external link where one exists), contact
       buttons (email, GitHub, LinkedIn), and the Open CV button it already has.
-- [ ] Reuse existing content — import from the Projects `PROJECTS` data (consider extracting it
+- [x] Reuse existing content — import from the Projects `PROJECTS` data (consider extracting it
       to a shared module rather than duplicating; see also P1.4) and keep styling on the
-      existing token system (`docs/styling.md`).
-- [ ] Keep it lightweight: this is a fallback, not a second portfolio. No new dependencies.
+      existing token system (`docs/styling.md`). *(Extracted to
+      `src/app/projects/projectsData.ts`; both surfaces import it.)*
+- [x] Keep it lightweight: this is a fallback, not a second portfolio. No new dependencies.
 
 ### P0.3 — Never block first content (startup sequence)
 - [ ] In `src/app/components/Desktop/StartupSequence.tsx`: keep the boot + lock theater but
