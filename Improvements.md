@@ -123,12 +123,13 @@ out *because* the rest is polished.
 - [x] Preserve the existing `sessionStorage` skip for same-session revisits.
 
 ### P0.4 — README.md for the repo
-- [ ] Write a root `README.md`: hero screenshot of the desktop (capture one into
+- [x] Write a root `README.md`: hero screenshot of the desktop (capture one into
       `public/` or a `docs/media/` folder), one-paragraph pitch of the macOS-desktop concept,
       quick-start commands, and a short "how it works" section linking into
       `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/macos-redesign.md`, and the workboard
-      system. The docs already exist — the README's job is to surface them.
-- [ ] Note: `CLAUDE.md`/`AGENTS.md` is the agent guide, not a substitute for a
+      system. The docs already exist — the README's job is to surface them. *(Hero lives at
+      `docs/media/desktop-hero.png`.)*
+- [x] Note: `CLAUDE.md`/`AGENTS.md` is the agent guide, not a substitute for a
       visitor-facing README.
 
 ### P0.5 — Metadata + OpenGraph

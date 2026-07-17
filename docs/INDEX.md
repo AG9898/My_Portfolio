@@ -20,6 +20,8 @@ Canonical navigation map for this repository's documentation. When adding, remov
 | [`styling.md`](styling.md) | Visual contract: Liquid Glass materials, color tokens, motion, and Tailwind rules |
 | [`AGENTS_EX.md`](AGENTS_EX.md) | Source template notes for the agent guide structure |
 | [`../Improvements.md`](../Improvements.md) | Prioritized improvement backlog from the 2026-07-17 recruiter/manager portfolio review |
+| [`../README.md`](../README.md) | Visitor-facing repo README: pitch, hero screenshot, quick start, doc links |
+| [`media/`](media/) | Repo media assets (README hero screenshot) |
 
 ---
 
