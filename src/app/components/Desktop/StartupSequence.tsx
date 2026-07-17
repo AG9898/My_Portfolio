@@ -2,12 +2,13 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { PORTFOLIO_LOGO_DARK_SRC } from "../logoAssets";
 
 const BOOT_DURATION_MS = 2400;
 const BOOT_FADE_DURATION_SECONDS = 0.4;
 const SIGN_IN_DURATION_MS = 1350;
+const AUTO_ENTER_DELAY_MS = 1500;
 const STARTUP_SESSION_KEY = "portfolio-startup-complete";
 
 type StartupPhase = "checking" | "boot" | "login" | "signing-in" | "done";
@@ -285,8 +286,8 @@ export default function StartupSequence() {
     };
   }, [phase, reduceMotion]);
 
-  const handleEnter = () => {
-    if (phase !== "login" || hasStartedSignIn.current) {
+  const handleEnter = useCallback(() => {
+    if (hasStartedSignIn.current) {
       return;
     }
 
@@ -300,7 +301,23 @@ export default function StartupSequence() {
       },
       reduceMotion ? 260 : SIGN_IN_DURATION_MS,
     );
-  };
+  }, [reduceMotion]);
+
+  // The lock screen is theater, not a gate: auto-advance after a short idle
+  // beat (immediately under reduced motion) while click/keypress stay as an
+  // instant skip.
+  useEffect(() => {
+    if (phase !== "login") {
+      return;
+    }
+
+    const timerId = window.setTimeout(
+      handleEnter,
+      reduceMotion ? 0 : AUTO_ENTER_DELAY_MS,
+    );
+
+    return () => window.clearTimeout(timerId);
+  }, [phase, reduceMotion, handleEnter]);
 
   if (phase === "done") {
     return null;

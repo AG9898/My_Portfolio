@@ -113,13 +113,14 @@ out *because* the rest is polished.
 - [x] Keep it lightweight: this is a fallback, not a second portfolio. No new dependencies.
 
 ### P0.3 — Never block first content (startup sequence)
-- [ ] In `src/app/components/Desktop/StartupSequence.tsx`: keep the boot + lock theater but
+- [x] In `src/app/components/Desktop/StartupSequence.tsx`: keep the boot + lock theater but
       make it non-blocking. Auto-advance the lock screen after ~1.5s of inactivity (respecting
       `prefers-reduced-motion` — reduced motion should skip straight through), and keep
       click/keypress as an immediate skip.
-- [ ] Ensure the very first boot frame isn't a plain black screen for seconds — the logo/progress
-      should appear immediately so the page never reads as broken.
-- [ ] Preserve the existing `sessionStorage` skip for same-session revisits.
+- [x] Ensure the very first boot frame isn't a plain black screen for seconds — the logo/progress
+      should appear immediately so the page never reads as broken. *(Already true: the initial
+      `checking` phase server-renders `BootPanel` with the `priority` logo + progress bar.)*
+- [x] Preserve the existing `sessionStorage` skip for same-session revisits.
 
 ### P0.4 — README.md for the repo
 - [ ] Write a root `README.md`: hero screenshot of the desktop (capture one into
