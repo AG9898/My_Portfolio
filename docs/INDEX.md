@@ -19,6 +19,7 @@ Canonical navigation map for this repository's documentation. When adding, remov
 | [`macos-redesign.md`](macos-redesign.md) | Canonical macOS desktop redesign direction |
 | [`styling.md`](styling.md) | Visual contract: Liquid Glass materials, color tokens, motion, and Tailwind rules |
 | [`AGENTS_EX.md`](AGENTS_EX.md) | Source template notes for the agent guide structure |
+| [`../Improvements.md`](../Improvements.md) | Prioritized improvement backlog from the 2026-07-17 recruiter/manager portfolio review |
 
 ---
 
