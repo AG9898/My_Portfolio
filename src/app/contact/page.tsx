@@ -10,8 +10,8 @@ import {
 const CONTACT_PATHS = [
   {
     label: "Email",
-    value: "aden219898@gmail.com",
-    href: "mailto:aden219898@gmail.com?subject=Portfolio%20conversation",
+    value: "aden.guowe@gmail.com",
+    href: "mailto:aden.guowe@gmail.com?subject=Portfolio%20conversation",
     icon: Mail,
   },
   {
@@ -22,8 +22,8 @@ const CONTACT_PATHS = [
   },
   {
     label: "LinkedIn",
-    value: "Search Aden Guo",
-    href: "https://www.linkedin.com/search/results/people/?keywords=Aden%20Guo",
+    value: "linkedin.com/in/aden-guo…",
+    href: "https://linkedin.com/in/aden-guo-b39743362",
     icon: Users,
   },
 ];
@@ -57,7 +57,7 @@ export default function Contact() {
       <main className="flex min-w-0 flex-1 flex-col">
         <div className="glass-chrome flex h-10 shrink-0 items-center gap-2 border-b border-glass-edge px-3">
           <a
-            href="mailto:aden219898@gmail.com?subject=Portfolio%20conversation"
+            href="mailto:aden.guowe@gmail.com?subject=Portfolio%20conversation"
             className="flex h-7 items-center gap-1.5 rounded-md bg-accent px-3 text-[12px] font-medium text-label-primary"
           >
             <Send className="h-3.5 w-3.5" aria-hidden="true" />

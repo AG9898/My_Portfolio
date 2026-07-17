@@ -93,11 +93,11 @@ out *because* the rest is polished.
 ## P0 — credibility fixes (est. an afternoon total)
 
 ### P0.1 — Fix contact email + LinkedIn link ✅ smallest, do first
-- [ ] In `src/app/contact/page.tsx`: confirm with the user which email is canonical
+- [x] In `src/app/contact/page.tsx`: confirm with the user which email is canonical
       (`resume.json` uses `aden.guowe@gmail.com`; the Contact window uses
       `aden219898@gmail.com`) and make both surfaces agree. Do **not** guess — ask if the user
-      hasn't already said.
-- [ ] Replace the LinkedIn search URL in `CONTACT_PATHS` with the direct profile URL from
+      hasn't already said. *(User confirmed 2026-07-17: `aden.guowe@gmail.com` is canonical.)*
+- [x] Replace the LinkedIn search URL in `CONTACT_PATHS` with the direct profile URL from
       `resume.json`: `https://linkedin.com/in/aden-guo-b39743362`. Change the card's value text
       from "Search Aden Guo" to something like `linkedin.com/in/aden-guo…`.
 
