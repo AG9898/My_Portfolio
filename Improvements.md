@@ -182,14 +182,14 @@ out *because* the rest is polished.
 - [x] Source facts from `src/data/resume.json` work/education entries; do not invent claims.
 
 ### P1.4 — Projects catalog consistency + real thumbnails
-- [ ] Add **buddy** to `PROJECTS` in `src/app/projects/page.tsx` (it has a desktop shortcut and
+- [x] Add **buddy** to `PROJECTS` in `src/app/projects/page.tsx` (it has a desktop shortcut and
       a full showcase page at `/buddy` but is absent from the Finder). Category: likely
       `agent-tools`. GitHub: `github.com/AG9898/buddy`. Status: pre-release / in development.
-- [ ] Replace the identical generic blue icon on every project card with per-project visuals.
+- [x] Replace the identical generic blue icon on every project card with per-project visuals.
       Real assets already exist under `public/` (e.g. `public/bites/`, `public/PigeonCoop/`,
       `public/buddy/`); a small square thumbnail or distinct icon per card is enough. Missing
       assets can fall back to the current generic icon.
-- [ ] Consider extracting `PROJECTS` into a shared data module (like `src/app/bites/bitesData.ts`
+- [x] Consider extracting `PROJECTS` into a shared data module (like `src/app/bites/bitesData.ts`
       does for Bites) so the mobile fallback (P0.2) imports the same source of truth.
 
 ---

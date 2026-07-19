@@ -9,6 +9,10 @@ export type Project = {
   stack: string[];
   category: Category;
   link: string | null;
+  thumbnail?: {
+    src: string;
+    alt: string;
+  };
 };
 
 export const PROJECTS: Project[] = [
@@ -22,6 +26,10 @@ export const PROJECTS: Project[] = [
     stack: ["Next.js", "TypeScript", "Tailwind", "framer-motion"],
     category: "frontend",
     link: "https://github.com/AG9898/My_Portfolio",
+    thumbnail: {
+      src: "/og-image.png",
+      alt: "My Portfolio macOS desktop interface",
+    },
   },
   {
     name: "PigeonCoop",
@@ -33,6 +41,10 @@ export const PROJECTS: Project[] = [
     stack: ["Rust", "Tauri", "React", "SQLite"],
     category: "agent-tools",
     link: "https://github.com/AG9898/PigeonCoop",
+    thumbnail: {
+      src: "/PigeonCoop/Pigeon-workspace.png",
+      alt: "PigeonCoop workflow workspace",
+    },
   },
   {
     name: "Zellaude-Plus",
@@ -55,6 +67,10 @@ export const PROJECTS: Project[] = [
     stack: ["SvelteKit", "TypeScript", "Drizzle + pgvector", "OpenRouter", "Bun", "Railway"],
     category: "frontend",
     link: "https://glass-atlas-production.up.railway.app",
+    thumbnail: {
+      src: "/Glass-Atlas/Glass-Atlas RAG diagram.png",
+      alt: "Glass Atlas retrieval-augmented generation diagram",
+    },
   },
   {
     name: "Techy",
@@ -66,6 +82,10 @@ export const PROJECTS: Project[] = [
     stack: ["SvelteKit", "TypeScript", "Drizzle", "D3"],
     category: "frontend",
     link: "https://techy-psi.vercel.app",
+    thumbnail: {
+      src: "/techy/graph.png",
+      alt: "Techy knowledge graph view",
+    },
   },
   {
     name: "Bites",
@@ -77,6 +97,10 @@ export const PROJECTS: Project[] = [
     stack: ["SvelteKit", "TypeScript", "Drizzle + Neon", "MapLibre GL", "Google Places"],
     category: "frontend",
     link: null,
+    thumbnail: {
+      src: "/bites/bites-map.png",
+      alt: "Bites saved-places map",
+    },
   },
   {
     name: "Sparse",
@@ -99,6 +123,25 @@ export const PROJECTS: Project[] = [
     stack: ["Next.js", "FastAPI", "Supabase", "statsmodels", "Upstash Redis"],
     category: "client-work",
     link: "https://ubcpsych.com",
+    thumbnail: {
+      src: "/Weather-Wellness/WeatherCard.png",
+      alt: "Weather and Wellness dashboard",
+    },
+  },
+  {
+    name: "buddy",
+    kind: "Desktop AI coding companion",
+    status: "Published · npm v1.0.1",
+    path: "~/projects/buddy",
+    description:
+      "A floating Windows desktop pet that reacts to Codex CLI and Claude Code hook events. Install @ag9898/buddy globally to launch the Electron companion, wire hooks, and diagnose the local integration.",
+    stack: ["TypeScript", "Electron", "Svelte", "Rust", "npm CLI"],
+    category: "agent-tools",
+    link: "https://www.npmjs.com/package/@ag9898/buddy",
+    thumbnail: {
+      src: "/buddy/spritesheet.webp",
+      alt: "buddy pixel-art pet spritesheet",
+    },
   },
   {
     name: "Interactive MapLibre",

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { GitFork, Construction, Terminal, Layers, Cpu } from "lucide-react";
+import { GitFork, PackageCheck, Terminal, Layers, Cpu } from "lucide-react";
 import PetSprite from "./PetSprite";
 import TerminalSimulator from "./TerminalSimulator";
 import {
@@ -10,6 +10,7 @@ import {
 } from "./buddyData";
 
 const GITHUB_URL = "https://github.com/AG9898/buddy";
+const NPM_URL = "https://www.npmjs.com/package/@ag9898/buddy";
 
 type Section = "overview" | "features" | "stack" | "links";
 
@@ -17,7 +18,7 @@ const NAV: { id: Section; label: string; sub: string }[] = [
   { id: "overview", label: "Overview", sub: "Project detail" },
   { id: "features", label: "Features", sub: "Scope" },
   { id: "stack", label: "Tech Stack", sub: "Dependencies" },
-  { id: "links", label: "Links", sub: "Repository" },
+  { id: "links", label: "Links", sub: "Install and source" },
 ];
 
 const ARCH_NOTES = [
@@ -79,11 +80,11 @@ export default function Buddy() {
               {/* Status and meta row */}
               <div className="mt-4 flex flex-wrap items-center gap-3">
                 <span className="flex items-center gap-1.5 rounded-full border border-glass-edge bg-chrome px-3 py-1 text-[11px] font-medium text-label-primary">
-                  <Construction
+                  <PackageCheck
                     className="h-3.5 w-3.5 shrink-0 text-amber-400"
                     aria-hidden="true"
                   />
-                  In Development
+                  Published · v1.0.1
                 </span>
                 <span className="flex items-center gap-1.5 rounded-full border border-glass-edge bg-chrome px-3 py-1 text-[11px] text-label-secondary">
                   <Terminal className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
@@ -234,23 +235,45 @@ export default function Buddy() {
               </p>
               <h1 className="mt-1 text-[22px] font-semibold">Links</h1>
 
-              {/* In Development notice card */}
+              {/* Public package notice */}
               <div className="mt-6 flex items-center gap-3 rounded-lg border border-glass-edge bg-chrome p-4">
-                <Construction
+                <PackageCheck
                   className="h-5 w-5 shrink-0 text-amber-400"
                   aria-hidden="true"
                 />
                 <div className="min-w-0">
-                  <p className="text-[13px] font-medium">In active development</p>
+                  <p className="text-[13px] font-medium">Available on npm</p>
                   <p className="mt-0.5 text-[12px] text-label-secondary">
-                    Pre-release — not yet published to npm. Source is available on
-                    GitHub for review.
+                    Install the public package with npm install -g @ag9898/buddy.
                   </p>
                 </div>
               </div>
 
-              {/* GitHub repo link */}
+              {/* npm package link */}
               <div className="mt-4">
+                <a
+                  href={NPM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 rounded-lg border border-glass-edge bg-chrome p-4 hover:bg-[var(--color-control-hover)]"
+                >
+                  <PackageCheck
+                    className="h-5 w-5 shrink-0 text-label-secondary"
+                    aria-hidden="true"
+                  />
+                  <div className="min-w-0">
+                    <p className="text-[13px] font-medium">
+                      Install @ag9898/buddy
+                    </p>
+                    <p className="mt-0.5 truncate text-[12px] text-label-secondary">
+                      npmjs.com/package/@ag9898/buddy
+                    </p>
+                  </div>
+                </a>
+              </div>
+
+              {/* GitHub repo link */}
+              <div className="mt-3">
                 <a
                   href={GITHUB_URL}
                   target="_blank"

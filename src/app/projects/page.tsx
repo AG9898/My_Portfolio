@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { ExternalLink, Folder, Grid3X3, List, Search } from "lucide-react";
 import { PROJECTS, type Category } from "./projectsData";
 
@@ -111,9 +112,21 @@ export default function Projects() {
                 className="rounded-lg border border-glass-edge bg-chrome p-4"
               >
                 <div className="flex items-start gap-3">
-                  <div className="flex h-11 w-12 shrink-0 items-end rounded-md border border-glass-edge bg-accent/80 px-1 pb-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.28)]">
-                    <div className="h-7 w-full rounded-sm bg-accent" />
-                  </div>
+                  {project.thumbnail ? (
+                    <div className="relative h-11 w-12 shrink-0 overflow-hidden rounded-md border border-glass-edge bg-window shadow-[inset_0_1px_0_rgba(255,255,255,0.28)]">
+                      <Image
+                        src={project.thumbnail.src}
+                        alt={project.thumbnail.alt}
+                        fill
+                        sizes="48px"
+                        className="object-cover"
+                      />
+                    </div>
+                  ) : (
+                    <div className="flex h-11 w-12 shrink-0 items-end rounded-md border border-glass-edge bg-accent/80 px-1 pb-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.28)]">
+                      <div className="h-7 w-full rounded-sm bg-accent" />
+                    </div>
+                  )}
                   <div className="min-w-0 flex-1">
                     <div className="flex items-start justify-between gap-2">
                       <div className="min-w-0">
