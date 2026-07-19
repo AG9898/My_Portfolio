@@ -2,10 +2,16 @@
 
 import { useState } from "react";
 
-type Section = "about" | "how-i-work" | "frontend-focus" | "what-i-value";
+type Section =
+  | "about"
+  | "my-path"
+  | "how-i-work"
+  | "frontend-focus"
+  | "what-i-value";
 
 const NAV: { id: Section; label: string; sub: string }[] = [
   { id: "about", label: "About Aden", sub: "Profile note" },
+  { id: "my-path", label: "My Path", sub: "Background" },
   { id: "how-i-work", label: "How I Work", sub: "Process" },
   { id: "frontend-focus", label: "Frontend Focus", sub: "Craft" },
   { id: "what-i-value", label: "What I Value", sub: "Principles" },
@@ -128,6 +134,45 @@ export default function About() {
                   state changes, navigation, and focus shifts — rather than applied
                   for visual interest. If a transition does not communicate something
                   useful, it does not ship.
+                </p>
+              </div>
+            </>
+          )}
+
+          {active === "my-path" && (
+            <>
+              <p className="text-[13px] text-label-secondary">
+                Notes / My Path
+              </p>
+              <h1 className="mt-1 text-[22px] font-semibold">
+                From geomatics to product engineering
+              </h1>
+
+              <div className="mt-6 space-y-4">
+                <p>
+                  I am completing a BSc in Geomatics Engineering at the University
+                  of Calgary, where my software foundation grew from spatial
+                  databases, data analysis, Python workflows, and technical
+                  reporting. That grounding in real-world spatial data still shapes
+                  how I approach software: understand the source, make the workflow
+                  dependable, and present the result clearly.
+                </p>
+                <p>
+                  Alongside that work, I have built full-stack and AI-enabled
+                  products. Weather &amp; Wellness is a production research platform
+                  for a UBC Psychology lab at ubcpsych.com, with a Next.js frontend,
+                  FastAPI backend, automated scoring, and isolated research data.
+                  Projects such as Glass Atlas and PigeonCoop let me carry that
+                  product work into source-grounded AI and local-first agent
+                  workflows.
+                </p>
+                <p className="text-label-secondary">
+                  Today, as a GIS Technologist at Canada West Land, I work on
+                  enterprise GIS data management, ETL automation, and map production
+                  across datasets ranging from thousands to roughly one million
+                  records. I also contribute to internal agentic AI workflows, where
+                  clear prompts and reliable pipelines help turn manual processes
+                  into repeatable tools.
                 </p>
               </div>
             </>

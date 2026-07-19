@@ -183,7 +183,7 @@ All app window pages use a **panel-switching sidebar pattern**: `"use client"` w
 - **`/pigeoncoop`** — PigeonCoop (Rust/Tauri agent workflow desktop app). Nav: Overview, Features, Tech Stack, Links. In active development, no live URL.
 - **`/buddy`** — buddy (Windows npm CLI + Electron floating pet). Nav: Overview (terminal demo + pet sprite), Features, Tech Stack, Links. In active development, pre-release. Two co-located sub-components live alongside the page: `PetSprite.tsx` (CSS spritesheet animation) and `TerminalSimulator.tsx` (auto-play typewriter demo). Sprite asset: `public/buddy/spritesheet.webp` (8 cols × 9 rows WebP, copied from source project). Terminal demo sequences through real CLI commands and emits `onStateChange` to drive the pet's animation state.
 - **`/bites`** — Bites (private, single-owner SvelteKit food-place PWA). Nav: Overview, Features, Tech Stack, Links. Overview uses real deployed screenshots of the map, expanded Bites-owned place sheet, saved-place list, and add-link intake. Tech Stack includes a rendered Mermaid diagram whose editable source is retained alongside the showcase. The Links panel states that both the deployed app and repository are private and contains no anchors or outbound URLs.
-- **`/about`** — About page. Nav: About Aden, How I Work, Frontend Focus, What I Value.
+- **`/about`** — About page. Nav: About Aden, My Path, How I Work, Frontend Focus, What I Value. The My Path panel connects Aden's Geomatics Engineering background, full-stack and AI-enabled product work, current GIS Technologist role, and UBC client platform.
 - Content is hardcoded in each route file — no backend, no CMS.
 
 #### CV window (`/cv`)

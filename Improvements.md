@@ -174,12 +174,12 @@ out *because* the rest is polished.
       surfaces agree.
 
 ### P1.3 — Concrete About section (the arc)
-- [ ] Add one section to `src/app/about/page.tsx` telling the concrete story: Geomatics
+- [x] Add one section to `src/app/about/page.tsx` telling the concrete story: Geomatics
       Engineering at U of C → self-taught full-stack + AI engineering → GIS Technologist at
       Canada West Land (enterprise GIS, ETL pipelines, agentic AI workflows) → shipped client
       work (UBC research platform at ubcpsych.com). Keep the existing philosophy sections but
       let this be the first or second entry — a manager wants the history before the values.
-- [ ] Source facts from `src/data/resume.json` work/education entries; do not invent claims.
+- [x] Source facts from `src/data/resume.json` work/education entries; do not invent claims.
 
 ### P1.4 — Projects catalog consistency + real thumbnails
 - [ ] Add **buddy** to `PROJECTS` in `src/app/projects/page.tsx` (it has a desktop shortcut and
