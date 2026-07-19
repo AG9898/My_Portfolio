@@ -96,7 +96,7 @@ export default function Buddy() {
                 </span>
               </div>
 
-              {/* 2-column layout: description left, pet + terminal right */}
+              {/* Intro and pet share the first visual segment. */}
               <div className="mt-6 grid gap-6 lg:grid-cols-2">
                 {/* Left: description */}
                 <div className="space-y-4 text-[14px] leading-6">
@@ -138,13 +138,15 @@ export default function Buddy() {
                   </p>
                 </div>
 
-                {/* Right: pet sprite + terminal simulator */}
-                <div className="flex flex-col items-center gap-4">
-                  <div className="flex justify-center">
-                    <PetSprite state={petState} />
-                  </div>
-                  <TerminalSimulator onStateChange={setPetState} />
+                {/* Right: pet sprite */}
+                <div className="flex items-center justify-center">
+                  <PetSprite state={petState} />
                 </div>
+              </div>
+
+              {/* The terminal has its own full-width segment below the intro. */}
+              <div className="mt-6">
+                <TerminalSimulator onStateChange={setPetState} />
               </div>
             </>
           )}

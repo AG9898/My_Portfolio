@@ -6,14 +6,14 @@ type Section =
   | "about"
   | "my-path"
   | "how-i-work"
-  | "frontend-focus"
+  | "interface-craft"
   | "what-i-value";
 
 const NAV: { id: Section; label: string; sub: string }[] = [
-  { id: "about", label: "About Aden", sub: "Profile note" },
+  { id: "about", label: "About Aden", sub: "Product engineering" },
   { id: "my-path", label: "My Path", sub: "Background" },
   { id: "how-i-work", label: "How I Work", sub: "Process" },
-  { id: "frontend-focus", label: "Frontend Focus", sub: "Craft" },
+  { id: "interface-craft", label: "Interface Craft", sub: "Craft" },
   { id: "what-i-value", label: "What I Value", sub: "Principles" },
 ];
 
@@ -74,22 +74,26 @@ export default function About() {
 
               <div className="mt-6 space-y-4">
                 <p>
-                  I am a frontend-focused developer interested in interfaces with
-                  strong interaction models: desktop metaphors, focused tools,
-                  responsive work surfaces, and systems where visual polish is tied
-                  to clear behavior.
+                  I am a software engineer who builds full-stack web products,
+                  AI-enabled tools, and spatial systems. I work across the product:
+                  shaping the interaction model, building the frontend and backend
+                  pieces that support it, and making sure the system behaves clearly
+                  when real users and real data meet it.
                 </p>
                 <p>
-                  The portfolio itself is part of that work. It uses a macOS-style
-                  desktop to show how routing, state, animation, and content can fit
-                  into one coherent browser experience without relying on a
-                  conventional scrolling landing page.
+                  My projects range from a production UBC research platform with a
+                  Next.js frontend and FastAPI backend to local-first workflow tools,
+                  source-grounded AI applications, and GIS data pipelines. The
+                  portfolio is another example: a macOS-style desktop where routing,
+                  state, animation, and content form one coherent browser experience
+                  instead of a conventional scrolling landing page.
                 </p>
                 <p className="text-label-secondary">
-                  I like building from product shape down to implementation detail:
-                  what the user should notice first, how controls reveal state, what
-                  breaks on small screens, and which patterns need to be documented
-                  before the next feature lands.
+                  I am especially drawn to agentic workflows and the rapidly changing
+                  engineering practices around them. I learn at that boundary by
+                  building: combining reliable workflow state, human review points,
+                  prompts, tools, and practical interfaces into systems people can
+                  understand and trust.
                 </p>
               </div>
 
@@ -178,12 +182,12 @@ export default function About() {
             </>
           )}
 
-          {active === "frontend-focus" && (
+          {active === "interface-craft" && (
             <>
               <p className="text-[13px] text-label-secondary">
-                Notes / Frontend Focus
+                Notes / Interface Craft
               </p>
-              <h1 className="mt-1 text-[22px] font-semibold">Frontend Focus</h1>
+              <h1 className="mt-1 text-[22px] font-semibold">Interface Craft</h1>
 
               <div className="mt-6 space-y-4">
                 <p>

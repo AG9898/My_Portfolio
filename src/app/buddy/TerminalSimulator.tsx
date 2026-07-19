@@ -7,10 +7,11 @@ interface TerminalSimulatorProps {
 }
 
 // Timing constants (ms)
-const CHAR_DELAY = 60
-const POST_COMMAND_PAUSE = 400
-const OUTPUT_LINE_DELAY = 80
-const INTER_COMMAND_PAUSE = 600
+const BANNER_LINE_DELAY = 60
+const CHAR_DELAY = 85
+const POST_COMMAND_PAUSE = 600
+const OUTPUT_LINE_DELAY = 130
+const INTER_COMMAND_PAUSE = 900
 
 interface TerminalLine {
   kind: "banner" | "tagline" | "prompt" | "command" | "output" | "blank"
@@ -57,12 +58,12 @@ export default function TerminalSimulator({ onStateChange }: TerminalSimulatorPr
       for (const bannerLine of BUDDY_BANNER.split("\n")) {
         if (cancelledRef.current) return
         appendLine({ kind: "banner", text: bannerLine })
-        await sleep(40)
+        await sleep(BANNER_LINE_DELAY)
       }
 
       if (cancelledRef.current) return
       appendLine({ kind: "tagline", text: BUDDY_TAGLINE })
-      await sleep(300)
+      await sleep(500)
 
       // 2. Step through script entries
       for (const entry of TERMINAL_SCRIPT) {
