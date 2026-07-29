@@ -185,6 +185,17 @@ Default transient colors live in `WallpaperProvider`: flow field starts with bac
 - Mail-style compose views should use deterministic mailbox sidebars (`w-52` is the current Contact width), token-backed compose headers, and normal outbound links instead of backend form controls.
 - Decorative editor controls must use token-backed hover and border styles; do not introduce inline hex or one-off backdrop classes inside page content.
 
+### Project-branded simulations
+
+- A product simulation may preserve a project's own visual system inside the app content area while
+  the surrounding title bar and window chrome continue to use portfolio Liquid Glass tokens.
+- The planned Cloo workspace remains dark in both portfolio themes and uses named `cloo-*` Tailwind
+  tokens derived from its Storm palette. Do not scatter Storm hex values through components or use
+  stock Tailwind colors as substitutes.
+- Cloo focus and attention treatments retain text or glyph signals in addition to color. Motion for
+  focus, split, zoom, detach, and overlays must be interruptible and simplify under reduced motion.
+- Full Cloo visual and responsive requirements live in [`CLOO.md`](CLOO.md).
+
 ---
 
 ## Dock magnification algorithm

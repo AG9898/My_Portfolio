@@ -313,6 +313,28 @@ in `DesktopShortcuts.tsx`; a private-PWA Get Info entry in `desktopInfo.ts`; and
 Projects Finder card with `link: null` (no external-link control). No reducer, Dock, mobile-fallback,
 resume, or CV files were touched.
 
+### 2026-07-29 — Planned Cloo Interactive Showcase
+
+Cloo (`/cloo`) is a public, MIT-licensed Rust client-server terminal multiplexer and concurrent
+coding-agent workspace. Source: `/home/ag9898/projects/cloo`; GitHub:
+`github.com/AG9898/cloo`. It is pre-alpha: the functional workspace foundations are implemented,
+while M9 is aligning the sparse live attached renderer with the approved high-fidelity handoff.
+README/handoff images are destination visuals, not current runtime captures, and the prepared
+`clooterminal` package is not a supported release yet.
+
+The approved portfolio direction is a full-window custom React workspace simulation, not the normal
+four-panel project page and not xterm.js. It uses semantic DOM panes, a native focused input, a typed
+finite command registry, and a scoped subset of Cloo's real `C-b` controls. It must never use
+`eval`, `innerHTML`, PTYs, WebSockets, shell APIs, or arbitrary network-backed commands. All project
+facts also remain available through a semantic Project info control. Label it **Interactive product
+simulation** and **Pre-alpha**.
+
+Canonical showcase behavior: `docs/CLOO.md`. Approved SVG masters:
+`/home/ag9898/projects/cloo/docs/assets/brand/`; copy portfolio assets to `public/cloo/`. Use the
+`cloo-product.svg` terminal-face mark for Cloo as the sixth Dock app. Cloo is the deliberate
+project-showcase exception to `showInDock: false`: do not also add a desktop shortcut or Get Info
+entry.
+
 ### 2026-05-08 — V1 Complete: Key Implementation Patterns
 
 The following patterns emerged during the complete V1 implementation and are now canonical:

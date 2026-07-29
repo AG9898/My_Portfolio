@@ -16,6 +16,7 @@ Canonical navigation map for this repository's documentation. When adding, remov
 | [`ENV_VARS.md`](ENV_VARS.md) | Environment variable and secret matrix |
 | [`TESTING.md`](TESTING.md) | Verification strategy and testing guidance |
 | [`CV.md`](CV.md) | CV subsystem: `resume.json` source, on-site + print renderers, PDF export, and verification |
+| [`CLOO.md`](CLOO.md) | Planned Cloo project showcase: simulator boundary, content, controls, styling, and verification |
 | [`macos-redesign.md`](macos-redesign.md) | Canonical macOS desktop redesign direction |
 | [`styling.md`](styling.md) | Visual contract: Liquid Glass materials, color tokens, motion, and Tailwind rules |
 | [`AGENTS_EX.md`](AGENTS_EX.md) | Source template notes for the agent guide structure |

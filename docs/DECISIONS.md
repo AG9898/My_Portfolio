@@ -90,3 +90,43 @@
 **Alternatives rejected:** Duplicate windows for the same app in the initial implementation.
 
 **Affects:** [`ARCHITECTURE.md`](ARCHITECTURE.md), [`CONVENTIONS.md`](CONVENTIONS.md)
+
+### RESOLVED-05 — Custom React Simulator For Cloo Showcase
+
+**Resolved:** 2026-07-29
+
+**Decision:** Build `/cloo` as a dependency-free custom React simulation of Cloo's multipane
+workspace. Use semantic DOM panes and a native focused input with a finite command registry and a
+scoped subset of Cloo's real `C-b` keymap. Do not use xterm.js, a generic terminal component, a PTY,
+or a backend shell.
+
+**Why:** The portfolio needs a believable, safe product demonstration rather than VT/ANSI
+emulation. Owning the bounded interaction layer keeps the simulation smaller, more accessible,
+easier to theme with Tailwind, and more faithful to Cloo's multiplexer-specific panes, tabs, and
+status chrome.
+
+**Alternatives rejected:** xterm.js, which is appropriate for a real PTY-backed terminal but still
+requires a command interpreter and line editor here; generic React terminal wrappers, which save
+little code while reducing styling and accessibility control; and a standard four-panel showcase,
+which would not demonstrate Cloo's core interaction model.
+
+**Affects:** [`CLOO.md`](CLOO.md), [`PRD.md`](PRD.md), [`ARCHITECTURE.md`](ARCHITECTURE.md),
+[`CONVENTIONS.md`](CONVENTIONS.md), [`styling.md`](styling.md)
+
+### RESOLVED-06 — Promote Cloo Into The Dock
+
+**Resolved:** 2026-07-29
+
+**Decision:** Make Cloo the first project showcase promoted into the portfolio Dock. It uses the
+approved `cloo-product.svg` terminal-face mark, becomes the sixth Dock app, and does not also appear
+as a desktop shortcut or Get Info item.
+
+**Why:** Cloo's terminal-workspace simulation is a distinctive interactive destination, and its
+rounded terminal product mark fits the Dock's application metaphor more naturally than the desktop
+file-shortcut treatment.
+
+**Alternatives rejected:** Adding another desktop project shortcut, duplicating Cloo in both the
+Dock and desktop, or using the compact command badge as the primary app icon.
+
+**Affects:** [`CLOO.md`](CLOO.md), [`PRD.md`](PRD.md), [`ARCHITECTURE.md`](ARCHITECTURE.md),
+[`macos-redesign.md`](macos-redesign.md)

@@ -86,6 +86,25 @@ Run manually after any window manager change:
 
 ---
 
+## Cloo Showcase Checklist
+
+Run manually when the planned `/cloo` showcase or its shell integration changes:
+
+- [ ] Direct `/cloo` entry opens exactly one centered `900x600` Cloo window and preserves the desktop shell.
+- [ ] The window and Project info surface clearly identify the experience as an interactive product simulation and Cloo as pre-alpha.
+- [ ] `help`, `about`, `features`, `stack`, `architecture`, `status`, `github`, `clear`, and `reset` return deterministic local results; unknown input is rendered as text and cannot execute code or network requests.
+- [ ] Up/Down history, Tab completion, text selection, copy, IME input, and focused-input clear behavior work without document-wide keyboard capture.
+- [ ] Supported `C-b` split, focus, zoom, tab, and detach actions match [`CLOO.md`](CLOO.md); unsupported prefix keys recover cleanly.
+- [ ] Every prefix action, Project info section, reset, GitHub link, and reattach action is reachable through ordinary labelled controls.
+- [ ] Detach and reattach preserve simulated pane/tab state; reset restores the documented initial workspace.
+- [ ] Resize toward `320x200` keeps the focused pane, status, commands, and recovery controls usable without unreadable fixed-width panes.
+- [ ] Reduced motion removes automatic typing and simplifies layout motion without hiding state changes.
+- [ ] Below `md`, the hidden desktop simulator does not type, animate, autofocus, or consume keys behind MobileFallback.
+- [ ] Light and dark portfolio themes preserve themed macOS chrome while the Cloo product surface remains intentionally dark.
+- [ ] Cloo appears once as the sixth Dock app using the approved terminal-face product mark; magnification, tooltip, open indicator, click-to-open/focus/restore, and source animation work, and no Cloo desktop shortcut or Get Info entry appears.
+
+---
+
 ## Writing New Tests
 
 - If a test framework is added, document it here and add a `npm run test` script.

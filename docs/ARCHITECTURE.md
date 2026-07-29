@@ -13,7 +13,7 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 ## System Topology
 
 - **Frontend:** Next.js 14, React 18, TypeScript, Tailwind CSS.
-- **Client interaction layer:** `framer-motion`, `react-rnd`, `next-themes`, Radix dropdown menus, `lucide-react`, canvas wallpaper using `simplex-noise`, and optional WebGL2 wallpaper rendering.
+- **Client interaction layer:** `framer-motion`, `react-rnd`, `next-themes`, Radix dropdown menus, `lucide-react`, canvas wallpaper using `simplex-noise`, optional WebGL2 wallpaper rendering, and a planned dependency-free React simulator for Cloo.
 - **Static assets:** served from `public/`, including `cv.pdf` (generated artifact for CV download).
 - **Static data:** `src/data/resume.json` — JSON Resume v1 schema file; agent-editable source of truth for all CV content.
 - **Backend/database/auth:** none.
@@ -81,7 +81,7 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 - Static bottom dock using `.glass-dock`, absolutely positioned at `bottom-3`, centered horizontally.
 - Dock border: `1px solid rgba(255,255,255,0.22)`. Dock shadow: inset top/bottom highlights + `0 30px 80px rgba(0,0,0,0.5)`.
 - Dock padding: `8px 12px`, border radius: `22px`. Icon base size: `56px`.
-- Renders one button per app from `APPS` filtered to `showInDock !== false` — the five core apps only (Home, Projects, About, Contact, CV). Project-specific apps set `showInDock: false` and appear only in `DesktopShortcuts`. Each icon uses an individual SVG matching the design handoff.
+- Renders one button per app from `APPS` filtered to `showInDock !== false` — currently the five core apps (Home, Projects, About, Contact, CV). Project-specific apps normally set `showInDock: false` and appear only in `DesktopShortcuts`; planned Cloo is the deliberate exception and becomes the sixth Dock app. Each icon uses an individual SVG matching the design handoff or the project's approved product mark.
 - Clicking a dock icon dispatches the `open` action; if the app is already open, focuses and restores it without duplicating.
 - Magnification uses a cosine-falloff algorithm: 100px radius, 56px base, 86px max, -8px lift at peak. Implemented with `framer-motion` `useTransform`/`useSpring` reading a `useMotionValue` tracking `clientX`.
 - Spring config: `{ stiffness: 600, damping: 35, duration: 0.22 }`.
@@ -116,7 +116,7 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 - `AppMetadata.route` is a string literal union covering `/`, `/projects`, `/about`, `/contact`, `/cv`, `/glass-atlas`, `/techy`, `/sparse`, `/weather`, `/pigeoncoop`, `/buddy`, `/bites`.
 - `defaultSize` provides the window's initial `{width, height}` in pixels; runtime open paths center the window in the desktop safe area with `getCenteredWindowPositionForViewport()`. `defaultPosition` remains a fallback for non-browser contexts.
 - `title` is the full window title bar string; `label` is the short dock/shortcut label.
-- `showInDock?: boolean` — when explicitly `false`, the app appears in `DesktopShortcuts` only and is excluded from the Dock. When omitted or `true`, the app appears in the Dock. The five core apps (Home, Projects, About, Contact, CV) omit this field; the project apps (Glass Atlas, Techy, Sparse, Weather, PigeonCoop, buddy, Bites) set it to `false`.
+- `showInDock?: boolean` — when explicitly `false`, the app appears in `DesktopShortcuts` only and is excluded from the Dock. When omitted or `true`, the app appears in the Dock and not in `DesktopShortcuts`. The five core apps (Home, Projects, About, Contact, CV) omit this field; Glass Atlas, Techy, Sparse, Weather, PigeonCoop, buddy, and Bites set it to `false`. Planned Cloo omits it as the first project-showcase exception promoted into the Dock.
 - No state, no hooks, no reducer logic — pure static metadata consumed by the window manager and shell components.
 
 ### Window Manager
@@ -174,7 +174,7 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 
 #### App window routes (project showcases and About)
 
-All app window pages use a **panel-switching sidebar pattern**: `"use client"` with `useState` for the active section; sidebar items are `<button>` elements; each section renders a dedicated content panel. See CONVENTIONS.md for the full pattern spec.
+App window pages use a **panel-switching sidebar pattern** by default: `"use client"` with `useState` for the active section; sidebar items are `<button>` elements; each section renders a dedicated content panel. The planned Cloo showcase is the explicit full-window simulation exception. See CONVENTIONS.md for the full pattern spec.
 
 - **`/sparse`** — Sparse (SvelteKit timesheet/expense app for Utilicom Technologies). Nav: Overview, Features, Tech Stack, Links. Private repo, no iframe.
 - **`/weather`** — Weather & Wellness (Python/Flask dashboard). Nav: Overview, Features, Tech Stack, Links. Live at `https://weather-and-wellness-dashboard.vercel.app`.
@@ -185,6 +185,27 @@ All app window pages use a **panel-switching sidebar pattern**: `"use client"` w
 - **`/bites`** — Bites (private, single-owner SvelteKit food-place PWA). Nav: Overview, Features, Tech Stack, Links. Overview uses real deployed screenshots of the map, expanded Bites-owned place sheet, saved-place list, and add-link intake. Tech Stack includes a rendered Mermaid diagram whose editable source is retained alongside the showcase. The Links panel states that both the deployed app and repository are private and contains no anchors or outbound URLs.
 - **`/about`** — About page. Nav: About Aden, My Path, How I Work, Frontend Focus, What I Value. The My Path panel connects Aden's Geomatics Engineering background, full-stack and AI-enabled product work, current GIS Technologist role, and UBC client platform.
 - Content is hardcoded in each route file — no backend, no CMS.
+
+#### Planned Cloo showcase (`/cloo`)
+
+- Cloo is the explicit exception to the panel-switching sidebar pattern. Its entire content area is
+  a custom React simulation of the product's multipane workspace, with a separate semantic Project
+  info surface for visitors who do not use terminal commands.
+- `src/app/cloo/clooData.ts` is the typed, UI-free source for project facts, command responses,
+  release status, and links. `page.tsx` and `ClooWorkspaceSimulator.tsx` consume it without adding
+  independent project claims.
+- Simulator state is local and deterministic: tabs, a bounded pane layout, focus, zoom, transcript
+  history, prefix state, and detached state. It never opens a PTY, WebSocket, backend route, or
+  executable shell.
+- A native input owns ordinary command editing only while focused. A scoped `C-b` prefix handler
+  implements a truthful subset of Cloo's real keymap; every action also has a button equivalent.
+- The product surface uses named Cloo Storm tokens and remains dark while the outer macOS window
+  chrome continues to follow the portfolio theme.
+- The route will be registered as a Dock app with a `900x600` default window and wired into
+  `WINDOW_CONTENT`, `DockIconGlyph`, and Projects Finder. It uses the approved
+  `cloo-product.svg` terminal-face mark, becomes the sixth Dock item, and does not receive a desktop
+  shortcut or Get Info entry.
+- Full behavior and truthfulness requirements are canonical in [`CLOO.md`](CLOO.md).
 
 #### CV window (`/cv`)
 

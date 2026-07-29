@@ -33,17 +33,18 @@ Normative guide for code in this portfolio. Read before writing new UI architect
 - Menu bar components belong under `src/app/components/MenuBar/`.
 - Dock components belong under `src/app/components/Dock/`.
 - Keep shared app metadata in a registry module (`src/app/components/appMetadata.ts`) instead of duplicating route titles, icons, default sizes, positions, or app IDs. The `APPS` array is the canonical source for id, route, label, title, icon, defaultSize, defaultPosition, and showInDock.
-- `showInDock: false` on an `AppMetadata` entry keeps the app in `DesktopShortcuts` but excludes it from the Dock. Use this for project-specific windows that are not core navigation destinations. The Dock filters `APPS` to entries where `showInDock !== false`; `DesktopShortcuts` renders the full registry.
+- `showInDock: false` on an `AppMetadata` entry keeps the app in `DesktopShortcuts` but excludes it from the Dock. Use this for project-specific windows that are not promoted navigation destinations. The Dock filters `APPS` to entries where `showInDock !== false`; `DesktopShortcuts` renders only entries where `showInDock === false`. Cloo is the explicit project exception: it appears in the Dock and has no desktop shortcut.
 - **Adding a new app window requires three coordinated changes:**
   1. Create the page component at `src/app/<slug>/page.tsx`.
   2. Add an entry to `APPS` in `src/app/components/appMetadata.ts` (new `AppId`, route, label, title, icon, defaultSize, showInDock).
   3. Add an entry to `WINDOW_CONTENT` in `src/app/components/WindowManager/WindowRenderer.tsx` mapping the new `AppId` to the imported component.
 - App window page components must be self-contained: no `useParams`, `useSearchParams`, `useRouter`, or other route-context hooks. Content is always mounted independently of the active URL.
-- **All app window pages** (project showcases and About) use a **panel-switching sidebar pattern**: a `"use client"` component with `useState` tracking the active section. Sidebar items are `<button>` elements that set the active section; the main pane renders only the active panel. There are no non-interactive (decorative) sidebars.
+- **App window pages** (project showcases and About) use a **panel-switching sidebar pattern** by default: a `"use client"` component with `useState` tracking the active section. Sidebar items are `<button>` elements that set the active section; the main pane renders only the active panel. There are no non-interactive (decorative) sidebars.
   - **Standard project nav** (Sparse, Techy, Weather & Wellness): four sections — Overview, Features, Tech Stack, Links. Each page defines its own typed `Section` union and `NAV` array. No shared component; each page is self-contained.
   - **Glass Atlas** (embeddable): Overview renders a full-bleed iframe (the live app). Its nav is Overview / About / Tech Stack / Links — "Overview" means the live embed, not the project description.
   - **About page**: four personal sections — About Aden, How I Work, Frontend Focus, What I Value.
-  - **Media assets** — screenshots and video clips go inside the Overview or Features panel, pointing to `/public/projects/<slug>/`. Placeholder `<div>` cards stay in place until assets arrive so no layout changes are needed when they do. All screenshot thumbnails must follow the **Screenshot Lightbox pattern** (see Interaction Patterns below).
+  - **Cloo exception**: `/cloo` is a full-window interactive workspace simulation with a semantic Project info surface, not a four-panel sidebar. Its canonical boundary is [`CLOO.md`](CLOO.md).
+  - **Media assets** — screenshots and video clips go inside the Overview or Features panel, pointing to `/public/<slug>/`. Placeholder `<div>` cards stay in place until assets arrive so no layout changes are needed when they do. All screenshot thumbnails must follow the **Screenshot Lightbox pattern** (see Interaction Patterns below).
 - **CV content lives in `src/data/resume.json`** (JSON Resume v1 schema). Do not hardcode resume sections in `src/app/cv/page.tsx` or `ResumeRenderer`. To update CV content, edit `resume.json` directly. After edits, run `npm run publish:resume` (= `export:cv` + `sync:resume`) — this regenerates `public/cv.pdf` for the download button **and** pushes the resume to the downstream Waunder app. Use `npm run export:cv` alone only when you intentionally do not want to sync (see the Resume Sync to Waunder discovery in `AGENTS.md`).
 - Iframe pages hardcode their `src` URL directly — no shared generic browser component. Full-bleed iframes use `h-full w-full border-0` on the `<iframe>` and `min-h-0 flex-1` on the containing `<div>`, with the outer window container using `flex h-full`.
 
@@ -74,6 +75,21 @@ Normative guide for code in this portfolio. Read before writing new UI architect
 - Inner window page transitions use a short opacity/y motion and must skip animation when `prefers-reduced-motion` is active.
 - Menu bar dropdowns use `@radix-ui/react-dropdown-menu`.
 - **`lucide-react` is for UI chrome glyphs only** (status bar icons, toolbar buttons, decorative controls). Desktop shortcut icons and dock app icons use custom SVG artwork — see `reference/design draft/design_handoff_macos_desktop_shell/desktop.jsx` for the exact SVG designs. Never substitute a lucide icon for an app icon.
+
+### Simulated Terminal Patterns
+
+- Browser terminal simulations use semantic React DOM and a native input unless a real VT/ANSI
+  stream is an explicit product requirement. Do not add xterm.js or another terminal dependency for
+  a finite local command demo.
+- Commands come from a typed allowlist and return trusted text or React elements. Never use `eval`,
+  `new Function`, `innerHTML`, executable user input, user-derived dynamic imports, WebSockets, or
+  shell APIs.
+- Keyboard handlers stay scoped to the focused simulator. Never steal document-wide editing,
+  browser, menu bar, or window-manager shortcuts.
+- Provide visible command discovery, bounded history, ordinary text selection, reduced-motion
+  behavior, and labelled button equivalents for terminal-only key chords.
+- Keep project facts available through semantic controls so terminal commands are an enhancement,
+  not the only navigation path.
 
 ### Screenshot Lightbox Pattern
 

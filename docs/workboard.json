@@ -1,7 +1,7 @@
 {
   "$schema": "./workboard.schema.json",
   "schema_version": "1.0.0",
-  "last_updated": "2026-07-16",
+  "last_updated": "2026-07-29",
   "tasks": [
     {
       "id": "V1_001",
@@ -2059,6 +2059,208 @@
       "commands": [
         "npm run lint",
         "npm run build"
+      ]
+    },
+    {
+      "id": "V2_031",
+      "title": "Prepare Cloo assets and canonical showcase data",
+      "description": "Prepare the source-controlled content layer and approved brand assets for the Cloo showcase without implementing UI. Read the canonical Cloo source docs under /home/ag9898/projects/cloo, copy the authoritative full-color product, command, workspace, and agent-signal SVG masters from docs/assets/brand into public/cloo, and create src/app/cloo/clooData.ts as a typed, UI-free module. The data must cover project overview, features, Rust workspace stack, daemon/client architecture, truthful pre-alpha and M9 status, the finite simulator command catalog, initial transcript content, and the public GitHub link. Treat the README handoff visuals as target direction rather than runtime captures, do not advertise the prepared npm package as released, and use cloo-product.svg as the planned Dock app mark.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V2_CONTENT",
+      "depends_on": [],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "public/cloo contains portfolio copies of the authoritative Cloo product, command, workspace, and agent-signal SVG masters, including the terminal-face product mark intended for the Dock.",
+        "clooData.ts exports typed, UI-free project facts, status, architecture, stack, command, transcript, and link data with no placeholder content.",
+        "Content identifies Cloo as public, MIT-licensed, Linux x64, and pre-alpha; distinguishes the functional runtime from the active M9 visual pass; and does not present a supported npm or crates.io release.",
+        "The only outbound project destination is https://github.com/AG9898/cloo, and no UI component or executable command behavior is introduced.",
+        "npm run lint passes."
+      ],
+      "docs": [
+        "AGENTS.md",
+        "docs/CLOO.md"
+      ],
+      "files": [
+        "src/app/cloo/clooData.ts",
+        "public/cloo/cloo-product.svg",
+        "public/cloo/cloo-command.svg",
+        "public/cloo/cloo-workspace.svg",
+        "public/cloo/cloo-agent-signal.svg"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V2_032",
+      "title": "Build the accessible Cloo command-pane foundation",
+      "description": "Implement the first stage of src/app/cloo/ClooWorkspaceSimulator.tsx as a custom React terminal-workspace surface, not xterm.js or a generic terminal package. Render a semantic initial workspace with one fully framed pane, tab and status rows, selectable transcript output, and a labelled native input. Drive help, about, features, stack, architecture, status, github, clear, and reset through a typed finite registry backed by clooData.ts; add bounded transcript retention, Up/Down history, Tab completion, deterministic reset, and a restrained polite live region. Keep keyboard handling scoped to the focused input and render unknown input as text with a bounded local error. Do not use eval, new Function, innerHTML, user-derived imports, fetch-backed commands, WebSockets, PTYs, or shell APIs.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V2_CONTENT",
+      "depends_on": [
+        "V2_031"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "The initial semantic workspace renders a named tab, framed focused pane, status row, selectable transcript, and associated native input using data from clooData.ts.",
+        "Every documented command returns deterministic local output; github exposes a normal validated link without automatic navigation; and unknown input cannot execute code or trigger a network request.",
+        "Up/Down history, Tab completion, clear, reset, IME-compatible native input, bounded transcript retention, and focused-input-only keyboard ownership work as documented.",
+        "New command results use one restrained polite live region and typewriter characters are not announced individually.",
+        "No terminal runtime dependency, backend route, unsafe HTML path, PTY, WebSocket, or shell integration is added, and npm run lint passes."
+      ],
+      "docs": [
+        "docs/CLOO.md",
+        "docs/CONVENTIONS.md",
+        "docs/TESTING.md"
+      ],
+      "files": [
+        "src/app/cloo/ClooWorkspaceSimulator.tsx",
+        "src/app/cloo/clooData.ts"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V2_033",
+      "title": "Add Cloo workspace controls and responsive state",
+      "description": "Extend ClooWorkspaceSimulator with a deterministic bounded workspace model for tabs, panes, focus, zoom, prefix state, and detach state. Implement the documented subset of Cloo's real tmux-shaped controls: C-b %, C-b double quote, C-b h/j/k/l and arrows, C-b z, C-b c, C-b n/p, and C-b d. Provide labelled clickable equivalents for every prefix action, preserve the simulated workspace across detach/reattach, and recover cleanly from unsupported prefix keys. Add container-driven narrow behavior that prioritizes the focused pane near the 320x200 window minimum, short interruptible layout transitions, reduced-motion behavior, and guards that prevent hidden desktop content under the mobile fallback from animating, typing, autofocus, or capturing keys.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V2_CONTENT",
+      "depends_on": [
+        "V2_032"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "Supported C-b split, focus, zoom, tab, and detach chords match docs/CLOO.md, consume keys only inside the focused simulator, and have labelled clickable equivalents.",
+        "Pane and tab counts are bounded, focus remains valid after every layout action, unsupported prefix keys recover with a concise hint, and reset always restores the same initial workspace.",
+        "Detach replaces the workspace with an explicit simulated detached state and reattach restores the same tabs, panes, transcripts, focus, and zoom state.",
+        "Container-driven narrow mode remains operable near 320x200 without squeezing unreadable fixed-width panes, and motion is short, interruptible, and simplified under reduced motion.",
+        "Below the md breakpoint the mounted-but-hidden simulator does not animate, type, autofocus, or capture keyboard input, and npm run lint passes."
+      ],
+      "docs": [
+        "docs/CLOO.md",
+        "docs/CONVENTIONS.md",
+        "docs/TESTING.md"
+      ],
+      "files": [
+        "src/app/cloo/ClooWorkspaceSimulator.tsx"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V2_034",
+      "title": "Compose the full-window Cloo showcase",
+      "description": "Implement src/app/cloo/page.tsx as the Cloo-first full-window showcase and explicit exception to the standard four-panel project layout. Compose ClooWorkspaceSimulator with a persistent Interactive product simulation and Pre-alpha disclosure plus a compact Project info control that exposes Overview, Features, Tech Stack, Status, and GitHub as semantic HTML sourced only from clooData.ts. Add named cloo-* Tailwind colors for the authoritative Storm roles and use the approved brand assets without scattering inline hex values through components. Keep the Cloo product surface intentionally dark while the surrounding macOS window chrome follows the portfolio theme; retain text glyphs for focus and attention, accessible labels and focus management, and reduced-motion behavior.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V2_CONTENT",
+      "depends_on": [
+        "V2_033"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "The page fills the app content area with the Cloo workspace instead of rendering the standard four-panel sidebar and visibly labels the experience Interactive product simulation and Pre-alpha.",
+        "Project info exposes complete Overview, Features, Tech Stack, Status, and GitHub content through semantic controls, so no visitor must know terminal commands to inspect the project.",
+        "The page and simulator consume project claims from clooData.ts without introducing separate hardcoded product facts, unsupported release links, or placeholder copy.",
+        "Named cloo-* tokens reproduce the Storm visual hierarchy; the product surface remains intentionally dark across portfolio themes; and focus or attention never relies on color alone.",
+        "Project info focus management, labels, keyboard operation, reduced motion, and npm run lint all pass."
+      ],
+      "docs": [
+        "docs/CLOO.md",
+        "docs/styling.md"
+      ],
+      "files": [
+        "src/app/cloo/page.tsx",
+        "src/app/cloo/ClooWorkspaceSimulator.tsx",
+        "src/app/cloo/clooData.ts",
+        "tailwind.config.js"
+      ],
+      "commands": [
+        "npm run lint"
+      ]
+    },
+    {
+      "id": "V2_035",
+      "title": "Wire Cloo into the Dock and Projects catalog",
+      "description": "Register the completed Cloo showcase across the portfolio shell as the deliberate project-showcase Dock exception. Add cloo and /cloo to appMetadata with a 900x600 default window and Dock inclusion; import and map the page in WindowRenderer's exhaustive content and title records; add a dedicated Cloo case to DockIconGlyph using the local approved cloo-product.svg terminal-face mark; and add a public Cloo entry to Projects Finder under Agent Tools with its GitHub link and truthful pre-alpha stack/status. Cloo becomes the sixth Dock app and must not be added to DesktopShortcuts, ICON_LABELS, desktopInfo, or Get Info. Preserve existing one-window-per-route behavior and do not modify reducer logic, mobile featured-project selection, resume data, or CV assets.",
+      "status": "todo",
+      "priority": "high",
+      "group_id": "V2_CONTENT",
+      "depends_on": [
+        "V2_034"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "AppId, route metadata, APPS, WINDOW_CONTENT, and window titles include Cloo, and direct /cloo navigation opens and focuses exactly one centered 900x600 window.",
+        "Cloo appears once as the sixth Dock app using the approved cloo-product.svg terminal-face mark; magnification, tooltip, open indicator, click-to-open/focus/restore, and Dock-source window animation work.",
+        "Cloo does not appear in DesktopShortcuts, ICON_LABELS, desktopInfo, or Get Info, and no existing project shortcut behavior changes.",
+        "Projects Finder lists Cloo under Agent Tools with accurate Rust, Tokio, PTY, terminal-emulation, and pre-alpha information plus the public GitHub link, but no release install claim.",
+        "No reducer, mobile featured-project, resume, or CV changes are included, and npm run lint and npm run build pass."
+      ],
+      "docs": [
+        "AGENTS.md",
+        "docs/CLOO.md",
+        "docs/PRD.md",
+        "docs/ARCHITECTURE.md",
+        "docs/macos-redesign.md"
+      ],
+      "files": [
+        "src/app/components/appMetadata.ts",
+        "src/app/components/WindowManager/WindowRenderer.tsx",
+        "src/app/components/Dock/Dock.tsx",
+        "src/app/projects/projectsData.ts",
+        "public/cloo/cloo-product.svg"
+      ],
+      "commands": [
+        "npm run lint",
+        "npm run build"
+      ]
+    },
+    {
+      "id": "V2_036",
+      "title": "Verify and reconcile the Cloo showcase",
+      "description": "Verify the complete Cloo showcase and shell integration against docs/CLOO.md and the Cloo checklist in docs/TESTING.md, fixing only issues discovered by that validation. Exercise direct routing, one-window behavior, all finite commands, history and completion, scoped C-b controls, clickable equivalents, Project info, detach/reattach, reset, text selection, keyboard ownership, reduced motion, container resizing, light/dark shell themes, hidden mobile behavior, the sixth Dock item, and Projects Finder content in modern desktop browsers when available. Confirm that no terminal runtime dependency or execution path was introduced, then replace planned documentation language with the actual implementation details and record any durable integration gotcha in AGENTS.md.",
+      "status": "todo",
+      "priority": "medium",
+      "group_id": "V2_CONTENT",
+      "depends_on": [
+        "V2_035"
+      ],
+      "blocked_by": [],
+      "acceptance_criteria": [
+        "npm run lint, npm run build, and git diff --check pass after any verification fixes.",
+        "Every command, history/completion path, C-b action, clickable equivalent, Project info section, detach/reattach transition, reset, and unknown-command path behaves as documented without code execution or command-backed networking.",
+        "The showcase remains usable near 320x200, respects reduced motion, does not run or capture focus behind MobileFallback, and preserves normal browser and desktop keyboard behavior outside the focused simulator.",
+        "The sixth Dock app uses the approved terminal-face mark and passes magnification, tooltip, open indicator, source animation, open/focus/restore, direct-route, and no-desktop-duplicate checks.",
+        "Canonical docs describe the implemented state rather than planned behavior, and AGENTS.md records any durable Cloo integration constraint discovered during verification."
+      ],
+      "docs": [
+        "AGENTS.md",
+        "docs/CLOO.md",
+        "docs/ARCHITECTURE.md",
+        "docs/TESTING.md"
+      ],
+      "files": [
+        "src/app/cloo/",
+        "src/app/components/appMetadata.ts",
+        "src/app/components/WindowManager/WindowRenderer.tsx",
+        "src/app/components/Dock/Dock.tsx",
+        "src/app/projects/projectsData.ts",
+        "docs/CLOO.md",
+        "docs/ARCHITECTURE.md",
+        "docs/TESTING.md",
+        "AGENTS.md"
+      ],
+      "commands": [
+        "npm run lint",
+        "npm run build",
+        "git diff --check"
       ]
     }
   ]
