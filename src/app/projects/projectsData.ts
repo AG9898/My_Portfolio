@@ -47,6 +47,17 @@ export const PROJECTS: Project[] = [
     },
   },
   {
+    name: "Cloo",
+    kind: "Terminal multiplexer",
+    status: "Pre-alpha · M9 visual alignment",
+    path: "~/projects/cloo",
+    description:
+      "A public, MIT-licensed Rust client-server terminal multiplexer for concurrent coding-agent workspaces. Its daemon owns persistent PTYs, terminal grids, tabs, panes, and layout state while thin clients attach over a Unix socket; the functional pre-alpha runtime is undergoing its M9 visual-fidelity pass.",
+    stack: ["Rust", "Tokio", "Linux PTYs", "alacritty_terminal"],
+    category: "agent-tools",
+    link: "https://github.com/AG9898/cloo",
+  },
+  {
     name: "Zellaude-Plus",
     kind: "Claude API client",
     status: "Active development",

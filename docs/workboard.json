@@ -2189,7 +2189,7 @@
       "id": "V2_035",
       "title": "Wire Cloo into the Dock and Projects catalog",
       "description": "Register the completed Cloo showcase across the portfolio shell as the deliberate project-showcase Dock exception. Add cloo and /cloo to appMetadata with a 900x600 default window and Dock inclusion; import and map the page in WindowRenderer's exhaustive content and title records; add a dedicated Cloo case to DockIconGlyph using the local approved cloo-product.svg terminal-face mark; and add a public Cloo entry to Projects Finder under Agent Tools with its GitHub link and truthful pre-alpha stack/status. Cloo becomes the sixth Dock app and must not be added to DesktopShortcuts, ICON_LABELS, desktopInfo, or Get Info. Preserve existing one-window-per-route behavior and do not modify reducer logic, mobile featured-project selection, resume data, or CV assets.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V2_CONTENT",
       "depends_on": [

@@ -25,7 +25,7 @@ import { getCenteredWindowPositionForViewport } from "../WindowManager/windowGeo
 import { useDesktop } from "./DesktopProvider";
 
 // ─── Icon labels — file-system metaphors matching macos-redesign.md ───────────
-export const ICON_LABELS: Record<AppId, string> = {
+export const ICON_LABELS: Partial<Record<AppId, string>> = {
   home:           "Home",
   projects:       "projects/",
   about:          "about_me.txt",
@@ -571,7 +571,7 @@ export default function DesktopShortcuts() {
         <DesktopShortcutItem
           key={app.id}
           appId={app.id}
-          label={ICON_LABELS[app.id]}
+          label={ICON_LABELS[app.id] ?? app.label}
           selected={isSelected(app.id)}
           onSelect={() => selectOnly(app.id)}
           onOpen={() => handleOpen(app.id)}

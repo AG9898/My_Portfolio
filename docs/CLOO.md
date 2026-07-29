@@ -1,6 +1,6 @@
 # Cloo Showcase
 
-Canonical product and interaction contract for the planned `/cloo` portfolio app.
+Canonical product and interaction contract for the `/cloo` portfolio app.
 The source project remains `/home/ag9898/projects/cloo`; this document governs only its browser
 showcase in this repository.
 
@@ -9,8 +9,8 @@ showcase in this repository.
 ## Status And Truthfulness
 
 - The typed content layer, approved brand assets, accessible command pane, bounded multipane
-  controls, responsive workspace state, full-window composition, and Project info surface are
-  implemented. Shell wiring remains planned.
+  controls, responsive workspace state, full-window composition, Project info surface, route,
+  sixth Dock item, and Projects Finder entry are implemented.
 - Cloo is a public, MIT-licensed, Linux x64 pre-alpha terminal multiplexer written in Rust.
 - The runtime has a functional daemon, persistent sessions, attached clients, panes, tabs, input,
   resize, copy mode, and agent-workspace foundations. Its M9 work is aligning the live attached UI
@@ -157,15 +157,15 @@ touch and assistive-technology users can reach it without synthesizing key chord
 
 ---
 
-## Planned File Boundaries
+## File Boundaries
 
 | Path | Responsibility |
 |---|---|
 | `src/app/cloo/page.tsx` | Implemented client page shell, persistent simulation disclosure, and keyboard-contained Project info surface |
-| `src/app/cloo/clooData.ts` | Prepared typed project facts, commands, status, links, brand metadata, and initial transcript data |
+| `src/app/cloo/clooData.ts` | Typed project facts, commands, status, links, brand metadata, and initial transcript data |
 | `src/app/cloo/ClooWorkspaceSimulator.tsx` | Deterministic bounded tabs, panes, transcripts, prefix controls, detach state, and container-responsive rendering |
-| `public/cloo/` | Prepared byte-for-byte copies of the four approved full-color Cloo brand masters |
-| Shell registries | Route, window, Dock icon, and Projects Finder integration |
+| `public/cloo/` | Byte-for-byte copies of the four approved full-color Cloo brand masters |
+| Shell registries | Implemented route, window, sixth Dock icon, and Projects Finder integration |
 
 Do not add a terminal dependency or backend route for this showcase.
 

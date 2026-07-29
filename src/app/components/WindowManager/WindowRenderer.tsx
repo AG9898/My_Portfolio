@@ -39,6 +39,7 @@ import WeatherPage from "../../weather/page";
 import PigeonCoopPage from "../../pigeoncoop/page";
 import BuddyPage from "../../buddy/page";
 import BitesPage from "../../bites/page";
+import ClooPage from "../../cloo/page";
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -422,6 +423,7 @@ const WINDOW_CONTENT: Record<AppId, React.ComponentType> = {
   pigeoncoop: PigeonCoopPage,
   buddy: BuddyPage,
   bites: BitesPage,
+  cloo: ClooPage,
 };
 
 /** Maps AppId to window title strings. */
@@ -438,6 +440,7 @@ const WINDOW_TITLES: Record<AppId, string> = {
   pigeoncoop: "PigeonCoop — Aden Guo",
   buddy: "buddy — Aden Guo",
   bites: "Bites — Aden Guo",
+  cloo: "Cloo — Aden Guo",
 };
 
 export function WindowRenderer() {

@@ -14,7 +14,8 @@ export type AppId =
   | "weather"
   | "pigeoncoop"
   | "buddy"
-  | "bites";
+  | "bites"
+  | "cloo";
 
 export interface AppSize {
   width: number;
@@ -28,7 +29,7 @@ export interface AppPosition {
 
 export interface AppMetadata {
   id: AppId;
-  route: "/" | "/projects" | "/about" | "/contact" | "/cv" | "/glass-atlas" | "/techy" | "/sparse" | "/weather" | "/pigeoncoop" | "/buddy" | "/bites";
+  route: "/" | "/projects" | "/about" | "/contact" | "/cv" | "/glass-atlas" | "/techy" | "/sparse" | "/weather" | "/pigeoncoop" | "/buddy" | "/bites" | "/cloo";
   /** Short label used in dock, desktop shortcuts, and window list */
   label: string;
   /** Full title shown in the window title bar */
@@ -161,5 +162,14 @@ export const APPS: AppMetadata[] = [
     defaultSize: { width: 900, height: 600 },
     defaultPosition: { x: 220, y: 100 },
     showInDock: false,
+  },
+  {
+    id: "cloo",
+    route: "/cloo",
+    label: "Cloo",
+    title: "Cloo — Aden Guo",
+    icon: "cloo",
+    defaultSize: { width: 900, height: 600 },
+    defaultPosition: { x: 220, y: 100 },
   },
 ];

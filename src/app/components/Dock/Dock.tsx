@@ -12,6 +12,7 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
+import Image from "next/image";
 import { useRef } from "react";
 import { APPS, type AppId } from "../appMetadata";
 import { useWindowManager } from "../WindowManager/WindowManagerProvider";
@@ -85,6 +86,20 @@ function CVIcon() {
   );
 }
 
+function ClooIcon() {
+  return (
+    <Image
+      src="/cloo/cloo-product.svg"
+      alt=""
+      width={64}
+      height={64}
+      unoptimized
+      aria-hidden="true"
+      className="h-[70%] w-[70%]"
+    />
+  );
+}
+
 function DockIconGlyph({ appId }: { appId: AppId }) {
   switch (appId) {
     case "home":
@@ -97,6 +112,8 @@ function DockIconGlyph({ appId }: { appId: AppId }) {
       return <ContactIcon />;
     case "cv":
       return <CVIcon />;
+    case "cloo":
+      return <ClooIcon />;
     default:
       return null;
   }

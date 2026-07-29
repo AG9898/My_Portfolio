@@ -313,7 +313,7 @@ in `DesktopShortcuts.tsx`; a private-PWA Get Info entry in `desktopInfo.ts`; and
 Projects Finder card with `link: null` (no external-link control). No reducer, Dock, mobile-fallback,
 resume, or CV files were touched.
 
-### 2026-07-29 — Planned Cloo Interactive Showcase
+### 2026-07-29 — Cloo Interactive Showcase
 
 Cloo (`/cloo`) is a public, MIT-licensed Rust client-server terminal multiplexer and concurrent
 coding-agent workspace. Source: `/home/ag9898/projects/cloo`; GitHub:
@@ -340,6 +340,12 @@ facts, status, features, stack, architecture, brand metadata, the sole GitHub de
 finite command catalog, and the initial transcript. `CLOO_COMMANDS` is a complete record keyed by
 `ClooCommandName`; its result values are declarative descriptors, not command execution. The four
 full-color SVGs under `public/cloo/` are byte-for-byte copies of the authoritative brand masters.
+
+Shell wiring (V2_035): `cloo`/`/cloo` is registered in `appMetadata.ts` with a centered `900x600`
+window and no `showInDock: false`, making it the sixth Dock item. `WindowRenderer` maps the route's
+page and title, `DockIconGlyph` uses `/cloo/cloo-product.svg`, and Projects Finder lists the public
+pre-alpha under Agent Tools. Cloo intentionally has no desktop shortcut, `ICON_LABELS`,
+`desktopInfo`, or Get Info entry.
 
 ### 2026-05-08 — V1 Complete: Key Implementation Patterns
 
