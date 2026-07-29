@@ -8,8 +8,9 @@ showcase in this repository.
 
 ## Status And Truthfulness
 
-- The typed content layer and approved brand assets are prepared; the simulator UI and shell wiring
-  remain planned and are not yet implemented.
+- The typed content layer, approved brand assets, and accessible single-pane command foundation are
+  implemented. Multipane controls, Project info, responsive workspace state, and shell wiring remain
+  planned.
 - Cloo is a public, MIT-licensed, Linux x64 pre-alpha terminal multiplexer written in Rust.
 - The runtime has a functional daemon, persistent sessions, attached clients, panes, tabs, input,
   resize, copy mode, and agent-workspace foundations. Its M9 work is aligning the live attached UI
@@ -57,7 +58,8 @@ The showcase is a custom React simulator, not xterm.js, a PTY client, or a termi
   `innerHTML`, executable user input, user-derived dynamic imports, WebSockets, or shell APIs.
 - Do not fetch command output. The only outbound navigation is an ordinary validated GitHub link.
 - Unknown input is displayed as text and receives a bounded local error.
-- Limit transcript history so repeated commands cannot grow memory without bound.
+- The command pane retains at most 80 transcript entries, 30 command-history entries, and 120 input
+  characters so repeated or unknown commands cannot grow memory without bound.
 
 The command registry should cover only portfolio discovery and simulator control:
 
@@ -73,9 +75,9 @@ The command registry should cover only portfolio discovery and simulator control
 | `clear` | Clear the focused pane's transcript while preserving workspace state |
 | `reset` | Restore the deterministic initial simulated workspace |
 
-Support command history with Up/Down, command completion with Tab, normal selection/copy, and a
-focused-input-only clear shortcut. Do not register document-wide handlers for ordinary terminal
-editing keys.
+Support command history with Up/Down, command completion with Tab, normal selection/copy, and
+focused-input-only `Ctrl+L` transcript clearing. Composition events retain native IME behavior. Do
+not register document-wide handlers for ordinary terminal editing keys.
 
 ---
 
@@ -161,7 +163,7 @@ touch and assistive-technology users can reach it without synthesizing key chord
 |---|---|
 | `src/app/cloo/page.tsx` | Client page shell, simulation disclosure, and Project info surface |
 | `src/app/cloo/clooData.ts` | Prepared typed project facts, commands, status, links, brand metadata, and initial transcript data |
-| `src/app/cloo/ClooWorkspaceSimulator.tsx` | Deterministic workspace, panes, input, commands, and prefix actions |
+| `src/app/cloo/ClooWorkspaceSimulator.tsx` | Implemented single-pane command foundation; later tasks extend its deterministic workspace and prefix actions |
 | `public/cloo/` | Prepared byte-for-byte copies of the four approved full-color Cloo brand masters |
 | Shell registries | Route, window, Dock icon, and Projects Finder integration |
 

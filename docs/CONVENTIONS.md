@@ -84,6 +84,9 @@ Normative guide for code in this portfolio. Read before writing new UI architect
 - Commands come from a typed allowlist and return trusted text or React elements. Never use `eval`,
   `new Function`, `innerHTML`, executable user input, user-derived dynamic imports, WebSockets, or
   shell APIs.
+- Cloo command behavior remains declarative in `clooData.ts`; the simulator may interpret only the
+  typed text, link, clear, and reset result descriptors. Preserve its 80-entry transcript,
+  30-command history, and 120-character input bounds when extending workspace behavior.
 - Keyboard handlers stay scoped to the focused simulator. Never steal document-wide editing,
   browser, menu bar, or window-manager shortcuts.
 - Provide visible command discovery, bounded history, ordinary text selection, reduced-motion

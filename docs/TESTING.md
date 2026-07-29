@@ -93,7 +93,9 @@ Run manually when the planned `/cloo` showcase or its shell integration changes:
 - [ ] Direct `/cloo` entry opens exactly one centered `900x600` Cloo window and preserves the desktop shell.
 - [ ] The window and Project info surface clearly identify the experience as an interactive product simulation and Cloo as pre-alpha.
 - [ ] `help`, `about`, `features`, `stack`, `architecture`, `status`, `github`, `clear`, and `reset` return deterministic local results; unknown input is rendered as text and cannot execute code or network requests.
-- [ ] Up/Down history, Tab completion, text selection, copy, IME input, and focused-input clear behavior work without document-wide keyboard capture.
+- [ ] `github` adds a normal `https://github.com` link without navigating automatically; repeated commands retain no more than 80 transcript entries, 30 history entries, or 120 input characters.
+- [ ] Up/Down history, Tab completion, text selection, copy, IME input, and focused-input `Ctrl+L` clearing work without document-wide keyboard capture.
+- [ ] Each completed command produces one concise polite live-region update; transcript rendering does not announce output character by character.
 - [ ] Supported `C-b` split, focus, zoom, tab, and detach actions match [`CLOO.md`](CLOO.md); unsupported prefix keys recover cleanly.
 - [ ] Every prefix action, Project info section, reset, GitHub link, and reattach action is reachable through ordinary labelled controls.
 - [ ] Detach and reattach preserve simulated pane/tab state; reset restores the documented initial workspace.

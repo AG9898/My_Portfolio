@@ -2096,7 +2096,7 @@
       "id": "V2_032",
       "title": "Build the accessible Cloo command-pane foundation",
       "description": "Implement the first stage of src/app/cloo/ClooWorkspaceSimulator.tsx as a custom React terminal-workspace surface, not xterm.js or a generic terminal package. Render a semantic initial workspace with one fully framed pane, tab and status rows, selectable transcript output, and a labelled native input. Drive help, about, features, stack, architecture, status, github, clear, and reset through a typed finite registry backed by clooData.ts; add bounded transcript retention, Up/Down history, Tab completion, deterministic reset, and a restrained polite live region. Keep keyboard handling scoped to the focused input and render unknown input as text with a bounded local error. Do not use eval, new Function, innerHTML, user-derived imports, fetch-backed commands, WebSockets, PTYs, or shell APIs.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V2_CONTENT",
       "depends_on": [

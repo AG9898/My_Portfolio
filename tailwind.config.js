@@ -28,8 +28,21 @@ module.exports = {
         'traffic-red':    '#FF5F57',
         'traffic-yellow': '#FEBC2E',
         'traffic-green':  '#28C840',
+        // Cloo Storm product palette (intentionally fixed across portfolio themes)
+        'cloo-frame':   '#0f0f16',
+        'cloo-surface': '#1a1b26',
+        'cloo-raised':  '#24283b',
+        'cloo-border':  '#2a2e42',
+        'cloo-accent':  '#bb9af7',
+        'cloo-primary': '#c0caf5',
+        'cloo-text':    '#a9b1d6',
+        'cloo-muted':   '#565f89',
+        'cloo-success': '#9ece6a',
+        'cloo-warning': '#e0af68',
+        'cloo-error':   '#f7768e',
+        'cloo-info':    '#7dcfff',
       },
     },
   },
   plugins: [],
-} 
+}
