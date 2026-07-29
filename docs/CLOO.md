@@ -8,9 +8,9 @@ showcase in this repository.
 
 ## Status And Truthfulness
 
-- The typed content layer, approved brand assets, and accessible single-pane command foundation are
-  implemented. Multipane controls, Project info, responsive workspace state, and shell wiring remain
-  planned.
+- The typed content layer, approved brand assets, accessible command pane, bounded multipane
+  controls, and responsive workspace state are implemented. Project info, page composition, and
+  shell wiring remain planned.
 - Cloo is a public, MIT-licensed, Linux x64 pre-alpha terminal multiplexer written in Rust.
 - The runtime has a functional daemon, persistent sessions, attached clients, panes, tabs, input,
   resize, copy mode, and agent-workspace foundations. Its M9 work is aligning the live attached UI
@@ -97,9 +97,9 @@ prefix and only the immediately following supported key is consumed by the works
 | `C-b d` | Detach the simulated client while preserving workspace state |
 
 Detach replaces the workspace with a clearly simulated detached state and a **Reattach** control.
-Reattaching restores the same tabs, panes, transcripts, and focus. Splits and tabs use a small
-fixed maximum so the demo stays legible and deterministic. Unsupported prefix keys show a concise
-hint and return keyboard ownership to the focused input.
+Reattaching restores the same tabs, panes, transcripts, focus, and zoom. The simulator permits at
+most four tabs and four panes per tab so the demo stays legible and deterministic. Unsupported
+prefix keys show a concise hint and return keyboard ownership to the focused input.
 
 Every prefix action also needs a labelled clickable control in Help or a compact command surface so
 touch and assistive-technology users can reach it without synthesizing key chords.
@@ -163,7 +163,7 @@ touch and assistive-technology users can reach it without synthesizing key chord
 |---|---|
 | `src/app/cloo/page.tsx` | Client page shell, simulation disclosure, and Project info surface |
 | `src/app/cloo/clooData.ts` | Prepared typed project facts, commands, status, links, brand metadata, and initial transcript data |
-| `src/app/cloo/ClooWorkspaceSimulator.tsx` | Implemented single-pane command foundation; later tasks extend its deterministic workspace and prefix actions |
+| `src/app/cloo/ClooWorkspaceSimulator.tsx` | Deterministic bounded tabs, panes, transcripts, prefix controls, detach state, and container-responsive rendering |
 | `public/cloo/` | Prepared byte-for-byte copies of the four approved full-color Cloo brand masters |
 | Shell registries | Route, window, Dock icon, and Projects Finder integration |
 

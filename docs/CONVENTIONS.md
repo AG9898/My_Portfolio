@@ -87,8 +87,15 @@ Normative guide for code in this portfolio. Read before writing new UI architect
 - Cloo command behavior remains declarative in `clooData.ts`; the simulator may interpret only the
   typed text, link, clear, and reset result descriptors. Preserve its 80-entry transcript,
   30-command history, and 120-character input bounds when extending workspace behavior.
+- Cloo workspace state is reducer-owned and bounded to four tabs with four panes per tab. Preserve
+  valid tab/pane focus and the complete workspace across simulated detach/reattach; `reset` must
+  rebuild the same initial tab, pane, transcript, focus, and zoom state.
 - Keyboard handlers stay scoped to the focused simulator. Never steal document-wide editing,
   browser, menu bar, or window-manager shortcuts.
+- Mounted simulator content behind the `md` mobile fallback must begin inactive, disable its
+  controls, blur focus when crossing below `md`, and suppress live announcements and motion.
+  Responsive pane selection comes from a `ResizeObserver` on the simulator container, not viewport
+  width; narrow containers render only the focused pane instead of compressing the multipane grid.
 - Provide visible command discovery, bounded history, ordinary text selection, reduced-motion
   behavior, and labelled button equivalents for terminal-only key chords.
 - Keep project facts available through semantic controls so terminal commands are an enhancement,

@@ -98,7 +98,8 @@ Run manually when the planned `/cloo` showcase or its shell integration changes:
 - [ ] Each completed command produces one concise polite live-region update; transcript rendering does not announce output character by character.
 - [ ] Supported `C-b` split, focus, zoom, tab, and detach actions match [`CLOO.md`](CLOO.md); unsupported prefix keys recover cleanly.
 - [ ] Every prefix action, Project info section, reset, GitHub link, and reattach action is reachable through ordinary labelled controls.
-- [ ] Detach and reattach preserve simulated pane/tab state; reset restores the documented initial workspace.
+- [ ] A fifth pane or fifth tab is rejected with a concise limit hint; directional movement never leaves focus pointing at a missing pane.
+- [ ] Detach and reattach preserve tabs, panes, transcripts, focus, and zoom; reset restores the documented one-tab, one-pane initial workspace.
 - [ ] Resize toward `320x200` keeps the focused pane, status, commands, and recovery controls usable without unreadable fixed-width panes.
 - [ ] Reduced motion removes automatic typing and simplifies layout motion without hiding state changes.
 - [ ] Below `md`, the hidden desktop simulator does not type, animate, autofocus, or consume keys behind MobileFallback.

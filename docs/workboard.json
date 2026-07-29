@@ -2127,7 +2127,7 @@
       "id": "V2_033",
       "title": "Add Cloo workspace controls and responsive state",
       "description": "Extend ClooWorkspaceSimulator with a deterministic bounded workspace model for tabs, panes, focus, zoom, prefix state, and detach state. Implement the documented subset of Cloo's real tmux-shaped controls: C-b %, C-b double quote, C-b h/j/k/l and arrows, C-b z, C-b c, C-b n/p, and C-b d. Provide labelled clickable equivalents for every prefix action, preserve the simulated workspace across detach/reattach, and recover cleanly from unsupported prefix keys. Add container-driven narrow behavior that prioritizes the focused pane near the 320x200 window minimum, short interruptible layout transitions, reduced-motion behavior, and guards that prevent hidden desktop content under the mobile fallback from animating, typing, autofocus, or capturing keys.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V2_CONTENT",
       "depends_on": [
