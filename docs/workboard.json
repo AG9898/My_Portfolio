@@ -2065,7 +2065,7 @@
       "id": "V2_031",
       "title": "Prepare Cloo assets and canonical showcase data",
       "description": "Prepare the source-controlled content layer and approved brand assets for the Cloo showcase without implementing UI. Read the canonical Cloo source docs under /home/ag9898/projects/cloo, copy the authoritative full-color product, command, workspace, and agent-signal SVG masters from docs/assets/brand into public/cloo, and create src/app/cloo/clooData.ts as a typed, UI-free module. The data must cover project overview, features, Rust workspace stack, daemon/client architecture, truthful pre-alpha and M9 status, the finite simulator command catalog, initial transcript content, and the public GitHub link. Treat the README handoff visuals as target direction rather than runtime captures, do not advertise the prepared npm package as released, and use cloo-product.svg as the planned Dock app mark.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V2_CONTENT",
       "depends_on": [],

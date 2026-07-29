@@ -8,7 +8,8 @@ showcase in this repository.
 
 ## Status And Truthfulness
 
-- The portfolio showcase is planned and not yet implemented.
+- The typed content layer and approved brand assets are prepared; the simulator UI and shell wiring
+  remain planned and are not yet implemented.
 - Cloo is a public, MIT-licensed, Linux x64 pre-alpha terminal multiplexer written in Rust.
 - The runtime has a functional daemon, persistent sessions, attached clients, panes, tabs, input,
   resize, copy mode, and agent-workspace foundations. Its M9 work is aligning the live attached UI
@@ -37,8 +38,11 @@ The initial view contains:
   and GitHub content without requiring terminal knowledge.
 - A visible simulation disclosure that remains available after the initial transcript scrolls.
 
-The Project info surface and terminal commands present the same canonical facts from a typed,
-UI-free `clooData.ts` module. The page component must not introduce separate project copy.
+The Project info surface and terminal commands present the same canonical facts from the typed,
+UI-free `clooData.ts` module. It exports project, status, feature, stack, architecture, brand-asset,
+link, finite-command, and initial-transcript data. `CLOO_COMMANDS` is a compile-time complete record
+over `ClooCommandName`; command results are declarative text, link, clear, or reset descriptors, not
+executable behavior. The page component must not introduce separate project copy.
 
 ---
 
@@ -156,9 +160,9 @@ touch and assistive-technology users can reach it without synthesizing key chord
 | Path | Responsibility |
 |---|---|
 | `src/app/cloo/page.tsx` | Client page shell, simulation disclosure, and Project info surface |
-| `src/app/cloo/clooData.ts` | Typed project facts, commands, status, links, and initial transcript data |
+| `src/app/cloo/clooData.ts` | Prepared typed project facts, commands, status, links, brand metadata, and initial transcript data |
 | `src/app/cloo/ClooWorkspaceSimulator.tsx` | Deterministic workspace, panes, input, commands, and prefix actions |
-| `public/cloo/` | Approved Cloo brand and supporting showcase assets |
+| `public/cloo/` | Prepared byte-for-byte copies of the four approved full-color Cloo brand masters |
 | Shell registries | Route, window, Dock icon, and Projects Finder integration |
 
 Do not add a terminal dependency or backend route for this showcase.

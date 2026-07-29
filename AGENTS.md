@@ -335,6 +335,12 @@ Canonical showcase behavior: `docs/CLOO.md`. Approved SVG masters:
 project-showcase exception to `showInDock: false`: do not also add a desktop shortcut or Get Info
 entry.
 
+Content/assets (V2_031): `src/app/cloo/clooData.ts` is the typed, UI-free source for Cloo project
+facts, status, features, stack, architecture, brand metadata, the sole GitHub destination, the
+finite command catalog, and the initial transcript. `CLOO_COMMANDS` is a complete record keyed by
+`ClooCommandName`; its result values are declarative descriptors, not command execution. The four
+full-color SVGs under `public/cloo/` are byte-for-byte copies of the authoritative brand masters.
+
 ### 2026-05-08 — V1 Complete: Key Implementation Patterns
 
 The following patterns emerged during the complete V1 implementation and are now canonical:
