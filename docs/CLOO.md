@@ -9,8 +9,8 @@ showcase in this repository.
 ## Status And Truthfulness
 
 - The typed content layer, approved brand assets, accessible command pane, bounded multipane
-  controls, and responsive workspace state are implemented. Project info, page composition, and
-  shell wiring remain planned.
+  controls, responsive workspace state, full-window composition, and Project info surface are
+  implemented. Shell wiring remains planned.
 - Cloo is a public, MIT-licensed, Linux x64 pre-alpha terminal multiplexer written in Rust.
 - The runtime has a functional daemon, persistent sessions, attached clients, panes, tabs, input,
   resize, copy mode, and agent-workspace foundations. Its M9 work is aligning the live attached UI
@@ -161,7 +161,7 @@ touch and assistive-technology users can reach it without synthesizing key chord
 
 | Path | Responsibility |
 |---|---|
-| `src/app/cloo/page.tsx` | Client page shell, simulation disclosure, and Project info surface |
+| `src/app/cloo/page.tsx` | Implemented client page shell, persistent simulation disclosure, and keyboard-contained Project info surface |
 | `src/app/cloo/clooData.ts` | Prepared typed project facts, commands, status, links, brand metadata, and initial transcript data |
 | `src/app/cloo/ClooWorkspaceSimulator.tsx` | Deterministic bounded tabs, panes, transcripts, prefix controls, detach state, and container-responsive rendering |
 | `public/cloo/` | Prepared byte-for-byte copies of the four approved full-color Cloo brand masters |

@@ -2157,7 +2157,7 @@
       "id": "V2_034",
       "title": "Compose the full-window Cloo showcase",
       "description": "Implement src/app/cloo/page.tsx as the Cloo-first full-window showcase and explicit exception to the standard four-panel project layout. Compose ClooWorkspaceSimulator with a persistent Interactive product simulation and Pre-alpha disclosure plus a compact Project info control that exposes Overview, Features, Tech Stack, Status, and GitHub as semantic HTML sourced only from clooData.ts. Add named cloo-* Tailwind colors for the authoritative Storm roles and use the approved brand assets without scattering inline hex values through components. Keep the Cloo product surface intentionally dark while the surrounding macOS window chrome follows the portfolio theme; retain text glyphs for focus and attention, accessible labels and focus management, and reduced-motion behavior.",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "group_id": "V2_CONTENT",
       "depends_on": [

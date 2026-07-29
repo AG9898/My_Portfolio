@@ -189,7 +189,7 @@ Default transient colors live in `WallpaperProvider`: flow field starts with bac
 
 - A product simulation may preserve a project's own visual system inside the app content area while
   the surrounding title bar and window chrome continue to use portfolio Liquid Glass tokens.
-- The planned Cloo workspace remains dark in both portfolio themes and uses named `cloo-*` Tailwind
+- The Cloo workspace remains dark in both portfolio themes and uses named `cloo-*` Tailwind
   tokens derived from its Storm palette. Do not scatter Storm hex values through components or use
   stock Tailwind colors as substitutes.
 - Cloo focus and attention treatments retain text or glyph signals in addition to color. Motion for
