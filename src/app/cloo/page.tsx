@@ -42,12 +42,22 @@ export default function ClooPage() {
   useEffect(() => {
     if (!isInfoOpen) return
 
+    const desktopQuery = window.matchMedia("(min-width: 768px)")
     const previousFocus = document.activeElement as HTMLElement | null
     const focusFrame = window.requestAnimationFrame(() => {
       closeButtonRef.current?.focus()
     })
 
+    function handleDesktopVisibility(event: MediaQueryListEvent) {
+      if (!event.matches) setIsInfoOpen(false)
+    }
+
     function handleKeyDown(event: KeyboardEvent) {
+      if (!desktopQuery.matches) {
+        setIsInfoOpen(false)
+        return
+      }
+
       if (event.key === "Escape") {
         event.preventDefault()
         event.stopPropagation()
@@ -82,11 +92,13 @@ export default function ClooPage() {
       }
     }
 
+    desktopQuery.addEventListener("change", handleDesktopVisibility)
     document.addEventListener("keydown", handleKeyDown, true)
     return () => {
       window.cancelAnimationFrame(focusFrame)
+      desktopQuery.removeEventListener("change", handleDesktopVisibility)
       document.removeEventListener("keydown", handleKeyDown, true)
-      if (previousFocus?.isConnected) previousFocus.focus()
+      if (desktopQuery.matches && previousFocus?.isConnected) previousFocus.focus()
     }
   }, [isInfoOpen])
 

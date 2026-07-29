@@ -174,7 +174,7 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 
 #### App window routes (project showcases and About)
 
-App window pages use a **panel-switching sidebar pattern** by default: `"use client"` with `useState` for the active section; sidebar items are `<button>` elements; each section renders a dedicated content panel. The planned Cloo showcase is the explicit full-window simulation exception. See CONVENTIONS.md for the full pattern spec.
+App window pages use a **panel-switching sidebar pattern** by default: `"use client"` with `useState` for the active section; sidebar items are `<button>` elements; each section renders a dedicated content panel. The implemented Cloo showcase is the explicit full-window simulation exception. See CONVENTIONS.md for the full pattern spec.
 
 - **`/sparse`** — Sparse (SvelteKit timesheet/expense app for Utilicom Technologies). Nav: Overview, Features, Tech Stack, Links. Private repo, no iframe.
 - **`/weather`** — Weather & Wellness (Python/Flask dashboard). Nav: Overview, Features, Tech Stack, Links. Live at `https://weather-and-wellness-dashboard.vercel.app`.
@@ -199,6 +199,9 @@ App window pages use a **panel-switching sidebar pattern** by default: `"use cli
   executable shell.
 - A native input owns ordinary command editing only while focused. A scoped `C-b` prefix handler
   implements a truthful subset of Cloo's real keymap; every action also has a button equivalent.
+- Simulator controls are disabled below the desktop breakpoint. Crossing below `md` blurs a focused
+  simulator descendant and closes Project info so its document-level focus trap cannot remain active
+  behind `MobileFallback`.
 - The product surface uses named Cloo Storm tokens and remains dark while the outer macOS window
   chrome continues to follow the portfolio theme.
 - The route is registered as a Dock app with a `900x600` default window and wired into

@@ -347,6 +347,12 @@ page and title, `DockIconGlyph` uses `/cloo/cloo-product.svg`, and Projects Find
 pre-alpha under Agent Tools. Cloo intentionally has no desktop shortcut, `ICON_LABELS`,
 `desktopInfo`, or Get Info entry.
 
+Verification (V2_036): the desktop shell stays mounted below `md`, so Cloo must guard more than its
+prompt. `ClooWorkspaceSimulator` disables controls, motion, announcements, and focused input when its
+media query is hidden; `page.tsx` also closes Project info on the same transition so its document-level
+focus trap cannot capture Tab behind `MobileFallback`. Any future Cloo overlay with global listeners
+must follow the same breakpoint lifecycle.
+
 ### 2026-05-08 — V1 Complete: Key Implementation Patterns
 
 The following patterns emerged during the complete V1 implementation and are now canonical:

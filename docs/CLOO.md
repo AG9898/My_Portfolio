@@ -134,7 +134,9 @@ touch and assistive-technology users can reach it without synthesizing key chord
 - Pane geometry derives from the simulator container, not the browser viewport.
 - Do not autofocus on small or coarse-pointer layouts. A deliberate click/tap enters the prompt.
 - The hidden desktop remains mounted below the portfolio's `md` breakpoint. The simulator must not
-  type, animate, or steal focus while its desktop surface is hidden.
+  type, animate, or steal focus while its desktop surface is hidden. The simulator disables its
+  controls and blurs focused descendants at that breakpoint; an open Project info dialog closes and
+  removes its document-level focus trap before the mobile fallback takes keyboard ownership.
 - Minimized windows are unmounted by the current window renderer. Restoring Cloo may reset the local
   simulator unless a later product decision explicitly requires persistence across minimize.
 - Cloo is promoted into the Dock as its sixth app and does not render as a desktop shortcut. It is
@@ -173,7 +175,7 @@ Do not add a terminal dependency or backend route for this showcase.
 
 ## Verification
 
-Run `npm run lint` and `npm run build`, then complete the Cloo checklist in
-[`TESTING.md`](TESTING.md). Browser verification must include direct `/cloo` entry, keyboard and
+The implemented showcase is verified with `npm run lint`, `npm run build`, and the Cloo checklist in
+[`TESTING.md`](TESTING.md). Browser verification covers direct `/cloo` entry, keyboard and
 touch-equivalent controls, window resizing, reduced motion, hidden mobile behavior, and the sixth
 Dock app's magnification, tooltip, open indicator, and window animation target.

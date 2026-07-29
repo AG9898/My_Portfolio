@@ -2226,7 +2226,7 @@
       "id": "V2_036",
       "title": "Verify and reconcile the Cloo showcase",
       "description": "Verify the complete Cloo showcase and shell integration against docs/CLOO.md and the Cloo checklist in docs/TESTING.md, fixing only issues discovered by that validation. Exercise direct routing, one-window behavior, all finite commands, history and completion, scoped C-b controls, clickable equivalents, Project info, detach/reattach, reset, text selection, keyboard ownership, reduced motion, container resizing, light/dark shell themes, hidden mobile behavior, the sixth Dock item, and Projects Finder content in modern desktop browsers when available. Confirm that no terminal runtime dependency or execution path was introduced, then replace planned documentation language with the actual implementation details and record any durable integration gotcha in AGENTS.md.",
-      "status": "todo",
+      "status": "done",
       "priority": "medium",
       "group_id": "V2_CONTENT",
       "depends_on": [

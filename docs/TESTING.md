@@ -88,7 +88,7 @@ Run manually after any window manager change:
 
 ## Cloo Showcase Checklist
 
-Run manually when the planned `/cloo` showcase or its shell integration changes:
+Run manually when the implemented `/cloo` showcase or its shell integration changes:
 
 - [ ] Direct `/cloo` entry opens exactly one centered `900x600` Cloo window and preserves the desktop shell.
 - [ ] The window and Project info surface clearly identify the experience as an interactive product simulation and Cloo as pre-alpha.
@@ -102,7 +102,7 @@ Run manually when the planned `/cloo` showcase or its shell integration changes:
 - [ ] Detach and reattach preserve tabs, panes, transcripts, focus, and zoom; reset restores the documented one-tab, one-pane initial workspace.
 - [ ] Resize toward `320x200` keeps the focused pane, status, commands, and recovery controls usable without unreadable fixed-width panes.
 - [ ] Reduced motion removes automatic typing and simplifies layout motion without hiding state changes.
-- [ ] Below `md`, the hidden desktop simulator does not type, animate, autofocus, or consume keys behind MobileFallback.
+- [ ] Below `md`, the hidden desktop simulator does not type, animate, autofocus, or consume keys behind MobileFallback; resizing with Project info open closes its focus trap.
 - [ ] Light and dark portfolio themes preserve themed macOS chrome while the Cloo product surface remains intentionally dark.
 - [ ] Cloo appears once as the sixth Dock app using the approved terminal-face product mark; magnification, tooltip, open indicator, click-to-open/focus/restore, and source animation work, and no Cloo desktop shortcut or Get Info entry appears.
 
