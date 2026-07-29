@@ -91,6 +91,7 @@ Run manually after any window manager change:
 Run manually when the implemented `/cloo` showcase or its shell integration changes:
 
 - [ ] Direct `/cloo` entry opens exactly one centered `900x600` Cloo window and preserves the desktop shell.
+- [ ] Opening Cloo on a desktop/fine-pointer layout focuses the command input, shows a visible ready-to-type hint, and accepts `help` immediately; coarse-pointer layouts require a deliberate tap.
 - [ ] The window and Project info surface clearly identify the experience as an interactive product simulation and Cloo as pre-alpha.
 - [ ] `help`, `about`, `features`, `stack`, `architecture`, `status`, `github`, `clear`, and `reset` return deterministic local results; unknown input is rendered as text and cannot execute code or network requests.
 - [ ] `github` adds a normal `https://github.com` link without navigating automatically; repeated commands retain no more than 80 transcript entries, 30 history entries, or 120 input characters.

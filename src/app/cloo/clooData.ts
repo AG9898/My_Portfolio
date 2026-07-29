@@ -302,6 +302,6 @@ export const CLOO_INITIAL_TRANSCRIPT: readonly ClooTranscriptEntry[] = [
   {
     id: "help-hint",
     kind: "system",
-    text: "Type help for project commands or use the simulated C-b prefix controls.",
+    text: "Prompt ready. Type help and press Enter, or use the simulated C-b prefix controls.",
   },
 ] as const;

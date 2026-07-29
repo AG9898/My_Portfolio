@@ -132,7 +132,9 @@ touch and assistive-technology users can reach it without synthesizing key chord
   Narrow mode may show only the focused pane plus compact tab/status controls; it must not squeeze a
   fixed multipane grid into unreadable columns.
 - Pane geometry derives from the simulator container, not the browser viewport.
-- Do not autofocus on small or coarse-pointer layouts. A deliberate click/tap enters the prompt.
+- On a visible desktop with a fine pointer, opening Cloo focuses the command input and presents an
+  explicit ready-to-type hint. Do not autofocus on small or coarse-pointer layouts; a deliberate
+  click/tap enters the prompt there.
 - The hidden desktop remains mounted below the portfolio's `md` breakpoint. The simulator must not
   type, animate, or steal focus while its desktop surface is hidden. The simulator disables its
   controls and blurs focused descendants at that breakpoint; an open Project info dialog closes and

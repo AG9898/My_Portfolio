@@ -482,6 +482,7 @@ export default function ClooWorkspaceSimulator() {
   const idBase = useId()
   const hintId = `${idBase}-hint`
   const rootRef = useRef<HTMLElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
   const entrySequence = useRef(0)
   const historyDraft = useRef("")
   const isComposing = useRef(false)
@@ -533,6 +534,15 @@ export default function ClooWorkspaceSimulator() {
     observer.observe(root)
     return () => observer.disconnect()
   }, [])
+
+  useEffect(() => {
+    if (!isDesktopVisible || !window.matchMedia("(pointer: fine)").matches) return
+
+    const focusFrame = window.requestAnimationFrame(() => {
+      inputRef.current?.focus({ preventScroll: true })
+    })
+    return () => window.cancelAnimationFrame(focusFrame)
+  }, [isDesktopVisible])
 
   function nextEntryId() {
     entrySequence.current += 1
@@ -1003,7 +1013,7 @@ export default function ClooWorkspaceSimulator() {
 
                   {focused && (
                     <form
-                      className="flex shrink-0 items-center gap-2 border-t border-cloo-border px-2 py-1.5"
+                      className="flex shrink-0 items-center gap-2 border-t border-cloo-border bg-cloo-frame/40 px-2 py-1.5 focus-within:border-cloo-accent focus-within:bg-cloo-raised"
                       onSubmit={(event) => {
                         event.preventDefault()
                         if (isComposing.current) return
@@ -1017,6 +1027,7 @@ export default function ClooWorkspaceSimulator() {
                         cloo&gt;
                       </label>
                       <input
+                        ref={inputRef}
                         id={inputId}
                         type="text"
                         value={input}
@@ -1043,7 +1054,7 @@ export default function ClooWorkspaceSimulator() {
                         }}
                         onKeyDown={handleKeyDown}
                         className="min-w-0 flex-1 bg-transparent text-xs text-cloo-primary caret-cloo-accent outline-none placeholder:text-cloo-muted focus-visible:ring-1 focus-visible:ring-cloo-accent disabled:pointer-events-none"
-                        placeholder="help"
+                        placeholder="Type help, then press Enter"
                       />
                       <button
                         type="submit"
