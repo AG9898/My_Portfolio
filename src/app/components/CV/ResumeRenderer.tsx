@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import resume from "@/data/resume.json";
+import resume, { type ResumeProfile } from "@/data/resume";
 import { displayUrl, formatDateRange } from "./resumeFormat";
 
 function SectionTitle({ children }: { children: ReactNode }) {
@@ -19,7 +19,11 @@ export default function ResumeRenderer() {
   const location = basics.location
     ? [basics.location.city, basics.location.region].filter(Boolean).join(", ")
     : null;
-  const profileLinks = basics.profiles?.filter((profile) => profile.url) ?? [];
+  const profileLinks =
+    basics.profiles?.filter(
+      (profile): profile is ResumeProfile & { url: string } =>
+        Boolean(profile.url),
+    ) ?? [];
   const summary = "summary" in basics ? String(basics.summary ?? "") : "";
 
   return (

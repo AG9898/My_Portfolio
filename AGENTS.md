@@ -362,3 +362,30 @@ The following patterns emerged during the complete V1 implementation and are now
 - **`visibleIdsRef` pattern for AnimatePresence cleanup**: Use a `useRef` tracking current visible IDs, updated each render, so `onExitComplete` callbacks always read the current set instead of a stale closure.
 - **syncRoute guard against feedback loops**: The `syncRoute` reducer action returns unchanged state if `focusedId` already matches the target app. This prevents the `useEffect`s in `WindowManagerProvider` from creating a push→sync→push cycle when the URL and window focus agree.
 - **Dock indicator dot via `opacity` not `display`**: The 4×4px dot under dock icons uses `opacity: isOpen ? 0.9 : 0` rather than conditional rendering, so the layout slot is always reserved and no layout shift occurs on open/close.
+
+### 2026-09-09 — resume.json Edits Are Typecheck-Sensitive (Vercel Prod Break)
+
+Commit `5f3cb2b` trimmed `education[].courses` out of `src/data/resume.json` to hold the CV export
+to one page. That content-only edit broke the **production Vercel deployment**: both renderers still
+read `school.courses`, and because they imported `@/data/resume.json` directly, TypeScript inferred
+the education type from the literals present — with `courses` gone from the data, the property no
+longer existed on the type and `school.courses?.length` became `TS2339`. Optional chaining does not
+help here; `?.` still requires the property to be declared.
+
+The trap is that `npm run lint` **passes clean** — ESLint does not typecheck — so a content edit that
+looks like it needs no verification sails through the fast check and fails only in `next build` on
+Vercel. `AGENTS.md` scopes `npm run build` to "structural, routing, or dependency changes," which a
+`resume.json` edit does not read as.
+
+Fix and rule going forward:
+
+- **`src/data/resume.ts` is the import surface.** It declares the JSON Resume v1 `Resume` type and
+  re-exports the JSON as that type. Renderers import `@/data/resume`, never `@/data/resume.json`.
+  Optional fields are optional in the type whether or not any entry fills them in, so trimming
+  content can no longer break the build. Add new optional keys to that type instead of reaching for
+  `"key" in obj` guards (the pre-existing `"summary" in basics` / `"url" in project` guards were
+  ad-hoc workarounds for this same root cause).
+- **Run `npx tsc --noEmit` (or `npm run build`) after any `resume.json` edit**, not just `lint`.
+- Vercel deploys production from pushes to `main`; there are no GitHub Actions workflows in this
+  repo, so a red check on a commit is a Vercel build, not CI. Inspect with
+  `vercel inspect <deployment-url> --logs`.

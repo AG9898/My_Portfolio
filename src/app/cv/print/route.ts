@@ -1,13 +1,8 @@
 import { NextResponse } from "next/server";
-import resume from "@/data/resume.json";
+import resume, { type ResumeProfile } from "@/data/resume";
 import { displayUrl, formatDateRange } from "@/app/components/CV/resumeFormat";
 
 export const dynamic = "force-static";
-
-type ResumeLink = {
-  network: string;
-  url: string;
-};
 
 function escapeHtml(value: string | number | null | undefined) {
   return String(value ?? "")
@@ -56,10 +51,11 @@ function renderSkillsList(
   `;
 }
 
-function renderContactLinks(profiles: ResumeLink[] | undefined) {
+function renderContactLinks(profiles: ResumeProfile[] | undefined) {
   return (profiles ?? [])
-    .filter((profile) => profile.url)
-    .map((profile) => displayUrl(profile.url));
+    .map((profile) => profile.url)
+    .filter((url): url is string => Boolean(url))
+    .map((url) => displayUrl(url));
 }
 
 function renderResumeHtml() {

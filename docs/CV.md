@@ -9,12 +9,14 @@ How the portfolio's CV/résumé is authored, rendered on-site, exported to PDF, 
 ```text
 src/data/resume.json            ← single source of truth (JSON Resume v1)
         │
-        ├──► ResumeRenderer.tsx        on-site React/Tailwind render (/cv window)
-        │
-        └──► /cv/print route.ts        standalone parser-safe HTML
-                     │
-                     └──► scripts/export-cv.js (Puppeteer)
-                                  └──► public/cv.pdf   ← downloaded artifact
+        └──► src/data/resume.ts        typed `Resume` schema (import surface)
+                  │
+                  ├──► ResumeRenderer.tsx   on-site React/Tailwind render (/cv window)
+                  │
+                  └──► /cv/print route.ts   standalone parser-safe HTML
+                               │
+                               └──► scripts/export-cv.js (Puppeteer)
+                                            └──► public/cv.pdf   ← downloaded artifact
 ```
 
 One JSON file feeds two renderers. The on-site renderer is the interactive
@@ -43,6 +45,16 @@ Dates are `YYYY` or `YYYY-MM` strings. `formatDate` renders `YYYY-MM` as
 
 **To edit the CV, change `resume.json` — never hand-edit the renderers or the
 PDF.** After editing, re-export the PDF (see below).
+
+### Import surface — `src/data/resume.ts`
+
+Both renderers import `@/data/resume` (the typed module), **never
+`@/data/resume.json` directly.** The module declares the `Resume` schema and
+re-exports the JSON as that type, so optional fields stay optional regardless of
+whether any entry currently fills them in. Importing the raw JSON makes
+TypeScript infer the type from the literals present, so trimming an optional
+field turns every reader of it into a build-breaking compile error. Add new
+optional JSON Resume keys to the type here rather than guarding with `in`.
 
 ---
 
@@ -118,16 +130,18 @@ script manually.
 
 | Check | Command | Pass condition |
 |---|---|---|
-| Lint | `npm run lint` | No errors. |
+| Lint | `npm run lint` | No errors. **Does not typecheck** — never the only check after a `resume.json` edit. |
+| Types | `npx tsc --noEmit` | No errors. Fast stand-in for the typecheck inside `next build`. |
 | Build | `npm run build` | `/cv` and `/cv/print` compile. |
 | ATS-safe PDF | `pdftotext -layout public/cv.pdf -` | Selectable text out, sections in canonical order. **Empty output = not ATS-safe** (rasterized capture). |
 | Visual parity | open `/cv` | On-site section order matches the PDF; nav buttons scroll correctly. |
 
 ### Editing workflow
 1. Edit `src/data/resume.json`.
-2. `npm run dev` → check `/cv` renders correctly.
-3. `npm run export:cv` → regenerate `public/cv.pdf`.
-4. `pdftotext -layout public/cv.pdf -` → confirm selectable text and order.
+2. `npx tsc --noEmit` → catches fields the renderers read but the JSON no longer has.
+3. `npm run dev` → check `/cv` renders correctly.
+4. `npm run export:cv` → regenerate `public/cv.pdf`.
+5. `pdftotext -layout public/cv.pdf -` → confirm selectable text and order.
 
 ---
 
@@ -145,6 +159,11 @@ script manually.
 - **Two renderers must stay in sync.** Shared helpers cover date/URL formatting;
   **section order and structure are manual** — change `ResumeRenderer.tsx`,
   `route.ts`, and `SECTION_NAV` together.
+- **A `resume.json` content edit is a typecheck-sensitive change.** Removing an
+  optional field (e.g. `education[].courses`) breaks the build even though the
+  edit touches no code, and `npm run lint` passes clean because ESLint does not
+  typecheck. Always run `npx tsc --noEmit` or `npm run build` after editing the
+  JSON. Keeping the renderers on the typed `src/data/resume.ts` prevents this.
 - **Export needs a running origin.** No dev server → `ERR_CONNECTION_REFUSED`.
 - **Only `/cv/print` is parser-safe.** Never export from the window view or a
   shell route; verify every export with `pdftotext`.
