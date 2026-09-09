@@ -110,7 +110,10 @@ export default function CV() {
           </a>
         </div>
 
-        <section className="min-h-0 flex-1 overflow-auto bg-chrome p-3 sm:p-5">
+        {/* `relative` is load-bearing: the resume contains an `sr-only`
+            (position: absolute) line, which would otherwise resolve against the
+            window content area and add its own scrollbar there. */}
+        <section className="relative min-h-0 flex-1 overflow-auto bg-chrome p-3 sm:p-5">
           <ResumeRenderer />
         </section>
       </main>

@@ -164,6 +164,12 @@ script manually.
   edit touches no code, and `npm run lint` passes clean because ESLint does not
   typecheck. Always run `npx tsc --noEmit` or `npm run build` after editing the
   JSON. Keeping the renderers on the typed `src/data/resume.ts` prevents this.
+- **The resume scroll section must stay `relative`.** `ResumeRenderer` emits an
+  `sr-only` (`position: absolute`) line in Education. Without `relative` on the
+  scrolling `<section>` in `src/app/cv/page.tsx`, that element resolves against
+  `WindowRenderer`'s `position: relative` content div, escapes the resume's scroll
+  clip, and gives the CV window a **second scrollbar** that drags the toolbar and
+  sidebar with it. See *Scroll Containers in App Windows* in `docs/CONVENTIONS.md`.
 - **Export needs a running origin.** No dev server → `ERR_CONNECTION_REFUSED`.
 - **Only `/cv/print` is parser-safe.** Never export from the window view or a
   shell route; verify every export with `pdftotext`.

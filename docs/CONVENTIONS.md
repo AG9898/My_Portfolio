@@ -101,6 +101,25 @@ Normative guide for code in this portfolio. Read before writing new UI architect
 - Keep project facts available through semantic controls so terminal commands are an enhancement,
   not the only navigation path.
 
+### Scroll Containers in App Windows
+
+`WindowRenderer` renders window content inside a `position: relative; overflow: auto`
+div. A page that manages its own scrolling must make that scroll container
+`position: relative`, or any absolutely positioned descendant inside it — including
+Tailwind's **`sr-only`, which is `position: absolute`** — resolves against the window
+content div instead. Such an element escapes the page's scroll clip, is laid out at
+its in-flow position deep inside the scrolled content, and inflates the window
+content div's scroll height, producing a **second scrollbar** on the window itself.
+
+The symptom is two scrollbars where the outer one scrolls the whole app chrome
+(toolbar, sidebar) by the offset of the stray element. `overflow: hidden` on an
+intermediate ancestor does **not** fix it — an absolutely positioned box is only
+clipped by an ancestor that is also its containing block. Add `relative` to the
+scrolling element.
+
+To audit, open a window and confirm exactly one element satisfies
+`overflowY in (auto, scroll) && scrollHeight > clientHeight`.
+
 ### Screenshot Lightbox Pattern
 
 All project page screenshots must use a consistent click-to-enlarge lightbox. Apply this pattern to every screenshot thumbnail in every project window page:
