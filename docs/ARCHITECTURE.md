@@ -43,10 +43,10 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 
 #### StartupSequence (`src/app/components/Desktop/StartupSequence.tsx`)
 
-- Renders above the mounted desktop shell as the boot/sign-in overlay for `md` and larger viewports.
+- Renders above the mounted desktop shell as the boot overlay for `md` and larger viewports.
 - Plays once per browser tab/session using a startup-specific `sessionStorage` flag, falling back to replay when storage is unavailable.
-- Phases: black boot panel with the portfolio logo and progress bar, Tahoe-inspired sign-in panel with clock/date and `Aden Guo`, signing-in password dots/loading bar, then unmount.
-- Click or non-Tab keypress on the sign-in panel starts the signing-in phase. No startup audio is used.
+- Phases: `checking` → `boot` (black panel with the portfolio logo and progress bar) → `fading-out` → `done` (unmount). There is no sign-in or lock screen; the boot panel fades straight into the desktop with no click or keypress required.
+- The overlay wrapper sets no background of its own and is `pointer-events-none`, so the boot panel's fade reveals the desktop underneath and never intercepts input. No startup audio is used.
 - Respects `prefers-reduced-motion` by shortening timing and using fade-only transitions.
 
 #### MenuBar (`src/app/components/MenuBar/MenuBar.tsx`)

@@ -44,7 +44,8 @@ out *because* the rest is polished.
 2. **Content is behind two gates.** Boot splash → lock screen → required "Click to enter" click
    (`StartupSequence.tsx`, skipped within a session via `sessionStorage`). Charming, but ~5–8
    seconds plus one click before the visitor's first content; the initial black boot frame can
-   read as a broken page to someone rushed.
+   read as a broken page to someone rushed. *(Resolved: the lock screen was removed entirely
+   — boot now fades straight into the desktop in ~3s with no interaction.)*
 3. **Contact details contradict each other.** `src/app/contact/page.tsx` uses
    `aden219898@gmail.com`; `src/data/resume.json` (and therefore the rendered CV and PDF) uses
    `aden.guowe@gmail.com`. The Contact window's LinkedIn card is a **search-results link**
@@ -116,7 +117,9 @@ out *because* the rest is polished.
 - [x] In `src/app/components/Desktop/StartupSequence.tsx`: keep the boot + lock theater but
       make it non-blocking. Auto-advance the lock screen after ~1.5s of inactivity (respecting
       `prefers-reduced-motion` — reduced motion should skip straight through), and keep
-      click/keypress as an immediate skip.
+      click/keypress as an immediate skip. *(Superseded: the lock screen, sign-in animation, and
+      auto-advance timer were removed outright. Boot fills over 2400ms, then fades to the desktop
+      over 400ms — no click, keypress, or timer gate remains.)*
 - [x] Ensure the very first boot frame isn't a plain black screen for seconds — the logo/progress
       should appear immediately so the page never reads as broken. *(Already true: the initial
       `checking` phase server-renders `BootPanel` with the `priority` logo + progress bar.)*

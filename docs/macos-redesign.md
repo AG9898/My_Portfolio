@@ -301,10 +301,10 @@ On the first desktop page load in each browser tab/session, before the desktop i
 1. **Black full-screen overlay** mounts immediately (z-index above everything)
 2. **Portfolio logo** centered as the portfolio-safe boot mark
 3. **Progress bar** below center fills linearly over `2400ms`
-4. Overlay transitions into a Tahoe-inspired sign-in screen over the already-mounted desktop wallpaper
-5. Sign-in screen shows a large clock/date, portfolio logo avatar, `Aden Guo`, and a glassy **Click to enter** control
-6. Visitor click or keypress triggers an automatic sign-in animation with password dots and a short loading bar
-7. Overlay fades out to reveal the desktop with wallpaper, dock, menu bar, shortcuts, and any route-synced windows already mounted underneath
+4. Overlay fades out to reveal the desktop with wallpaper, dock, menu bar, shortcuts, and any route-synced windows already mounted underneath
+
+There is no sign-in or lock screen. The boot panel is the entire sequence and it never waits on a
+click or keypress: a recruiter reaches real content in under three seconds with no interaction.
 
 **Sound note**: The original Apple startup chime is Apple IP. Options:
 - Use a royalty-free recreation (available on freesound.org)
@@ -312,13 +312,13 @@ On the first desktop page load in each browser tab/session, before the desktop i
 - Make the sound opt-in (click anywhere to start + play chime) — this also solves browser autoplay restrictions
 - Current implementation uses no audio. Any future audio path must require a user gesture.
 
-**Timing**: Boot progress fills linearly over `2400ms`. The transition between boot and sign-in fades over `400ms`. After click/key activation, the sign-in loading bar runs for ~`1350ms`, then the overlay fades away. Progress bar dimensions: `176×4px`, track `rgba(255,255,255,0.15)`, fill `rgba(255,255,255,0.85)`.
+**Timing**: Boot progress fills linearly over `2400ms`, holds for `180ms`, then the overlay fades out over `400ms` — roughly `3s` to a fully interactive desktop. Progress bar dimensions: `176×4px`, track `rgba(255,255,255,0.15)`, fill `rgba(255,255,255,0.85)`.
 
 **Replay policy**: `sessionStorage` records completion under a startup-only key so the sequence plays once per browser tab/session. If browser storage is unavailable, the sequence safely replays.
 
 **Browser autoplay policy**: The current implementation uses no audio. Any future audio path must require a user gesture.
 
-**Implementation**: `StartupSequence.tsx` component, rendered in `layout.tsx` above everything else, uses `framer-motion` to fade between boot, sign-in, signing-in, and unmounted states. The desktop shell is mounted underneath throughout the sequence. Reduced-motion users get the same phases with shortened fade-only transitions.
+**Implementation**: `StartupSequence.tsx` component, rendered in `layout.tsx` above everything else, uses `framer-motion` to fade the boot panel out and `AnimatePresence`'s `onExitComplete` to unmount the overlay. Phases are `checking → boot → fading-out → done`. The overlay wrapper carries no background of its own and is `pointer-events-none`, so the boot panel's fade reveals the desktop underneath and never intercepts clicks. The desktop shell is mounted underneath throughout the sequence. Reduced-motion users get the same phases with a `500ms` boot and a `120ms` fade.
 
 ---
 
