@@ -211,7 +211,7 @@ The parser-safe PDF export surface is `/cv/print`, implemented as a route handle
 
 ### 2026-06-06 — CV Subsystem Doc + Drift Reconciled
 
-The legacy `/cv?print=1` in-window mode and its dead `body.cv-print-mode` print CSS were removed; `/cv/print` is the sole export surface. Date/URL formatting (`formatDate`, `formatDateRange`, `displayUrl`) is now shared via `src/app/components/CV/resumeFormat.ts`, imported by both `ResumeRenderer.tsx` and `cv/print/route.ts`. The `/cv/print` layout is the canonical section order — `Summary → Skills → Experience → Education → Projects` — and `ResumeRenderer` plus the window's `SECTION_NAV` mirror it; section order is not enforced by the shared helpers, so reorder all three together. `docs/CV.md` is the canonical reference for the CV subsystem. `public/cv.pdf` is the in-use export; `public/CV_AG.*` are legacy/unused.
+The legacy `/cv?print=1` in-window mode and its dead `body.cv-print-mode` print CSS were removed; `/cv/print` is the sole export surface. Date/URL formatting (`formatDate`, `formatDateRange`, `displayUrl`) is now shared via `src/app/components/CV/resumeFormat.ts`, imported by both `ResumeRenderer.tsx` and `cv/print/route.ts`. The `/cv/print` layout is the canonical section order — `Summary → Experience → Education → Projects → Skills` (reordered 2026-09-21 on recruiter feedback) — and `ResumeRenderer` plus the window's `SECTION_NAV` mirror it; section order is not enforced by the shared helpers, so reorder all three together. `docs/CV.md` is the canonical reference for the CV subsystem. `public/cv.pdf` is the in-use export; `public/CV_AG.*` are legacy/unused.
 
 ### 2026-05-25 — buddy Added as Desktop Shortcut
 

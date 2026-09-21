@@ -40,7 +40,7 @@ function renderSkillsList(
   if (!skills.length) return "";
 
   return `
-    <ul>
+    <ul class="skills">
       ${skills
         .map(
           (skillGroup) =>
@@ -48,6 +48,15 @@ function renderSkillsList(
         )
         .join("")}
     </ul>
+  `;
+}
+
+function renderEntryHead(title: string, meta: string) {
+  return `
+    <div class="entry-head">
+      <p>${title}</p>
+      ${meta ? `<p class="meta">${escapeHtml(meta)}</p>` : ""}
+    </div>
   `;
 }
 
@@ -84,9 +93,10 @@ function renderResumeHtml() {
 
       return `
         <div class="entry">
-          <p><strong>${escapeHtml(school.studyType)}: ${escapeHtml(school.area)}</strong></p>
-          <p>${escapeHtml(school.institution)}${school.location ? ` - ${escapeHtml(school.location)}` : ""}</p>
-          ${dateRange ? `<p class="meta">${escapeHtml(dateRange)}</p>` : ""}
+          ${renderEntryHead(
+            `<strong>${escapeHtml(school.studyType)}, ${escapeHtml(school.area)}</strong> - ${escapeHtml(school.institution)}${school.location ? `, ${escapeHtml(school.location)}` : ""}`,
+            dateRange,
+          )}
           ${courses}
         </div>
       `;
@@ -103,8 +113,10 @@ function renderResumeHtml() {
 
       return `
         <div class="entry">
-          <p><strong>${escapeHtml(job.position)}</strong> - ${escapeHtml(job.name)}${job.location ? `, ${escapeHtml(job.location)}` : ""}</p>
-          <p class="meta">${escapeHtml(formatDateRange(job.startDate, job.endDate))}</p>
+          ${renderEntryHead(
+            `<strong>${escapeHtml(job.position)}</strong> - ${escapeHtml(job.name)}${job.location ? `, ${escapeHtml(job.location)}` : ""}`,
+            formatDateRange(job.startDate, job.endDate),
+          )}
           ${bullets}
         </div>
       `;
@@ -121,7 +133,10 @@ function renderResumeHtml() {
 
       return `
         <div class="entry">
-          <p><strong>${escapeHtml(project.name)}</strong>${projectUrl ? ` - ${escapeHtml(displayUrl(projectUrl))}` : ""}</p>
+          ${renderEntryHead(
+            `<strong>${escapeHtml(project.name)}</strong>`,
+            projectUrl ? displayUrl(projectUrl) : "",
+          )}
           ${renderList(bullets)}
         </div>
       `;
@@ -137,7 +152,7 @@ function renderResumeHtml() {
     <style>
       @page {
         size: A4;
-        margin: 8mm;
+        margin: 8mm 13mm;
       }
 
       * {
@@ -151,8 +166,8 @@ function renderResumeHtml() {
         background: #fff;
         color: #171717;
         font-family: Arial, Helvetica, sans-serif;
-        font-size: 9.6pt;
-        line-height: 1.13;
+        font-size: 10.2pt;
+        line-height: 1.35;
       }
 
       main {
@@ -165,25 +180,35 @@ function renderResumeHtml() {
 
       h1 {
         margin: 0;
-        font-size: 16pt;
-        line-height: 1.06;
+        font-size: 18pt;
+        line-height: 1.1;
+        letter-spacing: 0.04em;
         text-transform: uppercase;
       }
 
       .contact {
-        margin-top: 3px;
-        font-size: 9.2pt;
-        line-height: 1.12;
+        margin-top: 7px;
+        font-size: 9.5pt;
       }
 
       h2 {
-        margin: 7px 0 3px;
-        border-bottom: 0.7px solid #333;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 21px 0 10px;
         break-after: avoid;
-        font-size: 10.4pt;
-        letter-spacing: 0.02em;
-        line-height: 1.12;
+        font-size: 10.5pt;
+        letter-spacing: 0.06em;
+        line-height: 1;
         text-transform: uppercase;
+      }
+
+      h2::before,
+      h2::after {
+        content: "";
+        flex: 1;
+        height: 0.8px;
+        background: #171717;
       }
 
       p {
@@ -191,25 +216,36 @@ function renderResumeHtml() {
       }
 
       ul {
-        margin: 1.5px 0 0;
-        padding-left: 15px;
+        margin: 3px 0 0;
+        padding-left: 16px;
       }
 
       li {
-        margin: 0 0 0.5px;
+        margin: 0 0 3.5px;
       }
 
       .entry {
         break-inside: avoid;
-        margin-bottom: 4px;
+        margin-bottom: 12px;
       }
 
-      section {
-        break-inside: auto;
+      .entry:last-child {
+        margin-bottom: 0;
+      }
+
+      .entry-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
       }
 
       .meta {
+        flex-shrink: 0;
         font-style: italic;
+      }
+
+      .skills li {
+        margin-bottom: 3px;
       }
     </style>
   </head>
@@ -221,10 +257,10 @@ function renderResumeHtml() {
       </header>
 
       ${renderSection("Professional Summary", summary ? `<p>${escapeHtml(summary)}</p>` : "")}
-      ${renderSection("Technical Skills", skillsHtml)}
       ${renderSection("Professional Experience", workHtml)}
       ${renderSection("Education", educationHtml)}
       ${renderSection("Projects", projectsHtml)}
+      ${renderSection("Technical Skills", skillsHtml)}
     </main>
   </body>
 </html>`;

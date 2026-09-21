@@ -34,9 +34,9 @@ async function exportCvPdf() {
       preferCSSPageSize: true,
       margin: {
         top: "8mm",
-        right: "8mm",
+        right: "13mm",
         bottom: "8mm",
-        left: "8mm",
+        left: "13mm",
       },
     });
 

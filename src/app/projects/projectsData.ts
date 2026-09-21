@@ -77,7 +77,7 @@ export const PROJECTS: Project[] = [
       "A SvelteKit 2 (Svelte 5 runes) editorial knowledge site that makes a personal note library conversational. Visitors query published notes through a streaming RAG chat grounded exclusively in the author's content via hybrid pgvector + lexical retrieval, confidence-tiered fallbacks, and Gemini 2.0 Flash.",
     stack: ["SvelteKit", "TypeScript", "Drizzle + pgvector", "OpenRouter", "Bun", "Railway"],
     category: "frontend",
-    link: "https://glass-atlas-production.up.railway.app",
+    link: "https://glassatlas.dev",
     thumbnail: {
       src: "/Glass-Atlas/Glass-Atlas RAG diagram.png",
       alt: "Glass Atlas retrieval-augmented generation diagram",

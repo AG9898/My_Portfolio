@@ -30,11 +30,10 @@
       "startDate": "2025-12",
       "summary": "Software and AI-focused technologist building internal APIs, production agents, and automation tooling on Azure alongside enterprise geospatial delivery.",
       "highlights": [
-        "Deploy internal-facing APIs on Azure — App Service web apps, Azure Functions for event- and schedule-triggered jobs, and API Management for gateway routing, auth, and rate limiting — shipped via Azure DevOps with Repos code review, Pipelines CI/CD, and Doppler-managed secrets.",
-        "Designed and deployed role-specific internal agents on Microsoft Foundry, grounded on internal company data and wired to internal APIs and tool actions; now in daily production use by colleagues.",
-        "Contributed to an internal Azure-hosted production app for agentic AI workflows using LangChain, LangGraph, and n8n with role-specific system-prompt design, cutting selected full-day manual processes to 1–2 hours.",
-        "Build and maintain internal geospatial tooling through agentic CLI development (Claude Code, Codex) with repo-scoped agent context and hook automation, replacing manual ETL, QC, and map-production steps; several of these methods are now standard on the team. Prototyped self-hosted long-running agent runtimes with cross-session state and remote triggers.",
-        "Key contributor on a large-scale enterprise GIS delivery for a major client: own a six-map production workstream and its end-to-end ETL and data-cleaning pipelines (Python, Esri APIs, FME) across datasets of roughly 5,000 to 1M records."
+        "Gave 100 colleagues across 5 roles instant answers from company data by building role-specific AI assistants on Microsoft Foundry, connected to internal APIs and tools; used daily in production.",
+        "Built and deployed 3 internal APIs on Azure (Functions, App Service, API Management) serving hundreds of requests daily across 5 teams, shipped through Azure DevOps CI/CD.",
+        "Cut selected full-day manual processes to 1–2 hours by helping build an AI workflow app with LangChain, LangGraph, and n8n.",
+        "Cut QC time from 2 days to 1 hour on a six-map enterprise GIS workstream (up to 1M records) by automating Python and FME pipelines with AI-assisted methods now standard on the team."
       ]
     },
     {
@@ -43,14 +42,14 @@
       "location": "Calgary, AB",
       "startDate": "2024-09",
       "endDate": "2025-04",
-      "summary": "Led capstone delivery for a geospatial mapping study, building the Python processing and validation pipeline used to compare survey methods against photogrammetry-derived spatial datasets."
+      "summary": "Led capstone delivery and built the Python processing and validation pipeline comparing survey methods against photogrammetry-derived spatial datasets."
     },
     {
       "name": "Gongcha",
       "position": "Shift Lead / Team Trainer",
       "startDate": "2020-11",
       "endDate": "2024-05",
-      "summary": "Managed high-volume shift operations and trained staff on standardized workflows, strengthening team coordination and execution under time constraints."
+      "summary": "Ran high-volume shift operations and trained new staff on standardized workflows."
     }
   ],
   "education": [
@@ -65,116 +64,74 @@
   ],
   "skills": [
     {
-      "name": "Languages & Data",
+      "name": "Languages",
       "keywords": [
         "Python",
         "TypeScript",
-        "JavaScript",
-        "Go",
-        "Rust",
-        "Ruby",
-        "C++",
         "SQL",
-        "NumPy",
-        "Pandas"
+        "Rust"
       ]
     },
     {
-      "name": "AI & LLM Engineering",
+      "name": "AI & Agents",
       "keywords": [
-        "Anthropic / Claude API",
-        "OpenAI",
-        "Microsoft Foundry",
         "LangChain",
         "LangGraph",
-        "Vercel AI SDK",
-        "OpenRouter",
-        "RAG & hybrid vector retrieval",
-        "Embeddings",
-        "Prompt caching",
-        "System-prompt design"
-      ]
-    },
-    {
-      "name": "Agentic Development",
-      "keywords": [
+        "Microsoft Foundry",
+        "RAG & pgvector",
         "MCP servers",
-        "Claude Code & Codex CLI",
-        "Agent skills & subagents",
-        "Repo-scoped agent context (AGENTS.md)",
-        "Hook-driven automation",
-        "n8n workflow automation",
-        "Persistent / long-running agent runtimes"
+        "OpenClaw / Hermes",
+        "Custom agent skills"
       ]
     },
     {
-      "name": "Backend & Data",
+      "name": "Backend & Web",
       "keywords": [
         "FastAPI",
         "Node.js",
-        "Ruby on Rails",
-        "REST API design",
-        "PostgreSQL",
-        "pgvector",
-        "SQLite",
-        "Redis",
-        "Drizzle ORM",
-        "Supabase",
-        "Neon"
-      ]
-    },
-    {
-      "name": "Web & Frameworks",
-      "keywords": [
+        "REST APIs",
         "React",
-        "Next.js (App Router)",
-        "SvelteKit / Svelte 5",
-        "Tailwind CSS",
-        "Tauri",
-        "PWA & service workers",
-        "Bun"
+        "Next.js",
+        "SvelteKit",
+        "PostgreSQL",
+        "Redis"
       ]
     },
     {
       "name": "Cloud & DevOps",
       "keywords": [
         "Azure (App Service, Functions, API Management)",
-        "Azure DevOps (Repos & Pipelines)",
+        "Azure DevOps CI/CD",
         "Docker",
-        "CI/CD",
         "Vercel",
-        "Railway",
-        "AWS S3",
-        "Linux",
-        "Bash",
-        "Git",
-        "Playwright",
-        "pytest / RSpec"
-      ]
-    },
-    {
-      "name": "Geospatial",
-      "keywords": [
-        "ArcGIS Pro & Online",
-        "QGIS",
-        "PostGIS",
-        "GeoPandas",
-        "GDAL/PROJ",
-        "FME Form & Flow",
-        "MapLibre GL",
-        "RTK GNSS"
+        "Git"
       ]
     }
   ],
   "projects": [
     {
-      "name": "Glass Atlas: Source-Grounded RAG Knowledge Site",
-      "description": "Deployed SvelteKit 2 (Svelte 5 runes) site that turns a personal note library into a conversational, citation-backed assistant.",
-      "url": "https://glass-atlas-production.up.railway.app",
+      "name": "UBC Department of Psychology Research Platform",
+      "url": "https://ubcpsych.com",
       "highlights": [
-        "Engineered hybrid semantic + lexical retrieval over Neon PostgreSQL with pgvector and Drizzle ORM, with confidence-tiered fallbacks that keep every answer grounded in source notes.",
-        "Built streaming RAG chat through OpenRouter (Gemini 2.0 Flash) on 1536-dim text-embedding-3-small vectors, strictly typed end to end in TypeScript.",
-        "Shipped on Railway with a Bun HTTP server, Auth.js GitHub OAuth, and private S3-compatible storage via presigned URLs."
+        "Built solo as the official study platform for a UBC Psychology cognitive research lab, now also run with Yonsei University in Seoul.",
+        "Research assistants use it to run live study sessions; 180+ participants so far, with questionnaires scored automatically (Next.js, FastAPI, Supabase)."
+      ],
+      "keywords": [
+        "Next.js",
+        "FastAPI",
+        "statsmodels",
+        "Supabase",
+        "Python",
+        "Mixed-effects models",
+        "Multi-tenant"
+      ]
+    },
+    {
+      "name": "Glass Atlas: AI-Powered Personal Blog",
+      "url": "https://glassatlas.dev",
+      "highlights": [
+        "Personal blog where readers can ask questions in a chat and get answers drawn from my posts, with links back to the source.",
+        "Built with SvelteKit and PostgreSQL; a RAG search layer finds posts by meaning as well as keywords so answers stay accurate."
       ],
       "keywords": [
         "SvelteKit",
@@ -188,13 +145,11 @@
       ]
     },
     {
-      "name": "PigeonCoop: Local-First Agent Workflow Engine",
-      "description": "Rust/Tauri desktop app for designing, running, monitoring, and replaying coding-agent workflows against local repositories.",
+      "name": "PigeonCoop: Visual Workflow Builder for AI Coding Agents",
       "url": "https://github.com/AG9898/PigeonCoop",
       "highlights": [
-        "Designed Rust core crates for typed workflow definitions, RunEvent envelopes, deterministic run/node state machines, and SQLite-backed workflow, run, and event persistence.",
-        "Built runtime adapters that drive real coding-agent CLIs, plus a React/TypeScript graph workspace with Agent, Tool, Router, Memory, and Human Review nodes and pre-run validation.",
-        "Covered builder, live-run, human-review, and replay flows with Rust unit tests, React component tests, and WebdriverIO/Tauri end-to-end suites."
+        "Desktop app for building, running, and replaying AI coding-agent workflows on a visual canvas, with human-review checkpoints.",
+        "Built in Rust and React; every run is recorded so it can be replayed step by step."
       ],
       "keywords": [
         "Rust",
@@ -208,20 +163,17 @@
       ]
     },
     {
-      "name": "Weather & Wellness: UBC Research Platform",
-      "url": "https://ubcpsych.com",
+      "name": "Cloo: Terminal Workspace for AI Coding Agents",
+      "url": "https://github.com/AG9898/cloo",
       "highlights": [
-        "Built a Next.js 15 / React 19 frontend and FastAPI backend that auto-scores validated instruments (digit span, loneliness, depression, anxiety) in real time.",
-        "Architected per-lab data isolation on Supabase Postgres/Auth with Upstash Redis, and mixed-effects weather-psychology modelling via statsmodels."
+        "Open-source Rust terminal app, similar to tmux, for running several AI coding agents side by side.",
+        "Sessions keep running in the background after the window closes and can be picked up again later (pre-alpha)."
       ],
       "keywords": [
-        "Next.js",
-        "FastAPI",
-        "statsmodels",
-        "Supabase",
-        "Python",
-        "Mixed-effects models",
-        "Multi-tenant"
+        "Rust",
+        "Terminal multiplexer",
+        "Client-server",
+        "Unix sockets"
       ]
     }
   ]

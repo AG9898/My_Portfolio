@@ -14,10 +14,10 @@ import ResumeRenderer from "@/app/components/CV/ResumeRenderer";
 const PDF_URL = "/cv.pdf";
 const SECTION_NAV = [
   { id: "contact", label: "Contact" },
-  { id: "skills", label: "Technical Skills" },
   { id: "experience", label: "Experience" },
   { id: "education", label: "Education" },
   { id: "projects", label: "Projects" },
+  { id: "skills", label: "Technical Skills" },
 ] as const;
 
 export default function CV() {

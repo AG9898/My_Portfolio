@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { ExternalLink, Globe, GitFork, Lock, Zap } from "lucide-react";
 
-const APP_URL = "https://glass-atlas-production.up.railway.app";
+const APP_URL = "https://glassatlas.dev";
 const GITHUB_URL = "https://github.com/AG9898/Glass-Atlas";
 
 const STACK_GROUPS: { label: string; items: string[] }[] = [

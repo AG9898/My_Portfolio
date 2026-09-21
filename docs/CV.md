@@ -83,12 +83,21 @@ The **`/cv/print` layout is the canonical order**, and `ResumeRenderer` mirrors
 it:
 
 ```text
-Professional Summary → Technical Skills → Professional Experience → Education → Projects
+Professional Summary → Professional Experience → Education → Projects → Technical Skills
 ```
 
 The window's `SECTION_NAV` (in `src/app/cv/page.tsx`) is ordered to match.
 Section **ordering is the one thing the shared helpers don't enforce** — if you
 reorder sections, change both renderers and the nav together.
+
+### Density budget
+The export is one A4 page and should end roughly 95–97% full — whitespace is
+the point, not a by-product. The print stylesheet (10.2pt Arial, 1.35 line
+height, centered rule headings, right-aligned dates, 8 × 13 mm margins) is
+tuned to that. If content grows past one page, trim bullets in `resume.json`
+rather than shrinking fonts or gaps. Keep skills to about four lines of
+market-relevant tools; supporting detail belongs in experience/project
+bullets.
 
 ---
 
@@ -118,7 +127,7 @@ standalone content). The open/download buttons serve the pre-generated
    ```
 2. Loads `/cv/print`, waits for `[data-cv-print-ready='true']`, emulates print
    media.
-3. Writes A4 PDF with `printBackground`, `preferCSSPageSize`, 8 mm margins to
+3. Writes A4 PDF with `printBackground`, `preferCSSPageSize`, 8 × 13 mm margins to
    `public/cv.pdf`.
 
 The PDF is **not** regenerated automatically on `resume.json` edits — run the

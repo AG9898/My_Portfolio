@@ -6,7 +6,7 @@ import { displayUrl, formatDateRange } from "./resumeFormat";
 
 function SectionTitle({ children }: { children: ReactNode }) {
   return (
-    <div className="mt-3 flex items-center gap-2 text-center text-[10.5px] font-bold uppercase leading-none text-black print:mt-3 print:text-[12px]">
+    <div className="mt-4 flex items-center gap-2 text-center text-[10.5px] font-bold uppercase leading-none text-black print:mt-3 print:text-[12px]">
       <div className="h-px flex-1 bg-black" aria-hidden="true" />
       <h2 className="shrink-0">{children}</h2>
       <div className="h-px flex-1 bg-black" aria-hidden="true" />
@@ -66,33 +66,24 @@ export default function ResumeRenderer() {
         </section>
       ) : null}
 
-      <section id="skills" className="scroll-mt-4">
-        <SectionTitle>Technical Skills</SectionTitle>
-        <ul className="mt-2 list-disc space-y-0.5 pl-5 print:mt-1.5 print:space-y-0.5">
-          {skills.map((skillGroup) => (
-            <li key={skillGroup.name}>
-              <span className="font-bold">{skillGroup.name}:</span>{" "}
-              {skillGroup.keywords.join(", ")}
-            </li>
-          ))}
-        </ul>
-      </section>
-
       <section id="experience" className="scroll-mt-4">
         <SectionTitle>Professional Experience</SectionTitle>
-        <div className="mt-2 space-y-2.5 print:mt-1.5 print:space-y-2">
+        <div className="mt-2 space-y-3 print:mt-1.5 print:space-y-2">
           {work.map((job) => (
             <div key={`${job.name}-${job.position}-${job.startDate}`}>
-              <p>
-                <span className="font-bold">{job.position}</span>
-                {" - "}
-                <span className="italic">{job.name}</span>
-              </p>
-              <p className="mt-0.5 italic">
-                {formatDateRange(job.startDate, job.endDate)}
-              </p>
+              <div className="flex justify-between gap-3">
+                <p>
+                  <span className="font-bold">{job.position}</span>
+                  {" - "}
+                  {job.name}
+                  {job.location ? `, ${job.location}` : ""}
+                </p>
+                <p className="shrink-0 italic">
+                  {formatDateRange(job.startDate, job.endDate)}
+                </p>
+              </div>
               {job.highlights?.length ? (
-                <ul className="mt-1 list-disc space-y-0.5 pl-5 print:mt-1 print:space-y-0.5">
+                <ul className="mt-1 list-disc space-y-1 pl-5 print:mt-1 print:space-y-0.5">
                   {job.highlights.map((highlight) => (
                     <li key={highlight}>{highlight}</li>
                   ))}
@@ -112,23 +103,21 @@ export default function ResumeRenderer() {
         <div className="mt-2 space-y-2 print:mt-1.5 print:space-y-1.5">
           {education.map((school) => (
             <div key={`${school.institution}-${school.area}`}>
-              <p>
-                <span className="font-bold">{school.studyType}:</span>{" "}
-                {school.area}
-              </p>
-              <p className="mt-0.5">
-                <span className="font-bold">{school.institution}</span>
-                {school.location ? ` - ${school.location}` : ""}
-              </p>
-              {school.startDate || school.endDate ? (
-                <p className="mt-0.5 italic">
-                  {formatDateRange(school.startDate, school.endDate)}
+              <div className="flex justify-between gap-3">
+                <p>
+                  <span className="font-bold">
+                    {school.studyType}, {school.area}
+                  </span>
+                  {" - "}
+                  {school.institution}
+                  {school.location ? `, ${school.location}` : ""}
                 </p>
-              ) : null}
-              <p className="sr-only">
-                {school.institution}
-                {school.location ? ` · ${school.location}` : ""}
-              </p>
+                {school.startDate || school.endDate ? (
+                  <p className="shrink-0 italic">
+                    {formatDateRange(school.startDate, school.endDate)}
+                  </p>
+                ) : null}
+              </div>
               {school.courses?.length ? (
                 <>
                   <p className="mt-1">Relevant Skills:</p>
@@ -146,25 +135,21 @@ export default function ResumeRenderer() {
 
       <section id="projects" className="scroll-mt-4">
         <SectionTitle>Projects</SectionTitle>
-        <div className="mt-2 space-y-2.5 print:mt-1.5 print:space-y-2">
+        <div className="mt-2 space-y-3 print:mt-1.5 print:space-y-2">
           {projects.map((project) => {
             const projectUrl = "url" in project ? project.url : undefined;
             return (
             <div key={project.name}>
-              <h3 className="font-bold">
+              <div className="flex justify-between gap-3">
+                <h3 className="font-bold">{project.name}</h3>
                 {projectUrl ? (
-                  <a className="underline" href={projectUrl}>
-                    {project.name}
+                  <a className="shrink-0 italic underline" href={projectUrl}>
+                    {displayUrl(projectUrl)}
                   </a>
-                ) : (
-                  project.name
-                )}
-              </h3>
-              {projectUrl ? (
-                <p className="mt-0.5">{displayUrl(projectUrl)}</p>
-              ) : null}
+                ) : null}
+              </div>
               {project.description || project.highlights?.length ? (
-                <ul className="mt-1 list-disc space-y-0.5 pl-5 print:mt-1 print:space-y-0.5">
+                <ul className="mt-1 list-disc space-y-1 pl-5 print:mt-1 print:space-y-0.5">
                   {project.description ? <li>{project.description}</li> : null}
                   {project.highlights?.map((highlight) => (
                     <li key={highlight}>{highlight}</li>
@@ -175,6 +160,17 @@ export default function ResumeRenderer() {
             );
           })}
         </div>
+      </section>
+      <section id="skills" className="scroll-mt-4">
+        <SectionTitle>Technical Skills</SectionTitle>
+        <ul className="mt-2 list-disc space-y-1 pl-5 print:mt-1.5 print:space-y-0.5">
+          {skills.map((skillGroup) => (
+            <li key={skillGroup.name}>
+              <span className="font-bold">{skillGroup.name}:</span>{" "}
+              {skillGroup.keywords.join(", ")}
+            </li>
+          ))}
+        </ul>
       </section>
     </article>
   );
