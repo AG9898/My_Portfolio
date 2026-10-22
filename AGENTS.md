@@ -264,13 +264,47 @@ context (selection set, open context menu, open Get Info app id) that wraps the 
 
 ### 2026-10-22 — Showcase Set Trimmed
 
-The project showcase set is now exactly **buddy, PigeonCoop, Weather & Wellness, Glass Atlas, and
-Cloo** — on the desktop (Cloo via the Dock) and in the Projects Finder (`projectsData.ts`). Techy,
+The project showcase set is now exactly **buddy, PigeonCoop, Weather & Wellness, Glass Atlas, BFR,
+and Cloo** (BFR added later the same day) — on the desktop (Cloo via the Dock) and in the Projects Finder (`projectsData.ts`). Techy,
 Sparse, and Bites were fully retired: routes, `AppId`s, shortcuts/icons, Get Info entries, and
 `public/techy`/`public/bites` assets were deleted (recover them from git history if one returns).
 Finder-only cards (My Portfolio, Zellaude-Plus, Interactive MapLibre,
 movieboxd) and the then-empty "Tooling" category were dropped too. Keep the Finder list and the
 showcase windows in lockstep: don't add a Finder card without a matching window, or vice versa.
+
+### 2026-10-22 — BFR Showcase: No Game Art, Dated Metrics
+
+BFR (`/bfr`) is a solo-built, unofficial, non-commercial browser revival of the mobile RPG Brave
+Frontier (source: `/home/ag9898/projects/BFR`, private repo `AG9898/BFR`; live at
+`https://rebornbf.com`; Discord `https://discord.gg/Fz8byyzGf5`). Since 2026-10-07 the game serves
+the original game's assets, so **the portfolio must never show any BFR game art** — neither the
+original Brave Frontier assets nor BFR's own Codex-generated character/UI art. The showcase uses
+metric tiles, a DOM bar chart, and a DOM request-path diagram instead of screenshots. Every BFR
+surface (page, Finder card, resume) carries the non-affiliation framing ("unofficial,
+non-commercial fan revival; not affiliated with Alim or gumi") and claims only the engineering.
+
+Metrics in `src/app/bfr/bfrData.ts` are a dated snapshot (`BFR_SNAPSHOT_DATE`). To refresh them:
+accounts = `x-total-count` from Supabase `GET /auth/v1/admin/users?per_page=1` using BFR's
+`.env.local` secret key (read-only); gameplay counts via PostgREST `Prefer: count=exact` (use
+`count=estimated` for `battle_sessions`, which times out); Discord members via the public
+`GET https://discord.com/api/v10/invites/Fz8byyzGf5?with_counts=true`; Vercel daily requests and
+function invocations from the team billing export (`GET /v1/billing/charges`, rows tagged
+`ProjectName: bfr`) because `vercel metrics` needs the paid Observability Plus add-on. Direct
+Postgres (port 5432) is unreachable from this machine's sandbox. Update the resume entry and
+Finder card numbers in the same change so all surfaces agree.
+
+### 2026-10-22 — Project App Icons (Codex imagegen)
+
+Projects Finder thumbnails are a matched set of macOS-style app icons in `public/app-icons/`
+(256×256 WebP with transparent squircle corners), one per showcase project, styled after Apple's
+macOS system app icons: a single flat SF Symbols-like glyph centered on a two-tone gradient tile.
+A first, cartoon-3D pass was rejected as not Apple enough; keep new icons to the flat, centered style. They were generated
+with the Codex CLI's built-in image generation (`codex exec --skip-git-repo-check --sandbox
+workspace-write -C <dir> - < PROMPT.md`), then cropped to the tile and masked; the exact prompts
+are in `docs/assets/project-icon-prompts.json`. When adding a project, generate its icon with the
+same shared-style block so the set stays consistent. Icons must not reproduce any project's real
+art (notably BFR's — see the BFR discovery). The desktop shortcut SVGs in `DesktopShortcuts.tsx`
+are a separate, hand-drawn document-icon set and were not replaced.
 
 ### 2026-07-29 — Cloo Interactive Showcase
 

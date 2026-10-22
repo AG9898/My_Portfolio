@@ -112,13 +112,13 @@ export default function Projects() {
               >
                 <div className="flex items-start gap-3">
                   {project.thumbnail ? (
-                    <div className="relative h-11 w-12 shrink-0 overflow-hidden rounded-md border border-glass-edge bg-window shadow-[inset_0_1px_0_rgba(255,255,255,0.28)]">
+                    <div className="relative h-12 w-12 shrink-0 drop-shadow-[0_2px_4px_rgba(0,0,0,0.35)]">
                       <Image
                         src={project.thumbnail.src}
                         alt={project.thumbnail.alt}
                         fill
                         sizes="48px"
-                        className="object-cover"
+                        className="object-contain"
                       />
                     </div>
                   ) : (

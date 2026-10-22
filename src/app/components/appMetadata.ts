@@ -12,6 +12,7 @@ export type AppId =
   | "weather"
   | "pigeoncoop"
   | "buddy"
+  | "bfr"
   | "cloo";
 
 export interface AppSize {
@@ -26,7 +27,7 @@ export interface AppPosition {
 
 export interface AppMetadata {
   id: AppId;
-  route: "/" | "/projects" | "/about" | "/contact" | "/cv" | "/glass-atlas" | "/weather" | "/pigeoncoop" | "/buddy" | "/cloo";
+  route: "/" | "/projects" | "/about" | "/contact" | "/cv" | "/glass-atlas" | "/weather" | "/pigeoncoop" | "/buddy" | "/bfr" | "/cloo";
   /** Short label used in dock, desktop shortcuts, and window list */
   label: string;
   /** Full title shown in the window title bar */
@@ -128,6 +129,16 @@ export const APPS: AppMetadata[] = [
     icon: "buddy",
     defaultSize: { width: 900, height: 600 },
     defaultPosition: { x: 200, y: 90 },
+    showInDock: false,
+  },
+  {
+    id: "bfr",
+    route: "/bfr",
+    label: "BFR",
+    title: "BFR — Aden Guo",
+    icon: "bfr",
+    defaultSize: { width: 900, height: 600 },
+    defaultPosition: { x: 220, y: 100 },
     showInDock: false,
   },
   {

@@ -54,7 +54,7 @@ Build a memorable frontend portfolio where the browser behaves like a macOS desk
 
 ### Phase 4 — V2 Project Expansion
 
-- Project-specific apps normally appear as distinctive desktop shortcuts only, not in the Dock. The current showcase set is Glass Atlas, Weather & Wellness, PigeonCoop, buddy, and Cloo (trimmed 2026-10-22; Techy, Sparse, and Bites were retired); Cloo is the deliberate exception, promoted into the Dock with its terminal-face product mark instead of receiving a desktop shortcut.
+- Project-specific apps normally appear as distinctive desktop shortcuts only, not in the Dock. The current showcase set is Glass Atlas, Weather & Wellness, PigeonCoop, buddy, BFR, and Cloo (trimmed 2026-10-22; Techy, Sparse, and Bites were retired; BFR added the same day); Cloo is the deliberate exception, promoted into the Dock with its terminal-face product mark instead of receiving a desktop shortcut.
 - Public, embeddable projects may render their deployed site in-window. Authenticated, private, native, or pre-release projects use static showcase windows with real descriptions, screenshots or demonstrations, stack details, and access-aware link panels.
 - Cloo opens at `/cloo` as a full-window interactive product simulation rather than a standard four-panel showcase. A bounded custom React workspace demonstrates panes, tabs, focus, zoom, and detach/reattach while exposing the same Overview, Features, Tech Stack, Status, and GitHub facts through a semantic Project info surface. It executes no shell commands and clearly labels both the simulation and Cloo's pre-alpha/M9 visual status.
 - Projects window sidebar categories are interactive filters. The project list holds exactly the showcase set above — no extra Finder-only cards — and exposes an external link only when the destination is intentionally public.
@@ -70,7 +70,7 @@ Build a memorable frontend portfolio where the browser behaves like a macOS desk
 
 ## Success Criteria
 
-- Desktop shell persists while navigating between `/`, `/projects`, `/about`, `/contact`, `/cv`, `/glass-atlas`, `/weather`, `/pigeoncoop`, `/buddy`, and `/cloo`, including direct browser entry to any implemented route.
+- Desktop shell persists while navigating between `/`, `/projects`, `/about`, `/contact`, `/cv`, `/glass-atlas`, `/weather`, `/pigeoncoop`, `/buddy`, `/bfr`, and `/cloo`, including direct browser entry to any implemented route.
 - Users can open multiple app windows, focus existing windows, minimize to dock, restore, close, maximize, and snap.
 - URL reflects the focused app without unmounting the desktop chrome.
 - The visual system reads as macOS-inspired: frosted glass, traffic lights, dock, menu bar, system typography, and dark canonical theme.

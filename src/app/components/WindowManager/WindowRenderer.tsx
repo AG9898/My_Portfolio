@@ -36,6 +36,7 @@ import GlassAtlasPage from "../../glass-atlas/page";
 import WeatherPage from "../../weather/page";
 import PigeonCoopPage from "../../pigeoncoop/page";
 import BuddyPage from "../../buddy/page";
+import BfrPage from "../../bfr/page";
 import ClooPage from "../../cloo/page";
 
 // ---------------------------------------------------------------------------
@@ -417,6 +418,7 @@ const WINDOW_CONTENT: Record<AppId, React.ComponentType> = {
   weather: WeatherPage,
   pigeoncoop: PigeonCoopPage,
   buddy: BuddyPage,
+  bfr: BfrPage,
   cloo: ClooPage,
 };
 
@@ -431,6 +433,7 @@ const WINDOW_TITLES: Record<AppId, string> = {
   weather: "Weather & Wellness — Aden Guo",
   pigeoncoop: "PigeonCoop — Aden Guo",
   buddy: "buddy — Aden Guo",
+  bfr: "BFR — Aden Guo",
   cloo: "Cloo — Aden Guo",
 };
 

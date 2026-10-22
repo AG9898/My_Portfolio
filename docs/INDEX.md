@@ -23,6 +23,7 @@ Canonical navigation map for this repository's documentation. When adding, remov
 | [`../Improvements.md`](../Improvements.md) | Prioritized improvement backlog from the 2026-07-17 recruiter/manager portfolio review |
 | [`../README.md`](../README.md) | Visitor-facing repo README: pitch, hero screenshot, quick start, doc links |
 | [`media/`](media/) | Repo media assets (README hero screenshot) |
+| [`assets/project-icon-prompts.json`](assets/project-icon-prompts.json) | Codex imagegen prompts for the Projects Finder app icons |
 
 ---
 

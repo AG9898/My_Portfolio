@@ -69,4 +69,16 @@ export const DESKTOP_INFO: Partial<Record<AppId, DesktopInfo>> = {
     comment:
       "Will judge your commits. Affectionately. Currently napping on the status bar. Do not pet during PreToolUse.",
   },
+  bfr: {
+    name: "bfr.game",
+    kind: "Browser RPG (Fan Revival)",
+    size: "175k lines on disk",
+    bytes: "10,830 player accounts",
+    where: "/Desktop",
+    created: "Wednesday, 23 September 2026 at 9:00 AM",
+    modified: "Today at 4:12 AM",
+    version: "Next.js 16 · Supabase · Phaser 3",
+    comment:
+      "Launched on a Tuesday, fell over on a Tuesday, rebuilt as static pages by Thursday. Summon rates are seeded; your luck is not.",
+  },
 };

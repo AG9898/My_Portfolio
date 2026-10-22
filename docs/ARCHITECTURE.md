@@ -34,7 +34,7 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
   - Inside `#desktop-root`, from back to front: `<Wallpaper />`, `<DesktopSurface />` (`z-index: 5`, empty-desktop interaction layer for marquee select + context menu), `<MenuBar />` (`z-50`, `h-7`), `<DesktopShortcuts />` (`z-10`, top: 48px), a desktop-sized `[data-desktop-layer="windows"]` wrapper containing `<WindowRenderer />` (window z-index 21+), `<Dock />` (`z-40`, `bottom-3`), and `<DesktopMenuLayer />` (renders the active context menu at `z-index: 10000` and the Get Info panel at `z-index: 9000`). The shell content is wrapped in `<DesktopProvider>` (inside `WallpaperProvider`) which owns icon selection, context-menu, and Get Info state.
   - `<WindowRenderer />` takes no children — it resolves content from the `WINDOW_CONTENT` registry internally.
 - App window content is decoupled from Next.js routing. `WindowRenderer` imports every page component directly and maps them to their `AppId` in a static `WINDOW_CONTENT` registry. Each open window always mounts its own component instance, so multiple windows are simultaneously visible regardless of which window has focus.
-- Route changes dispatch `syncRoute` so direct browser entry to `/`, `/projects`, `/about`, `/contact`, `/cv`, `/glass-atlas`, `/weather`, `/pigeoncoop`, `/buddy`, or `/cloo` opens and focuses the matching app window without unmounting wallpaper, menu bar, dock, desktop icons, or other open windows.
+- Route changes dispatch `syncRoute` so direct browser entry to `/`, `/projects`, `/about`, `/contact`, `/cv`, `/glass-atlas`, `/weather`, `/pigeoncoop`, `/buddy`, `/bfr`, or `/cloo` opens and focuses the matching app window without unmounting wallpaper, menu bar, dock, desktop icons, or other open windows.
 
 ### Desktop Shell
 
@@ -92,9 +92,9 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 #### Desktop Shortcuts (`src/app/components/Desktop/DesktopShortcuts.tsx`)
 
 - 88px-wide left sidebar column, positioned `left: 16px; top: 48px` (clears menu bar).
-- Renders one shortcut item for every `APPS` entry with `showInDock === false` — four project apps (Glass Atlas, Weather & Wellness, PigeonCoop, buddy). Core Home, Projects, About, Contact, and CV apps remain Dock-only.
-- Each shortcut is a 56×56px SVG using a thematic file/app metaphor: globe (glass-atlas), cloud (weather), pigeon (pigeoncoop), and terminal/pet (buddy).
-- File labels are mapped via the `ICON_LABELS` record (`"glass_atlas/"`, `"weather.dash"`, `"pigeoncoop.app"`, and `"buddy.cli"`); route/id come from `APPS`.
+- Renders one shortcut item for every `APPS` entry with `showInDock === false` — five project apps (Glass Atlas, Weather & Wellness, PigeonCoop, buddy, BFR). Core Home, Projects, About, Contact, and CV apps remain Dock-only.
+- Each shortcut is a 56×56px SVG using a thematic file/app metaphor: globe (glass-atlas), cloud (weather), pigeon (pigeoncoop), terminal/pet (buddy), and a crimson kite shield with sword (bfr).
+- File labels are mapped via the `ICON_LABELS` record (`"glass_atlas/"`, `"weather.dash"`, `"pigeoncoop.app"`, `"buddy.cli"`, and `"bfr.game"`); route/id come from `APPS`.
 - Single click: selected state — `rgba(10,132,255,0.28)` background + `1px solid rgba(10,132,255,0.55)` border; label becomes `rgba(10,132,255,0.95)` pill.
 - Double click: dispatches `open` action to the window manager; focuses and restores the window if already open.
 - Right click: selects the icon and opens a context menu (`Open`, `Get Info`).
@@ -110,13 +110,13 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 
 #### App Metadata (`src/app/components/appMetadata.ts`)
 
-- Shared registry of all portfolio apps: Home, Projects, About, Contact, CV, Glass Atlas, Weather & Wellness, PigeonCoop, buddy, and Cloo.
+- Shared registry of all portfolio apps: Home, Projects, About, Contact, CV, Glass Atlas, Weather & Wellness, PigeonCoop, buddy, BFR, and Cloo.
 - Exports `AppId` union type, `AppSize` and `AppPosition` helper types, `AppMetadata` interface (id, route, label, title, icon, defaultSize, defaultPosition, showInDock), and `APPS` array.
-- `AppId` is `"home" | "projects" | "about" | "contact" | "cv" | "glass-atlas" | "weather" | "pigeoncoop" | "buddy" | "cloo"`.
-- `AppMetadata.route` is a string literal union covering `/`, `/projects`, `/about`, `/contact`, `/cv`, `/glass-atlas`, `/weather`, `/pigeoncoop`, `/buddy`, `/cloo`.
+- `AppId` is `"home" | "projects" | "about" | "contact" | "cv" | "glass-atlas" | "weather" | "pigeoncoop" | "buddy" | "bfr" | "cloo"`.
+- `AppMetadata.route` is a string literal union covering `/`, `/projects`, `/about`, `/contact`, `/cv`, `/glass-atlas`, `/weather`, `/pigeoncoop`, `/buddy`, `/bfr`, `/cloo`.
 - `defaultSize` provides the window's initial `{width, height}` in pixels; runtime open paths center the window in the desktop safe area with `getCenteredWindowPositionForViewport()`. `defaultPosition` remains a fallback for non-browser contexts.
 - `title` is the full window title bar string; `label` is the short dock/shortcut label.
-- `showInDock?: boolean` — when explicitly `false`, the app appears in `DesktopShortcuts` only and is excluded from the Dock. When omitted or `true`, the app appears in the Dock and not in `DesktopShortcuts`. The five core apps (Home, Projects, About, Contact, CV) and Cloo omit this field; Glass Atlas, Weather, PigeonCoop, and buddy set it to `false`. Cloo is the first project-showcase exception promoted into the Dock.
+- `showInDock?: boolean` — when explicitly `false`, the app appears in `DesktopShortcuts` only and is excluded from the Dock. When omitted or `true`, the app appears in the Dock and not in `DesktopShortcuts`. The five core apps (Home, Projects, About, Contact, CV) and Cloo omit this field; Glass Atlas, Weather, PigeonCoop, buddy, and BFR set it to `false`. Cloo is the first project-showcase exception promoted into the Dock.
 - No state, no hooks, no reducer logic — pure static metadata consumed by the window manager and shell components.
 
 ### Window Manager
@@ -180,6 +180,7 @@ App window pages use a **panel-switching sidebar pattern** by default: `"use cli
 - **`/glass-atlas`** — Glass Atlas (embeddable Next.js app). Nav: Overview (full-bleed iframe), About, Tech Stack, Links. Live at `https://glassatlas.dev`.
 - **`/pigeoncoop`** — PigeonCoop (Rust/Tauri agent workflow desktop app). Nav: Overview, Features, Tech Stack, Links. In active development, no live URL.
 - **`/buddy`** — buddy (Windows npm CLI + Electron floating pet), publicly available as `@ag9898/buddy` on npm. Nav: Overview (terminal demo + pet sprite), Features, Tech Stack, Links. Two co-located sub-components live alongside the page: `PetSprite.tsx` (CSS spritesheet animation) and `TerminalSimulator.tsx` (auto-play typewriter demo). Sprite asset: `public/buddy/spritesheet.webp` (8 cols × 9 rows WebP, copied from source project). Terminal demo sequences through real CLI commands and emits `onStateChange` to drive the pet's animation state.
+- **`/bfr`** — BFR (solo-built browser fan revival of the mobile RPG Brave Frontier). Nav: Overview, Scaling, Tech Stack, Links — Scaling replaces Features because the launch-week scaling work is the showcase's point. Content lives in the UI-free `src/app/bfr/bfrData.ts` (dated metrics snapshot, invocation series, architecture lanes, links, disclaimer). The page renders no images: metrics tiles, a DOM bar chart, and a DOM request-path diagram stand in for screenshots. Links to `https://rebornbf.com` and the Discord invite; source is private.
 - **`/about`** — About page. Nav: About Aden, My Path, How I Work, Frontend Focus, What I Value. The My Path panel connects Aden's Geomatics Engineering background, full-stack and AI-enabled product work, current GIS Technologist role, and UBC client platform.
 - Content is hardcoded in each route file — no backend, no CMS.
 

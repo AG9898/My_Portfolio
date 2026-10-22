@@ -110,6 +110,24 @@
   ],
   "projects": [
     {
+      "name": "BFR: Browser Revival of the Mobile RPG Brave Frontier",
+      "url": "https://rebornbf.com",
+      "highlights": [
+        "Built solo in a month as a free fan project; in its first 10 days it reached 10,800+ player accounts, ~1.6M requests a day, and a 1,370-member Discord community I run.",
+        "Rebuilt the menus as static CDN-served pages mid-launch, cutting server calls 88%; every battle is replayed on the server before rewards are granted (Next.js, Supabase, Cloudflare)."
+      ],
+      "keywords": [
+        "Next.js",
+        "TypeScript",
+        "Phaser",
+        "Supabase",
+        "PostgreSQL",
+        "Cloudflare Workers",
+        "Vercel",
+        "Game engine"
+      ]
+    },
+    {
       "name": "UBC Department of Psychology Research Platform",
       "url": "https://ubcpsych.com",
       "highlights": [
@@ -124,24 +142,6 @@
         "Python",
         "Mixed-effects models",
         "Multi-tenant"
-      ]
-    },
-    {
-      "name": "Glass Atlas: AI-Powered Personal Blog",
-      "url": "https://glassatlas.dev",
-      "highlights": [
-        "Personal blog where readers can ask questions in a chat and get answers drawn from my posts, with links back to the source.",
-        "Built with SvelteKit and PostgreSQL; a RAG search layer finds posts by meaning as well as keywords so answers stay accurate."
-      ],
-      "keywords": [
-        "SvelteKit",
-        "TypeScript",
-        "RAG",
-        "pgvector",
-        "Drizzle ORM",
-        "OpenRouter",
-        "Bun",
-        "Railway"
       ]
     },
     {

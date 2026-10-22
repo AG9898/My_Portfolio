@@ -169,7 +169,9 @@ export default function About() {
                   FastAPI backend, automated scoring, and isolated research data.
                   Yonsei University&apos;s Department of Psychology now also runs a
                   study on it, with live participants in Canada and South Korea.
-                  Projects such as Glass Atlas and PigeonCoop let me carry that
+                  BFR, a browser game revival I built solo, passed 10,000 player
+                  accounts in its first ten days, and I rebuilt its architecture
+                  while it was live to keep up. Projects such as Glass Atlas and PigeonCoop let me carry that
                   product work into source-grounded AI and local-first agent
                   workflows.
                 </p>

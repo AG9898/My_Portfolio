@@ -17,6 +17,21 @@ export type Project = {
 
 export const PROJECTS: Project[] = [
   {
+    name: "BFR",
+    kind: "Browser RPG",
+    status: "Live · fan revival",
+    path: "~/projects/BFR",
+    description:
+      "A solo-built browser revival of the mobile RPG Brave Frontier that reached 10,830 accounts and about 1.6M requests a day within ten days of launch. Rebuilt mid-launch as CDN-served static pages, cutting server calls by about 88%. Unofficial and non-commercial; not affiliated with Alim or gumi.",
+    stack: ["Next.js", "TypeScript", "Phaser", "Supabase", "Cloudflare Workers"],
+    category: "frontend",
+    link: "https://rebornbf.com",
+    thumbnail: {
+      src: "/app-icons/bfr.webp",
+      alt: "BFR app icon",
+    },
+  },
+  {
     name: "PigeonCoop",
     kind: "Desktop workflow tool",
     status: "Active development",
@@ -27,8 +42,8 @@ export const PROJECTS: Project[] = [
     category: "agent-tools",
     link: "https://github.com/AG9898/PigeonCoop",
     thumbnail: {
-      src: "/PigeonCoop/Pigeon-workspace.png",
-      alt: "PigeonCoop workflow workspace",
+      src: "/app-icons/pigeoncoop.webp",
+      alt: "PigeonCoop app icon",
     },
   },
   {
@@ -41,6 +56,10 @@ export const PROJECTS: Project[] = [
     stack: ["Rust", "Tokio", "Linux PTYs", "alacritty_terminal"],
     category: "agent-tools",
     link: "https://github.com/AG9898/cloo",
+    thumbnail: {
+      src: "/app-icons/cloo.webp",
+      alt: "Cloo app icon",
+    },
   },
   {
     name: "Glass Atlas",
@@ -53,8 +72,8 @@ export const PROJECTS: Project[] = [
     category: "frontend",
     link: "https://glassatlas.dev",
     thumbnail: {
-      src: "/Glass-Atlas/Glass-Atlas RAG diagram.png",
-      alt: "Glass Atlas retrieval-augmented generation diagram",
+      src: "/app-icons/glass-atlas.webp",
+      alt: "Glass Atlas app icon",
     },
   },
   {
@@ -68,8 +87,8 @@ export const PROJECTS: Project[] = [
     category: "client-work",
     link: "https://ubcpsych.com",
     thumbnail: {
-      src: "/Weather-Wellness/WeatherCard.png",
-      alt: "Weather and Wellness dashboard",
+      src: "/app-icons/weather-wellness.webp",
+      alt: "Weather & Wellness app icon",
     },
   },
   {
@@ -83,8 +102,8 @@ export const PROJECTS: Project[] = [
     category: "agent-tools",
     link: "https://www.npmjs.com/package/@ag9898/buddy",
     thumbnail: {
-      src: "/buddy/spritesheet.webp",
-      alt: "buddy pixel-art pet spritesheet",
+      src: "/app-icons/buddy.webp",
+      alt: "buddy app icon",
     },
   },
 ];

@@ -35,6 +35,7 @@ export const ICON_LABELS: Partial<Record<AppId, string>> = {
   weather:        "weather.dash",
   pigeoncoop:     "pigeoncoop.app",
   buddy:          "buddy.cli",
+  bfr:            "bfr.game",
 };
 
 // ─── File icon SVGs — 56×56, folded-corner document shape ────────────────────
@@ -343,6 +344,43 @@ function BuddyIcon() {
   );
 }
 
+function BfrIcon() {
+  return (
+    <svg width="56" height="56" viewBox={`-4 0 ${DOC_W + 8} ${DOC_H + 4}`} aria-hidden="true">
+      <defs>
+        <linearGradient id="doc-bfr" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#FFFFFF" />
+          <stop offset="100%" stopColor="#E2E2E6" />
+        </linearGradient>
+        <linearGradient id="bfr-shield" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#D7263D" />
+          <stop offset="100%" stopColor="#8E1324" />
+        </linearGradient>
+      </defs>
+      <path d={DOC_PATH} fill="url(#doc-bfr)" stroke="rgba(0,0,0,0.15)" strokeWidth="0.5" />
+      <path d={FOLD_PATH} fill="#C7C7CC" />
+      <path
+        d={`M${DOC_W - FOLD} 0 V${FOLD} H${DOC_W}`}
+        fill="none"
+        stroke="rgba(0,0,0,0.18)"
+        strokeWidth="0.5"
+      />
+      {/* Sword behind the shield, gold hilt */}
+      <path d="M24 12 L26 16 L26 44 L22 44 L22 16 Z" fill="#C9CDD4" stroke="#8E929A" strokeWidth="0.5" />
+      <rect x="16" y="43" width="16" height="3" rx="1.5" fill="#D4A017" />
+      <rect x="22.5" y="46" width="3" height="7" rx="1" fill="#8B5A2B" />
+      {/* Kite shield */}
+      <path
+        d="M14 22 H34 V32 Q34 41 24 46 Q14 41 14 32 Z"
+        fill="url(#bfr-shield)"
+        stroke="#D4A017"
+        strokeWidth="1.5"
+      />
+      <path d="M24 25 V42 M17 31 H31" stroke="#D4A017" strokeWidth="1.2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 // ─── Icon dispatcher ──────────────────────────────────────────────────────────
 
 export function ShortcutFileIcon({ appId }: { appId: AppId }) {
@@ -356,6 +394,7 @@ export function ShortcutFileIcon({ appId }: { appId: AppId }) {
     case "weather":     return <CloudIcon />;
     case "pigeoncoop":  return <PigeonIcon />;
     case "buddy":       return <BuddyIcon />;
+    case "bfr":         return <BfrIcon />;
     default:            return null;
   }
 }
