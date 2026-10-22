@@ -41,7 +41,7 @@ export const DESKTOP_INFO: Partial<Record<AppId, DesktopInfo>> = {
     where: "/Desktop/Projects",
     created: "Monday, 2 December 2024 at 4:20 PM",
     modified: "Today at 1:37 AM",
-    version: "Multi-tenant · UBC Psychology",
+    version: "Multi-tenant · UBC + Yonsei Psychology",
     comment:
       "100% chance of insights, scattered dashboards by afternoon. Bring an umbrella for the p-values.",
   },

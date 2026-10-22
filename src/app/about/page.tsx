@@ -81,8 +81,9 @@ export default function About() {
                   when real users and real data meet it.
                 </p>
                 <p>
-                  My projects range from a production UBC research platform with a
-                  Next.js frontend and FastAPI backend to local-first workflow tools,
+                  My projects range from a production research platform used by UBC
+                  and Yonsei University psychology labs (Next.js frontend, FastAPI
+                  backend) to local-first workflow tools,
                   source-grounded AI applications, and GIS data pipelines. The
                   portfolio is another example: a macOS-style desktop where routing,
                   state, animation, and content form one coherent browser experience
@@ -166,6 +167,8 @@ export default function About() {
                   products. Weather &amp; Wellness is a production research platform
                   for a UBC Psychology lab at ubcpsych.com, with a Next.js frontend,
                   FastAPI backend, automated scoring, and isolated research data.
+                  Yonsei University&apos;s Department of Psychology now also runs a
+                  study on it, with live participants in Canada and South Korea.
                   Projects such as Glass Atlas and PigeonCoop let me carry that
                   product work into source-grounded AI and local-first agent
                   workflows.

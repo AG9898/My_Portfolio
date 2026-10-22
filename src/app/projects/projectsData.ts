@@ -59,11 +59,11 @@ export const PROJECTS: Project[] = [
   },
   {
     name: "Weather & Wellness",
-    kind: "UBC research platform",
+    kind: "UBC + Yonsei research platform",
     status: "Deployed",
     path: "~/projects/Weather-and-Wellness-Dashboard",
     description:
-      "A multi-instrument research platform for a UBC Psychology lab. RAs run validated psychological tasks (digit span, loneliness, depression, anxiety) with anonymous participants; a FastAPI backend auto-scores responses and runs weather-psychology mixed-effects models via statsmodels, with per-lab data isolation.",
+      "A multi-instrument research platform built for a UBC Psychology lab and now also used by Yonsei University's Department of Psychology in Seoul, with live participants enrolled in both Canada and South Korea. RAs run validated psychological tasks (digit span, loneliness, depression, anxiety) with anonymous participants; a FastAPI backend auto-scores responses and runs weather-psychology mixed-effects models via statsmodels, with per-lab data isolation.",
     stack: ["Next.js", "FastAPI", "Supabase", "statsmodels", "Upstash Redis"],
     category: "client-work",
     link: "https://ubcpsych.com",

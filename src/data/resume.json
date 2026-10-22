@@ -113,8 +113,8 @@
       "name": "UBC Department of Psychology Research Platform",
       "url": "https://ubcpsych.com",
       "highlights": [
-        "Built solo as the official study platform for a UBC Psychology cognitive research lab, now also run with Yonsei University in Seoul.",
-        "Research assistants use it to run live study sessions; 180+ participants so far, with questionnaires scored automatically (Next.js, FastAPI, Supabase)."
+        "Built solo as the official study platform for a UBC Psychology research lab; Yonsei University's Department of Psychology in Seoul now also runs an active study on it.",
+        "Handles live participant intake and sessions in Canada and South Korea; 180+ participants so far, with automatic scoring that supports both labs' research and publications (Next.js, FastAPI, Supabase)."
       ],
       "keywords": [
         "Next.js",

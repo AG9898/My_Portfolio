@@ -126,6 +126,13 @@ export default function WeatherWellness() {
                   UBC Psychology lab
                 </span>
                 <span className="flex items-center gap-1.5 rounded-full border border-glass-edge bg-chrome px-3 py-1 text-[11px] text-label-secondary">
+                  <FlaskConical
+                    className="h-3.5 w-3.5 shrink-0"
+                    aria-hidden="true"
+                  />
+                  Yonsei University Psychology
+                </span>
+                <span className="flex items-center gap-1.5 rounded-full border border-glass-edge bg-chrome px-3 py-1 text-[11px] text-label-secondary">
                   <BarChart3
                     className="h-3.5 w-3.5 shrink-0"
                     aria-hidden="true"
@@ -143,6 +150,13 @@ export default function WeatherWellness() {
                   surveys with anonymous participants — with full server-side
                   auto-scoring, per-lab data isolation, and a weather-linked
                   mixed-effects analytics dashboard.
+                </p>
+                <p>
+                  The platform is now also in use by Yonsei University&apos;s
+                  Department of Psychology in Seoul for an active study. It
+                  handles live participant intake and study sessions in both
+                  Canada and South Korea, and the data it collects supports
+                  both labs&apos; ongoing research and publications.
                 </p>
                 <p>
                   The platform correlates daily weather conditions — temperature,
