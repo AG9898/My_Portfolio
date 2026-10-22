@@ -33,30 +33,6 @@ export const DESKTOP_INFO: Partial<Record<AppId, DesktopInfo>> = {
     comment:
       "Always cites its sources. Unlike your group-project teammate. Hold ⌥ and it still won't hallucinate.",
   },
-  techy: {
-    name: "techy.app",
-    kind: "Knowledge Graph Application",
-    size: "8.7 MB on disk",
-    bytes: "9,126,440 bytes",
-    where: "/Desktop",
-    created: "Friday, 17 January 2025 at 9:03 AM",
-    modified: "Yesterday at 11:58 PM",
-    version: "D3 + force-directed physics",
-    comment:
-      "A second brain. The first one was busy. Drag a node and watch the other thoughts panic.",
-  },
-  sparse: {
-    name: "sparse.app",
-    kind: "Time & Expense Tracker",
-    size: "6.1 MB on disk",
-    bytes: "6,402,118 bytes",
-    where: "/Desktop",
-    created: "Tuesday, 4 February 2025 at 8:30 AM",
-    modified: "Today at 9:01 AM",
-    version: "Timesheets · Approvals · Reports",
-    comment:
-      "Tracks every minute — yes, including the one you spent reading this. That'll be 0.02 billable hours.",
-  },
   weather: {
     name: "weather.dash",
     kind: "Research Platform Dashboard",
@@ -92,17 +68,5 @@ export const DESKTOP_INFO: Partial<Record<AppId, DesktopInfo>> = {
     version: "Electron · Ragdoll build",
     comment:
       "Will judge your commits. Affectionately. Currently napping on the status bar. Do not pet during PreToolUse.",
-  },
-  bites: {
-    name: "bites.app",
-    kind: "Private Food-Map PWA",
-    size: "9.8 MB on disk",
-    bytes: "10,276,864 bytes",
-    where: "/Desktop",
-    created: "Wednesday, 18 June 2025 at 8:15 PM",
-    modified: "Today at 1:19 AM",
-    version: "SvelteKit 2 · Single-owner",
-    comment:
-      "Turns your doom-scrolling into a dinner reservation. One TikTok in, several real pins out. Login required — it's a party of one.",
   },
 };

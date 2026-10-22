@@ -33,12 +33,9 @@ import AboutPage from "../../about/page";
 import ContactPage from "../../contact/page";
 import CvPage from "../../cv/page";
 import GlassAtlasPage from "../../glass-atlas/page";
-import TechyPage from "../../techy/page";
-import SparsePage from "../../sparse/page";
 import WeatherPage from "../../weather/page";
 import PigeonCoopPage from "../../pigeoncoop/page";
 import BuddyPage from "../../buddy/page";
-import BitesPage from "../../bites/page";
 import ClooPage from "../../cloo/page";
 
 // ---------------------------------------------------------------------------
@@ -417,12 +414,9 @@ const WINDOW_CONTENT: Record<AppId, React.ComponentType> = {
   contact: ContactPage,
   cv: CvPage,
   "glass-atlas": GlassAtlasPage,
-  techy: TechyPage,
-  sparse: SparsePage,
   weather: WeatherPage,
   pigeoncoop: PigeonCoopPage,
   buddy: BuddyPage,
-  bites: BitesPage,
   cloo: ClooPage,
 };
 
@@ -434,12 +428,9 @@ const WINDOW_TITLES: Record<AppId, string> = {
   contact: "Contact — Aden Guo",
   cv: "CV — Aden Guo",
   "glass-atlas": "Glass Atlas — Aden Guo",
-  techy: "Techy — Aden Guo",
-  sparse: "Sparse — Aden Guo",
   weather: "Weather & Wellness — Aden Guo",
   pigeoncoop: "PigeonCoop — Aden Guo",
   buddy: "buddy — Aden Guo",
-  bites: "Bites — Aden Guo",
   cloo: "Cloo — Aden Guo",
 };
 

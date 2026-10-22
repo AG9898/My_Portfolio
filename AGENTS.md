@@ -262,56 +262,15 @@ context (selection set, open context menu, open Get Info app id) that wraps the 
   Playwright `dblclick` on a lower icon (e.g. `buddy`) is intercepted by the window — drive top icons
   or move the window first.
 
-### 2026-07-16 — Bites Showcase Direction
+### 2026-10-22 — Showcase Set Trimmed
 
-Bites (`/bites`) is a private, single-owner SvelteKit PWA that turns TikTok food posts into
-verified saved places on a MapLibre map. Source codebase: `/projects/bites`. Both the deployed
-Railway application and GitHub repository are private; the portfolio Links panel must state that
-access is private and render no outbound links or URLs. The showcase follows the Techy/PigeonCoop
-four-panel structure (Overview, Features, Tech Stack, Links) and uses real deployed data in its
-map, expanded place-sheet, saved-list, and add-link screenshots. Assets belong under
-`public/bites/`. Keep an editable Mermaid source alongside the rendered workflow diagram; the
-diagram covers URL import → TikTok normalization/parsing → OCR/evidence extraction → Google
-Places verification → explicit confirm/correct/discard → Place Details → Drizzle/Neon writes →
-`GET /api/places` → MapLibre/List rendering. Never commit login credentials, cookies, or storage
-state used while capturing the private deployment.
-
-Asset pack (staged by V2_027, ahead of the React showcase): `public/bites/` holds the four
-production screenshots — `bites-map.png`, `bites-place-detail.png`, `bites-add-link.png` (each a
-390×844 phone viewport) and `bites-places-list.png` (the extra-tall saved-list capture cropped to
-a representative 418×800 top viewport so the DINING list and bottom dock read at display size).
-The editable diagram source is `src/app/bites/bites-workflow.mmd`, rendered to
-`public/bites/bites-workflow.svg`; regenerate with
-`npx --yes @mermaid-js/mermaid-cli -i src/app/bites/bites-workflow.mmd -o public/bites/bites-workflow.svg -b transparent`.
-The diagram uses dashed nodes for transient parsing/provider work and solid nodes for the explicit
-review gate and durable Drizzle/Neon writes. Mermaid is invoked via `npx` only — it is not a
-package.json dependency, so do not add it.
-
-Content layer (V2_028): unlike Techy/PigeonCoop, whose showcase content lives inline in
-`page.tsx`, the Bites showcase content is a separate typed, UI-free module —
-`src/app/bites/bitesData.ts`. It exports the four-section nav, status chips, overview copy,
-feature cards, grouped stack, architecture notes, screenshot metadata (`BITES_SCREENSHOTS`,
-`BITES_IMAGE_DIMS`), workflow metadata (`BITES_WORKFLOW`), and the private-access notice
-(`BITES_ACCESS`). The future page component imports from it and adds no content of its own. The
-module holds only local `/bites/*` asset paths — no deployed-site URL, repository URL, href, or
-outbound link target — so keep the Links panel URL-free by sourcing its copy from `BITES_ACCESS`.
-
-Page component (V2_029): `src/app/bites/page.tsx` is a `"use client"` static showcase that mirrors
-the Techy panel-switching + lightbox pattern and consumes only `bitesData.ts` — no route-context
-hook, iframe, or Mermaid runtime. The Overview screenshot grid renders all four `BITES_SCREENSHOTS`;
-the Tech Stack panel renders the workflow diagram in a `max-h`/`overflow-y-auto` container and shares
-the same lightbox. Gotcha: the workflow asset is an **SVG** and `next.config.js` does not set
-`dangerouslyAllowSVG`, so the Next `Image` for any `.svg` source must pass `unoptimized` (the page
-gates this on `src.endsWith(".svg")`); PNG screenshots go through the optimizer normally. Wiring into
-the shell (AppId, APPS, WINDOW_CONTENT, shortcuts, Get Info, Projects Finder) is V2_030, not this
-page.
-
-Shell wiring (V2_030, done): `bites`/`/bites` added to `appMetadata.ts` (`AppId`, route union, `APPS`
-with `defaultSize` 900×600 and `showInDock: false`); imported + mapped in `WindowRenderer.tsx`
-(`WINDOW_CONTENT`, `WINDOW_TITLES`); `bites.app` shortcut with a rose food-map pin icon (`BitesIcon`)
-in `DesktopShortcuts.tsx`; a private-PWA Get Info entry in `desktopInfo.ts`; and a frontend-category
-Projects Finder card with `link: null` (no external-link control). No reducer, Dock, mobile-fallback,
-resume, or CV files were touched.
+The project showcase set is now exactly **buddy, PigeonCoop, Weather & Wellness, Glass Atlas, and
+Cloo** — on the desktop (Cloo via the Dock) and in the Projects Finder (`projectsData.ts`). Techy,
+Sparse, and Bites were fully retired: routes, `AppId`s, shortcuts/icons, Get Info entries, and
+`public/techy`/`public/bites` assets were deleted (recover them from git history if one returns).
+Finder-only cards (My Portfolio, Zellaude-Plus, Interactive MapLibre,
+movieboxd) and the then-empty "Tooling" category were dropped too. Keep the Finder list and the
+showcase windows in lockstep: don't add a Finder card without a matching window, or vice versa.
 
 ### 2026-07-29 — Cloo Interactive Showcase
 

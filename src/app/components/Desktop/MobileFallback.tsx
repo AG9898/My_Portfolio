@@ -10,7 +10,7 @@ const FEATURED_PROJECT_NAMES = [
   "Glass Atlas",
   "Weather & Wellness",
   "PigeonCoop",
-  "Techy",
+  "Cloo",
 ];
 
 const FEATURED_PROJECTS = FEATURED_PROJECT_NAMES.flatMap((name) => {

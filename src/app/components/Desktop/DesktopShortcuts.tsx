@@ -32,12 +32,9 @@ export const ICON_LABELS: Partial<Record<AppId, string>> = {
   contact:        "contact.msg",
   cv:             "aden_guo_cv.pdf",
   "glass-atlas":  "glass_atlas/",
-  techy:          "techy.app",
-  sparse:         "sparse.app",
   weather:        "weather.dash",
   pigeoncoop:     "pigeoncoop.app",
   buddy:          "buddy.cli",
-  bites:          "bites.app",
 };
 
 // ─── File icon SVGs — 56×56, folded-corner document shape ────────────────────
@@ -238,64 +235,6 @@ function GlobeIcon() {
   );
 }
 
-function GraphIcon() {
-  return (
-    <svg width="56" height="56" viewBox={`-4 0 ${DOC_W + 8} ${DOC_H + 4}`} aria-hidden="true">
-      <defs>
-        <linearGradient id="doc-graph" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#FFFFFF" />
-          <stop offset="100%" stopColor="#E2E2E6" />
-        </linearGradient>
-      </defs>
-      <path d={DOC_PATH} fill="url(#doc-graph)" stroke="rgba(0,0,0,0.15)" strokeWidth="0.5" />
-      <path d={FOLD_PATH} fill="#C7C7CC" />
-      <path
-        d={`M${DOC_W - FOLD} 0 V${FOLD} H${DOC_W}`}
-        fill="none"
-        stroke="rgba(0,0,0,0.18)"
-        strokeWidth="0.5"
-      />
-      {/* Graph node network */}
-      <circle cx="24" cy="24" r="4" fill="#5E5CE6" />
-      <circle cx="12" cy="34" r="3" fill="#5E5CE6" />
-      <circle cx="36" cy="34" r="3" fill="#5E5CE6" />
-      <circle cx="18" cy="14" r="3" fill="#5E5CE6" />
-      <line x1="24" y1="24" x2="12" y2="34" stroke="#5E5CE6" strokeWidth="1.2" />
-      <line x1="24" y1="24" x2="36" y2="34" stroke="#5E5CE6" strokeWidth="1.2" />
-      <line x1="24" y1="24" x2="18" y2="14" stroke="#5E5CE6" strokeWidth="1.2" />
-      <line x1="12" y1="34" x2="36" y2="34" stroke="#5E5CE6" strokeWidth="0.8" />
-    </svg>
-  );
-}
-
-function GridIcon() {
-  return (
-    <svg width="56" height="56" viewBox={`-4 0 ${DOC_W + 8} ${DOC_H + 4}`} aria-hidden="true">
-      <defs>
-        <linearGradient id="doc-grid" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#FFFFFF" />
-          <stop offset="100%" stopColor="#E2E2E6" />
-        </linearGradient>
-      </defs>
-      <path d={DOC_PATH} fill="url(#doc-grid)" stroke="rgba(0,0,0,0.15)" strokeWidth="0.5" />
-      <path d={FOLD_PATH} fill="#C7C7CC" />
-      <path
-        d={`M${DOC_W - FOLD} 0 V${FOLD} H${DOC_W}`}
-        fill="none"
-        stroke="rgba(0,0,0,0.18)"
-        strokeWidth="0.5"
-      />
-      {/* Table / grid */}
-      <rect x="8" y="14" width="32" height="28" fill="none" stroke="#34C759" strokeWidth="1.2" />
-      <line x1="8" y1="21" x2="40" y2="21" stroke="#34C759" strokeWidth="1" />
-      <line x1="8" y1="28" x2="40" y2="28" stroke="#34C759" strokeWidth="1" />
-      <line x1="8" y1="35" x2="40" y2="35" stroke="#34C759" strokeWidth="1" />
-      <line x1="19" y1="14" x2="19" y2="42" stroke="#34C759" strokeWidth="1" />
-      <line x1="29" y1="14" x2="29" y2="42" stroke="#34C759" strokeWidth="1" />
-    </svg>
-  );
-}
-
 function CloudIcon() {
   return (
     <svg width="56" height="56" viewBox={`-4 0 ${DOC_W + 8} ${DOC_H + 4}`} aria-hidden="true">
@@ -404,46 +343,6 @@ function BuddyIcon() {
   );
 }
 
-function BitesIcon() {
-  return (
-    <svg width="56" height="56" viewBox={`-4 0 ${DOC_W + 8} ${DOC_H + 4}`} aria-hidden="true">
-      <defs>
-        <linearGradient id="doc-bites" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#FFFFFF" />
-          <stop offset="100%" stopColor="#E2E2E6" />
-        </linearGradient>
-        <linearGradient id="bites-pin" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#FF6B8B" />
-          <stop offset="100%" stopColor="#FF375F" />
-        </linearGradient>
-      </defs>
-      <path d={DOC_PATH} fill="url(#doc-bites)" stroke="rgba(0,0,0,0.15)" strokeWidth="0.5" />
-      <path d={FOLD_PATH} fill="#C7C7CC" />
-      <path
-        d={`M${DOC_W - FOLD} 0 V${FOLD} H${DOC_W}`}
-        fill="none"
-        stroke="rgba(0,0,0,0.18)"
-        strokeWidth="0.5"
-      />
-      {/* Rose food-map location pin */}
-      <path
-        d="M24 14 Q33 14 33 24 Q33 32 24 42 Q15 32 15 24 Q15 14 24 14 Z"
-        fill="url(#bites-pin)"
-        stroke="rgba(0,0,0,0.12)"
-        strokeWidth="0.5"
-      />
-      {/* Fork + knife (food) mark inside the pin */}
-      <g stroke="#FFFFFF" strokeWidth="1.4" strokeLinecap="round" fill="none">
-        <line x1="21" y1="20" x2="21" y2="28" />
-        <line x1="19.5" y1="20" x2="19.5" y2="23" />
-        <line x1="22.5" y1="20" x2="22.5" y2="23" />
-        <line x1="28" y1="20" x2="28" y2="28" />
-        <path d="M28 20 Q30 21 28 24" />
-      </g>
-    </svg>
-  );
-}
-
 // ─── Icon dispatcher ──────────────────────────────────────────────────────────
 
 export function ShortcutFileIcon({ appId }: { appId: AppId }) {
@@ -454,12 +353,9 @@ export function ShortcutFileIcon({ appId }: { appId: AppId }) {
     case "contact":     return <MsgIcon />;
     case "cv":          return <PdfIcon />;
     case "glass-atlas": return <GlobeIcon />;
-    case "techy":       return <GraphIcon />;
-    case "sparse":      return <GridIcon />;
     case "weather":     return <CloudIcon />;
     case "pigeoncoop":  return <PigeonIcon />;
     case "buddy":       return <BuddyIcon />;
-    case "bites":       return <BitesIcon />;
     default:            return null;
   }
 }

@@ -9,12 +9,9 @@ export type AppId =
   | "contact"
   | "cv"
   | "glass-atlas"
-  | "techy"
-  | "sparse"
   | "weather"
   | "pigeoncoop"
   | "buddy"
-  | "bites"
   | "cloo";
 
 export interface AppSize {
@@ -29,7 +26,7 @@ export interface AppPosition {
 
 export interface AppMetadata {
   id: AppId;
-  route: "/" | "/projects" | "/about" | "/contact" | "/cv" | "/glass-atlas" | "/techy" | "/sparse" | "/weather" | "/pigeoncoop" | "/buddy" | "/bites" | "/cloo";
+  route: "/" | "/projects" | "/about" | "/contact" | "/cv" | "/glass-atlas" | "/weather" | "/pigeoncoop" | "/buddy" | "/cloo";
   /** Short label used in dock, desktop shortcuts, and window list */
   label: string;
   /** Full title shown in the window title bar */
@@ -104,26 +101,6 @@ export const APPS: AppMetadata[] = [
     showInDock: false,
   },
   {
-    id: "techy",
-    route: "/techy",
-    label: "Techy",
-    title: "Techy — Aden Guo",
-    icon: "techy",
-    defaultSize: { width: 900, height: 600 },
-    defaultPosition: { x: 160, y: 70 },
-    showInDock: false,
-  },
-  {
-    id: "sparse",
-    route: "/sparse",
-    label: "Sparse",
-    title: "Sparse — Aden Guo",
-    icon: "sparse",
-    defaultSize: { width: 900, height: 600 },
-    defaultPosition: { x: 180, y: 80 },
-    showInDock: false,
-  },
-  {
     id: "weather",
     route: "/weather",
     label: "Weather & Wellness",
@@ -151,16 +128,6 @@ export const APPS: AppMetadata[] = [
     icon: "buddy",
     defaultSize: { width: 900, height: 600 },
     defaultPosition: { x: 200, y: 90 },
-    showInDock: false,
-  },
-  {
-    id: "bites",
-    route: "/bites",
-    label: "Bites",
-    title: "Bites — Aden Guo",
-    icon: "bites",
-    defaultSize: { width: 900, height: 600 },
-    defaultPosition: { x: 220, y: 100 },
     showInDock: false,
   },
   {

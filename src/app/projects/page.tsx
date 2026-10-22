@@ -10,7 +10,6 @@ const SIDEBAR_ITEMS: { label: string; category: Category | null }[] = [
   { label: "Frontend", category: "frontend" },
   { label: "Agent Tools", category: "agent-tools" },
   { label: "Client Work", category: "client-work" },
-  { label: "Tooling", category: "tooling" },
 ];
 
 export default function Projects() {

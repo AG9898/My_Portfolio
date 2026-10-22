@@ -40,7 +40,7 @@ Normative guide for code in this portfolio. Read before writing new UI architect
   3. Add an entry to `WINDOW_CONTENT` in `src/app/components/WindowManager/WindowRenderer.tsx` mapping the new `AppId` to the imported component.
 - App window page components must be self-contained: no `useParams`, `useSearchParams`, `useRouter`, or other route-context hooks. Content is always mounted independently of the active URL.
 - **App window pages** (project showcases and About) use a **panel-switching sidebar pattern** by default: a `"use client"` component with `useState` tracking the active section. Sidebar items are `<button>` elements that set the active section; the main pane renders only the active panel. There are no non-interactive (decorative) sidebars.
-  - **Standard project nav** (Sparse, Techy, Weather & Wellness): four sections — Overview, Features, Tech Stack, Links. Each page defines its own typed `Section` union and `NAV` array. No shared component; each page is self-contained.
+  - **Standard project nav** (Weather & Wellness, PigeonCoop, buddy): four sections — Overview, Features, Tech Stack, Links. Each page defines its own typed `Section` union and `NAV` array. No shared component; each page is self-contained.
   - **Glass Atlas** (embeddable): Overview renders a full-bleed iframe (the live app). Its nav is Overview / About / Tech Stack / Links — "Overview" means the live embed, not the project description.
   - **About page**: four personal sections — About Aden, How I Work, Frontend Focus, What I Value.
   - **Cloo exception**: `/cloo` is a full-window interactive workspace simulation with a semantic Project info surface, not a four-panel sidebar. Its canonical boundary is [`CLOO.md`](CLOO.md).

@@ -1,4 +1,4 @@
-export type Category = "frontend" | "agent-tools" | "client-work" | "tooling";
+export type Category = "frontend" | "agent-tools" | "client-work";
 
 export type Project = {
   name: string;
@@ -16,21 +16,6 @@ export type Project = {
 };
 
 export const PROJECTS: Project[] = [
-  {
-    name: "My Portfolio",
-    kind: "Next.js portfolio",
-    status: "Active redesign",
-    path: "~/projects/My_Portfolio",
-    description:
-      "A browser-based macOS desktop portfolio with a persistent shell, dock, shortcuts, route-synced windows, and first-pass app content.",
-    stack: ["Next.js", "TypeScript", "Tailwind", "framer-motion"],
-    category: "frontend",
-    link: "https://github.com/AG9898/My_Portfolio",
-    thumbnail: {
-      src: "/og-image.png",
-      alt: "My Portfolio macOS desktop interface",
-    },
-  },
   {
     name: "PigeonCoop",
     kind: "Desktop workflow tool",
@@ -58,17 +43,6 @@ export const PROJECTS: Project[] = [
     link: "https://github.com/AG9898/cloo",
   },
   {
-    name: "Zellaude-Plus",
-    kind: "Claude API client",
-    status: "Active development",
-    path: "~/projects/Zellaude-Plus",
-    description:
-      "An extended Claude API wrapper and chat interface with prompt-caching utilities, streaming controls, and conversation management.",
-    stack: ["TypeScript", "Node.js", "Anthropic SDK"],
-    category: "agent-tools",
-    link: "https://github.com/AG9898/Zellaude-Plus",
-  },
-  {
     name: "Glass Atlas",
     kind: "Editorial knowledge site",
     status: "Deployed",
@@ -82,47 +56,6 @@ export const PROJECTS: Project[] = [
       src: "/Glass-Atlas/Glass-Atlas RAG diagram.png",
       alt: "Glass Atlas retrieval-augmented generation diagram",
     },
-  },
-  {
-    name: "Techy",
-    kind: "Knowledge graph",
-    status: "Deployed",
-    path: "~/projects/Techy",
-    description:
-      "A personal, single-user tech knowledge graph built around notes, wikilinks, D3 graph views, Auth.js, Drizzle, and Neon PostgreSQL.",
-    stack: ["SvelteKit", "TypeScript", "Drizzle", "D3"],
-    category: "frontend",
-    link: "https://techy-psi.vercel.app",
-    thumbnail: {
-      src: "/techy/graph.png",
-      alt: "Techy knowledge graph view",
-    },
-  },
-  {
-    name: "Bites",
-    kind: "Private food-map PWA",
-    status: "Private · single-owner",
-    path: "~/projects/bites",
-    description:
-      "A single-owner, mobile-first SvelteKit PWA that turns shared TikTok food posts into verified saved places on a personal MapLibre map. Server-side parsing and Tesseract OCR extract candidate venues, Google Places verifies each match, and an explicit confirm/correct/discard gate keeps every pin honest. Both the deployment and the repository are private.",
-    stack: ["SvelteKit", "TypeScript", "Drizzle + Neon", "MapLibre GL", "Google Places"],
-    category: "frontend",
-    link: null,
-    thumbnail: {
-      src: "/bites/bites-map.png",
-      alt: "Bites saved-places map",
-    },
-  },
-  {
-    name: "Sparse",
-    kind: "Minimal text editor",
-    status: "Local product",
-    path: "~/projects/Sparse",
-    description:
-      "A distraction-free writing environment with a single-file approach, markdown preview, and a calm typographic baseline — no cloud sync.",
-    stack: ["Electron", "TypeScript", "CodeMirror"],
-    category: "tooling",
-    link: null,
   },
   {
     name: "Weather & Wellness",
@@ -153,27 +86,5 @@ export const PROJECTS: Project[] = [
       src: "/buddy/spritesheet.webp",
       alt: "buddy pixel-art pet spritesheet",
     },
-  },
-  {
-    name: "Interactive MapLibre",
-    kind: "Mapping playground",
-    status: "Prototype",
-    path: "~/projects/Interactive_MapLibre",
-    description:
-      "A MapLibre GL JS prototype with custom vector tile styling, dynamic layer controls, and gesture-driven navigation experiments.",
-    stack: ["MapLibre GL", "TypeScript", "Vite"],
-    category: "frontend",
-    link: "https://github.com/AG9898/Interactive_MapLibre",
-  },
-  {
-    name: "movieboxd",
-    kind: "Movie tracker",
-    status: "Prototype",
-    path: "~/projects/movieboxd",
-    description:
-      "A Letterboxd-inspired personal movie log with a clean card-grid UI, watchlist management, and TMDB API integration.",
-    stack: ["React", "TypeScript", "TMDB API", "Supabase"],
-    category: "frontend",
-    link: "https://github.com/AG9898/movieboxd",
   },
 ];
