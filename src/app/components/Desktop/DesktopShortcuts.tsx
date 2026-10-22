@@ -3,7 +3,7 @@
 // ─── Desktop Shortcuts Sidebar ────────────────────────────────────────────────
 // Left-column sidebar of file-type shortcut icons, PostHog-style.
 // Positioned 16px from left, 48px from top (clears menu bar).
-// Each icon is 56×56px SVG; labels are 11px system font below.
+// Each icon fills a 56×56px slot; labels are 11px system font below.
 //
 // Interaction:
 //   Single click → selected state (blue highlight + label pill)
@@ -16,9 +16,11 @@
 //   about     → person silhouette
 //   contact   → msg document (envelope outline)
 //   cv        → pdf document
+//   project apps → the project's macOS-style app icon (public/app-icons/)
 //
 // Shared appMetadata (APPS) is the single source of truth for labels/routes.
 
+import Image from "next/image";
 import { APPS, type AppId } from "../appMetadata";
 import { useWindowManager } from "../WindowManager/WindowManagerProvider";
 import { getCenteredWindowPositionForViewport } from "../WindowManager/windowGeometry";
@@ -209,175 +211,32 @@ function PdfIcon() {
   );
 }
 
-function GlobeIcon() {
-  return (
-    <svg width="56" height="56" viewBox={`-4 0 ${DOC_W + 8} ${DOC_H + 4}`} aria-hidden="true">
-      <defs>
-        <linearGradient id="doc-globe" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#FFFFFF" />
-          <stop offset="100%" stopColor="#E2E2E6" />
-        </linearGradient>
-      </defs>
-      <path d={DOC_PATH} fill="url(#doc-globe)" stroke="rgba(0,0,0,0.15)" strokeWidth="0.5" />
-      <path d={FOLD_PATH} fill="#C7C7CC" />
-      <path
-        d={`M${DOC_W - FOLD} 0 V${FOLD} H${DOC_W}`}
-        fill="none"
-        stroke="rgba(0,0,0,0.18)"
-        strokeWidth="0.5"
-      />
-      {/* Globe */}
-      <circle cx="24" cy="28" r="12" fill="none" stroke="#30B0C7" strokeWidth="1.4" />
-      <ellipse cx="24" cy="28" rx="6" ry="12" fill="none" stroke="#30B0C7" strokeWidth="1" />
-      <line x1="12" y1="28" x2="36" y2="28" stroke="#30B0C7" strokeWidth="1" />
-      <line x1="14" y1="21" x2="34" y2="21" stroke="#30B0C7" strokeWidth="0.8" />
-      <line x1="14" y1="35" x2="34" y2="35" stroke="#30B0C7" strokeWidth="0.8" />
-    </svg>
-  );
-}
+// ─── Project app icons ────────────────────────────────────────────────────────
+// Project shortcuts are app aliases, so they show the same macOS-style app icon
+// as the Projects Finder (public/app-icons/). The tile is drawn slightly inside
+// the 56px slot so its visual weight matches the document icons.
+const APP_ICON_SRC: Partial<Record<AppId, string>> = {
+  "glass-atlas": "/app-icons/glass-atlas.webp",
+  weather:       "/app-icons/weather-wellness.webp",
+  pigeoncoop:    "/app-icons/pigeoncoop.webp",
+  buddy:         "/app-icons/buddy.webp",
+  bfr:           "/app-icons/bfr.webp",
+};
 
-function CloudIcon() {
+function AppIcon({ appId }: { appId: AppId }) {
+  const src = APP_ICON_SRC[appId];
+  if (!src) return null;
   return (
-    <svg width="56" height="56" viewBox={`-4 0 ${DOC_W + 8} ${DOC_H + 4}`} aria-hidden="true">
-      <defs>
-        <linearGradient id="doc-cloud" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#FFFFFF" />
-          <stop offset="100%" stopColor="#E2E2E6" />
-        </linearGradient>
-      </defs>
-      <path d={DOC_PATH} fill="url(#doc-cloud)" stroke="rgba(0,0,0,0.15)" strokeWidth="0.5" />
-      <path d={FOLD_PATH} fill="#C7C7CC" />
-      <path
-        d={`M${DOC_W - FOLD} 0 V${FOLD} H${DOC_W}`}
-        fill="none"
-        stroke="rgba(0,0,0,0.18)"
-        strokeWidth="0.5"
+    <span className="flex h-14 w-14 items-center justify-center" aria-hidden="true">
+      <Image
+        src={src}
+        alt=""
+        width={50}
+        height={50}
+        draggable={false}
+        className="drop-shadow-[0_2px_4px_rgba(0,0,0,0.45)]"
       />
-      {/* Cloud shape */}
-      <path
-        d="M10 36 Q10 28 18 28 Q18 20 26 20 Q34 20 36 28 Q42 28 40 36 Z"
-        fill="#0A84FF"
-        fillOpacity="0.7"
-        stroke="#0A84FF"
-        strokeWidth="1"
-      />
-    </svg>
-  );
-}
-
-function PigeonIcon() {
-  return (
-    <svg width="56" height="56" viewBox={`-4 0 ${DOC_W + 8} ${DOC_H + 4}`} aria-hidden="true">
-      <defs>
-        <linearGradient id="doc-pigeon" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#FFFFFF" />
-          <stop offset="100%" stopColor="#E2E2E6" />
-        </linearGradient>
-      </defs>
-      <path d={DOC_PATH} fill="url(#doc-pigeon)" stroke="rgba(0,0,0,0.15)" strokeWidth="0.5" />
-      <path d={FOLD_PATH} fill="#C7C7CC" />
-      <path
-        d={`M${DOC_W - FOLD} 0 V${FOLD} H${DOC_W}`}
-        fill="none"
-        stroke="rgba(0,0,0,0.18)"
-        strokeWidth="0.5"
-      />
-      {/* Pigeon/bird silhouette in orange-amber */}
-      {/* Body */}
-      <ellipse cx="22" cy="32" rx="9" ry="7" fill="#FF9F0A" />
-      {/* Head */}
-      <circle cx="32" cy="25" r="5" fill="#FF9F0A" />
-      {/* Beak */}
-      <path d="M36 24 L40 25 L36 26 Z" fill="#FF9F0A" />
-      {/* Tail */}
-      <path d="M13 30 Q8 28 6 34 Q10 32 13 36 Z" fill="#FF9F0A" />
-      {/* Wing detail */}
-      <path d="M14 30 Q20 24 30 28" fill="none" stroke="#CC7700" strokeWidth="1.2" strokeLinecap="round" />
-      {/* Eye */}
-      <circle cx="33" cy="24" r="1.2" fill="#1C1C1E" />
-    </svg>
-  );
-}
-
-function BuddyIcon() {
-  return (
-    <svg width="56" height="56" viewBox={`-4 0 ${DOC_W + 8} ${DOC_H + 4}`} aria-hidden="true">
-      <defs>
-        <linearGradient id="doc-buddy" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#1C1C1E" />
-          <stop offset="100%" stopColor="#2C2C2E" />
-        </linearGradient>
-      </defs>
-      {/* Dark terminal document body */}
-      <path d={DOC_PATH} fill="url(#doc-buddy)" stroke="rgba(255,255,255,0.12)" strokeWidth="0.5" />
-      <path d={FOLD_PATH} fill="#3A3A3C" />
-      <path
-        d={`M${DOC_W - FOLD} 0 V${FOLD} H${DOC_W}`}
-        fill="none"
-        stroke="rgba(255,255,255,0.14)"
-        strokeWidth="0.5"
-      />
-      {/* Prompt line 1: > command */}
-      <text x="7" y="22" fontSize="6.5" fontFamily="monospace" fill="#32D74B">{">"}</text>
-      <line x1="13" y1="19" x2={DOC_W - 6} y2="19" stroke="#32D74B" strokeWidth="1" strokeOpacity="0.6" strokeLinecap="round" />
-      {/* Prompt line 2: > command */}
-      <text x="7" y="30" fontSize="6.5" fontFamily="monospace" fill="#32D74B">{">"}</text>
-      <line x1="13" y1="27" x2={DOC_W - 10} y2="27" stroke="#32D74B" strokeWidth="1" strokeOpacity="0.6" strokeLinecap="round" />
-      {/* Output line */}
-      <line x1="7" y1="34" x2={DOC_W - 8} y2="34" stroke="#FFD60A" strokeWidth="0.9" strokeOpacity="0.5" strokeLinecap="round" />
-      {/* Prompt line 3 with cursor */}
-      <text x="7" y="42" fontSize="6.5" fontFamily="monospace" fill="#32D74B">{">"}</text>
-      <rect x="13" y="35.5" width="4" height="7" rx="0.5" fill="#32D74B" fillOpacity="0.8" />
-      {/* CLI badge */}
-      <rect x="6" y={DOC_H - 18} width="18" height="10" rx="2" fill="#32D74B" />
-      <text
-        x="15"
-        y={DOC_H - 10}
-        textAnchor="middle"
-        fontSize="6"
-        fontWeight="700"
-        fill="#1C1C1E"
-      >
-        CLI
-      </text>
-    </svg>
-  );
-}
-
-function BfrIcon() {
-  return (
-    <svg width="56" height="56" viewBox={`-4 0 ${DOC_W + 8} ${DOC_H + 4}`} aria-hidden="true">
-      <defs>
-        <linearGradient id="doc-bfr" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#FFFFFF" />
-          <stop offset="100%" stopColor="#E2E2E6" />
-        </linearGradient>
-        <linearGradient id="bfr-shield" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#D7263D" />
-          <stop offset="100%" stopColor="#8E1324" />
-        </linearGradient>
-      </defs>
-      <path d={DOC_PATH} fill="url(#doc-bfr)" stroke="rgba(0,0,0,0.15)" strokeWidth="0.5" />
-      <path d={FOLD_PATH} fill="#C7C7CC" />
-      <path
-        d={`M${DOC_W - FOLD} 0 V${FOLD} H${DOC_W}`}
-        fill="none"
-        stroke="rgba(0,0,0,0.18)"
-        strokeWidth="0.5"
-      />
-      {/* Sword behind the shield, gold hilt */}
-      <path d="M24 12 L26 16 L26 44 L22 44 L22 16 Z" fill="#C9CDD4" stroke="#8E929A" strokeWidth="0.5" />
-      <rect x="16" y="43" width="16" height="3" rx="1.5" fill="#D4A017" />
-      <rect x="22.5" y="46" width="3" height="7" rx="1" fill="#8B5A2B" />
-      {/* Kite shield */}
-      <path
-        d="M14 22 H34 V32 Q34 41 24 46 Q14 41 14 32 Z"
-        fill="url(#bfr-shield)"
-        stroke="#D4A017"
-        strokeWidth="1.5"
-      />
-      <path d="M24 25 V42 M17 31 H31" stroke="#D4A017" strokeWidth="1.2" strokeLinecap="round" />
-    </svg>
+    </span>
   );
 }
 
@@ -390,11 +249,12 @@ export function ShortcutFileIcon({ appId }: { appId: AppId }) {
     case "about":       return <PersonIcon />;
     case "contact":     return <MsgIcon />;
     case "cv":          return <PdfIcon />;
-    case "glass-atlas": return <GlobeIcon />;
-    case "weather":     return <CloudIcon />;
-    case "pigeoncoop":  return <PigeonIcon />;
-    case "buddy":       return <BuddyIcon />;
-    case "bfr":         return <BfrIcon />;
+    case "glass-atlas":
+    case "weather":
+    case "pigeoncoop":
+    case "buddy":
+    case "bfr":
+      return <AppIcon appId={appId} />;
     default:            return null;
   }
 }

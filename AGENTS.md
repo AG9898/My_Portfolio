@@ -303,8 +303,8 @@ with the Codex CLI's built-in image generation (`codex exec --skip-git-repo-chec
 workspace-write -C <dir> - < PROMPT.md`), then cropped to the tile and masked; the exact prompts
 are in `docs/assets/project-icon-prompts.json`. When adding a project, generate its icon with the
 same shared-style block so the set stays consistent. Icons must not reproduce any project's real
-art (notably BFR's — see the BFR discovery). The desktop shortcut SVGs in `DesktopShortcuts.tsx`
-are a separate, hand-drawn document-icon set and were not replaced.
+art (notably BFR's — see the BFR discovery). Desktop shortcuts and the Get Info panel use the same
+icons (`APP_ICON_SRC` in `DesktopShortcuts.tsx`); a new project needs an entry there too.
 
 ### 2026-07-29 — Cloo Interactive Showcase
 

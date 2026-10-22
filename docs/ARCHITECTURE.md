@@ -93,7 +93,7 @@ This is a frontend-only Next.js 14 App Router portfolio. The root layout owns a 
 
 - 88px-wide left sidebar column, positioned `left: 16px; top: 48px` (clears menu bar).
 - Renders one shortcut item for every `APPS` entry with `showInDock === false` — five project apps (Glass Atlas, Weather & Wellness, PigeonCoop, buddy, BFR). Core Home, Projects, About, Contact, and CV apps remain Dock-only.
-- Each shortcut is a 56×56px SVG using a thematic file/app metaphor: globe (glass-atlas), cloud (weather), pigeon (pigeoncoop), terminal/pet (buddy), and a crimson kite shield with sword (bfr).
+- Each project shortcut shows its macOS-style app icon from `public/app-icons/` (the same set as the Projects Finder) in a 56×56px slot, mapped by `APP_ICON_SRC`. The Get Info panel reuses the same `ShortcutFileIcon`.
 - File labels are mapped via the `ICON_LABELS` record (`"glass_atlas/"`, `"weather.dash"`, `"pigeoncoop.app"`, `"buddy.cli"`, and `"bfr.game"`); route/id come from `APPS`.
 - Single click: selected state — `rgba(10,132,255,0.28)` background + `1px solid rgba(10,132,255,0.55)` border; label becomes `rgba(10,132,255,0.95)` pill.
 - Double click: dispatches `open` action to the window manager; focuses and restores the window if already open.
